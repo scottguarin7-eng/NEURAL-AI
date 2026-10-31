@@ -7,9 +7,9 @@
 
   <style>
     :root {
-      --bg: #070a18;
-      --panel: #141c34;
-      --line: #344267;
+      --bg: #080b18;
+      --panel: #151d36;
+      --line: #354369;
       --text: #f5f7ff;
       --muted: #aab5d1;
       --cyan: #67f5ff;
@@ -44,8 +44,8 @@
       color: var(--text);
       font-family: Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, #1a5266 0, transparent 28%),
-        radial-gradient(circle at 90% 90%, #321b65 0, transparent 32%),
+        radial-gradient(circle at 10% 10%, #185466 0, transparent 28%),
+        radial-gradient(circle at 90% 90%, #34206b 0, transparent 32%),
         var(--bg);
     }
 
@@ -138,16 +138,12 @@
       border-radius: 999px;
     }
 
-    .mode button,
-    .icon {
-      border: 0;
-      color: var(--muted);
-      background: transparent;
-    }
-
     .mode button {
       padding: 8px 13px;
+      border: 0;
       border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
     }
 
     .mode button.active {
@@ -189,7 +185,7 @@
       margin: 0 auto 30px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 30%, #fff 0 2%, transparent 3%),
+        radial-gradient(circle at 35% 30%, #ffffff 0 2%, transparent 3%),
         radial-gradient(circle at 35% 35%, var(--cyan), transparent 25%),
         #182052;
       box-shadow: 0 0 40px #67f5ff99;
@@ -323,8 +319,8 @@
 
     .suggestion:hover,
     .tool:hover {
-      border-color: var(--cyan);
       color: var(--text);
+      border-color: var(--cyan);
     }
 
     aside {
@@ -390,7 +386,7 @@
     }
 
     .danger {
-      color: white;
+      color: #ffffff;
       border-color: var(--red);
       background: var(--red);
     }
@@ -509,10 +505,10 @@
 
 <body>
   <div class="app">
-
     <header class="box">
       <div class="brand">
         <div class="logo"></div>
+
         <div>
           <strong>Neural Ultra</strong>
           <small>Stable Gemini workspace</small>
@@ -530,37 +526,63 @@
     </header>
 
     <div class="layout">
-
       <section class="main box">
         <div class="hero">
           <div class="orb"></div>
+
           <h1>Intelligence that feels alive.</h1>
-          <p>Ask anything. Write, plan, calculate, organize, and think with Neural Ultra.</p>
+
+          <p>
+            Ask anything. Write, plan, calculate, organize,
+            and think with Neural Ultra.
+          </p>
+
           <div id="status">Fast engine ready</div>
         </div>
 
         <div id="messages" class="messages"></div>
 
         <form id="chatForm" class="composer">
-          <textarea id="promptInput" rows="1" placeholder="Ask Neural Ultra anything..."></textarea>
+          <textarea
+            id="promptInput"
+            rows="1"
+            placeholder="Ask Neural Ultra anything..."
+          ></textarea>
+
           <button id="voiceButton" class="icon" type="button">🎙</button>
           <button id="sendButton" class="send" type="submit">↑</button>
         </form>
 
         <div class="suggestions">
-          <button class="suggestion" type="button" data-prompt="Explain AI in simple English.">
+          <button
+            class="suggestion"
+            type="button"
+            data-prompt="Explain AI in simple English."
+          >
             Explain AI simply
           </button>
 
-          <button class="suggestion" type="button" data-prompt="Create a useful weekly plan.">
+          <button
+            class="suggestion"
+            type="button"
+            data-prompt="Create a useful weekly plan."
+          >
             Create a weekly plan
           </button>
 
-          <button class="suggestion" type="button" data-prompt="Write a professional email.">
+          <button
+            class="suggestion"
+            type="button"
+            data-prompt="Write a professional email."
+          >
             Write an email
           </button>
 
-          <button class="suggestion" type="button" data-prompt="Give me a beginner coding idea.">
+          <button
+            class="suggestion"
+            type="button"
+            data-prompt="Give me a beginner coding idea."
+          >
             Give a coding idea
           </button>
         </div>
@@ -569,15 +591,18 @@
       <aside>
         <section class="card box">
           <h2>Engine</h2>
+
           <div class="online">
             <span class="dot"></span>
             <span id="engineStatus">Ready</span>
           </div>
+
           <p>Secure Gemini connection through Vercel.</p>
         </section>
 
         <section class="card box">
           <h2>Metrics</h2>
+
           <div class="metric">
             <span>Mode</span>
             <strong id="modeText">Fast</strong>
@@ -598,12 +623,29 @@
           <h2>Tools</h2>
 
           <div class="tools">
-            <button id="clearButton" class="tool danger" type="button">Clear</button>
-            <button id="exportButton" class="tool primary" type="button">Export</button>
-            <button id="noteButton" class="tool" type="button">Notes</button>
-            <button id="taskButton" class="tool" type="button">Tasks</button>
-            <button id="calculatorButton" class="tool" type="button">Calc</button>
-            <button id="timerButton" class="tool" type="button">Timer</button>
+            <button id="clearButton" class="tool danger" type="button">
+              Clear
+            </button>
+
+            <button id="exportButton" class="tool primary" type="button">
+              Export
+            </button>
+
+            <button id="noteButton" class="tool" type="button">
+              Notes
+            </button>
+
+            <button id="taskButton" class="tool" type="button">
+              Tasks
+            </button>
+
+            <button id="calculatorButton" class="tool" type="button">
+              Calc
+            </button>
+
+            <button id="timerButton" class="tool" type="button">
+              Timer
+            </button>
           </div>
         </section>
       </aside>
@@ -614,7 +656,10 @@
     <section class="modal box">
       <div class="modal-head">
         <h2>Settings</h2>
-        <button id="closeSettingsButton" class="icon" type="button">×</button>
+
+        <button id="closeSettingsButton" class="icon" type="button">
+          ×
+        </button>
       </div>
 
       <div class="setting">
@@ -660,8 +705,10 @@
     let mode = localStorage.getItem("nu-mode") || "fast";
     let chat = JSON.parse(localStorage.getItem("nu-chat") || "[]");
     let controller = null;
-    let speakResponses = localStorage.getItem("nu-speak") === "true";
-    let privacy = localStorage.getItem("nu-privacy") === "true";
+    let speakResponses =
+      localStorage.getItem("nu-speak") === "true";
+    let privacy =
+      localStorage.getItem("nu-privacy") === "true";
 
     function showToast(text) {
       toast.textContent = text;
@@ -681,11 +728,14 @@
     }
 
     function updateMetrics() {
-      get("modeText").textContent = mode === "fast" ? "Fast" : "Ultra";
+      get("modeText").textContent =
+        mode === "fast" ? "Fast" : "Ultra";
+
       get("messageCount").textContent = String(chat.length);
 
       const words = chat.reduce((total, item) => {
-        return total + item.text.trim().split(/s+/).filter(Boolean).length;
+        return total +
+          item.text.trim().split(/s+/).filter(Boolean).length;
       }, 0);
 
       get("wordCount").textContent = String(words);
@@ -695,7 +745,9 @@
       status.textContent = text;
 
       get("engineStatus").textContent =
-        text.toLowerCase().includes("error") ? "Error" : "Ready";
+        text.toLowerCase().includes("error")
+          ? "Error"
+          : "Ready";
     }
 
     function addMessage(text, role) {
@@ -734,6 +786,7 @@
           }
 
           window.speechSynthesis.cancel();
+
           window.speechSynthesis.speak(
             new SpeechSynthesisUtterance(text)
           );
@@ -786,7 +839,9 @@
       const data = await response.json().catch(() => ({}));
 
       if (!response.ok) {
-        throw new Error(data.error || "Gemini request failed.");
+        throw new Error(
+          data.error || "Gemini request failed."
+        );
       }
 
       if (!data.text) {
@@ -829,7 +884,10 @@
         addMessage(answer, "assistant");
         setStatus("Gemini ready");
 
-        if (speakResponses && "speechSynthesis" in window) {
+        if (
+          speakResponses &&
+          "speechSynthesis" in window
+        ) {
           window.speechSynthesis.speak(
             new SpeechSynthesisUtterance(answer)
           );
@@ -840,7 +898,10 @@
           showToast("Stopped.");
         } else {
           setStatus("Gemini error");
-          addMessage("Error: " + error.message, "assistant");
+          addMessage(
+            "Error: " + error.message,
+            "assistant"
+          );
           showToast(error.message);
         }
       } finally {
@@ -861,7 +922,10 @@
     };
 
     input.onkeydown = (event) => {
-      if (event.key === "Enter" && !event.shiftKey) {
+      if (
+        event.key === "Enter" &&
+        !event.shiftKey
+      ) {
         event.preventDefault();
         form.requestSubmit();
       }
@@ -869,7 +933,8 @@
 
     input.oninput = () => {
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 140) + "px";
+      input.style.height =
+        Math.min(input.scrollHeight, 140) + "px";
     };
 
     get("fastButton").onclick = () => {
@@ -912,8 +977,12 @@
       }
 
       const text = chat
-        .map((item) => item.role.toUpperCase() + "
-" + item.text)
+        .map((item) => {
+          return item.role.toUpperCase() +
+            "
+" +
+            item.text;
+        })
         .join("
 
 ");
@@ -956,13 +1025,22 @@
 
     get("speakCheckbox").onchange = () => {
       speakResponses = get("speakCheckbox").checked;
-      localStorage.setItem("nu-speak", String(speakResponses));
+
+      localStorage.setItem(
+        "nu-speak",
+        String(speakResponses)
+      );
+
       showToast("Speech setting updated.");
     };
 
     get("privacyCheckbox").onchange = () => {
       privacy = get("privacyCheckbox").checked;
-      localStorage.setItem("nu-privacy", String(privacy));
+
+      localStorage.setItem(
+        "nu-privacy",
+        String(privacy)
+      );
 
       if (privacy) {
         chat = [];
@@ -996,7 +1074,9 @@
       };
 
       recognition.onresult = (event) => {
-        input.value = event.results[0][0].transcript;
+        input.value =
+          event.results[0][0].transcript;
+
         input.focus();
         setStatus("Fast engine ready");
       };
@@ -1050,7 +1130,9 @@
     };
 
     get("timerButton").onclick = () => {
-      const seconds = Number(window.prompt("Timer seconds:"));
+      const seconds = Number(
+        window.prompt("Timer seconds:")
+      );
 
       if (!Number.isFinite(seconds) || seconds <= 0) {
         showToast("Enter a valid number.");
@@ -1064,7 +1146,8 @@
       }, seconds * 1000);
     };
 
-    const savedTheme = localStorage.getItem("nu-theme") || "dark";
+    const savedTheme =
+      localStorage.getItem("nu-theme") || "dark";
 
     if (savedTheme === "dark") {
       document.documentElement.removeAttribute("data-theme");
@@ -1085,4 +1168,4 @@
     renderChat();
   </script>
 </body>
-  </html>
+</html>
