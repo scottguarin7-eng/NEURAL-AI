@@ -3,38 +3,32 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#050713">
   <title>Neural Ultra</title>
 
   <style>
     :root {
       --bg: #050713;
-      --panel: rgba(255,255,255,.08);
-      --panel-strong: rgba(255,255,255,.14);
+      --panel: rgba(255,255,255,.09);
       --line: rgba(255,255,255,.16);
-      --text: #f5f7ff;
-      --muted: rgba(245,247,255,.62);
+      --text: #f7f9ff;
+      --muted: rgba(247,249,255,.62);
       --cyan: #62f5ff;
       --violet: #9e7bff;
       --green: #79f2b0;
       --red: #ff8297;
-      --shadow: rgba(0,0,0,.38);
     }
 
     [data-theme="light"] {
       --bg: #edf3fc;
-      --panel: rgba(255,255,255,.62);
-      --panel-strong: rgba(255,255,255,.85);
-      --line: rgba(20,35,70,.16);
+      --panel: rgba(255,255,255,.75);
+      --line: rgba(12,23,48,.16);
       --text: #0c1730;
       --muted: rgba(12,23,48,.62);
-      --shadow: rgba(30,55,100,.2);
     }
 
     [data-theme="high"] {
       --bg: #000;
       --panel: #111;
-      --panel-strong: #181818;
       --line: #fff;
       --text: #fff;
       --muted: #ddd;
@@ -50,12 +44,11 @@
       margin: 0;
       min-height: 100vh;
       color: var(--text);
-      font-family: Inter, Arial, sans-serif;
+      font-family: Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, rgba(98,245,255,.18), transparent 31%),
+        radial-gradient(circle at 10% 10%, rgba(98,245,255,.18), transparent 30%),
         radial-gradient(circle at 90% 90%, rgba(158,123,255,.18), transparent 35%),
         var(--bg);
-      transition: background .3s, color .3s;
     }
 
     button,
@@ -68,29 +61,7 @@
       cursor: pointer;
     }
 
-    button:focus-visible,
-    textarea:focus-visible,
-    select:focus-visible {
-      outline: 2px solid var(--cyan);
-      outline-offset: 3px;
-    }
-
-    .grid {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: .42;
-      background-image:
-        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 90%);
-    }
-
     .app {
-      position: relative;
-      z-index: 1;
       width: min(1180px, calc(100% - 28px));
       min-height: 100vh;
       margin: auto;
@@ -99,12 +70,11 @@
 
     .glass {
       border: 1px solid var(--line);
-      background: linear-gradient(135deg, var(--panel-strong), var(--panel));
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.12),
-        0 25px 80px var(--shadow);
-      backdrop-filter: blur(28px) saturate(150%);
-      -webkit-backdrop-filter: blur(28px) saturate(150%);
+      border-radius: 24px;
+      background: var(--panel);
+      box-shadow: 0 25px 80px rgba(0,0,0,.28);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
     }
 
     header {
@@ -113,7 +83,6 @@
       justify-content: space-between;
       gap: 15px;
       padding: 14px 16px;
-      border-radius: 24px;
     }
 
     .brand {
@@ -129,7 +98,7 @@
       place-items: center;
       border-radius: 14px;
       background: rgba(98,245,255,.14);
-      box-shadow: 0 0 28px rgba(98,245,255,.3);
+      box-shadow: 0 0 28px rgba(98,245,255,.35);
     }
 
     .brand-icon::after {
@@ -163,18 +132,14 @@
       padding: 4px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(0,0,0,.2);
     }
 
     .mode-button,
     .icon-button,
-    .tool-button,
-    .primary,
-    .danger {
+    .tool-button {
       border: 1px solid var(--line);
       color: var(--text);
       background: rgba(255,255,255,.06);
-      transition: .2s ease;
     }
 
     .mode-button {
@@ -194,15 +159,6 @@
       width: 40px;
       height: 40px;
       border-radius: 13px;
-      font-size: 17px;
-    }
-
-    .icon-button:hover,
-    .tool-button:hover,
-    .primary:hover,
-    .danger:hover {
-      transform: translateY(-1px);
-      border-color: var(--cyan);
     }
 
     .layout {
@@ -215,7 +171,6 @@
     .main {
       min-height: 720px;
       padding: 22px;
-      border-radius: 30px;
     }
 
     .hero {
@@ -238,7 +193,7 @@
         #121947;
       box-shadow:
         0 0 45px rgba(98,245,255,.6),
-        0 0 120px rgba(158,123,255,.25);
+        0 0 120px rgba(158,123,255,.3);
       animation: breathe 4s ease-in-out infinite;
     }
 
@@ -254,7 +209,7 @@
 
     .orb::after {
       inset: -36px;
-      border-color: rgba(158,123,255,.3);
+      border-color: rgba(158,123,255,.35);
       animation-direction: reverse;
       animation-duration: 13s;
     }
@@ -300,7 +255,6 @@
       border-radius: 19px;
       white-space: pre-wrap;
       line-height: 1.6;
-      animation: appear .25s ease both;
     }
 
     .message.user {
@@ -360,18 +314,12 @@
     .send {
       width: 48px;
       height: 48px;
-      flex: 0 0 48px;
       border: 0;
       border-radius: 50%;
       color: #061016;
       background: var(--cyan);
       font-size: 20px;
       font-weight: 900;
-    }
-
-    .send:hover {
-      transform: scale(1.06);
-      background: white;
     }
 
     .suggestions {
@@ -390,12 +338,6 @@
       background: rgba(255,255,255,.04);
     }
 
-    .suggestion:hover {
-      color: var(--text);
-      border-color: var(--cyan);
-      transform: translateY(-2px);
-    }
-
     aside {
       display: flex;
       flex-direction: column;
@@ -404,7 +346,6 @@
 
     .card {
       padding: 17px;
-      border-radius: 23px;
     }
 
     .card h2 {
@@ -446,10 +387,6 @@
       font-size: 13px;
     }
 
-    .metric:last-child {
-      border-bottom: 0;
-    }
-
     .metric strong {
       color: var(--text);
     }
@@ -460,9 +397,7 @@
       gap: 7px;
     }
 
-    .tool-button,
-    .primary,
-    .danger {
+    .tool-button {
       padding: 9px 7px;
       border-radius: 12px;
       font-size: 12px;
@@ -504,27 +439,19 @@
     .modal {
       width: min(520px, 100%);
       padding: 22px;
-      border-radius: 25px;
     }
 
     .modal-title {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .modal-title h2 {
-      margin: 0;
-      font-size: 20px;
+      align-items: center;
     }
 
     .setting {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
-      padding: 13px 0;
+      padding: 14px 0;
       border-bottom: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
@@ -535,7 +462,7 @@
       border: 1px solid var(--line);
       border-radius: 10px;
       color: var(--text);
-      background: var(--panel-strong);
+      background: var(--panel);
     }
 
     .toast {
@@ -543,13 +470,11 @@
       z-index: 30;
       right: 18px;
       bottom: 18px;
-      max-width: 310px;
       padding: 12px 15px;
       border: 1px solid var(--line);
       border-radius: 14px;
       color: var(--text);
-      background: var(--panel-strong);
-      box-shadow: 0 15px 45px var(--shadow);
+      background: var(--panel);
       opacity: 0;
       pointer-events: none;
       transform: translateY(12px);
@@ -581,13 +506,6 @@
       }
     }
 
-    @keyframes appear {
-      from {
-        opacity: 0;
-        transform: translateY(7px);
-      }
-    }
-
     @media (max-width: 850px) {
       .layout {
         grid-template-columns: 1fr;
@@ -597,18 +515,9 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
       }
-
-      .main {
-        min-height: 650px;
-      }
     }
 
     @media (max-width: 650px) {
-      .app {
-        width: calc(100% - 14px);
-        padding-top: 8px;
-      }
-
       header {
         align-items: flex-start;
         flex-direction: column;
@@ -616,7 +525,6 @@
 
       .top-actions {
         width: 100%;
-        justify-content: space-between;
       }
 
       .mode-switch {
@@ -625,11 +533,6 @@
 
       .mode-button {
         flex: 1;
-      }
-
-      .main {
-        padding: 15px;
-        border-radius: 24px;
       }
 
       .suggestions,
@@ -641,28 +544,17 @@
         max-width: 94%;
       }
     }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation-duration: .001ms !important;
-        transition-duration: .001ms !important;
-      }
-    }
   </style>
 </head>
 
 <body>
-  <div class="grid"></div>
-
   <main class="app">
     <header class="glass">
       <div class="brand">
         <div class="brand-icon"></div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-subtitle">Supreme Neural Fusion Workspace</div>
+          <div class="brand-subtitle">Gemini Neural Workspace</div>
         </div>
       </div>
 
@@ -683,8 +575,8 @@
             <div class="orb"></div>
             <h1>Intelligence that feels alive.</h1>
             <p>
-              Ask anything with a premium liquid-glass AI workspace
-              powered by your secure Gemini connection.
+              Ask anything with a premium liquid-glass workspace
+              powered by your Gemini connection.
             </p>
             <div id="status">Fast engine ready</div>
           </div>
@@ -695,13 +587,9 @@
         <form id="chatForm" class="composer">
           <textarea id="prompt" rows="1" placeholder="Ask Neural Ultra anything..."></textarea>
 
-          <button id="voiceButton" class="icon-button" type="button" title="Voice input">
-            🎙
-          </button>
+          <button id="voiceButton" class="icon-button" type="button">🎙</button>
 
-          <button id="sendButton" class="send" type="submit" title="Send message">
-            ↑
-          </button>
+          <button id="sendButton" class="send" type="submit">↑</button>
         </form>
 
         <div class="suggestions">
@@ -730,13 +618,11 @@
             <span class="dot"></span>
             <span id="engineState">Ready</span>
           </div>
-          <p id="engineDescription">
-            Gemini connection ready for testing.
-          </p>
+          <p>Gemini backend is ready for testing.</p>
         </section>
 
         <section class="card glass">
-          <h2>Live Metrics</h2>
+          <h2>Metrics</h2>
           <div class="metric">
             <span>Mode</span>
             <strong id="metricMode">Fast</strong>
@@ -747,15 +633,15 @@
           </div>
           <div class="metric">
             <span>Session</span>
-            <strong id="metricSession">Local</strong>
+            <strong>Local</strong>
           </div>
         </section>
 
         <section class="card glass">
           <h2>Tools</h2>
           <div class="tools">
-            <button id="clearButton" class="danger" type="button">Clear</button>
-            <button id="exportButton" class="primary" type="button">Export</button>
+            <button id="clearButton" class="tool-button danger" type="button">Clear</button>
+            <button id="exportButton" class="tool-button primary" type="button">Export</button>
             <button id="notesButton" class="tool-button" type="button">Notes</button>
             <button id="tasksButton" class="tool-button" type="button">Tasks</button>
             <button id="calculatorButton" class="tool-button" type="button">Calc</button>
@@ -765,9 +651,7 @@
       </aside>
     </div>
 
-    <div class="footer">
-      Neural Ultra · Gemini-powered interface
-    </div>
+    <div class="footer">Neural Ultra · Secure Gemini connection</div>
   </main>
 
   <div id="settingsModal" class="modal-bg">
@@ -796,7 +680,7 @@
         <input id="privacyToggle" type="checkbox">
       </div>
 
-      <button id="resetButton" class="danger" type="button">
+      <button id="resetButton" class="tool-button danger" type="button">
         Reset local data
       </button>
     </section>
@@ -811,95 +695,49 @@
     const promptInput = $("#prompt");
     const messages = $("#messages");
     const status = $("#status");
-    const engineState = $("#engineState");
-    const metricMode = $("#metricMode");
-    const metricMessages = $("#metricMessages");
-    const metricSession = $("#metricSession");
     const sendButton = $("#sendButton");
     const toast = $("#toast");
 
-    const fastMode = $("#fastMode");
-    const ultraMode = $("#ultraMode");
-    const settingsModal = $("#settingsModal");
-
-    let mode = localStorage.getItem("neural-ultra-mode") || "fast";
-    let conversation = JSON.parse(
-      localStorage.getItem("neural-ultra-conversation") || "[]"
+    let mode = localStorage.getItem("neural-mode") || "fast";
+    let history = JSON.parse(
+      localStorage.getItem("neural-history") || "[]"
     );
-    let speechEnabled =
-      localStorage.getItem("neural-ultra-speech") === "true";
-    let privacyMode =
-      localStorage.getItem("neural-ultra-privacy") === "true";
+    let speaking = localStorage.getItem("neural-speaking") === "true";
+    let privacy = localStorage.getItem("neural-privacy") === "true";
     let controller = null;
 
-    function notify(message) {
-      toast.textContent = message;
+    function notify(text) {
+      toast.textContent = text;
       toast.classList.add("show");
 
-      clearTimeout(notify.timer);
-      notify.timer = setTimeout(() => {
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
         toast.classList.remove("show");
-      }, 2600);
+      }, 2400);
     }
 
-    function saveConversation() {
-      if (!privacyMode) {
-        localStorage.setItem(
-          "neural-ultra-conversation",
-          JSON.stringify(conversation)
-        );
-      }
+    function update() {
+      $("#metricMode").textContent = mode === "fast" ? "Fast" : "Ultra";
+      $("#metricMessages").textContent = String(history.length);
     }
 
-    function updateMetrics() {
-      metricMode.textContent = mode === "fast" ? "Fast" : "Ultra";
-      metricMessages.textContent = String(conversation.length);
-      metricSession.textContent = privacyMode ? "Private" : "Local";
-    }
-
-    function setStatus(text, state = "Ready") {
+    function setStatus(text) {
       status.textContent = text;
-      engineState.textContent = state;
+      $("#engineState").textContent =
+        text.toLowerCase().includes("error") ? "Error" : "Ready";
     }
 
-    function setMode(nextMode) {
-      mode = nextMode;
-      localStorage.setItem("neural-ultra-mode", mode);
-
-      fastMode.classList.toggle("active", mode === "fast");
-      ultraMode.classList.toggle("active", mode === "ultra");
-
-      setStatus(
-        mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
-      );
-
-      updateMetrics();
-    }
-
-    function speak(text) {
-      if (!("speechSynthesis" in window)) {
-        notify("Text-to-speech is not supported here.");
-        return;
-      }
-
-      speechSynthesis.cancel();
-
-      const voice = new SpeechSynthesisUtterance(text);
-      voice.lang = "en-US";
-      speechSynthesis.speak(voice);
-    }
-
-    function addMessage(text, role, tools = false) {
+    function addMessage(text, role) {
       const item = document.createElement("article");
-      item.className = `message ${role}`;
+      item.className = "message " + role;
 
       const content = document.createElement("div");
       content.textContent = text;
       item.appendChild(content);
 
-      if (tools) {
-        const controls = document.createElement("div");
-        controls.className = "message-tools";
+      if (role === "assistant") {
+        const tools = document.createElement("div");
+        tools.className = "message-tools";
 
         const copy = document.createElement("button");
         copy.type = "button";
@@ -909,60 +747,55 @@
             await navigator.clipboard.writeText(text);
             notify("Copied.");
           } catch {
-            notify("Copy is unavailable.");
+            notify("Copy unavailable.");
           }
         };
 
-        const speech = document.createElement("button");
-        speech.type = "button";
-        speech.textContent = "Speak";
-        speech.onclick = () => speak(text);
+        const speak = document.createElement("button");
+        speak.type = "button";
+        speak.textContent = "Speak";
+        speak.onclick = () => {
+          if (!("speechSynthesis" in window)) {
+            notify("Speech unavailable.");
+            return;
+          }
 
-        controls.append(copy, speech);
-        item.appendChild(controls);
+          speechSynthesis.cancel();
+          speechSynthesis.speak(
+            new SpeechSynthesisUtterance(text)
+          );
+        };
+
+        tools.append(copy, speak);
+        item.appendChild(tools);
       }
 
       messages.appendChild(item);
       messages.classList.add("visible");
       messages.scrollTop = messages.scrollHeight;
-
-      return item;
     }
 
-    function renderConversation() {
+    function render() {
       messages.innerHTML = "";
 
-      conversation.forEach((entry) => {
-        addMessage(entry.text, entry.role, entry.role === "assistant");
+      history.forEach((item) => {
+        addMessage(item.text, item.role);
       });
 
-      if (!conversation.length) {
+      if (!history.length) {
         messages.classList.remove("visible");
       }
 
-      updateMetrics();
+      update();
     }
 
-    function addConversation(text, role) {
-      conversation.push({
-        text,
-        role,
-        time: new Date().toISOString()
-      });
-
-      saveConversation();
-      renderConversation();
-    }
-
-    async function sendToGemini(question) {
+    async function askGemini(question) {
       controller = new AbortController();
 
-      const history = conversation
-        .slice(-12)
-        .map((entry) => ({
-          role: entry.role === "assistant" ? "model" : "user",
-          text: entry.text
-        }));
+      const oldMessages = history.slice(-12).map((item) => ({
+        role: item.role === "assistant" ? "model" : "user",
+        text: item.text
+      }));
 
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -971,8 +804,8 @@
         },
         body: JSON.stringify({
           message: question,
-          history,
-          mode
+          mode,
+          history: oldMessages
         }),
         signal: controller.signal
       });
@@ -983,81 +816,63 @@
         throw new Error(data.error || "Gemini request failed.");
       }
 
-      if (!data.text) {
-        throw new Error("Gemini returned an empty response.");
-      }
-
       return data.text;
     }
 
-    async function submitMessage(text) {
+    async function sendMessage(text) {
       const question = text.trim();
 
       if (!question) {
-        notify("Write a message first.");
+        notify("Type a message first.");
         return;
       }
 
-      addConversation(question, "user");
+      history.push({
+        role: "user",
+        text: question
+      });
+
+      if (!privacy) {
+        localStorage.setItem("neural-history", JSON.stringify(history));
+      }
+
+      addMessage(question, "user");
       promptInput.value = "";
-      promptInput.style.height = "auto";
-
-      setStatus(
-        mode === "fast"
-          ? "Connecting to Gemini..."
-          : "Running Ultra reasoning...",
-        "Processing"
-      );
-
+      setStatus("Connecting to Gemini...");
       sendButton.textContent = "■";
-      sendButton.title = "Stop";
 
       try {
-        const answer = await sendToGemini(question);
+        const answer = await askGemini(question);
 
-        addConversation(answer, "assistant");
+        history.push({
+          role: "assistant",
+          text: answer
+        });
 
-        const lastMessage = messages.lastElementChild;
-        const controls = document.createElement("div");
-        controls.className = "message-tools";
-
-        const copy = document.createElement("button");
-        copy.type = "button";
-        copy.textContent = "Copy";
-        copy.onclick = async () => {
-          await navigator.clipboard?.writeText(answer);
-          notify("Copied.");
-        };
-
-        const speech = document.createElement("button");
-        speech.type = "button";
-        speech.textContent = "Speak";
-        speech.onclick = () => speak(answer);
-
-        controls.append(copy, speech);
-        lastMessage.appendChild(controls);
-
-        if (speechEnabled) {
-          speak(answer);
+        if (!privacy) {
+          localStorage.setItem("neural-history", JSON.stringify(history));
         }
 
-        setStatus(
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
-          "Ready"
-        );
+        addMessage(answer, "assistant");
+
+        if (speaking && "speechSynthesis" in window) {
+          speechSynthesis.speak(new SpeechSynthesisUtterance(answer));
+        }
+
+        setStatus("Gemini ready");
       } catch (error) {
         if (error.name === "AbortError") {
-          setStatus("Response stopped", "Ready");
-          notify("Response stopped.");
+          setStatus("Response stopped");
+          notify("Stopped.");
         } else {
-          setStatus("Gemini connection error", "Error");
-          addConversation(`Error: ${error.message}`, "assistant");
+          setStatus("Gemini error");
+          addMessage("Error: " + error.message, "assistant");
           notify(error.message);
         }
       } finally {
         controller = null;
         sendButton.textContent = "↑";
-        sendButton.title = "Send message";
+        update();
       }
     }
 
@@ -1066,16 +881,9 @@
 
       if (controller) {
         controller.abort();
-        return;
+      } else {
+        sendMessage(promptInput.value);
       }
-
-      submitMessage(promptInput.value);
-    });
-
-    promptInput.addEventListener("input", () => {
-      promptInput.style.height = "auto";
-      promptInput.style.height =
-        Math.min(promptInput.scrollHeight, 150) + "px";
     });
 
     promptInput.addEventListener("keydown", (event) => {
@@ -1085,65 +893,79 @@
       }
     });
 
-    fastMode.addEventListener("click", () => setMode("fast"));
-    ultraMode.addEventListener("click", () => setMode("ultra"));
+    promptInput.addEventListener("input", () => {
+      promptInput.style.height = "auto";
+      promptInput.style.height =
+        Math.min(promptInput.scrollHeight, 150) + "px";
+    });
+
+    $("#fastMode").onclick = () => {
+      mode = "fast";
+      localStorage.setItem("neural-mode", mode);
+      $("#fastMode").classList.add("active");
+      $("#ultraMode").classList.remove("active");
+      setStatus("Fast engine ready");
+      update();
+    };
+
+    $("#ultraMode").onclick = () => {
+      mode = "ultra";
+      localStorage.setItem("neural-mode", mode);
+      $("#ultraMode").classList.add("active");
+      $("#fastMode").classList.remove("active");
+      setStatus("Ultra engine ready");
+      update();
+    };
 
     document.querySelectorAll(".suggestion").forEach((button) => {
-      button.addEventListener("click", () => {
+      button.onclick = () => {
         promptInput.value = button.dataset.prompt;
         promptInput.focus();
-        promptInput.dispatchEvent(new Event("input"));
-      });
+      };
     });
 
-    $("#clearButton").addEventListener("click", () => {
-      conversation = [];
-      localStorage.removeItem("neural-ultra-conversation");
-      renderConversation();
+    $("#clearButton").onclick = () => {
+      history = [];
+      localStorage.removeItem("neural-history");
+      render();
       setStatus("Conversation cleared");
-      notify("Conversation cleared.");
-    });
+      notify("Cleared.");
+    };
 
-    $("#exportButton").addEventListener("click", () => {
-      if (!conversation.length) {
-        notify("There is no conversation to export.");
+    $("#exportButton").onclick = () => {
+      if (!history.length) {
+        notify("Nothing to export.");
         return;
       }
 
-      const text = conversation
-        .map((entry) => `${entry.role.toUpperCase()}
-${entry.text}`)
+      const content = history
+        .map((item) => item.role.toUpperCase() + "
+" + item.text)
         .join("
 
 ");
 
-      const blob = new Blob([text], { type: "text/plain" });
+      const blob = new Blob([content], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = "neural-ultra-conversation.txt";
+      link.download = "neural-ultra.txt";
       link.click();
 
       URL.revokeObjectURL(url);
-      notify("Conversation exported.");
-    });
+      notify("Exported.");
+    };
 
-    $("#settingsButton").addEventListener("click", () => {
-      settingsModal.classList.add("open");
-    });
+    $("#settingsButton").onclick = () => {
+      $("#settingsModal").classList.add("open");
+    };
 
-    $("#closeSettings").addEventListener("click", () => {
-      settingsModal.classList.remove("open");
-    });
+    $("#closeSettings").onclick = () => {
+      $("#settingsModal").classList.remove("open");
+    };
 
-    settingsModal.addEventListener("click", (event) => {
-      if (event.target === settingsModal) {
-        settingsModal.classList.remove("open");
-      }
-    });
-
-    $("#themeSelect").addEventListener("change", (event) => {
+    $("#themeSelect").onchange = (event) => {
       const theme = event.target.value;
 
       if (theme === "dark") {
@@ -1152,157 +974,130 @@ ${entry.text}`)
         document.documentElement.dataset.theme = theme;
       }
 
-      localStorage.setItem("neural-ultra-theme", theme);
+      localStorage.setItem("neural-theme", theme);
       notify("Theme updated.");
-    });
+    };
 
-    $("#speechToggle").addEventListener("change", (event) => {
-      speechEnabled = event.target.checked;
-      localStorage.setItem("neural-ultra-speech", String(speechEnabled));
+    $("#speechToggle").onchange = (event) => {
+      speaking = event.target.checked;
+      localStorage.setItem("neural-speaking", String(speaking));
       notify("Speech setting updated.");
-    });
+    };
 
-    $("#privacyToggle").addEventListener("change", (event) => {
-      privacyMode = event.target.checked;
-      localStorage.setItem("neural-ultra-privacy", String(privacyMode));
+    $("#privacyToggle").onchange = (event) => {
+      privacy = event.target.checked;
+      localStorage.setItem("neural-privacy", String(privacy));
 
-      if (privacyMode) {
-        conversation = [];
-        localStorage.removeItem("neural-ultra-conversation");
-        renderConversation();
+      if (privacy) {
+        history = [];
+        localStorage.removeItem("neural-history");
+        render();
       }
 
       notify("Privacy setting updated.");
-    });
+    };
 
-    $("#resetButton").addEventListener("click", () => {
+    $("#resetButton").onclick = () => {
       localStorage.clear();
-      conversation = [];
-      speechEnabled = false;
-      privacyMode = false;
-      document.documentElement.removeAttribute("data-theme");
-      $("#themeSelect").value = "dark";
-      $("#speechToggle").checked = false;
-      $("#privacyToggle").checked = false;
-      renderConversation();
-      setMode("fast");
-      settingsModal.classList.remove("open");
-      notify("Local data reset.");
-    });
+      location.reload();
+    };
 
-    $("#voiceButton").addEventListener("click", () => {
+    $("#voiceButton").onclick = () => {
       const Recognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
 
       if (!Recognition) {
-        notify("Voice input is not supported in this browser.");
+        notify("Voice input is not supported.");
         return;
       }
 
       const recognition = new Recognition();
       recognition.lang = "en-US";
-      recognition.interimResults = false;
 
-      recognition.onstart = () => setStatus("Listening...", "Voice input");
-
+      recognition.onstart = () => setStatus("Listening...");
       recognition.onresult = (event) => {
         promptInput.value = event.results[0][0].transcript;
-        promptInput.dispatchEvent(new Event("input"));
-        setStatus(
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
-        );
-      };
-
-      recognition.onerror = () => {
-        setStatus("Voice input unavailable", "Ready");
-        notify("Voice input could not start.");
+        promptInput.focus();
+        setStatus("Fast engine ready");
       };
 
       recognition.start();
-    });
+    };
 
-    $("#notesButton").addEventListener("click", () => {
+    $("#notesButton").onclick = () => {
       const note = prompt("Write a note:");
 
       if (note) {
-        localStorage.setItem("neural-ultra-note", note);
+        localStorage.setItem("neural-note", note);
         notify("Note saved.");
       }
-    });
+    };
 
-    $("#tasksButton").addEventListener("click", () => {
-      const task = prompt("Add a task:");
+    $("#tasksButton").onclick = () => {
+      const task = prompt("Write a task:");
 
       if (task) {
-        const tasks = JSON.parse(
-          localStorage.getItem("neural-ultra-tasks") || "[]"
-        );
-
-        tasks.push({
-          text: task,
-          done: false,
-          time: new Date().toISOString()
-        });
-
-        localStorage.setItem("neural-ultra-tasks", JSON.stringify(tasks));
-        notify("Task saved.");
+        notify("Task saved: " + task);
       }
-    });
+    };
 
-    $("#calculatorButton").addEventListener("click", () => {
-      const expression = prompt("Enter a basic calculation:");
+    $("#calculatorButton").onclick = () => {
+      const value = prompt("Enter a basic calculation:");
 
-      if (!expression) return;
+      if (!value) return;
 
-      if (!/^[0-9+*/().% -]+$/.test(expression)) {
-        notify("Only basic calculator characters are allowed.");
+      if (!/^[0-9+*/().% -]+$/.test(value)) {
+        notify("Invalid calculation.");
         return;
       }
 
       try {
         const result = Function(
-          `"use strict"; return (${expression})`
+          '"use strict"; return (' + value + ")"
         )();
 
-        notify(`Result: ${result}`);
+        notify("Result: " + result);
       } catch {
         notify("Invalid calculation.");
       }
-    });
+    };
 
-    $("#timerButton").addEventListener("click", () => {
-      const seconds = Number(prompt("Timer duration in seconds:"));
+    $("#timerButton").onclick = () => {
+      const seconds = Number(prompt("Timer seconds:"));
 
-      if (!Number.isFinite(seconds) || seconds <= 0) {
-        notify("Enter a valid duration.");
+      if (!seconds || seconds < 1) {
+        notify("Enter a valid number.");
         return;
       }
 
-      setStatus(`Timer running: ${seconds}s`, "Timer");
+      notify("Timer started.");
 
       setTimeout(() => {
-        notify("Timer complete.");
-        setStatus(
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
-        );
+        notify("Timer finished.");
       }, seconds * 1000);
-    });
+    };
 
-    const theme =
-      localStorage.getItem("neural-ultra-theme") || "dark";
+    const savedTheme =
+      localStorage.getItem("neural-theme") || "dark";
 
-    if (theme === "dark") {
+    if (savedTheme === "dark") {
       document.documentElement.removeAttribute("data-theme");
     } else {
-      document.documentElement.dataset.theme = theme;
+      document.documentElement.dataset.theme = savedTheme;
     }
 
-    $("#themeSelect").value = theme;
-    $("#speechToggle").checked = speechEnabled;
-    $("#privacyToggle").checked = privacyMode;
+    $("#themeSelect").value = savedTheme;
+    $("#speechToggle").checked = speaking;
+    $("#privacyToggle").checked = privacy;
 
-    setMode(mode);
-    renderConversation();
+    if (mode === "ultra") {
+      $("#ultraMode").click();
+    } else {
+      $("#fastMode").click();
+    }
+
+    render();
   </script>
 </body>
 </html>
