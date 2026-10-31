@@ -6,90 +6,544 @@
   <title>Neural Ultra</title>
 
   <style>
+    :root {
+      --bg: #050713;
+      --panel: rgba(255, 255, 255, 0.08);
+      --panel-strong: rgba(255, 255, 255, 0.13);
+      --line: rgba(255, 255, 255, 0.16);
+      --text: #f5f7ff;
+      --muted: rgba(245, 247, 255, 0.58);
+      --cyan: #62f5ff;
+      --violet: #9e7bff;
+      --amber: #ffd166;
+      --danger: #ff8297;
+    }
+
     * {
       box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 24px;
-      color: white;
-      font-family: Arial, sans-serif;
+      overflow-x: hidden;
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 20% 20%, #164e63, transparent 35%),
-        radial-gradient(circle at 80% 80%, #312e81, transparent 35%),
-        #050713;
+        radial-gradient(circle at 12% 10%, rgba(98, 245, 255, 0.16), transparent 30%),
+        radial-gradient(circle at 88% 90%, rgba(158, 123, 255, 0.17), transparent 35%),
+        var(--bg);
     }
 
-    .card {
-      width: min(760px, 100%);
-      padding: 48px 32px;
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.45;
+      background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 85%);
+    }
+
+    .app {
+      position: relative;
+      z-index: 1;
+      width: min(1120px, calc(100% - 32px));
+      min-height: 100vh;
+      margin: 0 auto;
+      padding: 22px 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .glass {
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.035));
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.12),
+        0 25px 80px rgba(0,0,0,.28);
+      backdrop-filter: blur(28px) saturate(150%);
+      -webkit-backdrop-filter: blur(28px) saturate(150%);
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 18px;
+      border-radius: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-mark {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(98,245,255,.12);
+      box-shadow: 0 0 30px rgba(98,245,255,.2);
+    }
+
+    .brand-mark::before {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
+      content: "";
+    }
+
+    .brand-name {
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-subtitle {
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .mode-switch {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.2);
+    }
+
+    .mode-switch button {
+      padding: 8px 14px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .mode-switch button.active {
+      color: #061016;
+      background: var(--cyan);
+    }
+
+    .hero {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      min-height: 330px;
+      padding: 54px 0 28px;
       text-align: center;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 32px;
-      background: rgba(255,255,255,.1);
-      box-shadow: 0 30px 100px rgba(0,0,0,.35);
-      backdrop-filter: blur(24px);
+    }
+
+    .hero-content {
+      width: min(760px, 100%);
     }
 
     .orb {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 28px;
+      position: relative;
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 30px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 30%, white, #62f5ff 12%, #7c3aed 70%);
-      box-shadow: 0 0 60px rgba(98,245,255,.7);
-      animation: pulse 3s ease-in-out infinite;
+      background:
+        radial-gradient(circle at 34% 26%, white 0 2%, transparent 3%),
+        radial-gradient(circle at 40% 35%, var(--cyan), transparent 22%),
+        radial-gradient(circle at 65% 70%, var(--violet), transparent 58%),
+        #111b4c;
+      box-shadow:
+        0 0 45px rgba(98,245,255,.58),
+        0 0 125px rgba(158,123,255,.25);
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    .orb::before,
+    .orb::after {
+      position: absolute;
+      inset: -18px;
+      border: 1px solid rgba(98,245,255,.34);
+      border-radius: 50%;
+      content: "";
+      animation: rotate 8s linear infinite;
+    }
+
+    .orb::after {
+      inset: -36px;
+      border-color: rgba(255,209,102,.2);
+      animation-direction: reverse;
+      animation-duration: 13s;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2rem, 7vw, 4.5rem);
-      letter-spacing: -0.06em;
+      font-size: clamp(2.4rem, 8vw, 5.7rem);
+      line-height: .95;
+      letter-spacing: -.075em;
     }
 
-    p {
-      color: rgba(255,255,255,.65);
-      font-size: 1.1rem;
+    .hero p {
+      max-width: 620px;
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      line-height: 1.7;
     }
 
-    button {
-      margin-top: 20px;
-      padding: 13px 22px;
+    .status {
+      min-height: 24px;
+      margin-top: 18px;
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    .chat-panel {
+      width: min(900px, 100%);
+      margin: 0 auto;
+      padding: 16px;
+      border-radius: 28px;
+    }
+
+    .messages {
+      display: none;
+      max-height: 420px;
+      overflow-y: auto;
+      padding: 10px 6px 16px;
+    }
+
+    .messages.visible {
+      display: block;
+    }
+
+    .message {
+      max-width: 82%;
+      margin: 10px 0;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      white-space: pre-wrap;
+      line-height: 1.6;
+    }
+
+    .message.user {
+      margin-left: auto;
+      color: #061016;
+      border-color: transparent;
+      background: var(--cyan);
+      border-bottom-right-radius: 6px;
+    }
+
+    .message.assistant {
+      border-bottom-left-radius: 6px;
+      background: rgba(0,0,0,.2);
+    }
+
+    .composer {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      padding: 8px 8px 8px 16px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(0,0,0,.22);
+    }
+
+    textarea {
+      flex: 1;
+      min-height: 48px;
+      max-height: 150px;
+      resize: none;
+      padding: 13px 0;
+      color: var(--text);
       border: 0;
-      border-radius: 999px;
-      background: #62f5ff;
-      color: #041018;
-      font-weight: bold;
-      cursor: pointer;
+      outline: 0;
+      background: transparent;
     }
 
-    @keyframes pulse {
+    textarea::placeholder {
+      color: rgba(245,247,255,.4);
+    }
+
+    .send {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      border: 0;
+      border-radius: 50%;
+      color: #061016;
+      background: var(--cyan);
+      font-size: 20px;
+      font-weight: 800;
+      transition: transform .2s, background .2s;
+    }
+
+    .send:hover {
+      transform: scale(1.06);
+      background: white;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .suggestion {
+      padding: 12px;
+      text-align: left;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      transition: transform .2s, border-color .2s, color .2s;
+    }
+
+    .suggestion:hover {
+      color: var(--text);
+      border-color: var(--cyan);
+      transform: translateY(-2px);
+    }
+
+    .footer-note {
+      padding: 15px 0 3px;
+      color: rgba(245,247,255,.35);
+      text-align: center;
+      font-size: 12px;
+    }
+
+    @keyframes breathe {
       50% {
-        transform: scale(1.08);
-        box-shadow: 0 0 100px rgba(98,245,255,.9);
+        transform: scale(1.07);
+        filter: brightness(1.18);
+      }
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 650px) {
+      .app {
+        width: min(100% - 20px, 1120px);
+        padding-top: 10px;
+      }
+
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .mode-switch {
+        width: 100%;
+      }
+
+      .mode-switch button {
+        flex: 1;
+      }
+
+      .hero {
+        min-height: 300px;
+        padding-top: 48px;
+      }
+
+      .suggestions {
+        grid-template-columns: 1fr;
+      }
+
+      .message {
+        max-width: 94%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: .001ms !important;
+        transition-duration: .001ms !important;
       }
     }
   </style>
 </head>
 
 <body>
-  <main class="card">
-    <div class="orb"></div>
-    <h1>Neural Ultra</h1>
-    <p>Your AI workspace is ready.</p>
-    <button onclick="showMessage()">Initialize Engine</button>
-    <p id="status"></p>
+  <div class="background-grid"></div>
+
+  <main class="app">
+    <header class="glass">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <div class="brand-name">Neural Ultra</div>
+          <div class="brand-subtitle">Adaptive Intelligence Workspace</div>
+        </div>
+      </div>
+
+      <div class="mode-switch">
+        <button id="fastMode" class="active" type="button">Fast</button>
+        <button id="ultraMode" type="button">Ultra</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="orb"></div>
+        <h1>Intelligence that feels alive.</h1>
+        <p>
+          Ask anything. Neural Ultra is designed for fast answers,
+          adaptive reasoning, and a premium liquid-glass experience.
+        </p>
+        <div id="status" class="status">Fast engine ready</div>
+      </div>
+    </section>
+
+    <section class="chat-panel glass">
+      <div id="messages" class="messages"></div>
+
+      <form id="chatForm" class="composer">
+        <textarea
+          id="prompt"
+          rows="1"
+          placeholder="Ask Neural Ultra anything..."
+          aria-label="Message"
+        ></textarea>
+
+        <button class="send" type="submit" aria-label="Send message">
+          ↑
+        </button>
+      </form>
+
+      <div class="suggestions">
+        <button class="suggestion" type="button" data-prompt="Explain artificial intelligence in simple English.">
+          Explain AI simply
+        </button>
+        <button class="suggestion" type="button" data-prompt="Create a practical weekly productivity plan.">
+          Create a productivity plan
+        </button>
+        <button class="suggestion" type="button" data-prompt="Help me write a professional email.">
+          Write a professional email
+        </button>
+        <button class="suggestion" type="button" data-prompt="Give me a useful coding idea for a beginner.">
+          Give me a coding idea
+        </button>
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Neural Ultra interface preview · Gemini backend will be connected next
+    </div>
   </main>
 
   <script>
-    function showMessage() {
-      document.getElementById("status").textContent =
-        "Neural Ultra engine initialized.";
+    const form = document.getElementById("chatForm");
+    const promptInput = document.getElementById("prompt");
+    const messages = document.getElementById("messages");
+    const status = document.getElementById("status");
+    const fastMode = document.getElementById("fastMode");
+    const ultraMode = document.getElementById("ultraMode");
+
+    let mode = "fast";
+
+    function setMode(nextMode) {
+      mode = nextMode;
+
+      fastMode.classList.toggle("active", mode === "fast");
+      ultraMode.classList.toggle("active", mode === "ultra");
+
+      status.textContent =
+        mode === "fast" ? "Fast engine ready" : "Ultra engine ready";
     }
+
+    function addMessage(text, role) {
+      messages.classList.add("visible");
+
+      const item = document.createElement("div");
+      item.className = `message ${role}`;
+      item.textContent = text;
+      messages.appendChild(item);
+      messages.scrollTop = messages.scrollHeight;
+
+      return item;
+    }
+
+    function demoAnswer(question) {
+      if (mode === "fast") {
+        return `Demo response: I received your question.
+
+"${question}"
+
+The Gemini backend is not connected yet. The interface is working correctly.`;
+      }
+
+      return `Ultra demo response:
+
+I received your question:
+"${question}"
+
+The liquid-glass interface, mode switch, suggestions, message area, and animated Neural Ultra engine are working.
+
+The secure Gemini backend will be connected in the next step.`;
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const question = promptInput.value.trim();
+      if (!question) return;
+
+      addMessage(question, "user");
+      promptInput.value = "";
+      status.textContent = "Neural Ultra is processing...";
+
+      setTimeout(() => {
+        addMessage(demoAnswer(question), "assistant");
+        status.textContent =
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready";
+      }, mode === "fast" ? 350 : 900);
+    });
+
+    promptInput.addEventListener("input", function () {
+      promptInput.style.height = "auto";
+      promptInput.style.height =
+        Math.min(promptInput.scrollHeight, 150) + "px";
+    });
+
+    fastMode.addEventListener("click", () => setMode("fast"));
+    ultraMode.addEventListener("click", () => setMode("ultra"));
+
+    document.querySelectorAll("[data-prompt]").forEach((button) => {
+      button.addEventListener("click", () => {
+        promptInput.value = button.dataset.prompt;
+        promptInput.focus();
+        promptInput.dispatchEvent(new Event("input"));
+      });
+    });
   </script>
 </body>
-</html>
+          </html>
