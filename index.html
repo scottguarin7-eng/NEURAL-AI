@@ -1,700 +1,1088 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Neural Ultra</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neural Ultra</title>
 
-<style>
-:root{
-  --bg:#070a18;
-  --panel:#11182d;
-  --panel2:#17213c;
-  --line:#2c3a60;
-  --text:#f5f7ff;
-  --muted:#9aa8c7;
-  --cyan:#67f5ff;
-  --violet:#a57cff;
-  --green:#70edab;
-  --red:#ff6f91;
-}
-[data-theme="light"]{
-  --bg:#eef3fb;
-  --panel:#ffffff;
-  --panel2:#f3f6fc;
-  --line:#cbd5e8;
-  --text:#14203a;
-  --muted:#60708f;
-}
-[data-theme="high"]{
-  --bg:#000;
-  --panel:#111;
-  --panel2:#191919;
-  --line:#fff;
-  --text:#fff;
-  --muted:#fff;
-  --cyan:#0ff;
-  --violet:#f0f;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  min-height:100vh;
-  color:var(--text);
-  font-family:Arial,sans-serif;
-  background:
-    radial-gradient(circle at 10% 10%,#1a5266 0,transparent 28%),
-    radial-gradient(circle at 90% 90%,#321b65 0,transparent 32%),
-    var(--bg);
-}
-button,input,textarea,select{font:inherit}
-button{cursor:pointer}
-button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
-  outline:2px solid var(--cyan);
-  outline-offset:2px;
-}
-.app{width:min(1180px,calc(100% - 24px));margin:auto;padding:14px 0}
-.box{
-  border:1px solid var(--line);
-  border-radius:22px;
-  background:linear-gradient(135deg,var(--panel2),var(--panel));
-  box-shadow:0 18px 60px #0005;
-}
-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:14px;
-}
-.brand{display:flex;align-items:center;gap:10px}
-.logo{
-  width:40px;height:40px;display:grid;place-items:center;
-  border-radius:13px;background:#67f5ff22;
-  box-shadow:0 0 25px #67f5ff55;
-}
-.logo:after{
-  content:"";width:11px;height:11px;border-radius:50%;
-  background:var(--cyan);box-shadow:0 0 18px var(--cyan)
-}
-.brand strong{display:block;letter-spacing:-.04em}
-.brand small{color:var(--muted)}
-.actions{display:flex;align-items:center;gap:6px}
-.mode{
-  display:flex;gap:4px;padding:4px;border:1px solid var(--line);
-  border-radius:999px
-}
-.mode button,.icon{
-  border:0;border-radius:999px;padding:8px 13px;
-  color:var(--muted);background:transparent
-}
-.mode button.active{color:#001116;background:var(--cyan)}
-.icon{
-  width:40px;height:40px;padding:0;border:1px solid var(--line);
-  border-radius:12px;color:var(--text);background:#ffffff0d
-}
-.grid{
-  display:grid;grid-template-columns:minmax(0,1fr) 280px;
-  gap:14px;margin-top:14px
-}
-.main{padding:20px;min-height:720px}
-.hero{text-align:center;min-height:285px;padding-top:18px}
-.orb{
-  width:120px;height:120px;margin:0 auto 30px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#fff 0 2%,transparent 3%),
-  radial-gradient(circle at 35% 35%,var(--cyan),transparent 25%),
-  radial-gradient(circle at 70% 70%,var(--violet),transparent 62%),#111947;
-  box-shadow:0 0 40px #67f5ff99,0 0 110px #a57cff55;
-  animation:pulse 4s infinite ease-in-out
-}
-h1{margin:0;font-size:clamp(2.4rem,7vw,5rem);line-height:.95;letter-spacing:-.07em}
-.hero p{max-width:620px;margin:22px auto;color:var(--muted);line-height:1.6}
-#status{min-height:22px;color:var(--cyan);font-size:13px}
-.messages{
-  display:none;max-height:380px;overflow:auto;margin:8px 0 16px;padding:4px
-}
-.messages.show{display:block}
-.message{
-  max-width:85%;margin:10px 0;padding:12px 15px;
-  border:1px solid var(--line);border-radius:18px;
-  white-space:pre-wrap;line-height:1.55
-}
-.message.user{
-  margin-left:auto;color:#001116;border:0;
-  background:var(--cyan);border-bottom-right-radius:5px
-}
-.message.assistant{background:#0003;border-bottom-left-radius:5px}
-.message-tools{display:flex;gap:5px;margin-top:9px}
-.message-tools button{
-  border:1px solid var(--line);border-radius:99px;
-  padding:4px 8px;color:var(--muted);background:transparent;font-size:11px
-}
-.composer{
-  display:flex;align-items:end;gap:8px;padding:8px 8px 8px 14px;
-  border:1px solid var(--line);border-radius:22px;background:#0003
-}
-textarea{
-  flex:1;min-height:48px;max-height:140px;resize:none;
-  padding:13px 0;color:var(--text);border:0;outline:0;background:transparent
-}
-textarea::placeholder{color:var(--muted)}
-.send{
-  width:48px;height:48px;border:0;border-radius:50%;
-  color:#001116;background:var(--cyan);font-size:20px;font-weight:bold
-}
-.suggestions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-.suggestion{
-  padding:11px;text-align:left;color:var(--muted);
-  border:1px solid var(--line);border-radius:13px;background:#ffffff08
-}
-.suggestion:hover{color:var(--text);border-color:var(--cyan)}
-aside{display:flex;flex-direction:column;gap:12px}
-.card{padding:16px}
-.card h2{margin:0 0 12px;font-size:13px;text-transform:uppercase;letter-spacing:.08em}
-.card p{color:var(--muted);font-size:13px;line-height:1.5}
-.online{color:var(--green);font-size:13px}
-.dot{
-  display:inline-block;width:8px;height:8px;margin-right:7px;
-  border-radius:50%;background:var(--green);box-shadow:0 0 12px var(--green)
-}
-.metric{
-  display:flex;justify-content:space-between;padding:8px 0;
-  border-bottom:1px solid var(--line);color:var(--muted);font-size:13px
-}
-.metric strong{color:var(--text)}
-.tools{display:grid;grid-template-columns:1fr 1fr;gap:7px}
-.tool{
-  padding:9px 5px;border:1px solid var(--line);border-radius:11px;
-  color:var(--text);background:#ffffff09;font-size:12px
-}
-.tool:hover{border-color:var(--cyan)}
-.danger{background:var(--red);color:white;border-color:var(--red)}
-.primary{background:var(--cyan);color:#001116;border-color:var(--cyan)}
-.modal-bg{
-  position:fixed;inset:0;z-index:10;display:none;place-items:center;
-  padding:18px;background:#000b
-}
-.modal-bg.open{display:grid}
-.modal{width:min(500px,100%);padding:20px}
-.modal-head{display:flex;justify-content:space-between;align-items:center}
-.setting{
-  display:flex;justify-content:space-between;align-items:center;
-  padding:14px 0;border-bottom:1px solid var(--line);color:var(--muted)
-}
-select{padding:7px;border:1px solid var(--line);border-radius:8px;color:var(--text);background:var(--panel)}
-.toast{
-  position:fixed;right:16px;bottom:16px;z-index:20;
-  padding:12px 15px;border:1px solid var(--line);border-radius:12px;
-  background:var(--panel);opacity:0;transform:translateY(10px);
-  pointer-events:none;transition:.2s
-}
-.toast.show{opacity:1;transform:translateY(0)}
-@keyframes pulse{50%{transform:scale(1.07);filter:brightness(1.2)}}
-@media(max-width:850px){.grid{grid-template-columns:1fr}aside{display:grid;grid-template-columns:repeat(3,1fr)}}
-@media(max-width:620px){
-  header{align-items:flex-start;flex-direction:column}
-  .actions{width:100%}.mode{flex:1}.mode button{flex:1}
-  .suggestions,aside{grid-template-columns:1fr}
-}
-</style>
+  <style>
+    :root {
+      --bg: #070a18;
+      --panel: #141c34;
+      --line: #344267;
+      --text: #f5f7ff;
+      --muted: #aab5d1;
+      --cyan: #67f5ff;
+      --green: #70edab;
+      --red: #ff6f91;
+    }
+
+    [data-theme="light"] {
+      --bg: #eef3fb;
+      --panel: #ffffff;
+      --line: #cbd5e8;
+      --text: #14203a;
+      --muted: #60708f;
+    }
+
+    [data-theme="high"] {
+      --bg: #000000;
+      --panel: #111111;
+      --line: #ffffff;
+      --text: #ffffff;
+      --muted: #ffffff;
+      --cyan: #00ffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at 10% 10%, #1a5266 0, transparent 28%),
+        radial-gradient(circle at 90% 90%, #321b65 0, transparent 32%),
+        var(--bg);
+    }
+
+    button,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 2px;
+    }
+
+    .app {
+      width: min(1100px, calc(100% - 24px));
+      margin: auto;
+      padding: 14px 0;
+    }
+
+    .box {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: var(--panel);
+      box-shadow: 0 18px 60px #0008;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: #67f5ff22;
+      box-shadow: 0 0 25px #67f5ff55;
+    }
+
+    .logo::after {
+      width: 11px;
+      height: 11px;
+      display: block;
+      border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 18px var(--cyan);
+      content: "";
+    }
+
+    .brand strong,
+    .brand small {
+      display: block;
+    }
+
+    .brand small {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .mode {
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+    }
+
+    .mode button,
+    .icon {
+      border: 0;
+      color: var(--muted);
+      background: transparent;
+    }
+
+    .mode button {
+      padding: 8px 13px;
+      border-radius: 999px;
+    }
+
+    .mode button.active {
+      color: #001116;
+      background: var(--cyan);
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      background: #ffffff0d;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .main {
+      min-height: 680px;
+      padding: 20px;
+    }
+
+    .hero {
+      min-height: 280px;
+      padding-top: 20px;
+      text-align: center;
+    }
+
+    .orb {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 30px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, #fff 0 2%, transparent 3%),
+        radial-gradient(circle at 35% 35%, var(--cyan), transparent 25%),
+        #182052;
+      box-shadow: 0 0 40px #67f5ff99;
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 7vw, 5rem);
+      line-height: .95;
+      letter-spacing: -.07em;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: 22px auto;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    #status {
+      min-height: 22px;
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    .messages {
+      display: none;
+      max-height: 380px;
+      overflow-y: auto;
+      margin: 8px 0 16px;
+      padding: 4px;
+    }
+
+    .messages.show {
+      display: block;
+    }
+
+    .message {
+      max-width: 85%;
+      margin: 10px 0;
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      white-space: pre-wrap;
+      line-height: 1.55;
+    }
+
+    .message.user {
+      margin-left: auto;
+      color: #001116;
+      border: 0;
+      background: var(--cyan);
+    }
+
+    .message.assistant {
+      background: #0003;
+    }
+
+    .message-tools {
+      display: flex;
+      gap: 5px;
+      margin-top: 9px;
+    }
+
+    .message-tools button {
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 99px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 11px;
+    }
+
+    .composer {
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      padding: 8px 8px 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: #0003;
+    }
+
+    textarea {
+      flex: 1;
+      min-height: 48px;
+      max-height: 140px;
+      resize: none;
+      padding: 13px 0;
+      color: var(--text);
+      border: 0;
+      outline: 0;
+      background: transparent;
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+    }
+
+    .send {
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 50%;
+      color: #001116;
+      background: var(--cyan);
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .suggestions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .suggestion,
+    .tool {
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--muted);
+      background: #ffffff09;
+    }
+
+    .suggestion {
+      text-align: left;
+    }
+
+    .suggestion:hover,
+    .tool:hover {
+      border-color: var(--cyan);
+      color: var(--text);
+    }
+
+    aside {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .card {
+      padding: 16px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      font-size: 13px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .online {
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      display: inline-block;
+      margin-right: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px var(--green);
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .metric strong {
+      color: var(--text);
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .tool {
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .danger {
+      color: white;
+      border-color: var(--red);
+      background: var(--red);
+    }
+
+    .primary {
+      color: #001116;
+      border-color: var(--cyan);
+      background: var(--cyan);
+    }
+
+    .modal-bg {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: #000b;
+    }
+
+    .modal-bg.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(500px, 100%);
+      padding: 20px;
+    }
+
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .setting {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+    }
+
+    select {
+      padding: 7px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      background: var(--panel);
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 20;
+      right: 16px;
+      bottom: 16px;
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: .2s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulse {
+      50% {
+        transform: scale(1.07);
+        filter: brightness(1.2);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 620px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .actions {
+        width: 100%;
+      }
+
+      .mode {
+        flex: 1;
+      }
+
+      .mode button {
+        flex: 1;
+      }
+
+      .suggestions,
+      aside {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<div class="app">
+  <div class="app">
 
-<header class="box">
-  <div class="brand">
-    <div class="logo"></div>
-    <div>
-      <strong>Neural Ultra</strong>
-      <small>40-feature Gemini workspace</small>
+    <header class="box">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>
+          <strong>Neural Ultra</strong>
+          <small>Stable Gemini workspace</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <div class="mode">
+          <button id="fastButton" class="active" type="button">Fast</button>
+          <button id="ultraButton" type="button">Ultra</button>
+        </div>
+
+        <button id="settingsButton" class="icon" type="button">⚙</button>
+      </div>
+    </header>
+
+    <div class="layout">
+
+      <section class="main box">
+        <div class="hero">
+          <div class="orb"></div>
+          <h1>Intelligence that feels alive.</h1>
+          <p>Ask anything. Write, plan, calculate, organize, and think with Neural Ultra.</p>
+          <div id="status">Fast engine ready</div>
+        </div>
+
+        <div id="messages" class="messages"></div>
+
+        <form id="chatForm" class="composer">
+          <textarea id="promptInput" rows="1" placeholder="Ask Neural Ultra anything..."></textarea>
+          <button id="voiceButton" class="icon" type="button">🎙</button>
+          <button id="sendButton" class="send" type="submit">↑</button>
+        </form>
+
+        <div class="suggestions">
+          <button class="suggestion" type="button" data-prompt="Explain AI in simple English.">
+            Explain AI simply
+          </button>
+
+          <button class="suggestion" type="button" data-prompt="Create a useful weekly plan.">
+            Create a weekly plan
+          </button>
+
+          <button class="suggestion" type="button" data-prompt="Write a professional email.">
+            Write an email
+          </button>
+
+          <button class="suggestion" type="button" data-prompt="Give me a beginner coding idea.">
+            Give a coding idea
+          </button>
+        </div>
+      </section>
+
+      <aside>
+        <section class="card box">
+          <h2>Engine</h2>
+          <div class="online">
+            <span class="dot"></span>
+            <span id="engineStatus">Ready</span>
+          </div>
+          <p>Secure Gemini connection through Vercel.</p>
+        </section>
+
+        <section class="card box">
+          <h2>Metrics</h2>
+          <div class="metric">
+            <span>Mode</span>
+            <strong id="modeText">Fast</strong>
+          </div>
+
+          <div class="metric">
+            <span>Messages</span>
+            <strong id="messageCount">0</strong>
+          </div>
+
+          <div class="metric">
+            <span>Words</span>
+            <strong id="wordCount">0</strong>
+          </div>
+        </section>
+
+        <section class="card box">
+          <h2>Tools</h2>
+
+          <div class="tools">
+            <button id="clearButton" class="tool danger" type="button">Clear</button>
+            <button id="exportButton" class="tool primary" type="button">Export</button>
+            <button id="noteButton" class="tool" type="button">Notes</button>
+            <button id="taskButton" class="tool" type="button">Tasks</button>
+            <button id="calculatorButton" class="tool" type="button">Calc</button>
+            <button id="timerButton" class="tool" type="button">Timer</button>
+          </div>
+        </section>
+      </aside>
     </div>
   </div>
 
-  <div class="actions">
-    <div class="mode">
-      <button id="fast" class="active" type="button">Fast</button>
-      <button id="ultra" type="button">Ultra</button>
-    </div>
-    <button id="settings" class="icon" type="button">⚙</button>
+  <div id="settingsModal" class="modal-bg">
+    <section class="modal box">
+      <div class="modal-head">
+        <h2>Settings</h2>
+        <button id="closeSettingsButton" class="icon" type="button">×</button>
+      </div>
+
+      <div class="setting">
+        <span>Theme</span>
+
+        <select id="themeSelect">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="high">High contrast</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <span>Speak responses</span>
+        <input id="speakCheckbox" type="checkbox">
+      </div>
+
+      <div class="setting">
+        <span>Privacy mode</span>
+        <input id="privacyCheckbox" type="checkbox">
+      </div>
+
+      <button id="resetButton" class="tool danger" type="button">
+        Reset local data
+      </button>
+    </section>
   </div>
-</header>
 
-<div class="grid">
+  <div id="toast" class="toast"></div>
 
-<section class="main box">
-  <div class="hero">
-    <div class="orb"></div>
-    <h1>Intelligence that feels alive.</h1>
-    <p>Ask anything. Write, plan, calculate, organize, and think with Neural Ultra.</p>
-    <div id="status">Fast engine ready</div>
-  </div>
+  <script>
+    "use strict";
 
-  <div id="messages" class="messages"></div>
+    const get = (id) => document.getElementById(id);
 
-  <form id="form" class="composer">
-    <textarea id="input" rows="1" placeholder="Ask Neural Ultra anything..."></textarea>
-    <button id="voice" class="icon" type="button">🎙</button>
-    <button id="send" class="send" type="submit">↑</button>
-  </form>
+    const form = get("chatForm");
+    const input = get("promptInput");
+    const messages = get("messages");
+    const status = get("status");
+    const sendButton = get("sendButton");
+    const toast = get("toast");
 
-  <div class="suggestions">
-    <button class="suggestion" type="button" data-p="Explain AI in simple English.">Explain AI simply</button>
-    <button class="suggestion" type="button" data-p="Create a useful weekly plan.">Create a weekly plan</button>
-    <button class="suggestion" type="button" data-p="Write a professional email.">Write an email</button>
-    <button class="suggestion" type="button" data-p="Give me a beginner coding idea.">Give a coding idea</button>
-  </div>
-</section>
+    let mode = localStorage.getItem("nu-mode") || "fast";
+    let chat = JSON.parse(localStorage.getItem("nu-chat") || "[]");
+    let controller = null;
+    let speakResponses = localStorage.getItem("nu-speak") === "true";
+    let privacy = localStorage.getItem("nu-privacy") === "true";
 
-<aside>
-  <section class="card box">
-    <h2>Engine</h2>
-    <div class="online"><span class="dot"></span><span id="engine">Ready</span></div>
-    <p>Secure Gemini connection through Vercel.</p>
-  </section>
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add("show");
 
-  <section class="card box">
-    <h2>Metrics</h2>
-    <div class="metric"><span>Mode</span><strong id="modeText">Fast</strong></div>
-    <div class="metric"><span>Messages</span><strong id="count">0</strong></div>
-    <div class="metric"><span>Words</span><strong id="words">0</strong></div>
-  </section>
+      clearTimeout(window.neuralToastTimer);
 
-  <section class="card box">
-    <h2>Tools</h2>
-    <div class="tools">
-      <button id="clear" class="tool danger" type="button">Clear</button>
-      <button id="export" class="tool primary" type="button">Export</button>
-      <button id="note" class="tool" type="button">Notes</button>
-      <button id="task" class="tool" type="button">Tasks</button>
-      <button id="calc" class="tool" type="button">Calc</button>
-      <button id="timer" class="tool" type="button">Timer</button>
-    </div>
-  </section>
-</aside>
+      window.neuralToastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2400);
+    }
 
-</div>
-
-<div id="modalBg" class="modal-bg">
-  <section class="modal box">
-    <div class="modal-head">
-      <h2>Settings</h2>
-      <button id="closeSettings" class="icon" type="button">×</button>
-    </div>
-
-    <div class="setting">
-      <span>Theme</span>
-      <select id="theme">
-        <option value="dark">Dark</option>
-        <option value="light">Light</option>
-        <option value="high">High contrast</option>
-      </select>
-    </div>
-
-    <div class="setting">
-      <span>Speak responses</span>
-      <input id="speak" type="checkbox">
-    </div>
-
-    <div class="setting">
-      <span>Privacy mode</span>
-      <input id="privacy" type="checkbox">
-    </div>
-
-    <button id="reset" class="tool danger" type="button">Reset local data</button>
-  </section>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script>
-"use strict";
-
-const $ = (id) => document.getElementById(id);
-
-const form = $("form");
-const input = $("input");
-const messages = $("messages");
-const status = $("status");
-const send = $("send");
-const toast = $("toast");
-
-let mode = localStorage.getItem("nu-mode") || "fast";
-let chat = JSON.parse(localStorage.getItem("nu-chat") || "[]");
-let controller = null;
-let speakResponses = localStorage.getItem("nu-speak") === "true";
-let privacy = localStorage.getItem("nu-privacy") === "true";
-
-function notify(text) {
-  toast.textContent = text;
-  toast.classList.add("show");
-  clearTimeout(window.nuToast);
-  window.nuToast = setTimeout(() => toast.classList.remove("show"), 2400);
-}
-
-function save() {
-  if (!privacy) {
-    localStorage.setItem("nu-chat", JSON.stringify(chat));
-  }
-}
-
-function update() {
-  $("modeText").textContent = mode === "fast" ? "Fast" : "Ultra";
-  $("count").textContent = chat.length;
-  $("words").textContent = chat.reduce(
-    (total, item) => total + item.text.trim().split(/s+/).filter(Boolean).length,
-    0
-  );
-}
-
-function setStatus(text) {
-  status.textContent = text;
-  $("engine").textContent = text.toLowerCase().includes("error")
-    ? "Error"
-    : "Ready";
-}
-
-function addMessage(text, role) {
-  const item = document.createElement("article");
-  item.className = "message " + role;
-
-  const body = document.createElement("div");
-  body.textContent = text;
-  item.appendChild(body);
-
-  if (role === "assistant") {
-    const tools = document.createElement("div");
-    tools.className = "message-tools";
-
-    const copy = document.createElement("button");
-    copy.type = "button";
-    copy.textContent = "Copy";
-    copy.onclick = async () => {
-      try {
-        await navigator.clipboard.writeText(text);
-        notify("Copied.");
-      } catch {
-        notify("Copy unavailable.");
+    function saveChat() {
+      if (!privacy) {
+        localStorage.setItem("nu-chat", JSON.stringify(chat));
       }
-    };
+    }
 
-    const speech = document.createElement("button");
-    speech.type = "button";
-    speech.textContent = "Speak";
-    speech.onclick = () => {
-      if (!("speechSynthesis" in window)) {
-        notify("Speech unavailable.");
+    function updateMetrics() {
+      get("modeText").textContent = mode === "fast" ? "Fast" : "Ultra";
+      get("messageCount").textContent = String(chat.length);
+
+      const words = chat.reduce((total, item) => {
+        return total + item.text.trim().split(/s+/).filter(Boolean).length;
+      }, 0);
+
+      get("wordCount").textContent = String(words);
+    }
+
+    function setStatus(text) {
+      status.textContent = text;
+
+      get("engineStatus").textContent =
+        text.toLowerCase().includes("error") ? "Error" : "Ready";
+    }
+
+    function addMessage(text, role) {
+      const item = document.createElement("article");
+      item.className = "message " + role;
+
+      const body = document.createElement("div");
+      body.textContent = text;
+      item.appendChild(body);
+
+      if (role === "assistant") {
+        const tools = document.createElement("div");
+        tools.className = "message-tools";
+
+        const copyButton = document.createElement("button");
+        copyButton.type = "button";
+        copyButton.textContent = "Copy";
+
+        copyButton.onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            showToast("Copied.");
+          } catch {
+            showToast("Copy unavailable.");
+          }
+        };
+
+        const speakButton = document.createElement("button");
+        speakButton.type = "button";
+        speakButton.textContent = "Speak";
+
+        speakButton.onclick = () => {
+          if (!("speechSynthesis" in window)) {
+            showToast("Speech unavailable.");
+            return;
+          }
+
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(
+            new SpeechSynthesisUtterance(text)
+          );
+        };
+
+        tools.append(copyButton, speakButton);
+        item.appendChild(tools);
+      }
+
+      messages.appendChild(item);
+      messages.classList.add("show");
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function renderChat() {
+      messages.innerHTML = "";
+
+      chat.forEach((item) => {
+        addMessage(item.text, item.role);
+      });
+
+      if (chat.length === 0) {
+        messages.classList.remove("show");
+      }
+
+      updateMetrics();
+    }
+
+    async function callGemini(question) {
+      controller = new AbortController();
+
+      const history = chat.slice(-12).map((item) => ({
+        role: item.role === "assistant" ? "model" : "user",
+        text: item.text
+      }));
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: question,
+          mode: mode,
+          history: history
+        }),
+        signal: controller.signal
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Gemini request failed.");
+      }
+
+      if (!data.text) {
+        throw new Error("Gemini returned no answer.");
+      }
+
+      return data.text;
+    }
+
+    async function sendMessage(value) {
+      const question = value.trim();
+
+      if (!question) {
+        showToast("Type a message first.");
         return;
       }
-      speechSynthesis.cancel();
-      speechSynthesis.speak(new SpeechSynthesisUtterance(text));
+
+      chat.push({
+        role: "user",
+        text: question
+      });
+
+      saveChat();
+      addMessage(question, "user");
+
+      input.value = "";
+      input.style.height = "auto";
+      sendButton.textContent = "■";
+      setStatus("Connecting to Gemini...");
+
+      try {
+        const answer = await callGemini(question);
+
+        chat.push({
+          role: "assistant",
+          text: answer
+        });
+
+        saveChat();
+        addMessage(answer, "assistant");
+        setStatus("Gemini ready");
+
+        if (speakResponses && "speechSynthesis" in window) {
+          window.speechSynthesis.speak(
+            new SpeechSynthesisUtterance(answer)
+          );
+        }
+      } catch (error) {
+        if (error.name === "AbortError") {
+          setStatus("Response stopped");
+          showToast("Stopped.");
+        } else {
+          setStatus("Gemini error");
+          addMessage("Error: " + error.message, "assistant");
+          showToast(error.message);
+        }
+      } finally {
+        controller = null;
+        sendButton.textContent = "↑";
+        updateMetrics();
+      }
+    }
+
+    form.onsubmit = (event) => {
+      event.preventDefault();
+
+      if (controller) {
+        controller.abort();
+      } else {
+        sendMessage(input.value);
+      }
     };
 
-    tools.append(copy, speech);
-    item.appendChild(tools);
-  }
+    input.onkeydown = (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    };
 
-  messages.appendChild(item);
-  messages.classList.add("show");
-  messages.scrollTop = messages.scrollHeight;
-}
+    input.oninput = () => {
+      input.style.height = "auto";
+      input.style.height = Math.min(input.scrollHeight, 140) + "px";
+    };
 
-function render() {
-  messages.innerHTML = "";
-  chat.forEach((item) => addMessage(item.text, item.role));
-  if (!chat.length) messages.classList.remove("show");
-  update();
-}
+    get("fastButton").onclick = () => {
+      mode = "fast";
+      localStorage.setItem("nu-mode", mode);
+      get("fastButton").classList.add("active");
+      get("ultraButton").classList.remove("active");
+      setStatus("Fast engine ready");
+      updateMetrics();
+    };
 
-async function callGemini(question) {
-  controller = new AbortController();
+    get("ultraButton").onclick = () => {
+      mode = "ultra";
+      localStorage.setItem("nu-mode", mode);
+      get("ultraButton").classList.add("active");
+      get("fastButton").classList.remove("active");
+      setStatus("Ultra engine ready");
+      updateMetrics();
+    };
 
-  const history = chat.slice(-12).map((item) => ({
-    role: item.role === "assistant" ? "model" : "user",
-    text: item.text
-  }));
+    document.querySelectorAll(".suggestion").forEach((button) => {
+      button.onclick = () => {
+        input.value = button.dataset.prompt;
+        input.focus();
+      };
+    });
 
-  const response = await fetch("/api/chat", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      message: question,
-      mode,
-      history
-    }),
-    signal: controller.signal
-  });
+    get("clearButton").onclick = () => {
+      chat = [];
+      localStorage.removeItem("nu-chat");
+      renderChat();
+      setStatus("Conversation cleared");
+      showToast("Chat cleared.");
+    };
 
-  const data = await response.json().catch(() => ({}));
+    get("exportButton").onclick = () => {
+      if (chat.length === 0) {
+        showToast("Nothing to export.");
+        return;
+      }
 
-  if (!response.ok) {
-    throw new Error(data.error || "Gemini request failed.");
-  }
-
-  if (!data.text) {
-    throw new Error("Gemini returned no answer.");
-  }
-
-  return data.text;
-}
-
-async function sendMessage(value) {
-  const question = value.trim();
-
-  if (!question) {
-    notify("Type a message first.");
-    return;
-  }
-
-  chat.push({role:"user",text:question});
-  save();
-  addMessage(question, "user");
-
-  input.value = "";
-  input.style.height = "auto";
-  send.textContent = "■";
-  setStatus("Connecting to Gemini...");
-
-  try {
-    const answer = await callGemini(question);
-
-    chat.push({role:"assistant",text:answer});
-    save();
-    addMessage(answer, "assistant");
-
-    if (speakResponses && "speechSynthesis" in window) {
-      speechSynthesis.speak(new SpeechSynthesisUtterance(answer));
-    }
-
-    setStatus("Gemini ready");
-  } catch (error) {
-    if (error.name === "AbortError") {
-      setStatus("Response stopped");
-      notify("Stopped.");
-    } else {
-      setStatus("Gemini error");
-      addMessage("Error: " + error.message, "assistant");
-      notify(error.message);
-    }
-  } finally {
-    controller = null;
-    send.textContent = "↑";
-    update();
-  }
-}
-
-form.onsubmit = (event) => {
-  event.preventDefault();
-
-  if (controller) {
-    controller.abort();
-  } else {
-    sendMessage(input.value);
-  }
-};
-
-input.onkeydown = (event) => {
-  if (event.key === "Enter" && !event.shiftKey) {
-    event.preventDefault();
-    form.requestSubmit();
-  }
-};
-
-input.oninput = () => {
-  input.style.height = "auto";
-  input.style.height = Math.min(input.scrollHeight, 140) + "px";
-};
-
-$("fast").onclick = () => {
-  mode = "fast";
-  localStorage.setItem("nu-mode", mode);
-  $("fast").classList.add("active");
-  $("ultra").classList.remove("active");
-  setStatus("Fast engine ready");
-  update();
-};
-
-$("ultra").onclick = () => {
-  mode = "ultra";
-  localStorage.setItem("nu-mode", mode);
-  $("ultra").classList.add("active");
-  $("fast").classList.remove("active");
-  setStatus("Ultra engine ready");
-  update();
-};
-
-document.querySelectorAll(".suggestion").forEach((button) => {
-  button.onclick = () => {
-    input.value = button.dataset.p;
-    input.focus();
-  };
-});
-
-$("clear").onclick = () => {
-  chat = [];
-  localStorage.removeItem("nu-chat");
-  render();
-  setStatus("Conversation cleared");
-  notify("Chat cleared.");
-};
-
-$("export").onclick = () => {
-  if (!chat.length) {
-    notify("Nothing to export.");
-    return;
-  }
-
-  const text = chat
-    .map((item) => item.role.toUpperCase() + "
+      const text = chat
+        .map((item) => item.role.toUpperCase() + "
 " + item.text)
-    .join("
+        .join("
 
 ");
 
-  const blob = new Blob([text], {type:"text/plain"});
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement("a");
+      const blob = new Blob([text], {
+        type: "text/plain"
+      });
 
-  link.href = url;
-  link.download = "neural-ultra-chat.txt";
-  link.click();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
 
-  URL.revokeObjectURL(url);
-  notify("Chat exported.");
-};
+      link.href = url;
+      link.download = "neural-ultra-chat.txt";
+      link.click();
 
-$("settings").onclick = () => $("modalBg").classList.add("open");
-$("closeSettings").onclick = () => $("modalBg").classList.remove("open");
+      URL.revokeObjectURL(url);
+      showToast("Chat exported.");
+    };
 
-$("theme").onchange = () => {
-  const value = $("theme").value;
+    get("settingsButton").onclick = () => {
+      get("settingsModal").classList.add("open");
+    };
 
-  if (value === "dark") {
-    document.documentElement.removeAttribute("data-theme");
-  } else {
-    document.documentElement.dataset.theme = value;
-  }
+    get("closeSettingsButton").onclick = () => {
+      get("settingsModal").classList.remove("open");
+    };
 
-  localStorage.setItem("nu-theme", value);
-  notify("Theme updated.");
-};
+    get("themeSelect").onchange = () => {
+      const value = get("themeSelect").value;
 
-$("speak").onchange = () => {
-  speakResponses = $("speak").checked;
-  localStorage.setItem("nu-speak", String(speakResponses));
-  notify("Speech setting updated.");
-};
+      if (value === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.dataset.theme = value;
+      }
 
-$("privacy").onchange = () => {
-  privacy = $("privacy").checked;
-  localStorage.setItem("nu-privacy", String(privacy));
+      localStorage.setItem("nu-theme", value);
+      showToast("Theme updated.");
+    };
 
-  if (privacy) {
-    chat = [];
-    localStorage.removeItem("nu-chat");
-    render();
-  }
+    get("speakCheckbox").onchange = () => {
+      speakResponses = get("speakCheckbox").checked;
+      localStorage.setItem("nu-speak", String(speakResponses));
+      showToast("Speech setting updated.");
+    };
 
-  notify("Privacy setting updated.");
-};
+    get("privacyCheckbox").onchange = () => {
+      privacy = get("privacyCheckbox").checked;
+      localStorage.setItem("nu-privacy", String(privacy));
 
-$("reset").onclick = () => {
-  localStorage.clear();
-  location.reload();
-};
+      if (privacy) {
+        chat = [];
+        localStorage.removeItem("nu-chat");
+        renderChat();
+      }
 
-$("voice").onclick = () => {
-  const Recognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+      showToast("Privacy setting updated.");
+    };
 
-  if (!Recognition) {
-    notify("Voice input is unsupported.");
-    return;
-  }
+    get("resetButton").onclick = () => {
+      localStorage.clear();
+      window.location.reload();
+    };
 
-  const recognition = new Recognition();
-  recognition.lang = "en-US";
+    get("voiceButton").onclick = () => {
+      const Recognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
 
-  recognition.onstart = () => setStatus("Listening...");
-  recognition.onresult = (event) => {
-    input.value = event.results[0][0].transcript;
-    input.focus();
-    setStatus("Fast engine ready");
-  };
-  recognition.onerror = () => notify("Voice input failed.");
-  recognition.start();
-};
+      if (!Recognition) {
+        showToast("Voice input is unsupported.");
+        return;
+      }
 
-$("note").onclick = () => {
-  const value = prompt("Write a note:");
+      const recognition = new Recognition();
+      recognition.lang = "en-US";
 
-  if (value) {
-    localStorage.setItem("nu-note", value);
-    notify("Note saved.");
-  }
-};
+      recognition.onstart = () => {
+        setStatus("Listening...");
+      };
 
-$("task").onclick = () => {
-  const value = prompt("Write a task:");
+      recognition.onresult = (event) => {
+        input.value = event.results[0][0].transcript;
+        input.focus();
+        setStatus("Fast engine ready");
+      };
 
-  if (value) {
-    localStorage.setItem("nu-task", value);
-    notify("Task saved.");
-  }
-};
+      recognition.onerror = () => {
+        showToast("Voice input failed.");
+      };
 
-$("calc").onclick = () => {
-  const value = prompt("Example: 2 + 2");
+      recognition.start();
+    };
 
-  if (!value) return;
+    get("noteButton").onclick = () => {
+      const value = window.prompt("Write a note:");
 
-  if (!/^[0-9+*/().% -]+$/.test(value)) {
-    notify("Invalid calculation.");
-    return;
-  }
+      if (value) {
+        localStorage.setItem("nu-note", value);
+        showToast("Note saved.");
+      }
+    };
 
-  try {
-    const result = Function('"use strict";return (' + value + ")")();
-    notify("Result: " + result);
-  } catch {
-    notify("Invalid calculation.");
-  }
-};
+    get("taskButton").onclick = () => {
+      const value = window.prompt("Write a task:");
 
-$("timer").onclick = () => {
-  const seconds = Number(prompt("Timer seconds:"));
+      if (value) {
+        localStorage.setItem("nu-task", value);
+        showToast("Task saved.");
+      }
+    };
 
-  if (!Number.isFinite(seconds) || seconds <= 0) {
-    notify("Enter a valid number.");
-    return;
-  }
+    get("calculatorButton").onclick = () => {
+      const value = window.prompt("Example: 2 + 2");
 
-  notify("Timer started.");
+      if (!value) {
+        return;
+      }
 
-  setTimeout(() => {
-    notify("Timer finished.");
-  }, seconds * 1000);
-};
+      if (!/^[0-9+*/().% -]+$/.test(value)) {
+        showToast("Invalid calculation.");
+        return;
+      }
 
-const savedTheme = localStorage.getItem("nu-theme") || "dark";
+      try {
+        const result = Function(
+          '"use strict"; return (' + value + ")"
+        )();
 
-if (savedTheme === "dark") {
-  document.documentElement.removeAttribute("data-theme");
-} else {
-  document.documentElement.dataset.theme = savedTheme;
-}
+        showToast("Result: " + result);
+      } catch {
+        showToast("Invalid calculation.");
+      }
+    };
 
-$("theme").value = savedTheme;
-$("speak").checked = speakResponses;
-$("privacy").checked = privacy;
+    get("timerButton").onclick = () => {
+      const seconds = Number(window.prompt("Timer seconds:"));
 
-if (mode === "ultra") {
-  $("ultra").click();
-} else {
-  $("fast").click();
-}
+      if (!Number.isFinite(seconds) || seconds <= 0) {
+        showToast("Enter a valid number.");
+        return;
+      }
 
-render();
-</script>
+      showToast("Timer started.");
+
+      window.setTimeout(() => {
+        showToast("Timer finished.");
+      }, seconds * 1000);
+    };
+
+    const savedTheme = localStorage.getItem("nu-theme") || "dark";
+
+    if (savedTheme === "dark") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.dataset.theme = savedTheme;
+    }
+
+    get("themeSelect").value = savedTheme;
+    get("speakCheckbox").checked = speakResponses;
+    get("privacyCheckbox").checked = privacy;
+
+    if (mode === "ultra") {
+      get("ultraButton").click();
+    } else {
+      get("fastButton").click();
+    }
+
+    renderChat();
+  </script>
 </body>
-</html>
+  </html>
