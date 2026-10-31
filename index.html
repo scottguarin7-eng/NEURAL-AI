@@ -9,71 +9,57 @@
   <style>
     :root {
       --bg: #050713;
-      --panel: rgba(255, 255, 255, 0.08);
-      --panel-strong: rgba(255, 255, 255, 0.14);
-      --line: rgba(255, 255, 255, 0.16);
+      --panel: rgba(255,255,255,.08);
+      --panel-strong: rgba(255,255,255,.14);
+      --line: rgba(255,255,255,.16);
       --text: #f5f7ff;
-      --muted: rgba(245, 247, 255, 0.58);
+      --muted: rgba(245,247,255,.62);
       --cyan: #62f5ff;
       --violet: #9e7bff;
-      --amber: #ffd166;
-      --rose: #ff8297;
       --green: #79f2b0;
-      --shadow: rgba(0, 0, 0, 0.35);
+      --red: #ff8297;
+      --shadow: rgba(0,0,0,.38);
     }
 
     [data-theme="light"] {
-      --bg: #eef3fb;
-      --panel: rgba(255, 255, 255, 0.62);
-      --panel-strong: rgba(255, 255, 255, 0.85);
-      --line: rgba(20, 35, 70, 0.14);
+      --bg: #edf3fc;
+      --panel: rgba(255,255,255,.62);
+      --panel-strong: rgba(255,255,255,.85);
+      --line: rgba(20,35,70,.16);
       --text: #0c1730;
-      --muted: rgba(12, 23, 48, 0.62);
-      --shadow: rgba(30, 55, 100, 0.18);
+      --muted: rgba(12,23,48,.62);
+      --shadow: rgba(30,55,100,.2);
     }
 
     [data-theme="high"] {
       --bg: #000;
       --panel: #111;
-      --panel-strong: #191919;
+      --panel-strong: #181818;
       --line: #fff;
       --text: #fff;
       --muted: #ddd;
       --cyan: #00ffff;
       --violet: #ff00ff;
-      --amber: #ffff00;
-      --shadow: #000;
     }
 
     * {
       box-sizing: border-box;
     }
 
-    html,
-    body {
-      min-height: 100%;
-    }
-
     body {
       margin: 0;
       min-height: 100vh;
-      overflow-x: hidden;
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: Inter, Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--cyan) 16%, transparent), transparent 30%),
-        radial-gradient(circle at 90% 90%, color-mix(in srgb, var(--violet) 18%, transparent), transparent 35%),
+        radial-gradient(circle at 10% 10%, rgba(98,245,255,.18), transparent 31%),
+        radial-gradient(circle at 90% 90%, rgba(158,123,255,.18), transparent 35%),
         var(--bg);
-      transition: background .35s, color .35s;
-    }
-
-    body.compact {
-      --spacing: 0.7;
+      transition: background .3s, color .3s;
     }
 
     button,
     textarea,
-    input,
     select {
       font: inherit;
     }
@@ -84,22 +70,22 @@
 
     button:focus-visible,
     textarea:focus-visible,
-    input:focus-visible,
     select:focus-visible {
       outline: 2px solid var(--cyan);
       outline-offset: 3px;
     }
 
-    .background-grid {
+    .grid {
       position: fixed;
       inset: 0;
+      z-index: 0;
       pointer-events: none;
-      opacity: 0.45;
+      opacity: .42;
       background-image:
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 86%);
+      mask-image: linear-gradient(to bottom, black, transparent 90%);
     }
 
     .app {
@@ -107,17 +93,13 @@
       z-index: 1;
       width: min(1180px, calc(100% - 28px));
       min-height: 100vh;
-      margin: 0 auto;
-      padding: 16px 0 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
+      margin: auto;
+      padding: 16px 0 24px;
     }
 
     .glass {
       border: 1px solid var(--line);
-      background:
-        linear-gradient(135deg, var(--panel-strong), var(--panel));
+      background: linear-gradient(135deg, var(--panel-strong), var(--panel));
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.12),
         0 25px 80px var(--shadow);
@@ -129,7 +111,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 15px;
       padding: 14px 16px;
       border-radius: 24px;
     }
@@ -138,56 +120,74 @@
       display: flex;
       align-items: center;
       gap: 11px;
-      min-width: 0;
     }
 
-    .brand-mark {
-      position: relative;
+    .brand-icon {
       width: 40px;
       height: 40px;
-      flex: 0 0 40px;
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: color-mix(in srgb, var(--cyan) 16%, transparent);
-      box-shadow: 0 0 30px color-mix(in srgb, var(--cyan) 28%, transparent);
+      background: rgba(98,245,255,.14);
+      box-shadow: 0 0 28px rgba(98,245,255,.3);
     }
 
-    .brand-mark::before {
+    .brand-icon::after {
       width: 11px;
       height: 11px;
       border-radius: 50%;
       background: var(--cyan);
-      box-shadow: 0 0 22px var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
       content: "";
     }
 
-    .brand-name {
+    .brand-title {
       font-weight: 800;
-      letter-spacing: -0.04em;
+      letter-spacing: -.04em;
     }
 
     .brand-subtitle {
       margin-top: 2px;
       color: var(--muted);
       font-size: 11px;
-      white-space: nowrap;
     }
 
-    .top-actions {
+    .top-actions,
+    .mode-switch {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 5px;
     }
 
-    .icon-button,
+    .mode-switch {
+      padding: 4px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(0,0,0,.2);
+    }
+
     .mode-button,
-    .primary-button,
-    .danger-button {
+    .icon-button,
+    .tool-button,
+    .primary,
+    .danger {
       border: 1px solid var(--line);
       color: var(--text);
       background: rgba(255,255,255,.06);
-      transition: transform .2s, background .2s, border-color .2s;
+      transition: .2s ease;
+    }
+
+    .mode-button {
+      padding: 8px 14px;
+      border: 0;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .mode-button.active {
+      color: #061016;
+      background: var(--cyan);
     }
 
     .icon-button {
@@ -198,78 +198,47 @@
     }
 
     .icon-button:hover,
-    .mode-button:hover,
-    .primary-button:hover,
-    .danger-button:hover {
+    .tool-button:hover,
+    .primary:hover,
+    .danger:hover {
       transform: translateY(-1px);
       border-color: var(--cyan);
     }
 
-    .mode-switch {
-      display: flex;
-      gap: 4px;
-      padding: 4px;
-      border: 1px solid var(--line);
-      border-radius: 999px;
-      background: rgba(0,0,0,.18);
-    }
-
-    .mode-button {
-      padding: 8px 13px;
-      border: 0;
-      border-radius: 999px;
-      color: var(--muted);
-      background: transparent;
-      font-size: 13px;
-    }
-
-    .mode-button.active {
-      color: #061016;
-      background: var(--cyan);
-    }
-
-    .workspace {
+    .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 290px;
+      grid-template-columns: minmax(0, 1fr) 285px;
       gap: 14px;
-      flex: 1;
+      margin-top: 14px;
     }
 
-    .main-panel {
-      min-width: 0;
-      display: flex;
-      flex-direction: column;
+    .main {
       min-height: 720px;
       padding: 22px;
       border-radius: 30px;
     }
 
     .hero {
+      min-height: 300px;
       display: grid;
       place-items: center;
-      min-height: 300px;
-      padding: 26px 0 20px;
       text-align: center;
-    }
-
-    .hero-content {
-      width: min(720px, 100%);
     }
 
     .orb {
       position: relative;
-      width: 128px;
-      height: 128px;
-      margin: 0 auto 30px;
+      width: 125px;
+      height: 125px;
+      margin: 18px auto 30px;
       border-radius: 50%;
       background:
         radial-gradient(circle at 34% 25%, white 0 2%, transparent 3%),
-        radial-gradient(circle at 40% 35%, var(--cyan), transparent 22%),
-        radial-gradient(circle at 65% 70%, var(--violet), transparent 58%),
-        #111b4c;
+        radial-gradient(circle at 38% 35%, var(--cyan), transparent 23%),
+        radial-gradient(circle at 66% 68%, var(--violet), transparent 60%),
+        #121947;
       box-shadow:
-        0 0 45px color-mix(in srgb, var(--cyan) 58%, transparent),
-        0 0 125px color-mix(in srgb, var(--violet) 25%, transparent);
+        0 0 45px rgba(98,245,255,.6),
+        0 0 120px rgba(158,123,255,.25);
       animation: breathe 4s ease-in-out infinite;
     }
 
@@ -277,47 +246,46 @@
     .orb::after {
       position: absolute;
       inset: -18px;
-      border: 1px solid color-mix(in srgb, var(--cyan) 34%, transparent);
+      border: 1px solid rgba(98,245,255,.4);
       border-radius: 50%;
       content: "";
-      animation: rotate 8s linear infinite;
+      animation: spin 8s linear infinite;
     }
 
     .orb::after {
       inset: -36px;
-      border-color: color-mix(in srgb, var(--amber) 22%, transparent);
+      border-color: rgba(158,123,255,.3);
       animation-direction: reverse;
       animation-duration: 13s;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 7vw, 5.4rem);
+      font-size: clamp(2.3rem, 7vw, 5.2rem);
       line-height: .95;
       letter-spacing: -.075em;
     }
 
     .hero p {
-      max-width: 630px;
-      margin: 23px auto 0;
+      max-width: 650px;
+      margin: 22px auto 0;
       color: var(--muted);
-      font-size: clamp(.98rem, 2vw, 1.16rem);
       line-height: 1.7;
     }
 
-    .status {
-      min-height: 24px;
-      margin-top: 16px;
+    #status {
+      min-height: 22px;
+      margin-top: 15px;
       color: var(--cyan);
       font-size: 13px;
     }
 
     .messages {
       display: none;
-      max-height: 405px;
+      max-height: 390px;
       overflow-y: auto;
       margin: 8px 0 18px;
-      padding: 10px 4px;
+      padding: 4px;
     }
 
     .messages.visible {
@@ -325,15 +293,14 @@
     }
 
     .message {
-      position: relative;
       max-width: 84%;
       margin: 12px 0;
       padding: 13px 16px;
       border: 1px solid var(--line);
-      border-radius: 20px;
+      border-radius: 19px;
       white-space: pre-wrap;
-      line-height: 1.62;
-      animation: message-in .25s ease-out both;
+      line-height: 1.6;
+      animation: appear .25s ease both;
     }
 
     .message.user {
@@ -352,11 +319,11 @@
     .message-tools {
       display: flex;
       gap: 6px;
-      margin-top: 9px;
+      margin-top: 10px;
     }
 
     .message-tools button {
-      padding: 4px 8px;
+      padding: 4px 9px;
       border: 1px solid var(--line);
       border-radius: 999px;
       color: var(--muted);
@@ -390,7 +357,7 @@
       color: var(--muted);
     }
 
-    .send-button {
+    .send {
       width: 48px;
       height: 48px;
       flex: 0 0 48px;
@@ -400,10 +367,9 @@
       background: var(--cyan);
       font-size: 20px;
       font-weight: 900;
-      transition: transform .2s, background .2s;
     }
 
-    .send-button:hover {
+    .send:hover {
       transform: scale(1.06);
       background: white;
     }
@@ -416,13 +382,12 @@
     }
 
     .suggestion {
-      padding: 11px 12px;
+      padding: 11px;
       text-align: left;
-      color: var(--muted);
       border: 1px solid var(--line);
       border-radius: 14px;
+      color: var(--muted);
       background: rgba(255,255,255,.04);
-      transition: transform .2s, border-color .2s, color .2s;
     }
 
     .suggestion:hover {
@@ -431,33 +396,31 @@
       transform: translateY(-2px);
     }
 
-    .side-panel {
+    aside {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .side-card {
+    .card {
       padding: 17px;
       border-radius: 23px;
     }
 
-    .side-title {
-      margin: 0 0 12px;
+    .card h2 {
+      margin: 0 0 13px;
       font-size: 13px;
-      font-weight: 800;
       letter-spacing: .08em;
       text-transform: uppercase;
     }
 
-    .side-card p {
-      margin: 8px 0;
+    .card p {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.55;
     }
 
-    .engine-state {
+    .engine {
       display: flex;
       align-items: center;
       gap: 9px;
@@ -465,19 +428,18 @@
       font-size: 13px;
     }
 
-    .engine-dot {
+    .dot {
       width: 9px;
       height: 9px;
       border-radius: 50%;
       background: var(--green);
       box-shadow: 0 0 14px var(--green);
-      animation: dot-pulse 1.8s ease-in-out infinite;
+      animation: pulse 1.7s infinite;
     }
 
     .metric {
       display: flex;
       justify-content: space-between;
-      gap: 15px;
       padding: 8px 0;
       border-bottom: 1px solid var(--line);
       color: var(--muted);
@@ -492,140 +454,88 @@
       color: var(--text);
     }
 
-    .tool-grid {
+    .tools {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 7px;
     }
 
-    .tool-grid button,
-    .primary-button,
-    .danger-button {
-      padding: 9px 8px;
+    .tool-button,
+    .primary,
+    .danger {
+      padding: 9px 7px;
       border-radius: 12px;
       font-size: 12px;
     }
 
-    .primary-button {
+    .primary {
       color: #061016;
       border-color: transparent;
       background: var(--cyan);
     }
 
-    .danger-button {
+    .danger {
       color: white;
       border-color: transparent;
-      background: var(--rose);
+      background: var(--red);
     }
 
-    .footer-note {
+    .footer {
+      margin-top: 14px;
       color: var(--muted);
       text-align: center;
       font-size: 11px;
     }
 
-    .modal-backdrop {
+    .modal-bg {
       position: fixed;
       z-index: 10;
       inset: 0;
       display: none;
       place-items: center;
       padding: 18px;
-      background: rgba(0,0,0,.62);
+      background: rgba(0,0,0,.65);
     }
 
-    .modal-backdrop.open {
+    .modal-bg.open {
       display: grid;
     }
 
     .modal {
-      width: min(540px, 100%);
-      max-height: 85vh;
-      overflow-y: auto;
+      width: min(520px, 100%);
       padding: 22px;
       border-radius: 25px;
     }
 
-    .modal-header {
+    .modal-title {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
+      justify-content: space-between;
+      margin-bottom: 16px;
     }
 
-    .modal-header h2 {
+    .modal-title h2 {
       margin: 0;
       font-size: 20px;
     }
 
     .setting {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 14px;
+      align-items: center;
+      gap: 15px;
       padding: 13px 0;
       border-bottom: 1px solid var(--line);
       color: var(--muted);
       font-size: 13px;
     }
 
-    .setting:last-child {
-      border-bottom: 0;
-    }
-
-    select,
-    input[type="range"] {
-      max-width: 150px;
-    }
-
     select {
-      padding: 7px 10px;
+      padding: 7px 9px;
       border: 1px solid var(--line);
       border-radius: 10px;
       color: var(--text);
       background: var(--panel-strong);
-    }
-
-    .command-palette {
-      position: fixed;
-      z-index: 20;
-      top: 18%;
-      left: 50%;
-      display: none;
-      width: min(520px, calc(100% - 32px));
-      transform: translateX(-50%);
-      padding: 15px;
-      border-radius: 22px;
-    }
-
-    .command-palette.open {
-      display: block;
-    }
-
-    .command-palette input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      outline: 0;
-      color: var(--text);
-      background: rgba(0,0,0,.22);
-    }
-
-    .command-list {
-      display: grid;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .command-list button {
-      padding: 11px;
-      text-align: left;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      color: var(--text);
-      background: rgba(255,255,255,.04);
     }
 
     .toast {
@@ -643,7 +553,7 @@
       opacity: 0;
       pointer-events: none;
       transform: translateY(12px);
-      transition: opacity .25s, transform .25s;
+      transition: .25s;
     }
 
     .toast.show {
@@ -654,24 +564,24 @@
     @keyframes breathe {
       50% {
         transform: scale(1.07);
-        filter: brightness(1.18);
+        filter: brightness(1.2);
       }
     }
 
-    @keyframes rotate {
+    @keyframes spin {
       to {
         transform: rotate(360deg);
       }
     }
 
-    @keyframes dot-pulse {
+    @keyframes pulse {
       50% {
         opacity: .4;
         transform: scale(.75);
       }
     }
 
-    @keyframes message-in {
+    @keyframes appear {
       from {
         opacity: 0;
         transform: translateY(7px);
@@ -679,23 +589,23 @@
     }
 
     @media (max-width: 850px) {
-      .workspace {
+      .layout {
         grid-template-columns: 1fr;
       }
 
-      .side-panel {
+      aside {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
       }
 
-      .main-panel {
+      .main {
         min-height: 650px;
       }
     }
 
     @media (max-width: 650px) {
       .app {
-        width: min(100% - 14px, 1180px);
+        width: calc(100% - 14px);
         padding-top: 8px;
       }
 
@@ -717,19 +627,13 @@
         flex: 1;
       }
 
-      .main-panel {
-        min-height: 690px;
+      .main {
         padding: 15px;
         border-radius: 24px;
       }
 
-      .hero {
-        min-height: 300px;
-        padding-top: 35px;
-      }
-
       .suggestions,
-      .side-panel {
+      aside {
         grid-template-columns: 1fr;
       }
 
@@ -750,57 +654,52 @@
 </head>
 
 <body>
-  <div class="background-grid"></div>
+  <div class="grid"></div>
 
   <main class="app">
     <header class="glass">
       <div class="brand">
-        <div class="brand-mark"></div>
+        <div class="brand-icon"></div>
         <div>
-          <div class="brand-name">Neural Ultra</div>
+          <div class="brand-title">Neural Ultra</div>
           <div class="brand-subtitle">Supreme Neural Fusion Workspace</div>
         </div>
       </div>
 
       <div class="top-actions">
-        <div class="mode-switch" aria-label="Response mode">
+        <div class="mode-switch">
           <button id="fastMode" class="mode-button active" type="button">Fast</button>
           <button id="ultraMode" class="mode-button" type="button">Ultra</button>
         </div>
-        <button id="commandButton" class="icon-button" type="button" title="Command palette">⌘</button>
-        <button id="settingsButton" class="icon-button" type="button" title="Settings">⚙</button>
+
+        <button id="settingsButton" class="icon-button" type="button">⚙</button>
       </div>
     </header>
 
-    <div class="workspace">
-      <section class="main-panel glass">
+    <div class="layout">
+      <section class="main glass">
         <div class="hero">
-          <div class="hero-content">
-            <div class="orb" aria-hidden="true"></div>
+          <div>
+            <div class="orb"></div>
             <h1>Intelligence that feels alive.</h1>
             <p>
-              A premium AI workspace with adaptive modes,
-              liquid-glass interaction, and a dynamic neural engine.
+              Ask anything with a premium liquid-glass AI workspace
+              powered by your secure Gemini connection.
             </p>
-            <div id="status" class="status">Fast engine ready</div>
+            <div id="status">Fast engine ready</div>
           </div>
         </div>
 
-        <div id="messages" class="messages" aria-live="polite"></div>
+        <div id="messages" class="messages"></div>
 
         <form id="chatForm" class="composer">
-          <textarea
-            id="prompt"
-            rows="1"
-            placeholder="Ask Neural Ultra anything..."
-            aria-label="Message"
-          ></textarea>
+          <textarea id="prompt" rows="1" placeholder="Ask Neural Ultra anything..."></textarea>
 
           <button id="voiceButton" class="icon-button" type="button" title="Voice input">
             🎙
           </button>
 
-          <button class="send-button" type="submit" aria-label="Send message">
+          <button id="sendButton" class="send" type="submit" title="Send message">
             ↑
           </button>
         </form>
@@ -809,32 +708,35 @@
           <button class="suggestion" type="button" data-prompt="Explain artificial intelligence in simple English.">
             Explain AI simply
           </button>
+
           <button class="suggestion" type="button" data-prompt="Create a practical weekly productivity plan.">
             Create a productivity plan
           </button>
+
           <button class="suggestion" type="button" data-prompt="Help me write a professional email.">
             Write a professional email
           </button>
+
           <button class="suggestion" type="button" data-prompt="Give me a useful coding idea for a beginner.">
             Give me a coding idea
           </button>
         </div>
       </section>
 
-      <aside class="side-panel">
-        <section class="side-card glass">
-          <h2 class="side-title">Engine</h2>
-          <div class="engine-state">
-            <span class="engine-dot"></span>
+      <aside>
+        <section class="card glass">
+          <h2>Engine</h2>
+          <div class="engine">
+            <span class="dot"></span>
             <span id="engineState">Ready</span>
           </div>
           <p id="engineDescription">
-            Frontend demo mode is active. Gemini will be connected securely later.
+            Gemini connection ready for testing.
           </p>
         </section>
 
-        <section class="side-card glass">
-          <h2 class="side-title">Live Metrics</h2>
+        <section class="card glass">
+          <h2>Live Metrics</h2>
           <div class="metric">
             <span>Mode</span>
             <strong id="metricMode">Fast</strong>
@@ -849,29 +751,29 @@
           </div>
         </section>
 
-        <section class="side-card glass">
-          <h2 class="side-title">Workspace Tools</h2>
-          <div class="tool-grid">
-            <button id="clearButton" class="danger-button" type="button">Clear</button>
-            <button id="exportButton" class="primary-button" type="button">Export</button>
-            <button id="notesButton" type="button">Notes</button>
-            <button id="checklistButton" type="button">Tasks</button>
-            <button id="calculatorButton" type="button">Calculator</button>
-            <button id="timerButton" type="button">Timer</button>
+        <section class="card glass">
+          <h2>Tools</h2>
+          <div class="tools">
+            <button id="clearButton" class="danger" type="button">Clear</button>
+            <button id="exportButton" class="primary" type="button">Export</button>
+            <button id="notesButton" class="tool-button" type="button">Notes</button>
+            <button id="tasksButton" class="tool-button" type="button">Tasks</button>
+            <button id="calculatorButton" class="tool-button" type="button">Calc</button>
+            <button id="timerButton" class="tool-button" type="button">Timer</button>
           </div>
         </section>
       </aside>
     </div>
 
-    <div class="footer-note">
-      Neural Ultra interface preview · Secure Gemini connection pending
+    <div class="footer">
+      Neural Ultra · Gemini-powered interface
     </div>
   </main>
 
-  <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true">
+  <div id="settingsModal" class="modal-bg">
     <section class="modal glass">
-      <div class="modal-header">
-        <h2>Workspace Settings</h2>
+      <div class="modal-title">
+        <h2>Settings</h2>
         <button id="closeSettings" class="icon-button" type="button">×</button>
       </div>
 
@@ -885,20 +787,7 @@
       </div>
 
       <div class="setting">
-        <span>Interface density</span>
-        <select id="densitySelect">
-          <option value="comfortable">Comfortable</option>
-          <option value="compact">Compact</option>
-        </select>
-      </div>
-
-      <div class="setting">
-        <span>Motion intensity</span>
-        <input id="motionRange" type="range" min="0" max="100" value="100">
-      </div>
-
-      <div class="setting">
-        <span>Speak demo responses</span>
+        <span>Speak responses</span>
         <input id="speechToggle" type="checkbox">
       </div>
 
@@ -907,44 +796,31 @@
         <input id="privacyToggle" type="checkbox">
       </div>
 
-      <button id="resetButton" class="danger-button" type="button">
-        Reset local settings and history
+      <button id="resetButton" class="danger" type="button">
+        Reset local data
       </button>
     </section>
   </div>
 
-  <div id="commandPalette" class="command-palette glass">
-    <input id="commandInput" placeholder="Type a command..." aria-label="Command">
-    <div class="command-list">
-      <button type="button" data-command="focus">Focus message box</button>
-      <button type="button" data-command="settings">Open settings</button>
-      <button type="button" data-command="clear">Clear conversation</button>
-      <button type="button" data-command="export">Export conversation</button>
-      <button type="button" data-command="theme">Toggle theme</button>
-    </div>
-  </div>
-
-  <div id="toast" class="toast" role="status"></div>
+  <div id="toast" class="toast"></div>
 
   <script>
     const $ = (selector) => document.querySelector(selector);
-    const $$ = (selector) => [...document.querySelectorAll(selector)];
 
     const form = $("#chatForm");
     const promptInput = $("#prompt");
     const messages = $("#messages");
     const status = $("#status");
     const engineState = $("#engineState");
-    const engineDescription = $("#engineDescription");
     const metricMode = $("#metricMode");
     const metricMessages = $("#metricMessages");
+    const metricSession = $("#metricSession");
+    const sendButton = $("#sendButton");
     const toast = $("#toast");
 
     const fastMode = $("#fastMode");
     const ultraMode = $("#ultraMode");
     const settingsModal = $("#settingsModal");
-    const commandPalette = $("#commandPalette");
-    const commandInput = $("#commandInput");
 
     let mode = localStorage.getItem("neural-ultra-mode") || "fast";
     let conversation = JSON.parse(
@@ -954,15 +830,16 @@
       localStorage.getItem("neural-ultra-speech") === "true";
     let privacyMode =
       localStorage.getItem("neural-ultra-privacy") === "true";
+    let controller = null;
 
-    function showToast(message) {
+    function notify(message) {
       toast.textContent = message;
       toast.classList.add("show");
 
-      clearTimeout(showToast.timer);
-      showToast.timer = setTimeout(() => {
+      clearTimeout(notify.timer);
+      notify.timer = setTimeout(() => {
         toast.classList.remove("show");
-      }, 2500);
+      }, 2600);
     }
 
     function saveConversation() {
@@ -980,8 +857,8 @@
       metricSession.textContent = privacyMode ? "Private" : "Local";
     }
 
-    function setStatus(message, state = "Ready") {
-      status.textContent = message;
+    function setStatus(text, state = "Ready") {
+      status.textContent = text;
       engineState.textContent = state;
     }
 
@@ -993,14 +870,26 @@
       ultraMode.classList.toggle("active", mode === "ultra");
 
       setStatus(
-        mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
-        "Ready"
+        mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
       );
 
       updateMetrics();
     }
 
-    function createMessage(text, role, savedIndex = null) {
+    function speak(text) {
+      if (!("speechSynthesis" in window)) {
+        notify("Text-to-speech is not supported here.");
+        return;
+      }
+
+      speechSynthesis.cancel();
+
+      const voice = new SpeechSynthesisUtterance(text);
+      voice.lang = "en-US";
+      speechSynthesis.speak(voice);
+    }
+
+    function addMessage(text, role, tools = false) {
       const item = document.createElement("article");
       item.className = `message ${role}`;
 
@@ -1008,44 +897,46 @@
       content.textContent = text;
       item.appendChild(content);
 
-      if (role === "assistant") {
-        const tools = document.createElement("div");
-        tools.className = "message-tools";
+      if (tools) {
+        const controls = document.createElement("div");
+        controls.className = "message-tools";
 
-        const copyButton = document.createElement("button");
-        copyButton.type = "button";
-        copyButton.textContent = "Copy";
-        copyButton.addEventListener("click", async () => {
-          await navigator.clipboard?.writeText(text);
-          showToast("Response copied.");
-        });
+        const copy = document.createElement("button");
+        copy.type = "button";
+        copy.textContent = "Copy";
+        copy.onclick = async () => {
+          try {
+            await navigator.clipboard.writeText(text);
+            notify("Copied.");
+          } catch {
+            notify("Copy is unavailable.");
+          }
+        };
 
-        const speakButton = document.createElement("button");
-        speakButton.type = "button";
-        speakButton.textContent = "Speak";
-        speakButton.addEventListener("click", () => speak(text));
+        const speech = document.createElement("button");
+        speech.type = "button";
+        speech.textContent = "Speak";
+        speech.onclick = () => speak(text);
 
-        tools.append(copyButton, speakButton);
-        item.appendChild(tools);
-      }
-
-      if (savedIndex !== null) {
-        item.dataset.index = String(savedIndex);
+        controls.append(copy, speech);
+        item.appendChild(controls);
       }
 
       messages.appendChild(item);
       messages.classList.add("visible");
       messages.scrollTop = messages.scrollHeight;
+
+      return item;
     }
 
     function renderConversation() {
       messages.innerHTML = "";
 
-      conversation.forEach((entry, index) => {
-        createMessage(entry.text, entry.role, index);
+      conversation.forEach((entry) => {
+        addMessage(entry.text, entry.role, entry.role === "assistant");
       });
 
-      if (conversation.length === 0) {
+      if (!conversation.length) {
         messages.classList.remove("visible");
       }
 
@@ -1063,47 +954,47 @@
       renderConversation();
     }
 
-    function demoAnswer(question) {
-      if (mode === "fast") {
-        return [
-          "Fast demo response:",
-          "",
-          `I received: "${question}"`,
-          "",
-          "The frontend is working. Gemini API integration will be connected through a secure server-side endpoint."
-        ].join("
-");
+    async function sendToGemini(question) {
+      controller = new AbortController();
+
+      const history = conversation
+        .slice(-12)
+        .map((entry) => ({
+          role: entry.role === "assistant" ? "model" : "user",
+          text: entry.text
+        }));
+
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          message: question,
+          history,
+          mode
+        }),
+        signal: controller.signal
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(data.error || "Gemini request failed.");
       }
 
-      return [
-        "Ultra demo response:",
-        "",
-        `Your request was: "${question}"`,
-        "",
-        "The Neural Ultra workspace is active with liquid-glass UI, adaptive modes, local session tools, dynamic engine status, and responsive interaction.",
-        "",
-        "The next backend step will connect Gemini securely without exposing an API key in this HTML file."
-      ].join("
-");
-    }
-
-    function speak(text) {
-      if (!("speechSynthesis" in window)) {
-        showToast("Speech is not supported in this browser.");
-        return;
+      if (!data.text) {
+        throw new Error("Gemini returned an empty response.");
       }
 
-      speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = "en-US";
-      speechSynthesis.speak(utterance);
+      return data.text;
     }
 
     async function submitMessage(text) {
       const question = text.trim();
 
       if (!question) {
-        showToast("Write a message first.");
+        notify("Write a message first.");
         return;
       }
 
@@ -1112,119 +1003,72 @@
       promptInput.style.height = "auto";
 
       setStatus(
-        mode === "fast" ? "Generating a fast response..." : "Running Ultra fusion...",
+        mode === "fast"
+          ? "Connecting to Gemini..."
+          : "Running Ultra reasoning...",
         "Processing"
       );
 
-      await new Promise((resolve) =>
-        setTimeout(resolve, mode === "fast" ? 350 : 900)
-      );
+      sendButton.textContent = "■";
+      sendButton.title = "Stop";
 
-      const answer = demoAnswer(question);
-      addConversation(answer, "assistant");
+      try {
+        const answer = await sendToGemini(question);
 
-      if (speechEnabled) {
-        speak(answer);
+        addConversation(answer, "assistant");
+
+        const lastMessage = messages.lastElementChild;
+        const controls = document.createElement("div");
+        controls.className = "message-tools";
+
+        const copy = document.createElement("button");
+        copy.type = "button";
+        copy.textContent = "Copy";
+        copy.onclick = async () => {
+          await navigator.clipboard?.writeText(answer);
+          notify("Copied.");
+        };
+
+        const speech = document.createElement("button");
+        speech.type = "button";
+        speech.textContent = "Speak";
+        speech.onclick = () => speak(answer);
+
+        controls.append(copy, speech);
+        lastMessage.appendChild(controls);
+
+        if (speechEnabled) {
+          speak(answer);
+        }
+
+        setStatus(
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
+          "Ready"
+        );
+      } catch (error) {
+        if (error.name === "AbortError") {
+          setStatus("Response stopped", "Ready");
+          notify("Response stopped.");
+        } else {
+          setStatus("Gemini connection error", "Error");
+          addConversation(`Error: ${error.message}`, "assistant");
+          notify(error.message);
+        }
+      } finally {
+        controller = null;
+        sendButton.textContent = "↑";
+        sendButton.title = "Send message";
       }
-
-      setStatus(
-        mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
-        "Ready"
-      );
     }
-
-    function exportConversation() {
-      if (!conversation.length) {
-        showToast("There is no conversation to export.");
-        return;
-      }
-
-      const content = conversation
-        .map((item) => `${item.role.toUpperCase()}
-${item.text}`)
-        .join("
-
-");
-
-      const blob = new Blob([content], { type: "text/plain" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-
-      link.href = url;
-      link.download = "neural-ultra-conversation.txt";
-      link.click();
-
-      URL.revokeObjectURL(url);
-      showToast("Conversation exported.");
-    }
-
-    function clearConversation() {
-      conversation = [];
-      localStorage.removeItem("neural-ultra-conversation");
-      renderConversation();
-      setStatus("Conversation cleared", "Ready");
-      showToast("Conversation cleared.");
-    }
-
-    function openSettings() {
-      settingsModal.classList.add("open");
-    }
-
-    function closeSettings() {
-      settingsModal.classList.remove("open");
-    }
-
-    function openCommands() {
-      commandPalette.classList.add("open");
-      commandInput.value = "";
-      commandInput.focus();
-    }
-
-    function closeCommands() {
-      commandPalette.classList.remove("open");
-    }
-
-    function applyTheme(theme) {
-      if (theme === "dark") {
-        document.documentElement.removeAttribute("data-theme");
-      } else {
-        document.documentElement.dataset.theme = theme;
-      }
-
-      localStorage.setItem("neural-ultra-theme", theme);
-    }
-
-    function applyDensity(density) {
-      document.body.classList.toggle("compact", density === "compact");
-      localStorage.setItem("neural-ultra-density", density);
-    }
-
-    function initializeSettings() {
-      const theme = localStorage.getItem("neural-ultra-theme") || "dark";
-      const density =
-        localStorage.getItem("neural-ultra-density") || "comfortable";
-      const motion = localStorage.getItem("neural-ultra-motion") || "100";
-
-      applyTheme(theme);
-      applyDensity(density);
-
-      $("#themeSelect").value = theme;
-      $("#densitySelect").value = density;
-      $("#motionRange").value = motion;
-      $("#speechToggle").checked = speechEnabled;
-      $("#privacyToggle").checked = privacyMode;
-
-      document.documentElement.style.setProperty(
-        "--motion-scale",
-        `${Number(motion) / 100}`
-      );
-    }
-
-    fastMode.addEventListener("click", () => setMode("fast"));
-    ultraMode.addEventListener("click", () => setMode("ultra"));
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+
+      if (controller) {
+        controller.abort();
+        return;
+      }
+
       submitMessage(promptInput.value);
     });
 
@@ -1241,7 +1085,10 @@ ${item.text}`)
       }
     });
 
-    $$(".suggestion").forEach((button) => {
+    fastMode.addEventListener("click", () => setMode("fast"));
+    ultraMode.addEventListener("click", () => setMode("ultra"));
+
+    document.querySelectorAll(".suggestion").forEach((button) => {
       button.addEventListener("click", () => {
         promptInput.value = button.dataset.prompt;
         promptInput.focus();
@@ -1249,34 +1096,70 @@ ${item.text}`)
       });
     });
 
-    $("#clearButton").addEventListener("click", clearConversation);
-    $("#exportButton").addEventListener("click", exportConversation);
-    $("#settingsButton").addEventListener("click", openSettings);
-    $("#closeSettings").addEventListener("click", closeSettings);
-    $("#commandButton").addEventListener("click", openCommands);
+    $("#clearButton").addEventListener("click", () => {
+      conversation = [];
+      localStorage.removeItem("neural-ultra-conversation");
+      renderConversation();
+      setStatus("Conversation cleared");
+      notify("Conversation cleared.");
+    });
+
+    $("#exportButton").addEventListener("click", () => {
+      if (!conversation.length) {
+        notify("There is no conversation to export.");
+        return;
+      }
+
+      const text = conversation
+        .map((entry) => `${entry.role.toUpperCase()}
+${entry.text}`)
+        .join("
+
+");
+
+      const blob = new Blob([text], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "neural-ultra-conversation.txt";
+      link.click();
+
+      URL.revokeObjectURL(url);
+      notify("Conversation exported.");
+    });
+
+    $("#settingsButton").addEventListener("click", () => {
+      settingsModal.classList.add("open");
+    });
+
+    $("#closeSettings").addEventListener("click", () => {
+      settingsModal.classList.remove("open");
+    });
+
+    settingsModal.addEventListener("click", (event) => {
+      if (event.target === settingsModal) {
+        settingsModal.classList.remove("open");
+      }
+    });
 
     $("#themeSelect").addEventListener("change", (event) => {
-      applyTheme(event.target.value);
-      showToast("Theme updated.");
-    });
+      const theme = event.target.value;
 
-    $("#densitySelect").addEventListener("change", (event) => {
-      applyDensity(event.target.value);
-      showToast("Density updated.");
-    });
+      if (theme === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.dataset.theme = theme;
+      }
 
-    $("#motionRange").addEventListener("input", (event) => {
-      localStorage.setItem("neural-ultra-motion", event.target.value);
-      document.documentElement.style.setProperty(
-        "--motion-scale",
-        `${Number(event.target.value) / 100}`
-      );
+      localStorage.setItem("neural-ultra-theme", theme);
+      notify("Theme updated.");
     });
 
     $("#speechToggle").addEventListener("change", (event) => {
       speechEnabled = event.target.checked;
       localStorage.setItem("neural-ultra-speech", String(speechEnabled));
-      showToast("Speech setting updated.");
+      notify("Speech setting updated.");
     });
 
     $("#privacyToggle").addEventListener("change", (event) => {
@@ -1284,24 +1167,27 @@ ${item.text}`)
       localStorage.setItem("neural-ultra-privacy", String(privacyMode));
 
       if (privacyMode) {
-        localStorage.removeItem("neural-ultra-conversation");
         conversation = [];
+        localStorage.removeItem("neural-ultra-conversation");
         renderConversation();
       }
 
-      showToast("Privacy setting updated.");
+      notify("Privacy setting updated.");
     });
 
     $("#resetButton").addEventListener("click", () => {
       localStorage.clear();
       conversation = [];
-      privacyMode = false;
       speechEnabled = false;
-      initializeSettings();
+      privacyMode = false;
+      document.documentElement.removeAttribute("data-theme");
+      $("#themeSelect").value = "dark";
+      $("#speechToggle").checked = false;
+      $("#privacyToggle").checked = false;
       renderConversation();
       setMode("fast");
-      closeSettings();
-      showToast("Local settings reset.");
+      settingsModal.classList.remove("open");
+      notify("Local data reset.");
     });
 
     $("#voiceButton").addEventListener("click", () => {
@@ -1309,7 +1195,7 @@ ${item.text}`)
         window.SpeechRecognition || window.webkitSpeechRecognition;
 
       if (!Recognition) {
-        showToast("Voice input is not supported in this browser.");
+        notify("Voice input is not supported in this browser.");
         return;
       }
 
@@ -1317,125 +1203,106 @@ ${item.text}`)
       recognition.lang = "en-US";
       recognition.interimResults = false;
 
-      recognition.onstart = () => {
-        setStatus("Listening...", "Voice input");
-      };
+      recognition.onstart = () => setStatus("Listening...", "Voice input");
 
       recognition.onresult = (event) => {
         promptInput.value = event.results[0][0].transcript;
         promptInput.dispatchEvent(new Event("input"));
         setStatus(
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
-          "Ready"
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
         );
       };
 
       recognition.onerror = () => {
         setStatus("Voice input unavailable", "Ready");
-        showToast("Voice input could not be started.");
+        notify("Voice input could not start.");
       };
 
       recognition.start();
     });
 
     $("#notesButton").addEventListener("click", () => {
-      const note = prompt("Write a workspace note:");
+      const note = prompt("Write a note:");
+
       if (note) {
         localStorage.setItem("neural-ultra-note", note);
-        showToast("Note saved locally.");
+        notify("Note saved.");
       }
     });
 
-    $("#checklistButton").addEventListener("click", () => {
+    $("#tasksButton").addEventListener("click", () => {
       const task = prompt("Add a task:");
+
       if (task) {
         const tasks = JSON.parse(
           localStorage.getItem("neural-ultra-tasks") || "[]"
         );
-        tasks.push({ text: task, done: false });
+
+        tasks.push({
+          text: task,
+          done: false,
+          time: new Date().toISOString()
+        });
+
         localStorage.setItem("neural-ultra-tasks", JSON.stringify(tasks));
-        showToast("Task saved locally.");
+        notify("Task saved.");
       }
     });
 
     $("#calculatorButton").addEventListener("click", () => {
-      const expression = prompt("Enter a simple calculation, e.g. 25 * 4:");
+      const expression = prompt("Enter a basic calculation:");
+
       if (!expression) return;
 
-      if (!/^[0-9+-*/(). %]+$/.test(expression)) {
-        showToast("Only basic calculator characters are allowed.");
+      if (!/^[0-9+*/().% -]+$/.test(expression)) {
+        notify("Only basic calculator characters are allowed.");
         return;
       }
 
       try {
-        const result = Function(`"use strict"; return (${expression})`)();
-        showToast(`Result: ${result}`);
+        const result = Function(
+          `"use strict"; return (${expression})`
+        )();
+
+        notify(`Result: ${result}`);
       } catch {
-        showToast("Invalid calculation.");
+        notify("Invalid calculation.");
       }
     });
 
     $("#timerButton").addEventListener("click", () => {
       const seconds = Number(prompt("Timer duration in seconds:"));
+
       if (!Number.isFinite(seconds) || seconds <= 0) {
-        showToast("Enter a valid duration.");
+        notify("Enter a valid duration.");
         return;
       }
 
       setStatus(`Timer running: ${seconds}s`, "Timer");
 
       setTimeout(() => {
-        showToast("Timer complete.");
+        notify("Timer complete.");
         setStatus(
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
-          "Ready"
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready"
         );
       }, seconds * 1000);
     });
 
-    $$("[data-command]").forEach((button) => {
-      button.addEventListener("click", () => {
-        const command = button.dataset.command;
-        closeCommands();
+    const theme =
+      localStorage.getItem("neural-ultra-theme") || "dark";
 
-        if (command === "focus") promptInput.focus();
-        if (command === "settings") openSettings();
-        if (command === "clear") clearConversation();
-        if (command === "export") exportConversation();
+    if (theme === "dark") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.dataset.theme = theme;
+    }
 
-        if (command === "theme") {
-          const current = localStorage.getItem("neural-ultra-theme") || "dark";
-          applyTheme(current === "dark" ? "light" : "dark");
-          $("#themeSelect").value =
-            current === "dark" ? "light" : "dark";
-          showToast("Theme toggled.");
-        }
-      });
-    });
+    $("#themeSelect").value = theme;
+    $("#speechToggle").checked = speechEnabled;
+    $("#privacyToggle").checked = privacyMode;
 
-    commandInput.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeCommands();
-    });
-
-    settingsModal.addEventListener("click", (event) => {
-      if (event.target === settingsModal) closeSettings();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
-        event.preventDefault();
-        openCommands();
-      }
-
-      if (event.key === "Escape") {
-        closeSettings();
-        closeCommands();
-      }
-    });
-
-    initializeSettings();
     setMode(mode);
     renderConversation();
   </script>
 </body>
-  </html>
+</html>
