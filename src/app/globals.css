@@ -1,0 +1,94 @@
+:root {
+  --glass: rgba(255, 255, 255, 0.075);
+  --glass-strong: rgba(255, 255, 255, 0.12);
+  --glass-line: rgba(255, 255, 255, 0.16);
+  --cyan: #62f5ff;
+  --violet: #9e7bff;
+  --amber: #ffd166;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #050713;
+  color: #f5f7ff;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+.glass {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.13),
+      rgba(255, 255, 255, 0.035)
+    );
+  border: 1px solid var(--glass-line);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 24px 80px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(28px) saturate(145%);
+  -webkit-backdrop-filter: blur(28px) saturate(145%);
+}
+
+.neural-orb {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(circle at 35% 28%, #ffffff 0 2%, transparent 3%),
+    radial-gradient(circle, rgba(98, 245, 255, 0.42), transparent 58%),
+    radial-gradient(circle at 70% 70%, rgba(158, 123, 255, 0.5), transparent 55%);
+  box-shadow:
+    0 0 35px rgba(98, 245, 255, 0.42),
+    0 0 110px rgba(158, 123, 255, 0.2);
+  animation: orb-breathe 4s ease-in-out infinite;
+}
+
+.neural-orb::before,
+.neural-orb::after {
+  position: absolute;
+  inset: -16px;
+  border: 1px solid rgba(98, 245, 255, 0.28);
+  border-radius: 999px;
+  content: "";
+  animation: orb-ring 7s linear infinite;
+}
+
+.neural-orb::after {
+  inset: -32px;
+  border-color: rgba(255, 209, 102, 0.18);
+  animation-direction: reverse;
+  animation-duration: 11s;
+}
+
+@keyframes orb-breathe {
+  50% {
+    transform: scale(1.06);
+    filter: brightness(1.18);
+  }
+}
+
+@keyframes orb-ring {
+  to {
+    transform: rotate(360deg) scale(1.08);
+  }
+}
+
+.neural-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 78%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
