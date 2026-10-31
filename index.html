@@ -3,20 +3,46 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050713">
   <title>Neural Ultra</title>
 
   <style>
     :root {
       --bg: #050713;
       --panel: rgba(255, 255, 255, 0.08);
-      --panel-strong: rgba(255, 255, 255, 0.13);
+      --panel-strong: rgba(255, 255, 255, 0.14);
       --line: rgba(255, 255, 255, 0.16);
       --text: #f5f7ff;
       --muted: rgba(245, 247, 255, 0.58);
       --cyan: #62f5ff;
       --violet: #9e7bff;
       --amber: #ffd166;
-      --danger: #ff8297;
+      --rose: #ff8297;
+      --green: #79f2b0;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme="light"] {
+      --bg: #eef3fb;
+      --panel: rgba(255, 255, 255, 0.62);
+      --panel-strong: rgba(255, 255, 255, 0.85);
+      --line: rgba(20, 35, 70, 0.14);
+      --text: #0c1730;
+      --muted: rgba(12, 23, 48, 0.62);
+      --shadow: rgba(30, 55, 100, 0.18);
+    }
+
+    [data-theme="high"] {
+      --bg: #000;
+      --panel: #111;
+      --panel-strong: #191919;
+      --line: #fff;
+      --text: #fff;
+      --muted: #ddd;
+      --cyan: #00ffff;
+      --violet: #ff00ff;
+      --amber: #ffff00;
+      --shadow: #000;
     }
 
     * {
@@ -35,18 +61,33 @@
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at 12% 10%, rgba(98, 245, 255, 0.16), transparent 30%),
-        radial-gradient(circle at 88% 90%, rgba(158, 123, 255, 0.17), transparent 35%),
+        radial-gradient(circle at 10% 10%, color-mix(in srgb, var(--cyan) 16%, transparent), transparent 30%),
+        radial-gradient(circle at 90% 90%, color-mix(in srgb, var(--violet) 18%, transparent), transparent 35%),
         var(--bg);
+      transition: background .35s, color .35s;
+    }
+
+    body.compact {
+      --spacing: 0.7;
     }
 
     button,
-    textarea {
+    textarea,
+    input,
+    select {
       font: inherit;
     }
 
     button {
       cursor: pointer;
+    }
+
+    button:focus-visible,
+    textarea:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
     }
 
     .background-grid {
@@ -58,27 +99,28 @@
         linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
       background-size: 42px 42px;
-      mask-image: linear-gradient(to bottom, black, transparent 85%);
+      mask-image: linear-gradient(to bottom, black, transparent 86%);
     }
 
     .app {
       position: relative;
       z-index: 1;
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 28px));
       min-height: 100vh;
       margin: 0 auto;
-      padding: 22px 0;
+      padding: 16px 0 22px;
       display: flex;
       flex-direction: column;
+      gap: 14px;
     }
 
     .glass {
       border: 1px solid var(--line);
       background:
-        linear-gradient(135deg, rgba(255,255,255,.13), rgba(255,255,255,.035));
+        linear-gradient(135deg, var(--panel-strong), var(--panel));
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.12),
-        0 25px 80px rgba(0,0,0,.28);
+        0 25px 80px var(--shadow);
       backdrop-filter: blur(28px) saturate(150%);
       -webkit-backdrop-filter: blur(28px) saturate(150%);
     }
@@ -87,46 +129,80 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 18px;
-      padding: 15px 18px;
+      gap: 16px;
+      padding: 14px 16px;
       border-radius: 24px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
+      min-width: 0;
     }
 
     .brand-mark {
       position: relative;
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
+      flex: 0 0 40px;
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: rgba(98,245,255,.12);
-      box-shadow: 0 0 30px rgba(98,245,255,.2);
+      background: color-mix(in srgb, var(--cyan) 16%, transparent);
+      box-shadow: 0 0 30px color-mix(in srgb, var(--cyan) 28%, transparent);
     }
 
     .brand-mark::before {
-      width: 10px;
-      height: 10px;
+      width: 11px;
+      height: 11px;
       border-radius: 50%;
       background: var(--cyan);
-      box-shadow: 0 0 20px var(--cyan);
+      box-shadow: 0 0 22px var(--cyan);
       content: "";
     }
 
     .brand-name {
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      font-weight: 800;
+      letter-spacing: -0.04em;
     }
 
     .brand-subtitle {
       margin-top: 2px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-button,
+    .mode-button,
+    .primary-button,
+    .danger-button {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: rgba(255,255,255,.06);
+      transition: transform .2s, background .2s, border-color .2s;
+    }
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
+      font-size: 17px;
+    }
+
+    .icon-button:hover,
+    .mode-button:hover,
+    .primary-button:hover,
+    .danger-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--cyan);
     }
 
     .mode-switch {
@@ -135,49 +211,65 @@
       padding: 4px;
       border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(0,0,0,.2);
+      background: rgba(0,0,0,.18);
     }
 
-    .mode-switch button {
-      padding: 8px 14px;
+    .mode-button {
+      padding: 8px 13px;
       border: 0;
       border-radius: 999px;
       color: var(--muted);
       background: transparent;
+      font-size: 13px;
     }
 
-    .mode-switch button.active {
+    .mode-button.active {
       color: #061016;
       background: var(--cyan);
     }
 
-    .hero {
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 290px;
+      gap: 14px;
       flex: 1;
+    }
+
+    .main-panel {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 720px;
+      padding: 22px;
+      border-radius: 30px;
+    }
+
+    .hero {
       display: grid;
       place-items: center;
-      min-height: 330px;
-      padding: 54px 0 28px;
+      min-height: 300px;
+      padding: 26px 0 20px;
       text-align: center;
     }
 
     .hero-content {
-      width: min(760px, 100%);
+      width: min(720px, 100%);
     }
 
     .orb {
       position: relative;
-      width: 132px;
-      height: 132px;
+      width: 128px;
+      height: 128px;
       margin: 0 auto 30px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 34% 26%, white 0 2%, transparent 3%),
+        radial-gradient(circle at 34% 25%, white 0 2%, transparent 3%),
         radial-gradient(circle at 40% 35%, var(--cyan), transparent 22%),
         radial-gradient(circle at 65% 70%, var(--violet), transparent 58%),
         #111b4c;
       box-shadow:
-        0 0 45px rgba(98,245,255,.58),
-        0 0 125px rgba(158,123,255,.25);
+        0 0 45px color-mix(in srgb, var(--cyan) 58%, transparent),
+        0 0 125px color-mix(in srgb, var(--violet) 25%, transparent);
       animation: breathe 4s ease-in-out infinite;
     }
 
@@ -185,7 +277,7 @@
     .orb::after {
       position: absolute;
       inset: -18px;
-      border: 1px solid rgba(98,245,255,.34);
+      border: 1px solid color-mix(in srgb, var(--cyan) 34%, transparent);
       border-radius: 50%;
       content: "";
       animation: rotate 8s linear infinite;
@@ -193,45 +285,39 @@
 
     .orb::after {
       inset: -36px;
-      border-color: rgba(255,209,102,.2);
+      border-color: color-mix(in srgb, var(--amber) 22%, transparent);
       animation-direction: reverse;
       animation-duration: 13s;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 8vw, 5.7rem);
+      font-size: clamp(2.2rem, 7vw, 5.4rem);
       line-height: .95;
       letter-spacing: -.075em;
     }
 
     .hero p {
-      max-width: 620px;
-      margin: 24px auto 0;
+      max-width: 630px;
+      margin: 23px auto 0;
       color: var(--muted);
-      font-size: clamp(1rem, 2vw, 1.2rem);
+      font-size: clamp(.98rem, 2vw, 1.16rem);
       line-height: 1.7;
     }
 
     .status {
       min-height: 24px;
-      margin-top: 18px;
+      margin-top: 16px;
       color: var(--cyan);
       font-size: 13px;
     }
 
-    .chat-panel {
-      width: min(900px, 100%);
-      margin: 0 auto;
-      padding: 16px;
-      border-radius: 28px;
-    }
-
     .messages {
       display: none;
-      max-height: 420px;
+      max-height: 405px;
       overflow-y: auto;
-      padding: 10px 6px 16px;
+      margin: 8px 0 18px;
+      padding: 10px 4px;
     }
 
     .messages.visible {
@@ -239,13 +325,15 @@
     }
 
     .message {
-      max-width: 82%;
-      margin: 10px 0;
+      position: relative;
+      max-width: 84%;
+      margin: 12px 0;
       padding: 13px 16px;
       border: 1px solid var(--line);
       border-radius: 20px;
       white-space: pre-wrap;
-      line-height: 1.6;
+      line-height: 1.62;
+      animation: message-in .25s ease-out both;
     }
 
     .message.user {
@@ -261,13 +349,28 @@
       background: rgba(0,0,0,.2);
     }
 
+    .message-tools {
+      display: flex;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .message-tools button {
+      padding: 4px 8px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+      background: transparent;
+      font-size: 11px;
+    }
+
     .composer {
       display: flex;
       align-items: flex-end;
-      gap: 10px;
-      padding: 8px 8px 8px 16px;
+      gap: 9px;
+      padding: 8px 8px 8px 15px;
       border: 1px solid var(--line);
-      border-radius: 22px;
+      border-radius: 23px;
       background: rgba(0,0,0,.22);
     }
 
@@ -284,10 +387,10 @@
     }
 
     textarea::placeholder {
-      color: rgba(245,247,255,.4);
+      color: var(--muted);
     }
 
-    .send {
+    .send-button {
       width: 48px;
       height: 48px;
       flex: 0 0 48px;
@@ -296,11 +399,11 @@
       color: #061016;
       background: var(--cyan);
       font-size: 20px;
-      font-weight: 800;
+      font-weight: 900;
       transition: transform .2s, background .2s;
     }
 
-    .send:hover {
+    .send-button:hover {
       transform: scale(1.06);
       background: white;
     }
@@ -313,7 +416,7 @@
     }
 
     .suggestion {
-      padding: 12px;
+      padding: 11px 12px;
       text-align: left;
       color: var(--muted);
       border: 1px solid var(--line);
@@ -328,11 +431,224 @@
       transform: translateY(-2px);
     }
 
-    .footer-note {
-      padding: 15px 0 3px;
-      color: rgba(245,247,255,.35);
-      text-align: center;
+    .side-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .side-card {
+      padding: 17px;
+      border-radius: 23px;
+    }
+
+    .side-title {
+      margin: 0 0 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .side-card p {
+      margin: 8px 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .engine-state {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .engine-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px var(--green);
+      animation: dot-pulse 1.8s ease-in-out infinite;
+    }
+
+    .metric {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .metric:last-child {
+      border-bottom: 0;
+    }
+
+    .metric strong {
+      color: var(--text);
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px;
+    }
+
+    .tool-grid button,
+    .primary-button,
+    .danger-button {
+      padding: 9px 8px;
+      border-radius: 12px;
       font-size: 12px;
+    }
+
+    .primary-button {
+      color: #061016;
+      border-color: transparent;
+      background: var(--cyan);
+    }
+
+    .danger-button {
+      color: white;
+      border-color: transparent;
+      background: var(--rose);
+    }
+
+    .footer-note {
+      color: var(--muted);
+      text-align: center;
+      font-size: 11px;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      z-index: 10;
+      inset: 0;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(0,0,0,.62);
+    }
+
+    .modal-backdrop.open {
+      display: grid;
+    }
+
+    .modal {
+      width: min(540px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 22px;
+      border-radius: 25px;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .setting {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .setting:last-child {
+      border-bottom: 0;
+    }
+
+    select,
+    input[type="range"] {
+      max-width: 150px;
+    }
+
+    select {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      color: var(--text);
+      background: var(--panel-strong);
+    }
+
+    .command-palette {
+      position: fixed;
+      z-index: 20;
+      top: 18%;
+      left: 50%;
+      display: none;
+      width: min(520px, calc(100% - 32px));
+      transform: translateX(-50%);
+      padding: 15px;
+      border-radius: 22px;
+    }
+
+    .command-palette.open {
+      display: block;
+    }
+
+    .command-palette input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      outline: 0;
+      color: var(--text);
+      background: rgba(0,0,0,.22);
+    }
+
+    .command-list {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .command-list button {
+      padding: 11px;
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--text);
+      background: rgba(255,255,255,.04);
+    }
+
+    .toast {
+      position: fixed;
+      z-index: 30;
+      right: 18px;
+      bottom: 18px;
+      max-width: 310px;
+      padding: 12px 15px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--text);
+      background: var(--panel-strong);
+      box-shadow: 0 15px 45px var(--shadow);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(12px);
+      transition: opacity .25s, transform .25s;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @keyframes breathe {
@@ -348,10 +664,39 @@
       }
     }
 
+    @keyframes dot-pulse {
+      50% {
+        opacity: .4;
+        transform: scale(.75);
+      }
+    }
+
+    @keyframes message-in {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+    }
+
+    @media (max-width: 850px) {
+      .workspace {
+        grid-template-columns: 1fr;
+      }
+
+      .side-panel {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .main-panel {
+        min-height: 650px;
+      }
+    }
+
     @media (max-width: 650px) {
       .app {
-        width: min(100% - 20px, 1120px);
-        padding-top: 10px;
+        width: min(100% - 14px, 1180px);
+        padding-top: 8px;
       }
 
       header {
@@ -359,20 +704,32 @@
         flex-direction: column;
       }
 
-      .mode-switch {
+      .top-actions {
         width: 100%;
+        justify-content: space-between;
       }
 
-      .mode-switch button {
+      .mode-switch {
         flex: 1;
+      }
+
+      .mode-button {
+        flex: 1;
+      }
+
+      .main-panel {
+        min-height: 690px;
+        padding: 15px;
+        border-radius: 24px;
       }
 
       .hero {
         min-height: 300px;
-        padding-top: 48px;
+        padding-top: 35px;
       }
 
-      .suggestions {
+      .suggestions,
+      .side-panel {
         grid-template-columns: 1fr;
       }
 
@@ -401,149 +758,684 @@
         <div class="brand-mark"></div>
         <div>
           <div class="brand-name">Neural Ultra</div>
-          <div class="brand-subtitle">Adaptive Intelligence Workspace</div>
+          <div class="brand-subtitle">Supreme Neural Fusion Workspace</div>
         </div>
       </div>
 
-      <div class="mode-switch">
-        <button id="fastMode" class="active" type="button">Fast</button>
-        <button id="ultraMode" type="button">Ultra</button>
+      <div class="top-actions">
+        <div class="mode-switch" aria-label="Response mode">
+          <button id="fastMode" class="mode-button active" type="button">Fast</button>
+          <button id="ultraMode" class="mode-button" type="button">Ultra</button>
+        </div>
+        <button id="commandButton" class="icon-button" type="button" title="Command palette">⌘</button>
+        <button id="settingsButton" class="icon-button" type="button" title="Settings">⚙</button>
       </div>
     </header>
 
-    <section class="hero">
-      <div class="hero-content">
-        <div class="orb"></div>
-        <h1>Intelligence that feels alive.</h1>
-        <p>
-          Ask anything. Neural Ultra is designed for fast answers,
-          adaptive reasoning, and a premium liquid-glass experience.
-        </p>
-        <div id="status" class="status">Fast engine ready</div>
-      </div>
-    </section>
+    <div class="workspace">
+      <section class="main-panel glass">
+        <div class="hero">
+          <div class="hero-content">
+            <div class="orb" aria-hidden="true"></div>
+            <h1>Intelligence that feels alive.</h1>
+            <p>
+              A premium AI workspace with adaptive modes,
+              liquid-glass interaction, and a dynamic neural engine.
+            </p>
+            <div id="status" class="status">Fast engine ready</div>
+          </div>
+        </div>
 
-    <section class="chat-panel glass">
-      <div id="messages" class="messages"></div>
+        <div id="messages" class="messages" aria-live="polite"></div>
 
-      <form id="chatForm" class="composer">
-        <textarea
-          id="prompt"
-          rows="1"
-          placeholder="Ask Neural Ultra anything..."
-          aria-label="Message"
-        ></textarea>
+        <form id="chatForm" class="composer">
+          <textarea
+            id="prompt"
+            rows="1"
+            placeholder="Ask Neural Ultra anything..."
+            aria-label="Message"
+          ></textarea>
 
-        <button class="send" type="submit" aria-label="Send message">
-          ↑
-        </button>
-      </form>
+          <button id="voiceButton" class="icon-button" type="button" title="Voice input">
+            🎙
+          </button>
 
-      <div class="suggestions">
-        <button class="suggestion" type="button" data-prompt="Explain artificial intelligence in simple English.">
-          Explain AI simply
-        </button>
-        <button class="suggestion" type="button" data-prompt="Create a practical weekly productivity plan.">
-          Create a productivity plan
-        </button>
-        <button class="suggestion" type="button" data-prompt="Help me write a professional email.">
-          Write a professional email
-        </button>
-        <button class="suggestion" type="button" data-prompt="Give me a useful coding idea for a beginner.">
-          Give me a coding idea
-        </button>
-      </div>
-    </section>
+          <button class="send-button" type="submit" aria-label="Send message">
+            ↑
+          </button>
+        </form>
+
+        <div class="suggestions">
+          <button class="suggestion" type="button" data-prompt="Explain artificial intelligence in simple English.">
+            Explain AI simply
+          </button>
+          <button class="suggestion" type="button" data-prompt="Create a practical weekly productivity plan.">
+            Create a productivity plan
+          </button>
+          <button class="suggestion" type="button" data-prompt="Help me write a professional email.">
+            Write a professional email
+          </button>
+          <button class="suggestion" type="button" data-prompt="Give me a useful coding idea for a beginner.">
+            Give me a coding idea
+          </button>
+        </div>
+      </section>
+
+      <aside class="side-panel">
+        <section class="side-card glass">
+          <h2 class="side-title">Engine</h2>
+          <div class="engine-state">
+            <span class="engine-dot"></span>
+            <span id="engineState">Ready</span>
+          </div>
+          <p id="engineDescription">
+            Frontend demo mode is active. Gemini will be connected securely later.
+          </p>
+        </section>
+
+        <section class="side-card glass">
+          <h2 class="side-title">Live Metrics</h2>
+          <div class="metric">
+            <span>Mode</span>
+            <strong id="metricMode">Fast</strong>
+          </div>
+          <div class="metric">
+            <span>Messages</span>
+            <strong id="metricMessages">0</strong>
+          </div>
+          <div class="metric">
+            <span>Session</span>
+            <strong id="metricSession">Local</strong>
+          </div>
+        </section>
+
+        <section class="side-card glass">
+          <h2 class="side-title">Workspace Tools</h2>
+          <div class="tool-grid">
+            <button id="clearButton" class="danger-button" type="button">Clear</button>
+            <button id="exportButton" class="primary-button" type="button">Export</button>
+            <button id="notesButton" type="button">Notes</button>
+            <button id="checklistButton" type="button">Tasks</button>
+            <button id="calculatorButton" type="button">Calculator</button>
+            <button id="timerButton" type="button">Timer</button>
+          </div>
+        </section>
+      </aside>
+    </div>
 
     <div class="footer-note">
-      Neural Ultra interface preview · Gemini backend will be connected next
+      Neural Ultra interface preview · Secure Gemini connection pending
     </div>
   </main>
 
-  <script>
-    const form = document.getElementById("chatForm");
-    const promptInput = document.getElementById("prompt");
-    const messages = document.getElementById("messages");
-    const status = document.getElementById("status");
-    const fastMode = document.getElementById("fastMode");
-    const ultraMode = document.getElementById("ultraMode");
+  <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true">
+    <section class="modal glass">
+      <div class="modal-header">
+        <h2>Workspace Settings</h2>
+        <button id="closeSettings" class="icon-button" type="button">×</button>
+      </div>
 
-    let mode = "fast";
+      <div class="setting">
+        <span>Theme</span>
+        <select id="themeSelect">
+          <option value="dark">Dark</option>
+          <option value="light">Light</option>
+          <option value="high">High contrast</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <span>Interface density</span>
+        <select id="densitySelect">
+          <option value="comfortable">Comfortable</option>
+          <option value="compact">Compact</option>
+        </select>
+      </div>
+
+      <div class="setting">
+        <span>Motion intensity</span>
+        <input id="motionRange" type="range" min="0" max="100" value="100">
+      </div>
+
+      <div class="setting">
+        <span>Speak demo responses</span>
+        <input id="speechToggle" type="checkbox">
+      </div>
+
+      <div class="setting">
+        <span>Privacy mode</span>
+        <input id="privacyToggle" type="checkbox">
+      </div>
+
+      <button id="resetButton" class="danger-button" type="button">
+        Reset local settings and history
+      </button>
+    </section>
+  </div>
+
+  <div id="commandPalette" class="command-palette glass">
+    <input id="commandInput" placeholder="Type a command..." aria-label="Command">
+    <div class="command-list">
+      <button type="button" data-command="focus">Focus message box</button>
+      <button type="button" data-command="settings">Open settings</button>
+      <button type="button" data-command="clear">Clear conversation</button>
+      <button type="button" data-command="export">Export conversation</button>
+      <button type="button" data-command="theme">Toggle theme</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status"></div>
+
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+
+    const form = $("#chatForm");
+    const promptInput = $("#prompt");
+    const messages = $("#messages");
+    const status = $("#status");
+    const engineState = $("#engineState");
+    const engineDescription = $("#engineDescription");
+    const metricMode = $("#metricMode");
+    const metricMessages = $("#metricMessages");
+    const toast = $("#toast");
+
+    const fastMode = $("#fastMode");
+    const ultraMode = $("#ultraMode");
+    const settingsModal = $("#settingsModal");
+    const commandPalette = $("#commandPalette");
+    const commandInput = $("#commandInput");
+
+    let mode = localStorage.getItem("neural-ultra-mode") || "fast";
+    let conversation = JSON.parse(
+      localStorage.getItem("neural-ultra-conversation") || "[]"
+    );
+    let speechEnabled =
+      localStorage.getItem("neural-ultra-speech") === "true";
+    let privacyMode =
+      localStorage.getItem("neural-ultra-privacy") === "true";
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add("show");
+
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2500);
+    }
+
+    function saveConversation() {
+      if (!privacyMode) {
+        localStorage.setItem(
+          "neural-ultra-conversation",
+          JSON.stringify(conversation)
+        );
+      }
+    }
+
+    function updateMetrics() {
+      metricMode.textContent = mode === "fast" ? "Fast" : "Ultra";
+      metricMessages.textContent = String(conversation.length);
+      metricSession.textContent = privacyMode ? "Private" : "Local";
+    }
+
+    function setStatus(message, state = "Ready") {
+      status.textContent = message;
+      engineState.textContent = state;
+    }
 
     function setMode(nextMode) {
       mode = nextMode;
+      localStorage.setItem("neural-ultra-mode", mode);
 
       fastMode.classList.toggle("active", mode === "fast");
       ultraMode.classList.toggle("active", mode === "ultra");
 
-      status.textContent =
-        mode === "fast" ? "Fast engine ready" : "Ultra engine ready";
+      setStatus(
+        mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
+        "Ready"
+      );
+
+      updateMetrics();
     }
 
-    function addMessage(text, role) {
-      messages.classList.add("visible");
-
-      const item = document.createElement("div");
+    function createMessage(text, role, savedIndex = null) {
+      const item = document.createElement("article");
       item.className = `message ${role}`;
-      item.textContent = text;
-      messages.appendChild(item);
-      messages.scrollTop = messages.scrollHeight;
 
-      return item;
+      const content = document.createElement("div");
+      content.textContent = text;
+      item.appendChild(content);
+
+      if (role === "assistant") {
+        const tools = document.createElement("div");
+        tools.className = "message-tools";
+
+        const copyButton = document.createElement("button");
+        copyButton.type = "button";
+        copyButton.textContent = "Copy";
+        copyButton.addEventListener("click", async () => {
+          await navigator.clipboard?.writeText(text);
+          showToast("Response copied.");
+        });
+
+        const speakButton = document.createElement("button");
+        speakButton.type = "button";
+        speakButton.textContent = "Speak";
+        speakButton.addEventListener("click", () => speak(text));
+
+        tools.append(copyButton, speakButton);
+        item.appendChild(tools);
+      }
+
+      if (savedIndex !== null) {
+        item.dataset.index = String(savedIndex);
+      }
+
+      messages.appendChild(item);
+      messages.classList.add("visible");
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function renderConversation() {
+      messages.innerHTML = "";
+
+      conversation.forEach((entry, index) => {
+        createMessage(entry.text, entry.role, index);
+      });
+
+      if (conversation.length === 0) {
+        messages.classList.remove("visible");
+      }
+
+      updateMetrics();
+    }
+
+    function addConversation(text, role) {
+      conversation.push({
+        text,
+        role,
+        time: new Date().toISOString()
+      });
+
+      saveConversation();
+      renderConversation();
     }
 
     function demoAnswer(question) {
       if (mode === "fast") {
-        return `Demo response: I received your question.
-
-"${question}"
-
-The Gemini backend is not connected yet. The interface is working correctly.`;
+        return [
+          "Fast demo response:",
+          "",
+          `I received: "${question}"`,
+          "",
+          "The frontend is working. Gemini API integration will be connected through a secure server-side endpoint."
+        ].join("
+");
       }
 
-      return `Ultra demo response:
-
-I received your question:
-"${question}"
-
-The liquid-glass interface, mode switch, suggestions, message area, and animated Neural Ultra engine are working.
-
-The secure Gemini backend will be connected in the next step.`;
+      return [
+        "Ultra demo response:",
+        "",
+        `Your request was: "${question}"`,
+        "",
+        "The Neural Ultra workspace is active with liquid-glass UI, adaptive modes, local session tools, dynamic engine status, and responsive interaction.",
+        "",
+        "The next backend step will connect Gemini securely without exposing an API key in this HTML file."
+      ].join("
+");
     }
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+    function speak(text) {
+      if (!("speechSynthesis" in window)) {
+        showToast("Speech is not supported in this browser.");
+        return;
+      }
 
-      const question = promptInput.value.trim();
-      if (!question) return;
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = "en-US";
+      speechSynthesis.speak(utterance);
+    }
 
-      addMessage(question, "user");
+    async function submitMessage(text) {
+      const question = text.trim();
+
+      if (!question) {
+        showToast("Write a message first.");
+        return;
+      }
+
+      addConversation(question, "user");
       promptInput.value = "";
-      status.textContent = "Neural Ultra is processing...";
+      promptInput.style.height = "auto";
 
-      setTimeout(() => {
-        addMessage(demoAnswer(question), "assistant");
-        status.textContent =
-          mode === "fast" ? "Fast engine ready" : "Ultra engine ready";
-      }, mode === "fast" ? 350 : 900);
+      setStatus(
+        mode === "fast" ? "Generating a fast response..." : "Running Ultra fusion...",
+        "Processing"
+      );
+
+      await new Promise((resolve) =>
+        setTimeout(resolve, mode === "fast" ? 350 : 900)
+      );
+
+      const answer = demoAnswer(question);
+      addConversation(answer, "assistant");
+
+      if (speechEnabled) {
+        speak(answer);
+      }
+
+      setStatus(
+        mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
+        "Ready"
+      );
+    }
+
+    function exportConversation() {
+      if (!conversation.length) {
+        showToast("There is no conversation to export.");
+        return;
+      }
+
+      const content = conversation
+        .map((item) => `${item.role.toUpperCase()}
+${item.text}`)
+        .join("
+
+");
+
+      const blob = new Blob([content], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download = "neural-ultra-conversation.txt";
+      link.click();
+
+      URL.revokeObjectURL(url);
+      showToast("Conversation exported.");
+    }
+
+    function clearConversation() {
+      conversation = [];
+      localStorage.removeItem("neural-ultra-conversation");
+      renderConversation();
+      setStatus("Conversation cleared", "Ready");
+      showToast("Conversation cleared.");
+    }
+
+    function openSettings() {
+      settingsModal.classList.add("open");
+    }
+
+    function closeSettings() {
+      settingsModal.classList.remove("open");
+    }
+
+    function openCommands() {
+      commandPalette.classList.add("open");
+      commandInput.value = "";
+      commandInput.focus();
+    }
+
+    function closeCommands() {
+      commandPalette.classList.remove("open");
+    }
+
+    function applyTheme(theme) {
+      if (theme === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.dataset.theme = theme;
+      }
+
+      localStorage.setItem("neural-ultra-theme", theme);
+    }
+
+    function applyDensity(density) {
+      document.body.classList.toggle("compact", density === "compact");
+      localStorage.setItem("neural-ultra-density", density);
+    }
+
+    function initializeSettings() {
+      const theme = localStorage.getItem("neural-ultra-theme") || "dark";
+      const density =
+        localStorage.getItem("neural-ultra-density") || "comfortable";
+      const motion = localStorage.getItem("neural-ultra-motion") || "100";
+
+      applyTheme(theme);
+      applyDensity(density);
+
+      $("#themeSelect").value = theme;
+      $("#densitySelect").value = density;
+      $("#motionRange").value = motion;
+      $("#speechToggle").checked = speechEnabled;
+      $("#privacyToggle").checked = privacyMode;
+
+      document.documentElement.style.setProperty(
+        "--motion-scale",
+        `${Number(motion) / 100}`
+      );
+    }
+
+    fastMode.addEventListener("click", () => setMode("fast"));
+    ultraMode.addEventListener("click", () => setMode("ultra"));
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      submitMessage(promptInput.value);
     });
 
-    promptInput.addEventListener("input", function () {
+    promptInput.addEventListener("input", () => {
       promptInput.style.height = "auto";
       promptInput.style.height =
         Math.min(promptInput.scrollHeight, 150) + "px";
     });
 
-    fastMode.addEventListener("click", () => setMode("fast"));
-    ultraMode.addEventListener("click", () => setMode("ultra"));
+    promptInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        form.requestSubmit();
+      }
+    });
 
-    document.querySelectorAll("[data-prompt]").forEach((button) => {
+    $$(".suggestion").forEach((button) => {
       button.addEventListener("click", () => {
         promptInput.value = button.dataset.prompt;
         promptInput.focus();
         promptInput.dispatchEvent(new Event("input"));
       });
     });
+
+    $("#clearButton").addEventListener("click", clearConversation);
+    $("#exportButton").addEventListener("click", exportConversation);
+    $("#settingsButton").addEventListener("click", openSettings);
+    $("#closeSettings").addEventListener("click", closeSettings);
+    $("#commandButton").addEventListener("click", openCommands);
+
+    $("#themeSelect").addEventListener("change", (event) => {
+      applyTheme(event.target.value);
+      showToast("Theme updated.");
+    });
+
+    $("#densitySelect").addEventListener("change", (event) => {
+      applyDensity(event.target.value);
+      showToast("Density updated.");
+    });
+
+    $("#motionRange").addEventListener("input", (event) => {
+      localStorage.setItem("neural-ultra-motion", event.target.value);
+      document.documentElement.style.setProperty(
+        "--motion-scale",
+        `${Number(event.target.value) / 100}`
+      );
+    });
+
+    $("#speechToggle").addEventListener("change", (event) => {
+      speechEnabled = event.target.checked;
+      localStorage.setItem("neural-ultra-speech", String(speechEnabled));
+      showToast("Speech setting updated.");
+    });
+
+    $("#privacyToggle").addEventListener("change", (event) => {
+      privacyMode = event.target.checked;
+      localStorage.setItem("neural-ultra-privacy", String(privacyMode));
+
+      if (privacyMode) {
+        localStorage.removeItem("neural-ultra-conversation");
+        conversation = [];
+        renderConversation();
+      }
+
+      showToast("Privacy setting updated.");
+    });
+
+    $("#resetButton").addEventListener("click", () => {
+      localStorage.clear();
+      conversation = [];
+      privacyMode = false;
+      speechEnabled = false;
+      initializeSettings();
+      renderConversation();
+      setMode("fast");
+      closeSettings();
+      showToast("Local settings reset.");
+    });
+
+    $("#voiceButton").addEventListener("click", () => {
+      const Recognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+      if (!Recognition) {
+        showToast("Voice input is not supported in this browser.");
+        return;
+      }
+
+      const recognition = new Recognition();
+      recognition.lang = "en-US";
+      recognition.interimResults = false;
+
+      recognition.onstart = () => {
+        setStatus("Listening...", "Voice input");
+      };
+
+      recognition.onresult = (event) => {
+        promptInput.value = event.results[0][0].transcript;
+        promptInput.dispatchEvent(new Event("input"));
+        setStatus(
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
+          "Ready"
+        );
+      };
+
+      recognition.onerror = () => {
+        setStatus("Voice input unavailable", "Ready");
+        showToast("Voice input could not be started.");
+      };
+
+      recognition.start();
+    });
+
+    $("#notesButton").addEventListener("click", () => {
+      const note = prompt("Write a workspace note:");
+      if (note) {
+        localStorage.setItem("neural-ultra-note", note);
+        showToast("Note saved locally.");
+      }
+    });
+
+    $("#checklistButton").addEventListener("click", () => {
+      const task = prompt("Add a task:");
+      if (task) {
+        const tasks = JSON.parse(
+          localStorage.getItem("neural-ultra-tasks") || "[]"
+        );
+        tasks.push({ text: task, done: false });
+        localStorage.setItem("neural-ultra-tasks", JSON.stringify(tasks));
+        showToast("Task saved locally.");
+      }
+    });
+
+    $("#calculatorButton").addEventListener("click", () => {
+      const expression = prompt("Enter a simple calculation, e.g. 25 * 4:");
+      if (!expression) return;
+
+      if (!/^[0-9+-*/(). %]+$/.test(expression)) {
+        showToast("Only basic calculator characters are allowed.");
+        return;
+      }
+
+      try {
+        const result = Function(`"use strict"; return (${expression})`)();
+        showToast(`Result: ${result}`);
+      } catch {
+        showToast("Invalid calculation.");
+      }
+    });
+
+    $("#timerButton").addEventListener("click", () => {
+      const seconds = Number(prompt("Timer duration in seconds:"));
+      if (!Number.isFinite(seconds) || seconds <= 0) {
+        showToast("Enter a valid duration.");
+        return;
+      }
+
+      setStatus(`Timer running: ${seconds}s`, "Timer");
+
+      setTimeout(() => {
+        showToast("Timer complete.");
+        setStatus(
+          mode === "fast" ? "Fast engine ready" : "Ultra engine ready",
+          "Ready"
+        );
+      }, seconds * 1000);
+    });
+
+    $$("[data-command]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const command = button.dataset.command;
+        closeCommands();
+
+        if (command === "focus") promptInput.focus();
+        if (command === "settings") openSettings();
+        if (command === "clear") clearConversation();
+        if (command === "export") exportConversation();
+
+        if (command === "theme") {
+          const current = localStorage.getItem("neural-ultra-theme") || "dark";
+          applyTheme(current === "dark" ? "light" : "dark");
+          $("#themeSelect").value =
+            current === "dark" ? "light" : "dark";
+          showToast("Theme toggled.");
+        }
+      });
+    });
+
+    commandInput.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeCommands();
+    });
+
+    settingsModal.addEventListener("click", (event) => {
+      if (event.target === settingsModal) closeSettings();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        openCommands();
+      }
+
+      if (event.key === "Escape") {
+        closeSettings();
+        closeCommands();
+      }
+    });
+
+    initializeSettings();
+    setMode(mode);
+    renderConversation();
   </script>
 </body>
-          </html>
+  </html>
