@@ -1,51 +1,60 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Neural Ultra</title>
 
   <style>
     :root {
-      --bg: #080b18;
-      --panel: #151d36;
-      --line: #354369;
-      --text: #f5f7ff;
-      --muted: #aab5d1;
-      --cyan: #67f5ff;
-      --green: #70edab;
-      --red: #ff6f91;
+      --bg: #050713;
+      --glass: rgba(255,255,255,.09);
+      --glass-strong: rgba(255,255,255,.14);
+      --line: rgba(255,255,255,.18);
+      --text: #f7f9ff;
+      --muted: rgba(247,249,255,.65);
+      --cyan: #65f5ff;
+      --violet: #a47cff;
+      --green: #76efae;
+      --red: #ff7890;
     }
 
     [data-theme="light"] {
-      --bg: #eef3fb;
-      --panel: #ffffff;
-      --line: #cbd5e8;
-      --text: #14203a;
-      --muted: #60708f;
+      --bg: #eaf1fb;
+      --glass: rgba(255,255,255,.72);
+      --glass-strong: rgba(255,255,255,.92);
+      --line: rgba(12,23,48,.16);
+      --text: #101d38;
+      --muted: rgba(16,29,56,.64);
     }
 
     [data-theme="high"] {
-      --bg: #000000;
-      --panel: #111111;
-      --line: #ffffff;
-      --text: #ffffff;
-      --muted: #ffffff;
-      --cyan: #00ffff;
+      --bg: #000;
+      --glass: #111;
+      --glass-strong: #1b1b1b;
+      --line: #fff;
+      --text: #fff;
+      --muted: #fff;
+      --cyan: #0ff;
+      --violet: #f0f;
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html,
+    body {
+      min-height: 100%;
+    }
+
     body {
       margin: 0;
-      min-height: 100vh;
       color: var(--text);
       font-family: Arial, sans-serif;
       background:
-        radial-gradient(circle at 10% 10%, #185466 0, transparent 28%),
-        radial-gradient(circle at 90% 90%, #34206b 0, transparent 32%),
+        radial-gradient(circle at 8% 8%, rgba(85,230,255,.22), transparent 30%),
+        radial-gradient(circle at 92% 92%, rgba(164,124,255,.24), transparent 34%),
         var(--bg);
     }
 
@@ -57,223 +66,243 @@
 
     button {
       cursor: pointer;
+      touch-action: manipulation;
+    }
+
+    button:active {
+      transform: scale(.97);
     }
 
     button:focus-visible,
     textarea:focus-visible,
     select:focus-visible {
       outline: 2px solid var(--cyan);
-      outline-offset: 2px;
+      outline-offset: 3px;
     }
 
     .app {
-      width: min(1100px, calc(100% - 24px));
+      width: min(1180px, calc(100% - 28px));
+      min-height: 100vh;
       margin: auto;
-      padding: 14px 0;
+      padding: 16px 0 24px;
     }
 
-    .box {
+    .glass {
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: var(--panel);
-      box-shadow: 0 18px 60px #0008;
+      border-radius: 24px;
+      background: var(--glass);
+      box-shadow: 0 24px 80px rgba(0,0,0,.25);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
 
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      padding: 14px;
+      gap: 14px;
+      padding: 14px 16px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 11px;
     }
 
-    .logo {
-      width: 40px;
-      height: 40px;
+    .brand-mark {
+      width: 42px;
+      height: 42px;
       display: grid;
       place-items: center;
-      border-radius: 13px;
-      background: #67f5ff22;
-      box-shadow: 0 0 25px #67f5ff55;
+      border-radius: 14px;
+      background: rgba(101,245,255,.14);
+      box-shadow: 0 0 28px rgba(101,245,255,.36);
     }
 
-    .logo::after {
-      width: 11px;
-      height: 11px;
-      display: block;
+    .brand-mark::after {
+      width: 12px;
+      height: 12px;
       border-radius: 50%;
       background: var(--cyan);
-      box-shadow: 0 0 18px var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
       content: "";
     }
 
-    .brand strong,
-    .brand small {
-      display: block;
+    .brand-title {
+      font-weight: 800;
+      letter-spacing: -.04em;
     }
 
-    .brand small {
+    .brand-subtitle {
       margin-top: 3px;
       color: var(--muted);
-      font-size: 12px;
+      font-size: 11px;
     }
 
-    .actions {
+    .top-actions,
+    .mode-switch {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
     }
 
-    .mode {
-      display: flex;
-      gap: 4px;
+    .mode-switch {
       padding: 4px;
       border: 1px solid var(--line);
       border-radius: 999px;
     }
 
-    .mode button {
-      padding: 8px 13px;
+    .mode-button,
+    .icon-button {
       border: 0;
-      border-radius: 999px;
       color: var(--muted);
       background: transparent;
     }
 
-    .mode button.active {
-      color: #001116;
+    .mode-button {
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .mode-button.active {
+      color: #061016;
       background: var(--cyan);
     }
 
-    .icon {
-      width: 40px;
-      height: 40px;
-      padding: 0;
+    .icon-button {
+      width: 42px;
+      height: 42px;
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 13px;
       color: var(--text);
-      background: #ffffff0d;
+      background: rgba(255,255,255,.07);
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 270px;
+      grid-template-columns: minmax(0,1fr) 285px;
       gap: 14px;
       margin-top: 14px;
     }
 
     .main {
-      min-height: 680px;
-      padding: 20px;
+      min-height: 720px;
+      padding: 22px;
     }
 
     .hero {
-      min-height: 280px;
-      padding-top: 20px;
+      min-height: 300px;
+      display: grid;
+      place-items: center;
       text-align: center;
     }
 
     .orb {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 30px;
+      position: relative;
+      width: 126px;
+      height: 126px;
+      margin: 18px auto 30px;
       border-radius: 50%;
       background:
-        radial-gradient(circle at 35% 30%, #ffffff 0 2%, transparent 3%),
-        radial-gradient(circle at 35% 35%, var(--cyan), transparent 25%),
-        #182052;
-      box-shadow: 0 0 40px #67f5ff99;
-      animation: pulse 4s infinite ease-in-out;
+        radial-gradient(circle at 34% 24%, #fff 0 2%, transparent 3%),
+        radial-gradient(circle at 35% 35%, var(--cyan), transparent 24%),
+        radial-gradient(circle at 68% 70%, var(--violet), transparent 62%),
+        #151b4d;
+      box-shadow:
+        0 0 48px rgba(101,245,255,.58),
+        0 0 120px rgba(164,124,255,.35);
+      animation: breathe 4s ease-in-out infinite;
+    }
+
+    .orb::before,
+    .orb::after {
+      position: absolute;
+      inset: -18px;
+      border: 1px solid rgba(101,245,255,.42);
+      border-radius: 50%;
+      content: "";
+      animation: rotate 9s linear infinite;
+    }
+
+    .orb::after {
+      inset: -36px;
+      border-color: rgba(164,124,255,.32);
+      animation-direction: reverse;
+      animation-duration: 14s;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(2.3rem, 7vw, 5rem);
+      font-size: clamp(2.4rem, 7vw, 5.2rem);
       line-height: .95;
-      letter-spacing: -.07em;
+      letter-spacing: -.075em;
     }
 
     .hero p {
-      max-width: 620px;
-      margin: 22px auto;
+      max-width: 650px;
+      margin: 22px auto 0;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.7;
     }
 
     #status {
       min-height: 22px;
+      margin-top: 16px;
       color: var(--cyan);
       font-size: 13px;
     }
 
     .messages {
       display: none;
-      max-height: 380px;
+      max-height: 390px;
       overflow-y: auto;
-      margin: 8px 0 16px;
+      margin: 6px 0 18px;
       padding: 4px;
     }
 
-    .messages.show {
+    .messages.visible {
       display: block;
     }
 
     .message {
       max-width: 85%;
-      margin: 10px 0;
-      padding: 12px 15px;
+      margin: 12px 0;
+      padding: 13px 16px;
       border: 1px solid var(--line);
-      border-radius: 18px;
+      border-radius: 19px;
       white-space: pre-wrap;
-      line-height: 1.55;
+      line-height: 1.6;
     }
 
     .message.user {
       margin-left: auto;
-      color: #001116;
-      border: 0;
+      color: #061016;
+      border-color: transparent;
       background: var(--cyan);
+      border-bottom-right-radius: 6px;
     }
 
     .message.assistant {
-      background: #0003;
-    }
-
-    .message-tools {
-      display: flex;
-      gap: 5px;
-      margin-top: 9px;
-    }
-
-    .message-tools button {
-      padding: 4px 8px;
-      border: 1px solid var(--line);
-      border-radius: 99px;
-      color: var(--muted);
-      background: transparent;
-      font-size: 11px;
+      background: rgba(0,0,0,.18);
+      border-bottom-left-radius: 6px;
     }
 
     .composer {
       display: flex;
-      align-items: end;
-      gap: 8px;
-      padding: 8px 8px 8px 14px;
+      align-items: flex-end;
+      gap: 9px;
+      padding: 8px 8px 8px 15px;
       border: 1px solid var(--line);
-      border-radius: 22px;
-      background: #0003;
+      border-radius: 23px;
+      background: rgba(0,0,0,.19);
     }
 
     textarea {
       flex: 1;
       min-height: 48px;
-      max-height: 140px;
+      max-height: 150px;
       resize: none;
       padding: 13px 0;
       color: var(--text);
@@ -286,39 +315,39 @@
       color: var(--muted);
     }
 
-    .send {
-      width: 48px;
-      height: 48px;
+    .send-button {
+      width: 49px;
+      height: 49px;
       border: 0;
       border-radius: 50%;
-      color: #001116;
+      color: #061016;
       background: var(--cyan);
-      font-size: 20px;
-      font-weight: bold;
+      font-size: 21px;
+      font-weight: 900;
     }
 
     .suggestions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2,1fr);
       gap: 8px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .suggestion,
-    .tool {
-      padding: 10px;
+    .tool-button {
       border: 1px solid var(--line);
-      border-radius: 12px;
+      border-radius: 14px;
       color: var(--muted);
-      background: #ffffff09;
+      background: rgba(255,255,255,.05);
     }
 
     .suggestion {
+      padding: 11px;
       text-align: left;
     }
 
     .suggestion:hover,
-    .tool:hover {
+    .tool-button:hover {
       color: var(--text);
       border-color: var(--cyan);
     }
@@ -330,11 +359,11 @@
     }
 
     .card {
-      padding: 16px;
+      padding: 17px;
     }
 
     .card h2 {
-      margin: 0 0 12px;
+      margin: 0 0 13px;
       font-size: 13px;
       letter-spacing: .08em;
       text-transform: uppercase;
@@ -343,22 +372,22 @@
     .card p {
       color: var(--muted);
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.55;
     }
 
-    .online {
+    .engine {
       color: var(--green);
       font-size: 13px;
     }
 
-    .dot {
-      width: 8px;
-      height: 8px;
+    .engine-dot {
+      width: 9px;
+      height: 9px;
       display: inline-block;
       margin-right: 7px;
       border-radius: 50%;
       background: var(--green);
-      box-shadow: 0 0 12px var(--green);
+      box-shadow: 0 0 14px var(--green);
     }
 
     .metric {
@@ -380,43 +409,44 @@
       gap: 7px;
     }
 
-    .tool {
+    .tool-button {
+      padding: 10px 6px;
       color: var(--text);
       font-size: 12px;
     }
 
     .danger {
-      color: #ffffff;
+      color: white;
       border-color: var(--red);
       background: var(--red);
     }
 
     .primary {
-      color: #001116;
+      color: #061016;
       border-color: var(--cyan);
       background: var(--cyan);
     }
 
-    .modal-bg {
+    .modal-backdrop {
       position: fixed;
-      z-index: 10;
+      z-index: 20;
       inset: 0;
       display: none;
       place-items: center;
       padding: 18px;
-      background: #000b;
+      background: rgba(0,0,0,.68);
     }
 
-    .modal-bg.open {
+    .modal-backdrop.open {
       display: grid;
     }
 
     .modal {
-      width: min(500px, 100%);
-      padding: 20px;
+      width: min(520px,100%);
+      padding: 22px;
     }
 
-    .modal-head {
+    .modal-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -432,26 +462,27 @@
     }
 
     select {
-      padding: 7px;
+      padding: 7px 9px;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: 10px;
       color: var(--text);
-      background: var(--panel);
+      background: var(--glass-strong);
     }
 
     .toast {
       position: fixed;
-      z-index: 20;
-      right: 16px;
-      bottom: 16px;
+      z-index: 30;
+      right: 18px;
+      bottom: 18px;
       padding: 12px 15px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      background: var(--panel);
+      border-radius: 14px;
+      color: var(--text);
+      background: var(--glass-strong);
       opacity: 0;
       pointer-events: none;
-      transform: translateY(10px);
-      transition: .2s;
+      transform: translateY(12px);
+      transition: .22s ease;
     }
 
     .toast.show {
@@ -459,10 +490,16 @@
       transform: translateY(0);
     }
 
-    @keyframes pulse {
+    @keyframes breathe {
       50% {
         transform: scale(1.07);
-        filter: brightness(1.2);
+        filter: brightness(1.18);
+      }
+    }
+
+    @keyframes rotate {
+      to {
+        transform: rotate(360deg);
       }
     }
 
@@ -473,25 +510,25 @@
 
       aside {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3,1fr);
       }
     }
 
-    @media (max-width: 620px) {
+    @media (max-width: 650px) {
       header {
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .actions {
+      .top-actions {
         width: 100%;
       }
 
-      .mode {
+      .mode-switch {
         flex: 1;
       }
 
-      .mode button {
+      .mode-button {
         flex: 1;
       }
 
@@ -499,42 +536,54 @@
       aside {
         grid-template-columns: 1fr;
       }
+
+      .message {
+        max-width: 94%;
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="app">
-    <header class="box">
+  <main class="app">
+
+    <header class="glass">
       <div class="brand">
-        <div class="logo"></div>
+        <div class="brand-mark"></div>
 
         <div>
-          <strong>Neural Ultra</strong>
-          <small>Stable Gemini workspace</small>
+          <div class="brand-title">Neural Ultra</div>
+          <div class="brand-subtitle">Liquid-glass Gemini workspace</div>
         </div>
       </div>
 
-      <div class="actions">
-        <div class="mode">
-          <button id="fastButton" class="active" type="button">Fast</button>
-          <button id="ultraButton" type="button">Ultra</button>
+      <div class="top-actions">
+        <div class="mode-switch">
+          <button id="fastMode" class="mode-button active" type="button">
+            Fast
+          </button>
+
+          <button id="ultraMode" class="mode-button" type="button">
+            Ultra
+          </button>
         </div>
 
-        <button id="settingsButton" class="icon" type="button">⚙</button>
+        <button id="openSettings" class="icon-button" type="button">
+          ⚙
+        </button>
       </div>
     </header>
 
     <div class="layout">
-      <section class="main box">
+
+      <section class="main glass">
         <div class="hero">
           <div class="orb"></div>
 
           <h1>Intelligence that feels alive.</h1>
 
           <p>
-            Ask anything. Write, plan, calculate, organize,
-            and think with Neural Ultra.
+            Ask anything with a calm, premium liquid-glass workspace.
           </p>
 
           <div id="status">Fast engine ready</div>
@@ -544,20 +593,25 @@
 
         <form id="chatForm" class="composer">
           <textarea
-            id="promptInput"
+            id="prompt"
             rows="1"
             placeholder="Ask Neural Ultra anything..."
           ></textarea>
 
-          <button id="voiceButton" class="icon" type="button">🎙</button>
-          <button id="sendButton" class="send" type="submit">↑</button>
+          <button id="voice" class="icon-button" type="button">
+            🎙
+          </button>
+
+          <button id="send" class="send-button" type="submit">
+            ↑
+          </button>
         </form>
 
         <div class="suggestions">
           <button
             class="suggestion"
             type="button"
-            data-prompt="Explain AI in simple English."
+            data-prompt="Explain artificial intelligence in simple English."
           >
             Explain AI simply
           </button>
@@ -565,7 +619,7 @@
           <button
             class="suggestion"
             type="button"
-            data-prompt="Create a useful weekly plan."
+            data-prompt="Create a practical weekly productivity plan."
           >
             Create a weekly plan
           </button>
@@ -573,7 +627,7 @@
           <button
             class="suggestion"
             type="button"
-            data-prompt="Write a professional email."
+            data-prompt="Help me write a professional email."
           >
             Write an email
           </button>
@@ -581,7 +635,7 @@
           <button
             class="suggestion"
             type="button"
-            data-prompt="Give me a beginner coding idea."
+            data-prompt="Give me a useful beginner coding idea."
           >
             Give a coding idea
           </button>
@@ -589,75 +643,75 @@
       </section>
 
       <aside>
-        <section class="card box">
+        <section class="card glass">
           <h2>Engine</h2>
 
-          <div class="online">
-            <span class="dot"></span>
-            <span id="engineStatus">Ready</span>
+          <div class="engine">
+            <span class="engine-dot"></span>
+            <span id="engineState">Ready</span>
           </div>
 
-          <p>Secure Gemini connection through Vercel.</p>
+          <p>Gemini connection is available through the API route.</p>
         </section>
 
-        <section class="card box">
+        <section class="card glass">
           <h2>Metrics</h2>
 
           <div class="metric">
             <span>Mode</span>
-            <strong id="modeText">Fast</strong>
+            <strong id="modeValue">Fast</strong>
           </div>
 
           <div class="metric">
             <span>Messages</span>
-            <strong id="messageCount">0</strong>
+            <strong id="messageValue">0</strong>
           </div>
 
           <div class="metric">
             <span>Words</span>
-            <strong id="wordCount">0</strong>
+            <strong id="wordValue">0</strong>
           </div>
         </section>
 
-        <section class="card box">
+        <section class="card glass">
           <h2>Tools</h2>
 
           <div class="tools">
-            <button id="clearButton" class="tool danger" type="button">
+            <button id="clearChat" class="tool-button danger" type="button">
               Clear
             </button>
 
-            <button id="exportButton" class="tool primary" type="button">
+            <button id="exportChat" class="tool-button primary" type="button">
               Export
             </button>
 
-            <button id="noteButton" class="tool" type="button">
+            <button id="saveNote" class="tool-button" type="button">
               Notes
             </button>
 
-            <button id="taskButton" class="tool" type="button">
+            <button id="addTask" class="tool-button" type="button">
               Tasks
             </button>
 
-            <button id="calculatorButton" class="tool" type="button">
+            <button id="calculate" class="tool-button" type="button">
               Calc
             </button>
 
-            <button id="timerButton" class="tool" type="button">
+            <button id="startTimer" class="tool-button" type="button">
               Timer
             </button>
           </div>
         </section>
       </aside>
     </div>
-  </div>
+  </main>
 
-  <div id="settingsModal" class="modal-bg">
-    <section class="modal box">
-      <div class="modal-head">
+  <div id="settingsModal" class="modal-backdrop">
+    <section class="modal glass">
+      <div class="modal-heading">
         <h2>Settings</h2>
 
-        <button id="closeSettingsButton" class="icon" type="button">
+        <button id="closeSettings" class="icon-button" type="button">
           ×
         </button>
       </div>
@@ -665,7 +719,7 @@
       <div class="setting">
         <span>Theme</span>
 
-        <select id="themeSelect">
+        <select id="theme">
           <option value="dark">Dark</option>
           <option value="light">Light</option>
           <option value="high">High contrast</option>
@@ -674,16 +728,16 @@
 
       <div class="setting">
         <span>Speak responses</span>
-        <input id="speakCheckbox" type="checkbox">
+        <input id="speak" type="checkbox">
       </div>
 
       <div class="setting">
         <span>Privacy mode</span>
-        <input id="privacyCheckbox" type="checkbox">
+        <input id="privacy" type="checkbox">
       </div>
 
-      <button id="resetButton" class="tool danger" type="button">
-        Reset local data
+      <button id="reset" class="tool-button danger" type="button">
+        Reset local settings
       </button>
     </section>
   </div>
@@ -693,199 +747,133 @@
   <script>
     "use strict";
 
-    const get = (id) => document.getElementById(id);
+    const byId = (id) => document.getElementById(id);
 
-    const form = get("chatForm");
-    const input = get("promptInput");
-    const messages = get("messages");
-    const status = get("status");
-    const sendButton = get("sendButton");
-    const toast = get("toast");
+    const form = byId("chatForm");
+    const promptBox = byId("prompt");
+    const messageBox = byId("messages");
+    const statusBox = byId("status");
+    const toastBox = byId("toast");
+    const sendButton = byId("send");
 
-    let mode = localStorage.getItem("nu-mode") || "fast";
-    let chat = JSON.parse(localStorage.getItem("nu-chat") || "[]");
-    let controller = null;
-    let speakResponses =
-      localStorage.getItem("nu-speak") === "true";
-    let privacy =
-      localStorage.getItem("nu-privacy") === "true";
+    let messages = [];
+    let currentMode = "fast";
+    let requestController = null;
+    let speakEnabled = false;
 
-    function showToast(text) {
-      toast.textContent = text;
-      toast.classList.add("show");
+    function showToast(message) {
+      toastBox.textContent = message;
+      toastBox.classList.add("show");
 
-      clearTimeout(window.neuralToastTimer);
+      window.clearTimeout(window.neuralToast);
 
-      window.neuralToastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2400);
+      window.neuralToast = window.setTimeout(() => {
+        toastBox.classList.remove("show");
+      }, 2200);
     }
 
-    function saveChat() {
-      if (!privacy) {
-        localStorage.setItem("nu-chat", JSON.stringify(chat));
-      }
-    }
-
-    function updateMetrics() {
-      get("modeText").textContent =
-        mode === "fast" ? "Fast" : "Ultra";
-
-      get("messageCount").textContent = String(chat.length);
-
-      const words = chat.reduce((total, item) => {
-        return total +
-          item.text.trim().split(/s+/).filter(Boolean).length;
-      }, 0);
-
-      get("wordCount").textContent = String(words);
-    }
-
-    function setStatus(text) {
-      status.textContent = text;
-
-      get("engineStatus").textContent =
-        text.toLowerCase().includes("error")
+    function setStatus(message) {
+      statusBox.textContent = message;
+      byId("engineState").textContent =
+        message.toLowerCase().includes("error")
           ? "Error"
           : "Ready";
     }
 
-    function addMessage(text, role) {
-      const item = document.createElement("article");
-      item.className = "message " + role;
+    function updateMetrics() {
+      byId("modeValue").textContent =
+        currentMode === "fast" ? "Fast" : "Ultra";
 
-      const body = document.createElement("div");
-      body.textContent = text;
-      item.appendChild(body);
+      byId("messageValue").textContent =
+        String(messages.length);
 
-      if (role === "assistant") {
-        const tools = document.createElement("div");
-        tools.className = "message-tools";
+      const words = messages.reduce((total, item) => {
+        const list = item.text.trim().split(/s+/);
+        return total + (item.text.trim() ? list.length : 0);
+      }, 0);
 
-        const copyButton = document.createElement("button");
-        copyButton.type = "button";
-        copyButton.textContent = "Copy";
-
-        copyButton.onclick = async () => {
-          try {
-            await navigator.clipboard.writeText(text);
-            showToast("Copied.");
-          } catch {
-            showToast("Copy unavailable.");
-          }
-        };
-
-        const speakButton = document.createElement("button");
-        speakButton.type = "button";
-        speakButton.textContent = "Speak";
-
-        speakButton.onclick = () => {
-          if (!("speechSynthesis" in window)) {
-            showToast("Speech unavailable.");
-            return;
-          }
-
-          window.speechSynthesis.cancel();
-
-          window.speechSynthesis.speak(
-            new SpeechSynthesisUtterance(text)
-          );
-        };
-
-        tools.append(copyButton, speakButton);
-        item.appendChild(tools);
-      }
-
-      messages.appendChild(item);
-      messages.classList.add("show");
-      messages.scrollTop = messages.scrollHeight;
+      byId("wordValue").textContent = String(words);
     }
 
-    function renderChat() {
-      messages.innerHTML = "";
+    function addMessage(text, role) {
+      const article = document.createElement("article");
+      article.className = "message " + role;
+      article.textContent = text;
 
-      chat.forEach((item) => {
-        addMessage(item.text, item.role);
+      messageBox.appendChild(article);
+      messageBox.classList.add("visible");
+      messageBox.scrollTop = messageBox.scrollHeight;
+    }
+
+    function addChatMessage(text, role) {
+      messages.push({
+        text: text,
+        role: role
       });
 
-      if (chat.length === 0) {
-        messages.classList.remove("show");
-      }
-
+      addMessage(text, role);
       updateMetrics();
     }
 
-    async function callGemini(question) {
-      controller = new AbortController();
-
-      const history = chat.slice(-12).map((item) => ({
-        role: item.role === "assistant" ? "model" : "user",
-        text: item.text
-      }));
-
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          message: question,
-          mode: mode,
-          history: history
-        }),
-        signal: controller.signal
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (!response.ok) {
-        throw new Error(
-          data.error || "Gemini request failed."
-        );
-      }
-
-      if (!data.text) {
-        throw new Error("Gemini returned no answer.");
-      }
-
-      return data.text;
+    function clearChat() {
+      messages = [];
+      messageBox.innerHTML = "";
+      messageBox.classList.remove("visible");
+      updateMetrics();
+      setStatus("Conversation cleared");
+      showToast("Chat cleared.");
     }
 
-    async function sendMessage(value) {
-      const question = value.trim();
+    function localReply(question) {
+      return "Demo mode is working. Your message was received:
+
+" + question;
+    }
+
+    async function sendMessage(text) {
+      const question = text.trim();
 
       if (!question) {
         showToast("Type a message first.");
         return;
       }
 
-      chat.push({
-        role: "user",
-        text: question
-      });
-
-      saveChat();
-      addMessage(question, "user");
-
-      input.value = "";
-      input.style.height = "auto";
+      addChatMessage(question, "user");
+      promptBox.value = "";
+      promptBox.style.height = "auto";
+      setStatus("Thinking...");
       sendButton.textContent = "■";
-      setStatus("Connecting to Gemini...");
 
       try {
-        const answer = await callGemini(question);
+        requestController = new AbortController();
 
-        chat.push({
-          role: "assistant",
-          text: answer
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            message: question,
+            mode: currentMode
+          }),
+          signal: requestController.signal
         });
 
-        saveChat();
-        addMessage(answer, "assistant");
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(
+            data.error || "API request failed."
+          );
+        }
+
+        const answer = data.text || localReply(question);
+
+        addChatMessage(answer, "assistant");
         setStatus("Gemini ready");
 
         if (
-          speakResponses &&
+          speakEnabled &&
           "speechSynthesis" in window
         ) {
           window.speechSynthesis.speak(
@@ -894,34 +882,30 @@
         }
       } catch (error) {
         if (error.name === "AbortError") {
-          setStatus("Response stopped");
-          showToast("Stopped.");
+          setStatus("Stopped");
+          showToast("Request stopped.");
         } else {
-          setStatus("Gemini error");
-          addMessage(
-            "Error: " + error.message,
-            "assistant"
-          );
-          showToast(error.message);
+          addChatMessage(localReply(question), "assistant");
+          setStatus("Demo mode");
+          showToast("API unavailable; demo reply shown.");
         }
       } finally {
-        controller = null;
+        requestController = null;
         sendButton.textContent = "↑";
-        updateMetrics();
       }
     }
 
-    form.onsubmit = (event) => {
+    form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (controller) {
-        controller.abort();
+      if (requestController) {
+        requestController.abort();
       } else {
-        sendMessage(input.value);
+        sendMessage(promptBox.value);
       }
-    };
+    });
 
-    input.onkeydown = (event) => {
+    promptBox.addEventListener("keydown", (event) => {
       if (
         event.key === "Enter" &&
         !event.shiftKey
@@ -929,54 +913,47 @@
         event.preventDefault();
         form.requestSubmit();
       }
-    };
-
-    input.oninput = () => {
-      input.style.height = "auto";
-      input.style.height =
-        Math.min(input.scrollHeight, 140) + "px";
-    };
-
-    get("fastButton").onclick = () => {
-      mode = "fast";
-      localStorage.setItem("nu-mode", mode);
-      get("fastButton").classList.add("active");
-      get("ultraButton").classList.remove("active");
-      setStatus("Fast engine ready");
-      updateMetrics();
-    };
-
-    get("ultraButton").onclick = () => {
-      mode = "ultra";
-      localStorage.setItem("nu-mode", mode);
-      get("ultraButton").classList.add("active");
-      get("fastButton").classList.remove("active");
-      setStatus("Ultra engine ready");
-      updateMetrics();
-    };
-
-    document.querySelectorAll(".suggestion").forEach((button) => {
-      button.onclick = () => {
-        input.value = button.dataset.prompt;
-        input.focus();
-      };
     });
 
-    get("clearButton").onclick = () => {
-      chat = [];
-      localStorage.removeItem("nu-chat");
-      renderChat();
-      setStatus("Conversation cleared");
-      showToast("Chat cleared.");
-    };
+    promptBox.addEventListener("input", () => {
+      promptBox.style.height = "auto";
+      promptBox.style.height =
+        Math.min(promptBox.scrollHeight, 150) + "px";
+    });
 
-    get("exportButton").onclick = () => {
-      if (chat.length === 0) {
+    byId("fastMode").addEventListener("click", () => {
+      currentMode = "fast";
+      byId("fastMode").classList.add("active");
+      byId("ultraMode").classList.remove("active");
+      byId("modeValue").textContent = "Fast";
+      setStatus("Fast engine ready");
+    });
+
+    byId("ultraMode").addEventListener("click", () => {
+      currentMode = "ultra";
+      byId("ultraMode").classList.add("active");
+      byId("fastMode").classList.remove("active");
+      byId("modeValue").textContent = "Ultra";
+      setStatus("Ultra engine ready");
+    });
+
+    byId("openSettings").addEventListener("click", () => {
+      byId("settingsModal").classList.add("open");
+    });
+
+    byId("closeSettings").addEventListener("click", () => {
+      byId("settingsModal").classList.remove("open");
+    });
+
+    byId("clearChat").addEventListener("click", clearChat);
+
+    byId("exportChat").addEventListener("click", () => {
+      if (messages.length === 0) {
         showToast("Nothing to export.");
         return;
       }
 
-      const text = chat
+      const text = messages
         .map((item) => {
           return item.role.toUpperCase() +
             "
@@ -987,154 +964,71 @@
 
 ");
 
-      const blob = new Blob([text], {
+      const file = new Blob([text], {
         type: "text/plain"
       });
 
-      const url = URL.createObjectURL(blob);
+      const url = URL.createObjectURL(file);
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = "neural-ultra-chat.txt";
+      link.download = "neural-ultra.txt";
       link.click();
 
       URL.revokeObjectURL(url);
       showToast("Chat exported.");
-    };
+    });
 
-    get("settingsButton").onclick = () => {
-      get("settingsModal").classList.add("open");
-    };
+    byId("saveNote").addEventListener("click", () => {
+      const note = window.prompt("Write a note:");
 
-    get("closeSettingsButton").onclick = () => {
-      get("settingsModal").classList.remove("open");
-    };
-
-    get("themeSelect").onchange = () => {
-      const value = get("themeSelect").value;
-
-      if (value === "dark") {
-        document.documentElement.removeAttribute("data-theme");
-      } else {
-        document.documentElement.dataset.theme = value;
-      }
-
-      localStorage.setItem("nu-theme", value);
-      showToast("Theme updated.");
-    };
-
-    get("speakCheckbox").onchange = () => {
-      speakResponses = get("speakCheckbox").checked;
-
-      localStorage.setItem(
-        "nu-speak",
-        String(speakResponses)
-      );
-
-      showToast("Speech setting updated.");
-    };
-
-    get("privacyCheckbox").onchange = () => {
-      privacy = get("privacyCheckbox").checked;
-
-      localStorage.setItem(
-        "nu-privacy",
-        String(privacy)
-      );
-
-      if (privacy) {
-        chat = [];
-        localStorage.removeItem("nu-chat");
-        renderChat();
-      }
-
-      showToast("Privacy setting updated.");
-    };
-
-    get("resetButton").onclick = () => {
-      localStorage.clear();
-      window.location.reload();
-    };
-
-    get("voiceButton").onclick = () => {
-      const Recognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
-
-      if (!Recognition) {
-        showToast("Voice input is unsupported.");
-        return;
-      }
-
-      const recognition = new Recognition();
-      recognition.lang = "en-US";
-
-      recognition.onstart = () => {
-        setStatus("Listening...");
-      };
-
-      recognition.onresult = (event) => {
-        input.value =
-          event.results[0][0].transcript;
-
-        input.focus();
-        setStatus("Fast engine ready");
-      };
-
-      recognition.onerror = () => {
-        showToast("Voice input failed.");
-      };
-
-      recognition.start();
-    };
-
-    get("noteButton").onclick = () => {
-      const value = window.prompt("Write a note:");
-
-      if (value) {
-        localStorage.setItem("nu-note", value);
+      if (note) {
         showToast("Note saved.");
       }
-    };
+    });
 
-    get("taskButton").onclick = () => {
-      const value = window.prompt("Write a task:");
+    byId("addTask").addEventListener("click", () => {
+      const task = window.prompt("Write a task:");
 
-      if (value) {
-        localStorage.setItem("nu-task", value);
+      if (task) {
         showToast("Task saved.");
       }
-    };
+    });
 
-    get("calculatorButton").onclick = () => {
-      const value = window.prompt("Example: 2 + 2");
+    byId("calculate").addEventListener("click", () => {
+      const expression = window.prompt("Example: 2 + 2");
 
-      if (!value) {
+      if (!expression) {
         return;
       }
 
-      if (!/^[0-9+*/().% -]+$/.test(value)) {
+      if (!/^[0-9+*/().% -]+$/.test(expression)) {
         showToast("Invalid calculation.");
         return;
       }
 
       try {
         const result = Function(
-          '"use strict"; return (' + value + ")"
+          '"use strict";return (' +
+            expression +
+            ")"
         )();
 
         showToast("Result: " + result);
       } catch {
         showToast("Invalid calculation.");
       }
-    };
+    });
 
-    get("timerButton").onclick = () => {
+    byId("startTimer").addEventListener("click", () => {
       const seconds = Number(
         window.prompt("Timer seconds:")
       );
 
-      if (!Number.isFinite(seconds) || seconds <= 0) {
+      if (
+        !Number.isFinite(seconds) ||
+        seconds <= 0
+      ) {
         showToast("Enter a valid number.");
         return;
       }
@@ -1144,28 +1038,92 @@
       window.setTimeout(() => {
         showToast("Timer finished.");
       }, seconds * 1000);
-    };
+    });
 
-    const savedTheme =
-      localStorage.getItem("nu-theme") || "dark";
+    document.querySelectorAll(".suggestion").forEach((button) => {
+      button.addEventListener("click", () => {
+        promptBox.value = button.dataset.prompt;
+        promptBox.focus();
+      });
+    });
 
-    if (savedTheme === "dark") {
+    byId("voice").addEventListener("click", () => {
+      const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+      if (!SpeechRecognition) {
+        showToast("Voice input is unsupported.");
+        return;
+      }
+
+      const recognition = new SpeechRecognition();
+
+      recognition.lang = "en-US";
+
+      recognition.onstart = () => {
+        setStatus("Listening...");
+      };
+
+      recognition.onresult = (event) => {
+        promptBox.value =
+          event.results[0][0].transcript;
+
+        promptBox.focus();
+        setStatus("Fast engine ready");
+      };
+
+      recognition.onerror = () => {
+        showToast("Voice input failed.");
+      };
+
+      recognition.start();
+    });
+
+    byId("theme").addEventListener("change", () => {
+      const selected = byId("theme").value;
+
+      if (selected === "dark") {
+        document.documentElement.removeAttribute("data-theme");
+      } else {
+        document.documentElement.dataset.theme = selected;
+      }
+
+      showToast("Theme changed.");
+    });
+
+    byId("speak").addEventListener("change", () => {
+      speakEnabled = byId("speak").checked;
+      showToast("Speech setting changed.");
+    });
+
+    byId("privacy").addEventListener("change", () => {
+      if (byId("privacy").checked) {
+        messages = [];
+        messageBox.innerHTML = "";
+        messageBox.classList.remove("visible");
+        updateMetrics();
+      }
+
+      showToast("Privacy setting changed.");
+    });
+
+    byId("reset").addEventListener("click", () => {
+      currentMode = "fast";
+      speakEnabled = false;
+      messages = [];
+      messageBox.innerHTML = "";
+      messageBox.classList.remove("visible");
+      byId("privacy").checked = false;
+      byId("speak").checked = false;
+      byId("theme").value = "dark";
       document.documentElement.removeAttribute("data-theme");
-    } else {
-      document.documentElement.dataset.theme = savedTheme;
-    }
+      updateMetrics();
+      setStatus("Reset complete");
+      showToast("Reset complete.");
+    });
 
-    get("themeSelect").value = savedTheme;
-    get("speakCheckbox").checked = speakResponses;
-    get("privacyCheckbox").checked = privacy;
-
-    if (mode === "ultra") {
-      get("ultraButton").click();
-    } else {
-      get("fastButton").click();
-    }
-
-    renderChat();
+    updateMetrics();
   </script>
 </body>
 </html>
