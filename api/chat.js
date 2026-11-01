@@ -1,4 +1,4 @@
-const MODEL = "grok-beta";
+const MODEL = "gpt-4o-mini";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -8,8 +8,8 @@ function wait(ms) {
   });
 }
 
-async function callGrokAI(apiKey, message, signal) {
-  const endpoint = "https://api.x.ai/v1/chat/completions";
+async function callOpenAI(apiKey, message, signal) {
+  const endpoint = "https://api.openai.com/v1/chat/completions";
 
   return fetch(endpoint, {
     method: "POST",
@@ -39,14 +39,14 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.GROK_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY;
   const message = String(
     req.body?.message || ""
   ).trim();
 
   if (!apiKey) {
     return res.status(500).json({
-      error: "GROK_API_KEY is missing in Vercel environment variables."
+      error: "OPENAI_API_KEY is missing in Vercel environment variables."
     });
   }
 
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
     }, REQUEST_TIMEOUT);
 
     try {
-      const response = await callGrokAI(
+      const response = await callOpenAI(
         apiKey,
         message,
         controller.signal
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 
         if (!text) {
           return res.status(502).json({
-            error: "Grok returned an empty response.",
+            error: "OpenAI returned an empty response.",
             provider: data
           });
         }
@@ -94,11 +94,9 @@ export default async function handler(req, res) {
         });
       }
 
-      // Dito natin kukunin ang eksaktong mensahe galing sa xAI API kung bakit nag-error
       const providerError =
         data?.error?.message ||
-        JSON.stringify(data) ||
-        `Grok returned HTTP ${response.status}.`;
+        `OpenAI returned HTTP ${response.status}.`;
 
       const retryable = [
         408,
@@ -125,7 +123,7 @@ export default async function handler(req, res) {
       ) {
         return res.status(504).json({
           error:
-            "Grok did not respond within 60 seconds. " +
+            "OpenAI did not respond within 60 seconds. " +
             "The provider may be busy or unavailable."
         });
       }
@@ -146,6 +144,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(504).json({
-    error: "Grok request timed out."
+    error: "OpenAI request timed out."
   });
 }
