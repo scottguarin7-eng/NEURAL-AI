@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#010206">
   <meta name="description" content="Neural Ultra Liquid Glass OS">
-  <title>Neural Ultra — Ultimate Glowing Logo OS</title>
+  <title>Neural Ultra — Enterprise Video AI OS</title>
 
   <style>
     :root {
@@ -154,7 +154,6 @@
       gap: 12px;
     }
 
-    /* BAGONG GUMAGALAW AT LUMILIWANAG NA LOGO (MAS MAGANDA KAY APPLE!) */
     .brand-logo-container {
       position: relative;
       width: 46px;
@@ -189,10 +188,7 @@
       border: 1px solid rgba(255, 255, 255, 0.6);
       transition: transform 0.4s var(--spring-physics);
     }
-
-    .brand-logo-core:active {
-      transform: scale(0.85) rotate(-15deg);
-    }
+    .brand-logo-core:active { transform: scale(0.85) rotate(-15deg); }
 
     @keyframes logoGlowPulse {
       0% { opacity: 0.5; transform: scale(0.95); filter: blur(8px); }
@@ -248,34 +244,42 @@
       margin-top: 16px;
     }
 
-    /* HERO */
+    /* HERO NA MAY PROFESSIONAL VIDEO BACKGROUND SA LOOB NG LIQUID GLASS */
     .hero {
-      padding: 40px 20px 26px;
+      padding: 36px 20px 26px;
       text-align: center;
       border: 1px solid var(--border-lightning);
     }
 
-    .hero-core {
+    .hero-video-wrapper {
       position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 18px;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 20px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
-      box-shadow: 0 0 90px rgba(108, 242, 255, 0.85), 0 0 160px rgba(168, 124, 255, 0.6), inset 0 5px 15px rgba(255,255,255,0.9);
-      animation: coreBreathe 5s ease-in-out infinite;
-      transition: transform 0.6s var(--spring-physics);
-      cursor: pointer;
+      overflow: hidden;
+      border: 2px solid rgba(108, 242, 255, 0.8);
+      box-shadow: 0 0 90px rgba(108, 242, 255, 0.85), 0 0 160px rgba(168, 124, 255, 0.6), inset 0 0 20px rgba(108,242,255,0.7);
+      background: #000;
     }
-    .hero-core:hover { transform: scale(1.15) rotate(10deg); }
 
-    .hero-core::before {
+    .hero-video-wrapper video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.15);
+      filter: saturate(140%) contrast(120%);
+    }
+
+    .hero-video-wrapper::before {
       position: absolute;
       inset: -14px;
       border: 1px dashed rgba(108, 242, 255, 0.7);
       border-radius: 50%;
       content: "";
-      animation: spinRing 14s linear infinite;
+      animation: spinRing 16s linear infinite;
+      pointer-events: none;
+      z-index: 2;
     }
 
     .hero h1 {
@@ -653,7 +657,6 @@
     }
     .toast-popup.show { opacity: 1; transform: translateY(0) scale(1); }
 
-    @keyframes coreBreathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.08); filter: brightness(1.3); } }
     @keyframes spinRing { to { transform: rotate(360deg); } }
     @keyframes bubbleBounce { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     @keyframes liquidPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
@@ -674,10 +677,9 @@
 
   <div class="app-viewport">
 
-    <!-- TOPBAR WITH NEW GLOWING QUANTUM LOGO -->
+    <!-- TOPBAR -->
     <header class="topbar glass-panel">
       <div class="brand">
-        <!-- BAGONG GLOWING LOGO -->
         <div class="brand-logo-container" title="Neural Ultra Quantum Core">
           <div class="brand-logo-glow"></div>
           <div class="brand-logo-core">✦</div>
@@ -706,21 +708,25 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
 
-      <!-- HERO BANNER -->
+      <!-- HERO BANNER NA MAY PROFESSIONAL VIDEO LOOP -->
       <section class="hero glass-panel">
-        <div class="hero-core"></div>
+        <div class="hero-video-wrapper">
+          <video autoplay muted loop playsinline>
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-31910-large.mp4" type="video/mp4">
+          </video>
+        </div>
         <h1>
           Intelligence<br>
           <span>reimagined.</span>
         </h1>
         <p>
-          Next-generation quantum AI environment built with true 3D liquid glass refraction, specular highlights, spring physics, and 100 futuristic features.
+          Next-generation quantum AI environment built with professional video rendering, true 3D liquid glass refraction, and 100 futuristic features.
         </p>
 
         <div class="hero-badges">
           <span class="badge"><strong>Quantum OS</strong> Active</span>
           <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>Liquid Glass</strong> Refraction</span>
+          <span class="badge"><strong>Cinematic Video</strong> Loop</span>
         </div>
       </section>
 
@@ -837,7 +843,7 @@
             <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
             <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
             <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Liquid Glass Core</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Cinematic Video Core</strong></div>
           </div>
         </div>
       </div>
@@ -1039,7 +1045,6 @@
       }
     }
 
-    // TOGGLES
     const toggleDrawer = (id, open) => $(id).classList.toggle("open", open);
 
     $("openHubBtn").addEventListener("click", () => toggleDrawer("hubDrawer", true));
@@ -1054,7 +1059,6 @@
     $("closeSettingsBtn").addEventListener("click", () => toggleDrawer("settingsDrawer", false));
     $("settingsDrawer").addEventListener("click", (e) => { if (e.target === $("settingsDrawer")) toggleDrawer("settingsDrawer", false); });
 
-    // POWER TOOLS
     $("clearChatBtn").addEventListener("click", () => {
       state.messages = [];
       renderMessages();
@@ -1088,7 +1092,6 @@
       showToast("Reading response...");
     });
 
-    // FORM SUBMIT
     $("chatForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (state.isLoading && state.controller) state.controller.abort();
