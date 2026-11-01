@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#020308">
   <meta name="description" content="Neural Ultra Enterprise Quantum OS">
-  <title>Neural Ultra — Quantum OS v100</title>
+  <title>Neural Ultra — Liquid Flow OS</title>
 
   <style>
     :root {
       --bg-base: #020309;
       --bg-surface: #060917;
-      --liquid-glass: rgba(13, 17, 40, 0.82);
-      --liquid-card: rgba(20, 27, 62, 0.65);
+      --liquid-glass: rgba(13, 17, 40, 0.78);
+      --liquid-card: rgba(20, 27, 62, 0.6);
       --liquid-hover: rgba(32, 42, 98, 0.85);
-      --border-glass: rgba(255, 255, 255, 0.15);
-      --border-lightning: rgba(108, 242, 255, 0.7);
-      --border-glow: 0 0 20px rgba(108, 242, 255, 0.35);
+      --border-glass: rgba(255, 255, 255, 0.16);
+      --border-lightning: rgba(108, 242, 255, 0.75);
       --text-main: #f5f7ff;
       --text-muted: #9faad4;
       --text-faint: #6774a6;
@@ -30,7 +29,9 @@
       --radius-xl: 28px;
       --radius-lg: 20px;
       --radius-md: 14px;
-      --transition: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+      /* ELASTIC APPLE SPRING TRANSITION */
+      --spring-physics: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --smooth-fluid: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     [data-theme="light"] {
@@ -60,7 +61,7 @@
 
     body {
       color: var(--text-main);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, ui-sans-serif, system-ui, sans-serif;
       background: 
         radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.22), transparent 35%),
         radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.25), transparent 40%),
@@ -74,7 +75,7 @@
       inset: 0;
       z-index: -3;
       content: "";
-      opacity: 0.3;
+      opacity: 0.25;
       pointer-events: none;
       background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
@@ -97,6 +98,31 @@
     button, input, textarea, select { font: inherit; }
     button { cursor: pointer; touch-action: manipulation; }
 
+    /* LIQUID RIPPLE EFFECT */
+    .liquid-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .liquid-ripple::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(108,242,255,0.2) 50%, transparent 70%);
+      border-radius: 50%;
+      transform: scale(0);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s var(--smooth-fluid), opacity 0.5s var(--smooth-fluid);
+    }
+
+    .liquid-ripple:active::after {
+      transform: scale(3);
+      opacity: 1;
+      transition: 0s;
+    }
+
     .app-viewport {
       display: flex;
       flex-direction: column;
@@ -112,6 +138,7 @@
       box-shadow: var(--shadow-quantum);
       backdrop-filter: blur(32px);
       -webkit-backdrop-filter: blur(32px);
+      transition: transform 0.4s var(--spring-physics), box-shadow 0.4s var(--smooth-fluid), border-color 0.4s var(--smooth-fluid);
     }
 
     .glass-card {
@@ -119,9 +146,10 @@
       background: var(--liquid-card);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
+      transition: transform 0.35s var(--spring-physics), background 0.3s var(--smooth-fluid), border-color 0.3s var(--smooth-fluid);
     }
 
-    /* TOPBAR */
+    /* TOPBAR WITH FLUID SPRING ANIMATIONS */
     .topbar {
       position: sticky;
       top: 10px;
@@ -149,6 +177,11 @@
       background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
       box-shadow: 0 0 25px rgba(108, 242, 255, 0.85);
       animation: coreBreathe 4s ease-in-out infinite;
+      transition: transform 0.5s var(--spring-physics);
+    }
+
+    .brand-orb:active {
+      transform: scale(0.85) rotate(-10deg);
     }
 
     .brand-title {
@@ -171,24 +204,30 @@
       gap: 8px;
     }
 
+    /* SATISFYING BUTTON MORPHING */
     .action-btn {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 12px;
+      padding: 8px 14px;
       border: 1px solid var(--border-lightning);
-      border-radius: 12px;
+      border-radius: 14px;
       color: #010206;
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
       font-size: 11px;
       font-weight: 900;
-      box-shadow: 0 0 18px rgba(108, 242, 255, 0.4);
-      transition: var(--transition);
+      box-shadow: 0 4px 18px rgba(108, 242, 255, 0.4);
+      transition: transform 0.35s var(--spring-physics), box-shadow 0.35s var(--smooth-fluid), filter 0.2s ease;
     }
 
     .action-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 28px rgba(108, 242, 255, 0.7);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 8px 28px rgba(108, 242, 255, 0.7);
+    }
+
+    .action-btn:active {
+      transform: scale(0.92);
+      filter: brightness(1.2);
     }
 
     .icon-btn {
@@ -200,12 +239,17 @@
       border-radius: 12px;
       color: var(--text-main);
       background: var(--liquid-card);
-      transition: var(--transition);
+      transition: transform 0.35s var(--spring-physics), background 0.3s var(--smooth-fluid), border-color 0.3s var(--smooth-fluid);
     }
 
     .icon-btn:hover {
       border-color: var(--cyan);
       background: var(--liquid-hover);
+      transform: scale(1.06);
+    }
+
+    .icon-btn:active {
+      transform: scale(0.88) rotate(15deg);
     }
 
     /* MAIN CONTENT */
@@ -216,7 +260,7 @@
       margin-top: 14px;
     }
 
-    /* HERO */
+    /* HERO WITH FLUID LIGHTING */
     .hero {
       position: relative;
       overflow: hidden;
@@ -235,6 +279,12 @@
       background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
       box-shadow: 0 0 70px rgba(108, 242, 255, 0.75), 0 0 130px rgba(168, 124, 255, 0.5);
       animation: coreBreathe 5s ease-in-out infinite;
+      transition: transform 0.6s var(--spring-physics);
+      cursor: pointer;
+    }
+
+    .hero-core:hover {
+      transform: scale(1.12) rotate(5deg);
     }
 
     .hero-core::before {
@@ -283,6 +333,12 @@
       color: var(--text-muted);
       background: rgba(255,255,255,0.03);
       font-size: 10px;
+      transition: transform 0.3s var(--spring-physics), border-color 0.3s ease;
+    }
+
+    .badge:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
     }
 
     .badge strong { color: var(--cyan); }
@@ -293,7 +349,10 @@
       padding: 16px;
       border-radius: var(--radius-lg);
     }
-    .transcript-panel.visible { display: block; }
+    .transcript-panel.visible { 
+      display: block; 
+      animation: liquidPop 0.4s var(--spring-physics);
+    }
 
     .transcript-head {
       display: flex;
@@ -329,6 +388,7 @@
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
+      animation: bubbleBounce 0.4s var(--spring-physics);
     }
 
     .message.user {
@@ -357,7 +417,7 @@
     }
     .message.user .message-tag { color: rgba(1,2,6,0.6); }
 
-    /* SUGGESTIONS GRID */
+    /* SUGGESTIONS GRID WITH SATISFYING HOVER & PUSH */
     .suggestions-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -369,13 +429,18 @@
       border-radius: var(--radius-md);
       text-align: left;
       cursor: pointer;
-      transition: var(--transition);
+      transition: transform 0.35s var(--spring-physics), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .suggestion-card:hover {
       border-color: var(--cyan);
       background: var(--liquid-hover);
-      transform: translateY(-3px);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    .suggestion-card:active {
+      transform: scale(0.95);
     }
 
     .suggestion-icon {
@@ -388,6 +453,11 @@
       background: linear-gradient(135deg, var(--cyan), var(--violet));
       color: #010206;
       font-size: 12px;
+      transition: transform 0.35s var(--spring-physics);
+    }
+
+    .suggestion-card:hover .suggestion-icon {
+      transform: rotate(15deg) scale(1.1);
     }
 
     .suggestion-card strong { display: block; font-size: 11px; }
@@ -414,6 +484,12 @@
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
       box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(108, 242, 255, 0.25);
+      transition: transform 0.4s var(--spring-physics), border-color 0.3s ease;
+    }
+
+    .composer-inner:focus-within {
+      border-color: var(--cyan);
+      transform: translateY(-2px);
     }
 
     .composer-form {
@@ -454,6 +530,15 @@
       box-shadow: 0 4px 18px rgba(108, 242, 255, 0.5);
       font-size: 18px;
       font-weight: 900;
+      transition: transform 0.35s var(--spring-physics), filter 0.2s ease;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.08);
+    }
+
+    .send-btn:active {
+      transform: scale(0.9);
     }
 
     .send-btn.stop { color: #fff; background: linear-gradient(135deg, var(--red), #ffa1b4); }
@@ -475,11 +560,13 @@
       background: transparent;
       font-size: 10px;
       font-weight: 600;
+      transition: transform 0.3s var(--spring-physics), border-color 0.2s ease, background 0.2s ease;
     }
-    .chip:hover { color: var(--text-main); border-color: var(--cyan); }
+    .chip:hover { color: var(--text-main); border-color: var(--cyan); transform: translateY(-2px); background: var(--liquid-card); }
+    .chip:active { transform: scale(0.92); }
     .counter { color: var(--text-faint); font-size: 10px; }
 
-    /* MODAL DRAWERS (PERFECT FULL-WIDTH LAYOUT FOR MOBILE) */
+    /* MODAL DRAWERS WITH IOS SLIDE & SPRING POP */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -488,8 +575,14 @@
       place-items: flex-end center;
       background: rgba(1, 2, 6, 0.88);
       backdrop-filter: blur(18px);
+      opacity: 0;
+      transition: opacity 0.35s var(--smooth-fluid);
     }
-    .drawer-backdrop.open { display: grid; }
+
+    .drawer-backdrop.open { 
+      display: grid;
+      opacity: 1;
+    }
 
     .drawer-panel {
       width: min(850px, 100%);
@@ -500,7 +593,12 @@
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
       box-shadow: 0 -20px 80px rgba(0,0,0,0.95);
-      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(100%);
+      transition: transform 0.45s var(--spring-physics);
+    }
+
+    .drawer-backdrop.open .drawer-panel {
+      transform: translateY(0);
     }
 
     .drawer-head {
@@ -514,7 +612,6 @@
 
     .drawer-head h2 { margin: 0; font-size: 16px; font-weight: 900; letter-spacing: -0.02em; }
 
-    /* INAYOS ANG DRAWER GRID PARA HINDI NAKASIKSIK ANG TOOLS */
     .drawer-sections {
       display: flex;
       flex-direction: column;
@@ -537,7 +634,6 @@
       margin-bottom: 12px;
     }
 
-    /* POWER TOOLS FULL FLEX LAYOUT */
     .tools-grid-layout {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -551,17 +647,21 @@
       padding: 12px 14px;
       min-height: 54px;
       border: 1px solid var(--border-glass);
-      border-radius: 12px;
+      border-radius: 14px;
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       text-align: left;
-      transition: var(--transition);
+      transition: transform 0.35s var(--spring-physics), background 0.3s ease, border-color 0.3s ease;
     }
 
     .tool-tile-btn:hover {
       border-color: var(--cyan);
       background: var(--liquid-hover);
-      transform: translateY(-2px);
+      transform: translateY(-3px) scale(1.02);
+    }
+
+    .tool-tile-btn:active {
+      transform: scale(0.94);
     }
 
     .tool-icon {
@@ -574,6 +674,11 @@
       color: var(--cyan);
       font-size: 15px;
       flex-shrink: 0;
+      transition: transform 0.35s var(--spring-physics);
+    }
+
+    .tool-tile-btn:hover .tool-icon {
+      transform: scale(1.15) rotate(-8deg);
     }
 
     .tool-info strong { display: block; font-size: 12px; font-weight: 700; }
@@ -599,9 +704,10 @@
       border-radius: 12px;
       background: var(--liquid-card);
       text-align: left;
-      transition: var(--transition);
+      transition: transform 0.35s var(--spring-physics), border-color 0.3s ease;
     }
-    .feature-chip:hover { border-color: var(--cyan); background: var(--liquid-hover); transform: translateY(-2px); }
+    .feature-chip:hover { border-color: var(--cyan); background: var(--liquid-hover); transform: translateY(-3px) scale(1.02); }
+    .feature-chip:active { transform: scale(0.94); }
     .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 3px; }
     .feature-title { font-size: 11px; font-weight: 700; color: var(--text-main); }
 
@@ -626,7 +732,7 @@
       background: var(--liquid-card);
     }
 
-    /* TOAST */
+    /* TOAST WITH FLUID BOUNCE */
     .toast-popup {
       position: fixed;
       z-index: 200;
@@ -641,16 +747,17 @@
       font-size: 11px;
       font-weight: 600;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(20px) scale(0.9);
       pointer-events: none;
-      transition: var(--transition);
+      transition: transform 0.4s var(--spring-physics), opacity 0.3s ease;
     }
-    .toast-popup.show { opacity: 1; transform: translateY(0); }
+    .toast-popup.show { opacity: 1; transform: translateY(0) scale(1); }
 
     @keyframes coreBreathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.08); filter: brightness(1.3); } }
     @keyframes spinRing { to { transform: rotate(360deg); } }
     @keyframes ambientSpin { to { transform: rotate(360deg); } }
-    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    @keyframes bubbleBounce { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    @keyframes liquidPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
     @media (max-width: 768px) {
       .suggestions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -669,25 +776,22 @@
         <div class="brand-orb"></div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Quantum OS v100</div>
+          <div class="brand-sub">Liquid Flow OS</div>
         </div>
       </div>
 
       <div class="topbar-actions">
-        <!-- 100 FEATURES BUTTON -->
-        <button id="openFeaturesBtn" class="action-btn" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
+        <button id="openFeaturesBtn" class="action-btn liquid-ripple" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
           <span>⚡</span>
           <span>100 Features</span>
         </button>
 
-        <!-- COMMAND HUB BUTTON (INAYOS NA LALAGYAN NG TOOLS) -->
-        <button id="openHubBtn" class="action-btn" type="button">
+        <button id="openHubBtn" class="action-btn liquid-ripple" type="button">
           <span>✦</span>
           <span>Hub</span>
         </button>
 
-        <!-- WORKING SETTINGS BUTTON (⚙) -->
-        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings" title="Settings">⚙</button>
+        <button id="settingsBtn" class="icon-btn liquid-ripple" type="button" aria-label="Settings" title="Settings">⚙</button>
       </div>
     </header>
 
@@ -702,13 +806,13 @@
           <span>reimagined.</span>
         </h1>
         <p>
-          Next-generation quantum AI environment engineered with 100 futuristic features for ultimate soft opening impact.
+          Next-generation quantum AI environment built with fluid iOS physics animations and 100 futuristic features.
         </p>
 
         <div class="hero-badges">
           <span class="badge"><strong>Quantum OS</strong> Active</span>
           <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>Isolated</strong> Command Hub</span>
+          <span class="badge"><strong>Liquid Flow</strong> Engine</span>
         </div>
       </section>
 
@@ -723,25 +827,25 @@
 
       <!-- SUGGESTIONS -->
       <div class="suggestions-grid">
-        <button class="suggestion-card glass-card" type="button" data-prompt="Explain artificial intelligence in simple English with one practical example.">
+        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Explain artificial intelligence in simple English with one practical example.">
           <div class="suggestion-icon">✦</div>
           <strong>Explain anything</strong>
           <small>Turn complex ideas into clear clarity.</small>
         </button>
 
-        <button class="suggestion-card glass-card" type="button" data-prompt="Create a realistic weekly productivity plan with priorities, breaks, and measurable goals.">
+        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Create a realistic weekly productivity plan with priorities, breaks, and measurable goals.">
           <div class="suggestion-icon">◷</div>
           <strong>Build a plan</strong>
           <small>Transform ambitions into systems.</small>
         </button>
 
-        <button class="suggestion-card glass-card" type="button" data-prompt="Help me write a polished professional email. Ask for missing context if needed.">
+        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Help me write a polished professional email. Ask for missing context if needed.">
           <div class="suggestion-icon">✎</div>
           <strong>Write better</strong>
           <small>Draft emails and scripts instantly.</small>
         </button>
 
-        <button class="suggestion-card glass-card" type="button" data-prompt="Give me a beginner-friendly coding project and explain how to build it step by step.">
+        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Give me a beginner-friendly coding project and explain how to build it step by step.">
           <div class="suggestion-icon">⌘</div>
           <strong>Make something</strong>
           <small>Explore coding and creation.</small>
@@ -757,36 +861,35 @@
     <div class="composer-inner">
       <form id="chatForm" class="composer-form">
         <textarea id="promptInput" rows="1" maxlength="12000" autocomplete="off" placeholder="Ask Neural Ultra anything..."></textarea>
-        <button id="voiceBtn" class="icon-btn" type="button" title="Voice">🎙</button>
-        <button id="sendBtn" class="send-btn" type="submit" title="Send">↑</button>
+        <button id="voiceBtn" class="icon-btn liquid-ripple" type="button" title="Voice">🎙</button>
+        <button id="sendBtn" class="send-btn liquid-ripple" type="submit" title="Send">↑</button>
       </form>
 
       <div class="composer-tools">
         <div class="chips">
-          <button class="chip" type="button" data-insert="Be concise and practical.">Concise</button>
-          <button class="chip" type="button" data-insert="Explain step by step.">Step by step</button>
-          <button class="chip" type="button" data-insert="Provide a clear example.">Example</button>
-          <button id="clearInputBtn" class="chip" type="button">Clear</button>
+          <button class="chip liquid-ripple" type="button" data-insert="Be concise and practical.">Concise</button>
+          <button class="chip liquid-ripple" type="button" data-insert="Explain step by step.">Step by step</button>
+          <button class="chip liquid-ripple" type="button" data-insert="Provide a clear example.">Example</button>
+          <button id="clearInputBtn" class="chip liquid-ripple" type="button">Clear</button>
         </div>
         <div class="counter"><span id="charCount">0</span>/12000</div>
       </div>
     </div>
   </div>
 
-  <!-- COMMAND HUB DRAWER (MALINIS AT MALUWAG NA LALAGYAN NG POWER TOOLS & METRICS) -->
+  <!-- COMMAND HUB DRAWER -->
   <div id="hubDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
         <h2>✦ Quantum Command Hub</h2>
-        <button id="closeHubBtn" class="icon-btn" type="button">×</button>
+        <button id="closeHubBtn" class="icon-btn liquid-ripple" type="button">×</button>
       </div>
 
       <div class="drawer-sections">
-        <!-- POWER TOOLS -->
         <div class="drawer-card">
           <div class="drawer-card-title">Power Tools</div>
           <div class="tools-grid-layout">
-            <button id="clearChatBtn" class="tool-tile-btn" type="button">
+            <button id="clearChatBtn" class="tool-tile-btn liquid-ripple" type="button">
               <div class="tool-icon">⌫</div>
               <div class="tool-info">
                 <strong>Clear chat</strong>
@@ -794,7 +897,7 @@
               </div>
             </button>
 
-            <button id="exportChatBtn" class="tool-tile-btn" type="button">
+            <button id="exportChatBtn" class="tool-tile-btn liquid-ripple" type="button">
               <div class="tool-icon">⇩</div>
               <div class="tool-info">
                 <strong>Export</strong>
@@ -802,7 +905,7 @@
               </div>
             </button>
 
-            <button id="copyLastBtn" class="tool-tile-btn" type="button">
+            <button id="copyLastBtn" class="tool-tile-btn liquid-ripple" type="button">
               <div class="tool-icon">▣</div>
               <div class="tool-info">
                 <strong>Copy last</strong>
@@ -810,7 +913,7 @@
               </div>
             </button>
 
-            <button id="speakLastBtn" class="tool-tile-btn" type="button">
+            <button id="speakLastBtn" class="tool-tile-btn liquid-ripple" type="button">
               <div class="tool-icon">◖</div>
               <div class="tool-info">
                 <strong>Speak</strong>
@@ -820,14 +923,13 @@
           </div>
         </div>
 
-        <!-- SESSION METRICS -->
         <div class="drawer-card">
           <div class="drawer-card-title">Session Telemetry</div>
           <div class="metrics-flex">
             <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
             <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
             <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Quantum Ultra</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Liquid Ultra</strong></div>
           </div>
         </div>
       </div>
@@ -839,7 +941,7 @@
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
         <h2>⚡ 100 Futuristic AI OS Features</h2>
-        <button id="closeFeaturesBtn" class="icon-btn" type="button">×</button>
+        <button id="closeFeaturesBtn" class="icon-btn liquid-ripple" type="button">×</button>
       </div>
       <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
         Exclusive futuristic architecture built for software engineering evaluation and soft opening demonstration:
@@ -848,12 +950,12 @@
     </div>
   </div>
 
-  <!-- WORKING SETTINGS MODAL -->
+  <!-- SETTINGS MODAL -->
   <div id="settingsDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
         <h2>⚙ Workspace Settings</h2>
-        <button id="closeSettingsBtn" class="icon-btn" type="button">×</button>
+        <button id="closeSettingsBtn" class="icon-btn liquid-ripple" type="button">×</button>
       </div>
 
       <div class="drawer-sections">
@@ -895,7 +997,6 @@
       controller: null
     };
 
-    // GENERATE 100 FUTURISTIC FEATURES MATRIX
     const featureTitles = [
       "Neural Synapse Engine", "Holographic Thought Visualizer", "Quantum Context Caching", "Bi-Directional Mind Mapping", "Multi-Stream Thinking", 
       "Subconscious Memory Retrieval", "Adaptive Persona Tuning", "Zero-Latency Prediction", "Cognitive Auto-Balancer", "Emotion Spectrum Detection",
@@ -924,7 +1025,7 @@
       grid.innerHTML = "";
       featureTitles.forEach((title, idx) => {
         const item = document.createElement("div");
-        item.className = "feature-chip";
+        item.className = "feature-chip liquid-ripple";
         item.innerHTML = `
           <div class="feature-num">FEATURE #${idx + 1}</div>
           <div class="feature-title">${title}</div>
@@ -1030,26 +1131,27 @@
       }
     }
 
-    // DRAWER LISTENERS & TOGGLES
-    $("openHubBtn").addEventListener("click", () => $("hubDrawer").classList.add("open"));
-    $("closeHubBtn").addEventListener("click", () => $("hubDrawer").classList.remove("open"));
-    $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) $("hubDrawer").classList.remove("open"); });
+    // TOGGLES
+    const toggleDrawer = (id, open) => $(id).classList.toggle("open", open);
 
-    $("openFeaturesBtn").addEventListener("click", () => $("featuresDrawer").classList.add("open"));
-    $("closeFeaturesBtn").addEventListener("click", () => $("featuresDrawer").classList.remove("open"));
-    $("featuresDrawer").addEventListener("click", (e) => { if (e.target === $("featuresDrawer")) $("featuresDrawer").classList.remove("open"); });
+    $("openHubBtn").addEventListener("click", () => toggleDrawer("hubDrawer", true));
+    $("closeHubBtn").addEventListener("click", () => toggleDrawer("hubDrawer", false));
+    $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) toggleDrawer("hubDrawer", false); });
 
-    // SETTINGS BUTTON EVENT LISTENER (FIXED GUMAGANA NA!)
-    $("settingsBtn").addEventListener("click", () => $("settingsDrawer").classList.add("open"));
-    $("closeSettingsBtn").addEventListener("click", () => $("settingsDrawer").classList.remove("open"));
-    $("settingsDrawer").addEventListener("click", (e) => { if (e.target === $("settingsDrawer")) $("settingsDrawer").classList.remove("open"); });
+    $("openFeaturesBtn").addEventListener("click", () => toggleDrawer("featuresDrawer", true));
+    $("closeFeaturesBtn").addEventListener("click", () => toggleDrawer("featuresDrawer", false));
+    $("featuresDrawer").addEventListener("click", (e) => { if (e.target === $("featuresDrawer")) toggleDrawer("featuresDrawer", false); });
 
-    // POWER TOOLS LISTENERS
+    $("settingsBtn").addEventListener("click", () => toggleDrawer("settingsDrawer", true));
+    $("closeSettingsBtn").addEventListener("click", () => toggleDrawer("settingsDrawer", false));
+    $("settingsDrawer").addEventListener("click", (e) => { if (e.target === $("settingsDrawer")) toggleDrawer("settingsDrawer", false); });
+
+    // POWER TOOLS
     $("clearChatBtn").addEventListener("click", () => {
       state.messages = [];
       renderMessages();
       showToast("Session cleared.");
-      $("hubDrawer").classList.remove("open");
+      toggleDrawer("hubDrawer", false);
     });
 
     $("exportChatBtn").addEventListener("click", () => {
