@@ -1,0 +1,22 @@
+export const featureTitles = [
+      "Neural Synapse Engine", "Holographic Thought Visualizer", "Quantum Context Caching", "Bi-Directional Mind Mapping", "Multi-Stream Thinking",
+      "Subconscious Memory Retrieval", "Adaptive Persona Tuning", "Zero-Latency Prediction", "Cognitive Auto-Balancer", "Emotion Spectrum Detection",
+      "Dynamic Prompt Compression", "Live AST Code Refactoring", "Self-Healing Bug Engine", "Architecture Visualizer", "Autonomous API Mocking",
+      "Multi-Language Code Fusion", "Memory Leak Radar", "Cyber-Threat Vulnerability Scanner", "Zero-Day Defense Auditor", "Quantum Compiler Pipeline",
+      "Algorithmic Complexity Auditor", "AES-256 Quantum Vault", "Zero-Knowledge Storage", "Biometric Session Lock", "Intrusion Countermeasure Logic",
+      "Anti-Reverse Engineering Canvas", "Steganographic Data Shield", "Threat Vector Heatmap", "Identity Anonymizer", "Secure Sandbox Execution",
+      "Auto-Wipe Memory Triggers", "Spectral Audio Equalizer", "Neural Voice Clone Emulator", "Real-Time UI Code Gen", "Spatial Audio Spatializer",
+      "Synthetic Image Color Grading", "3D Object Mesh Prompting", "Neural Video Frame Interpolator", "Haptic Feedback Engine", "Subliminal Noise Suppressor",
+      "Dynamic Waveform Visualizer", "Hyper-Dimensional DB Search", "Multi-Agent Swarm Orchestrator", "Autonomous Web Crawler", "Executive Summary Matrix",
+      "Predictive Forecasting Engine", "Cross-Platform Knowledge Graph", "Semantic Intent Analyzer", "Contextual Sentiment Matrix", "Language Auto-Localizer",
+      "Knowledge Ingestion Pipeline", "Custom System Constructor", "API Key Vault Manager", "WebSockets Low-Latency Router", "Token Density Monitor",
+      "Custom CSS/JS Theme Injection", "Edge Compute Routing", "Multi-Cloud Fallback Engine", "Deployment Pipeline Trigger", "Benchmark Suite Engine",
+      "Quantum State Synchronizer", "Neural Packet Inspector", "Autonomous Refactor Daemon", "Synthetic Persona Synthesizer", "Deep Latent Space Explorer",
+      "Hyperbolic Embedding Visualizer", "Zero-Shot Logic Verifier", "Quantum Entanglement Router", "Neural Firewall Sentinel", "Autonomous Test Case Generator",
+      "Distributed Memory Mesh", "Real-time Telemetry Streamer", "Sub-Millisecond Tokenizer", "Neural Drift Corrector", "Cross-Model Consensus Engine",
+      "Encrypted Neural Weights Hub", "Autonomous Patch Deployer", "Quantum Entropy Generator", "Cognitive Load Shedder", "Adaptive Context Pruner",
+      "Multi-Modal Sensor Fusion", "Neural State Snapshotter", "Autonomous Git Integrator", "Predictive Branching Simulator", "Quantum Cryptographic Bridge",
+      "Distributed Tensor Pipeline", "Real-time Syntax Harmonizer", "Neural Semantic Indexer", "Autonomous Profiling Agent", "Hyper-Threaded Prompt Stream",
+      "Zero-Overhead State Cache", "Secure Enclave Executor", "Quantum Annealing Optimizer", "Neural Feedback Loop Tuner", "Autonomous API Gateway",
+      "Synthetic Data Generator", "Quantum Mesh Router", "Neural Edge Synthesizer", "Universal Protocol Bridge", "Neural Ultra Prime Core"
+    ];
