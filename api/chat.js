@@ -1,47 +1,24 @@
 const MODEL = "gemini-3.8-flash";
-const MAX_ATTEMPTS = 4;
-const REQUEST_TIMEOUT = 30000;
+const MAX_ATTEMPTS = 2;
+const REQUEST_TIMEOUT = 60000;
 
-function sleep(milliseconds) {
+function wait(ms) {
   return new Promise((resolve) => {
-    setTimeout(resolve, milliseconds);
+    setTimeout(resolve, ms);
   });
 }
 
-function retryable(status) {
-  return [
-    408,
-    425,
-    429,
-    500,
-    502,
-    503,
-    504
-  ].includes(status);
-}
-
-function retryDelay(attempt) {
-  const exponential = 900 * Math.pow(2, attempt);
-  const jitter = Math.floor(Math.random() * 450);
-
-  return exponential + jitter;
-}
-
-async function callGemini({
-  apiKey,
-  message,
-  signal
-}) {
+async function callGemini(apiKey, message, signal) {
   const endpoint =
     "https://generativelanguage.googleapis.com/v1beta/models/" +
     MODEL +
-    ":generateContent";
+    ":generateContent?key=" +
+    encodeURIComponent(apiKey);
 
   return fetch(endpoint, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
-      "x-goog-api-key": apiKey
+      "Content-Type": "application/json"
     },
     body: JSON.stringify({
       contents: [
@@ -55,7 +32,8 @@ async function callGemini({
         }
       ],
       generationConfig: {
-        maxOutputTokens: 1024
+        maxOutputTokens: 512,
+        temperature: 0.7
       }
     }),
     signal
@@ -86,83 +64,94 @@ export default async function handler(req, res) {
     });
   }
 
-  const controller = new AbortController();
+  for (
+    let attempt = 0;
+    attempt < MAX_ATTEMPTS;
+    attempt++
+  ) {
+    const controller = new AbortController();
 
-  const timeout = setTimeout(() => {
-    controller.abort();
-  }, REQUEST_TIMEOUT);
+    const timeout = setTimeout(() => {
+      controller.abort();
+    }, REQUEST_TIMEOUT);
 
-  try {
-    let lastStatus = 503;
-    let lastMessage =
-      "Gemini is temporarily unavailable.";
+    try {
+      const response = await callGemini(
+        apiKey,
+        message,
+        controller.signal
+      );
 
-    for (
-      let attempt = 0;
-      attempt < MAX_ATTEMPTS;
-      attempt++
-    ) {
-      try {
-        const response = await callGemini({
-          apiKey,
-          message,
-          signal: controller.signal
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok) {
+        const text =
+          data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!text) {
+          return res.status(502).json({
+            error: "Gemini returned an empty response.",
+            provider: data
+          });
+        }
+
+        return res.status(200).json({
+          text,
+          model: MODEL,
+          attempts: attempt + 1
         });
-
-        const data = await response.json().catch(() => ({}));
-
-        if (response.ok) {
-          const text =
-            data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-          if (!text) {
-            return res.status(502).json({
-              error: "Gemini returned no text."
-            });
-          }
-
-          return res.status(200).json({
-            text,
-            model: MODEL,
-            attempts: attempt + 1
-          });
-        }
-
-        lastStatus = response.status;
-        lastMessage =
-          data?.error?.message ||
-          "Gemini request failed.";
-
-        if (!retryable(response.status)) {
-          return res.status(response.status).json({
-            error: lastMessage
-          });
-        }
-
-        if (attempt < MAX_ATTEMPTS - 1) {
-          await sleep(retryDelay(attempt));
-        }
-      } catch (error) {
-        if (error.name === "AbortError") {
-          return res.status(504).json({
-            error: "Gemini request timed out."
-          });
-        }
-
-        lastMessage = error.message;
-
-        if (attempt < MAX_ATTEMPTS - 1) {
-          await sleep(retryDelay(attempt));
-        }
       }
-    }
 
-    return res.status(lastStatus).json({
-      error:
-        lastMessage +
-        " Please try again shortly."
-    });
-  } finally {
-    clearTimeout(timeout);
+      const providerError =
+        data?.error?.message ||
+        `Gemini returned HTTP ${response.status}.`;
+
+      const retryable = [
+        408,
+        429,
+        500,
+        502,
+        503,
+        504
+      ].includes(response.status);
+
+      if (!retryable || attempt === MAX_ATTEMPTS - 1) {
+        return res.status(response.status).json({
+          error: providerError,
+          status: response.status,
+          model: MODEL
+        });
+      }
+
+      await wait(1500);
+    } catch (error) {
+      if (
+        error.name === "AbortError" &&
+        attempt === MAX_ATTEMPTS - 1
+      ) {
+        return res.status(504).json({
+          error:
+            "Gemini did not respond within 60 seconds. " +
+            "The provider may be busy or unavailable."
+        });
+      }
+
+      if (
+        error.name !== "AbortError" &&
+        attempt === MAX_ATTEMPTS - 1
+      ) {
+        return res.status(500).json({
+          error: error.message
+        });
+      }
+
+      await wait(1500);
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+
+  return res.status(504).json({
+    error: "Gemini request timed out."
+  });
 }
