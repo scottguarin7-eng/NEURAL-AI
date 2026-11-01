@@ -4,19 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000105">
-  <meta name="description" content="Neural Ultra Hyper-Realistic Liquid Glass OS">
-  <title>Neural Ultra — Hyper-Realistic Liquid Glass OS</title>
+  <meta name="description" content="Neural Ultra 3D Realistic Liquid Glass OS">
+  <title>Neural Ultra — 3D Realistic Liquid Glass OS</title>
 
   <style>
     :root {
       --bg-base: #000105;
-      /* Mas pinalalim at pinatingkad ang Apple-grade glass gradients */
-      --glass-base: rgba(14, 20, 45, 0.52);
-      --glass-card: rgba(10, 16, 38, 0.42);
-      --glass-hover: rgba(22, 32, 70, 0.65);
-      --border-outer: rgba(255, 255, 255, 0.28);
-      --border-inner: rgba(255, 255, 255, 0.65);
-      --border-glow: rgba(108, 242, 255, 0.9);
+      --glass-base: rgba(14, 20, 45, 0.55);
+      --glass-card: rgba(10, 16, 38, 0.45);
+      --glass-hover: rgba(22, 32, 70, 0.7);
+      --border-outer: rgba(255, 255, 255, 0.3);
+      --border-glow: rgba(108, 242, 255, 0.95);
       --text-main: #f8faff;
       --text-muted: #9fb0e0;
       --text-faint: #6373a8;
@@ -24,9 +22,9 @@
       --blue: #599dff;
       --violet: #a87cff;
       --pink: #ff75c8;
-      --shadow-hyper: 0 35px 100px rgba(0, 0, 0, 0.95), 
-                      inset 0 1px 2px rgba(255, 255, 255, 0.8), 
-                      inset 0 -2px 5px rgba(0, 0, 0, 0.9);
+      --shadow-hyper: 0 40px 110px rgba(0, 0, 0, 0.98), 
+                      inset 0 1px 2px rgba(255, 255, 255, 0.85), 
+                      inset 0 -2px 6px rgba(0, 0, 0, 0.95);
       --radius-xl: 38px;
       --radius-lg: 26px;
       --radius-md: 18px;
@@ -47,14 +45,14 @@
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.28), transparent 45%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.28), transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(255, 117, 200, 0.22), transparent 55%),
+        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.3), transparent 45%),
+        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.3), transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(255, 117, 200, 0.25), transparent 55%),
         linear-gradient(135deg, #000105, #040714);
       background-attachment: fixed;
     }
 
-    /* REALISTIC VISIONOS FLUID AMBIENT ORBS */
+    /* REALISTIC 3D AMBIENT ORBS */
     .ambient-glows {
       position: fixed;
       inset: 0;
@@ -67,14 +65,14 @@
       width: 550px;
       height: 550px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(108,242,255,0.32) 0%, rgba(168,124,255,0.18) 50%, transparent 75%);
+      background: radial-gradient(circle, rgba(108,242,255,0.35) 0%, rgba(168,124,255,0.2) 50%, transparent 75%);
       filter: blur(100px);
       animation: orbFloat 12s ease-in-out infinite alternate;
     }
     .ambient-orb:nth-child(2) {
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(255,117,200,0.26) 0%, rgba(89,157,255,0.18) 50%, transparent 75%);
+      background: radial-gradient(circle, rgba(255,117,200,0.28) 0%, rgba(89,157,255,0.2) 50%, transparent 75%);
       right: -140px;
       top: 30%;
       animation: orbFloat 16s ease-in-out infinite alternate-reverse;
@@ -96,12 +94,12 @@
       padding: 12px 0 140px;
     }
 
-    /* REALISTIC HYPER-GLASS PANEL WITH TRUE 3D DEPTH */
+    /* APPLE VISIONOS 3D GLASS PANEL */
     .glass-panel {
       position: relative;
       background: var(--glass-base);
-      backdrop-filter: blur(60px) saturate(230%);
-      -webkit-backdrop-filter: blur(60px) saturate(230%);
+      backdrop-filter: blur(65px) saturate(240%);
+      -webkit-backdrop-filter: blur(65px) saturate(240%);
       border: 1px solid var(--border-outer);
       box-shadow: var(--shadow-hyper);
       border-radius: var(--radius-xl);
@@ -109,7 +107,6 @@
       transition: transform 0.4s var(--spring), box-shadow 0.4s var(--smooth), border-color 0.4s var(--smooth);
     }
 
-    /* TRIPLE SPECULAR REFRACTION LIGHTS (PARANG TOTONG SALAMIN) */
     .glass-panel::before {
       content: "";
       position: absolute;
@@ -120,24 +117,14 @@
       background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
       z-index: 3;
     }
-    .glass-panel::after {
-      content: "";
-      position: absolute;
-      top: 2px;
-      left: 10%;
-      right: 10%;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(108, 242, 255, 0.8), transparent);
-      z-index: 3;
-    }
 
     .glass-card {
       position: relative;
       background: var(--glass-card);
-      backdrop-filter: blur(40px) saturate(200%);
-      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      backdrop-filter: blur(45px) saturate(210%);
+      -webkit-backdrop-filter: blur(45px) saturate(210%);
       border: 1px solid var(--border-outer);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.5), inset 0 -1px 2px rgba(0, 0, 0, 0.7);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.55);
       border-radius: var(--radius-md);
       overflow: hidden;
       transition: transform 0.35s var(--spring), background 0.3s var(--smooth), border-color 0.3s var(--smooth);
@@ -149,7 +136,7 @@
       left: 0;
       right: 0;
       height: 1.5px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
     }
 
     /* TOPBAR */
@@ -164,7 +151,7 @@
       padding: 12px 18px;
       border-radius: 28px;
       border: 1px solid var(--border-glow);
-      box-shadow: 0 20px 50px rgba(108, 242, 255, 0.28), inset 0 1px 3px rgba(255,255,255,0.8), inset 0 -1px 2px rgba(0,0,0,0.8);
+      box-shadow: 0 20px 50px rgba(108, 242, 255, 0.3), inset 0 1px 3px rgba(255,255,255,0.85);
     }
 
     .brand {
@@ -173,7 +160,6 @@
       gap: 12px;
     }
 
-    /* REALISTIC 3D GLOWING LOGO */
     .brand-logo-container {
       position: relative;
       width: 48px;
@@ -199,7 +185,7 @@
       height: 44px;
       border-radius: 16px;
       background: radial-gradient(circle at 30% 30%, #ffffff, var(--cyan) 35%, var(--violet) 75%, var(--pink));
-      box-shadow: 0 0 35px rgba(108, 242, 255, 1), inset 0 2px 6px rgba(255, 255, 255, 1), inset 0 -3px 8px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 0 35px rgba(108, 242, 255, 1), inset 0 2px 6px rgba(255, 255, 255, 1);
       display: grid;
       place-items: center;
       font-size: 20px;
@@ -230,8 +216,8 @@
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
       font-size: 11px;
       font-weight: 900;
-      box-shadow: 0 6px 25px rgba(108, 242, 255, 0.5), inset 0 1px 3px rgba(255,255,255,1);
-      transition: transform 0.35s var(--spring), box-shadow 0.35s var(--smooth), filter 0.2s ease;
+      box-shadow: 0 6px 25px rgba(108, 242, 255, 0.55), inset 0 1px 3px rgba(255,255,255,1);
+      transition: transform 0.35s var(--spring), box-shadow 0.35s var(--smooth);
     }
     .action-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 40px rgba(108, 242, 255, 0.9); }
     .action-btn:active { transform: scale(0.9); filter: brightness(1.2); }
@@ -245,8 +231,8 @@
       border-radius: 14px;
       color: var(--text-main);
       background: var(--glass-card);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4), inset 0 -1px 1px rgba(0,0,0,0.6);
-      transition: transform 0.35s var(--spring), background 0.3s var(--smooth), border-color 0.3s var(--smooth);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
+      transition: transform 0.35s var(--spring), background 0.3s var(--smooth);
     }
     .icon-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: scale(1.08); }
     .icon-btn:active { transform: scale(0.85) rotate(15deg); }
@@ -259,42 +245,63 @@
       margin-top: 16px;
     }
 
-    /* HERO */
+    /* HERO NA MAY 3D REALISTIC GLOWING LIGHT & TYPING ANIMATION */
     .hero {
       padding: 42px 20px 30px;
       text-align: center;
       border: 1px solid var(--border-glow);
     }
 
-    .hero-video-wrapper {
+    /* 3D REALISTIC GLOWING LIGHT SPHERE */
+    .hero-3d-sphere-container {
       position: relative;
       width: 140px;
       height: 140px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 2px solid rgba(108, 242, 255, 0.95);
-      box-shadow: 0 0 110px rgba(108, 242, 255, 0.95), 0 0 200px rgba(168, 124, 255, 0.7), inset 0 0 30px rgba(108,242,255,0.9);
-      background: #000;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
     }
 
-    .hero-video-wrapper video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.15);
-      filter: saturate(150%) contrast(130%);
-    }
-
-    .hero-video-wrapper::before {
+    .sphere-ambient-glow {
       position: absolute;
-      inset: -14px;
+      inset: -20px;
+      background: radial-gradient(circle, rgba(108,242,255,0.7) 0%, rgba(168,124,255,0.5) 50%, transparent 75%);
+      border-radius: 50%;
+      filter: blur(25px);
+      animation: spherePulse 4s ease-in-out infinite alternate;
+    }
+
+    .sphere-core-3d {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--cyan) 25%, var(--violet) 65%, var(--pink) 100%);
+      box-shadow: 0 0 70px rgba(108, 242, 255, 0.95), 
+                  0 0 140px rgba(168, 124, 255, 0.7), 
+                  inset 0 8px 20px rgba(255, 255, 255, 0.95), 
+                  inset 0 -12px 25px rgba(0, 0, 0, 0.85);
+      border: 2px solid rgba(255, 255, 255, 0.8);
+      animation: sphereFloat 6s ease-in-out infinite;
+    }
+
+    .sphere-core-3d::before {
+      content: "";
+      position: absolute;
+      inset: -12px;
       border: 1px dashed rgba(108, 242, 255, 0.8);
       border-radius: 50%;
-      content: "";
-      animation: spinRing 16s linear infinite;
-      pointer-events: none;
-      z-index: 2;
+      animation: spinRing 18s linear infinite;
+    }
+
+    @keyframes spherePulse {
+      0% { transform: scale(0.92); opacity: 0.7; filter: blur(20px); }
+      100% { transform: scale(1.08); opacity: 1; filter: blur(30px); }
+    }
+
+    @keyframes sphereFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-8px) scale(1.03); }
     }
 
     .hero h1 {
@@ -310,9 +317,37 @@
       -webkit-background-clip: text;
     }
 
+    /* LIVE TYPING ANIMATION CONTAINER */
+    .typing-container {
+      margin: 12px auto 0;
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--cyan);
+      text-transform: uppercase;
+      min-height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 18px;
+      background: var(--cyan);
+      animation: cursorBlink 0.8s infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
     .hero p {
       max-width: 540px;
-      margin: 14px auto 0;
+      margin: 10px auto 0;
       color: var(--text-muted);
       font-size: 13px;
       line-height: 1.6;
@@ -696,13 +731,13 @@
     <!-- TOPBAR -->
     <header class="topbar glass-panel">
       <div class="brand">
-        <div class="brand-logo-container" title="Neural Ultra Hyper-Realistic Core">
+        <div class="brand-logo-container" title="Neural Ultra 3D Core">
           <div class="brand-logo-glow"></div>
           <div class="brand-logo-core">✦</div>
         </div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Hyper-Glass OS</div>
+          <div class="brand-sub">3D Quantum OS</div>
         </div>
       </div>
 
@@ -724,25 +759,31 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
 
-      <!-- HERO BANNER -->
+      <!-- HERO BANNER WITH 3D REALISTIC SPHERE & LIVE TYPING ANIMATION -->
       <section class="hero glass-panel">
-        <div class="hero-video-wrapper">
-          <video autoplay muted loop playsinline>
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-digital-animation-of-screens-with-code-31910-large.mp4" type="video/mp4">
-          </video>
+        <div class="hero-3d-sphere-container">
+          <div class="sphere-ambient-glow"></div>
+          <div class="sphere-core-3d"></div>
         </div>
+
         <h1>
           Intelligence<br>
           <span>reimagined.</span>
         </h1>
+
+        <!-- LIVE TYPING ANIMATION -->
+        <div class="typing-container">
+          <span id="typedText"></span><span class="typing-cursor"></span>
+        </div>
+
         <p>
-          Next-generation quantum AI environment engineered with hyper-realistic Apple-grade liquid glass refraction, triple specular highlights, and 100 futuristic features.
+          Next-generation quantum AI environment engineered with 3D realistic glowing lights, live typing AI signatures, and 100 futuristic features.
         </p>
 
         <div class="hero-badges">
           <span class="badge"><strong>Quantum OS</strong> Active</span>
           <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>Hyper-Realistic</strong> Liquid Glass</span>
+          <span class="badge"><strong>3D Realistic</strong> Lighting</span>
         </div>
       </section>
 
@@ -859,7 +900,7 @@
             <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
             <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
             <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Hyper-Glass Core</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">3D Realistic Core</strong></div>
           </div>
         </div>
       </div>
@@ -919,6 +960,44 @@
     "use strict";
 
     const $ = (id) => document.getElementById(id);
+
+    // LIVE TYPING ANIMATION SCRIPT FOR AI NAME
+    const wordsToType = [
+      "NEURAL ULTRA PRIME",
+      "QUANTUM OS v100",
+      "5000 IQ AI ENGINE",
+      "VISIONOS LIQUID GLASS",
+      "ENTERPRISE AI CORE"
+    ];
+    let wordIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    const typedElem = $("typedText");
+
+    function typeWriter() {
+      const currentWord = wordsToType[wordIdx];
+      if (isDeleting) {
+        typedElem.textContent = currentWord.substring(0, charIdx - 1);
+        charIdx--;
+      } else {
+        typedElem.textContent = currentWord.substring(0, charIdx + 1);
+        charIdx++;
+      }
+
+      let speed = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIdx === currentWord.length) {
+        speed = 2000; // Pause at end of word
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        wordIdx = (wordIdx + 1) % wordsToType.length;
+        speed = 400;
+      }
+
+      setTimeout(typeWriter, speed);
+    }
+    setTimeout(typeWriter, 600);
 
     const state = {
       messages: [],
