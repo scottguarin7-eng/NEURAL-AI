@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="theme-color" content="#020308">
   <meta name="description" content="Neural Ultra Next-Gen Quantum AI OS">
-  <title>Neural Ultra — Quantum OS</title>
+  <title>Neural Ultra — Quantum OS v100</title>
 
   <style>
     :root {
-      --bg-base: #020308;
-      --bg-surface: #060914;
-      --liquid-glass: rgba(14, 18, 44, 0.75);
-      --liquid-card: rgba(20, 26, 62, 0.55);
-      --liquid-hover: rgba(30, 39, 90, 0.8);
+      --bg-base: #010206;
+      --bg-surface: #050814;
+      --liquid-glass: rgba(14, 18, 44, 0.78);
+      --liquid-card: rgba(20, 26, 62, 0.58);
+      --liquid-hover: rgba(30, 39, 90, 0.85);
       --border-glass: rgba(255, 255, 255, 0.14);
-      --border-lightning: rgba(108, 242, 255, 0.65);
+      --border-lightning: rgba(108, 242, 255, 0.7);
       --text-main: #f5f7ff;
       --text-muted: #9faad4;
       --text-faint: #6774a6;
@@ -25,7 +25,7 @@
       --pink: #ff75c8;
       --green: #51f59c;
       --red: #ff6b8b;
-      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.8);
+      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.85);
       --radius-xl: 32px;
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -35,11 +35,11 @@
     [data-theme="light"] {
       --bg-base: #e2ecfb;
       --bg-surface: #cfdffc;
-      --liquid-glass: rgba(255, 255, 255, 0.85);
-      --liquid-card: rgba(255, 255, 255, 0.95);
+      --liquid-glass: rgba(255, 255, 255, 0.88);
+      --liquid-card: rgba(255, 255, 255, 0.96);
       --liquid-hover: rgba(255, 255, 255, 1);
       --border-glass: rgba(20, 45, 85, 0.16);
-      --border-lightning: rgba(0, 140, 255, 0.5);
+      --border-lightning: rgba(0, 140, 255, 0.55);
       --text-main: #0c1838;
       --text-muted: #526391;
       --text-faint: #7988b5;
@@ -62,9 +62,9 @@
       color: var(--text-main);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.22), transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.25), transparent 40%),
-        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.18), transparent 45%),
+        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.24), transparent 35%),
+        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.28), transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.2), transparent 45%),
         linear-gradient(135deg, var(--bg-base), var(--bg-surface));
       background-attachment: fixed;
     }
@@ -97,14 +97,13 @@
     button, input, textarea, select { font: inherit; }
     button { cursor: pointer; touch-action: manipulation; }
 
-    /* LAYOUT CONTAINER */
     .app-viewport {
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      width: min(1200px, 100% - 24px);
+      width: min(1200px, 100% - 20px);
       margin: 0 auto;
-      padding: 12px 0 140px; /* Space para sa sticky composer */
+      padding: 12px 0 130px;
     }
 
     .glass-panel {
@@ -130,11 +129,11 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
+      gap: 10px;
       padding: 10px 16px;
       border-radius: 22px;
       border: 1px solid var(--border-lightning);
-      box-shadow: 0 10px 40px rgba(108, 242, 255, 0.2);
+      box-shadow: 0 10px 40px rgba(108, 242, 255, 0.22);
     }
 
     .brand {
@@ -144,23 +143,23 @@
     }
 
     .brand-orb {
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
       background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
-      box-shadow: 0 0 25px rgba(108, 242, 255, 0.8);
+      box-shadow: 0 0 25px rgba(108, 242, 255, 0.85);
       animation: coreBreathe 4s ease-in-out infinite;
     }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
       letter-spacing: -0.04em;
     }
 
     .brand-sub {
       color: var(--cyan);
-      font-size: 9px;
+      font-size: 8px;
       font-weight: 800;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -172,22 +171,22 @@
       gap: 8px;
     }
 
-    .hub-trigger-btn {
+    .action-btn {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding: 8px 14px;
+      padding: 8px 12px;
       border: 1px solid var(--border-lightning);
       border-radius: 12px;
-      color: #020308;
+      color: #010206;
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
       box-shadow: 0 0 20px rgba(108, 242, 255, 0.4);
       transition: var(--transition);
     }
 
-    .hub-trigger-btn:hover {
+    .action-btn:hover {
       transform: translateY(-2px);
       box-shadow: 0 0 30px rgba(108, 242, 255, 0.7);
     }
@@ -195,8 +194,8 @@
     .icon-btn {
       display: grid;
       place-items: center;
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border: 1px solid var(--border-glass);
       border-radius: 12px;
       color: var(--text-main);
@@ -208,14 +207,14 @@
       display: flex;
       flex-direction: column;
       gap: 16px;
-      margin-top: 16px;
+      margin-top: 14px;
     }
 
     /* HERO */
     .hero {
       position: relative;
       overflow: hidden;
-      padding: 36px 20px 24px;
+      padding: 32px 18px 22px;
       border-radius: var(--radius-xl);
       text-align: center;
       border: 1px solid var(--border-lightning);
@@ -223,12 +222,12 @@
 
     .hero-core {
       position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 20px;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 18px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
-      box-shadow: 0 0 70px rgba(108, 242, 255, 0.7), 0 0 130px rgba(168, 124, 255, 0.45);
+      box-shadow: 0 0 70px rgba(108, 242, 255, 0.75), 0 0 130px rgba(168, 124, 255, 0.5);
       animation: coreBreathe 5s ease-in-out infinite;
     }
 
@@ -243,7 +242,7 @@
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      font-size: clamp(2rem, 4.8vw, 3.8rem);
       line-height: 0.95;
       letter-spacing: -0.08em;
     }
@@ -256,10 +255,10 @@
     }
 
     .hero p {
-      max-width: 560px;
-      margin: 14px auto 0;
+      max-width: 540px;
+      margin: 12px auto 0;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
     }
 
@@ -267,17 +266,17 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 8px;
-      margin-top: 18px;
+      gap: 6px;
+      margin-top: 16px;
     }
 
     .badge {
-      padding: 5px 12px;
+      padding: 4px 10px;
       border: 1px solid var(--border-glass);
       border-radius: 999px;
       color: var(--text-muted);
       background: rgba(255,255,255,0.03);
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .badge strong { color: var(--cyan); }
@@ -285,7 +284,7 @@
     /* TRANSCRIPT PANEL */
     .transcript-panel {
       display: none;
-      padding: 18px;
+      padding: 16px;
       border-radius: var(--radius-lg);
     }
     .transcript-panel.visible { display: block; }
@@ -294,8 +293,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
+      margin-bottom: 10px;
+      padding-bottom: 6px;
       border-bottom: 1px solid var(--border-glass);
     }
 
@@ -312,7 +311,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      max-height: 480px;
+      max-height: 440px;
       overflow-y: auto;
     }
 
@@ -320,7 +319,7 @@
       max-width: 90%;
       padding: 14px 16px;
       border-radius: 18px;
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
@@ -328,7 +327,7 @@
 
     .message.user {
       margin-left: auto;
-      color: #020308;
+      color: #010206;
       background: linear-gradient(135deg, var(--cyan), #b5ffff);
       box-shadow: 0 8px 24px rgba(108, 242, 255, 0.35);
       border-bottom-right-radius: 4px;
@@ -344,13 +343,13 @@
 
     .message-tag {
       margin-bottom: 4px;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 900;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-faint);
     }
-    .message.user .message-tag { color: rgba(2,3,8,0.6); }
+    .message.user .message-tag { color: rgba(1,2,6,0.6); }
 
     /* SUGGESTIONS GRID */
     .suggestions-grid {
@@ -376,17 +375,17 @@
     .suggestion-icon {
       display: grid;
       place-items: center;
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       margin-bottom: 10px;
-      border-radius: 10px;
+      border-radius: 9px;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: #020308;
-      font-size: 13px;
+      color: #010206;
+      font-size: 12px;
     }
 
-    .suggestion-card strong { display: block; font-size: 12px; }
-    .suggestion-card small { display: block; margin-top: 4px; color: var(--text-muted); font-size: 10px; }
+    .suggestion-card strong { display: block; font-size: 11px; }
+    .suggestion-card small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
 
     /* STICKY FLOATING COMPOSER AT THE VERY BOTTOM */
     .sticky-composer {
@@ -395,7 +394,7 @@
       left: 0;
       right: 0;
       z-index: 90;
-      padding: 10px 14px 16px;
+      padding: 8px 12px 14px;
       background: linear-gradient(to top, var(--bg-base) 80%, transparent);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -405,10 +404,10 @@
       width: min(1200px, 100%);
       margin: 0 auto;
       padding: 10px;
-      border-radius: 26px;
+      border-radius: 24px;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(108, 242, 255, 0.25);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(108, 242, 255, 0.25);
     }
 
     .composer-form {
@@ -416,22 +415,22 @@
       align-items: flex-end;
       gap: 8px;
       padding: 4px 6px;
-      border-radius: 18px;
-      background: rgba(0, 0, 0, 0.4);
+      border-radius: 16px;
+      background: rgba(0, 0, 0, 0.45);
     }
 
     textarea {
       flex: 1;
-      min-height: 44px;
-      max-height: 140px;
+      min-height: 42px;
+      max-height: 130px;
       resize: none;
       padding: 10px 8px;
       border: 0;
       outline: 0;
       color: var(--text-main);
       background: transparent;
-      font-size: 14px;
-      line-height: 1.45;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
     textarea::placeholder { color: var(--text-faint); }
@@ -439,15 +438,15 @@
     .send-btn {
       display: grid;
       place-items: center;
-      width: 48px;
-      height: 48px;
+      width: 46px;
+      height: 46px;
       flex-shrink: 0;
       border: 0;
-      border-radius: 14px;
-      color: #020308;
+      border-radius: 13px;
+      color: #010206;
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
       box-shadow: 0 4px 20px rgba(108, 242, 255, 0.5);
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
     }
 
@@ -474,27 +473,27 @@
     .chip:hover { color: var(--text-main); border-color: var(--cyan); }
     .counter { color: var(--text-faint); font-size: 10px; }
 
-    /* QUANTUM TOOLS DRAWER (ANG BAGONG LALAGYAN NG TOOLS AT METRICS) */
+    /* MODAL DRAWERS (COMMAND HUB & 100 FEATURES) */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 120;
+      z-index: 150;
       display: none;
       place-items: flex-end center;
-      background: rgba(1, 2, 6, 0.85);
-      backdrop-filter: blur(16px);
+      background: rgba(1, 2, 6, 0.88);
+      backdrop-filter: blur(18px);
     }
     .drawer-backdrop.open { display: grid; }
 
     .drawer-panel {
-      width: min(900px, 100%);
+      width: min(950px, 100%);
       max-height: 85vh;
       overflow-y: auto;
-      padding: 24px;
-      border-radius: 32px 32px 0 0;
+      padding: 22px;
+      border-radius: 30px 30px 0 0;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
-      box-shadow: 0 -20px 80px rgba(0,0,0,0.9);
+      box-shadow: 0 -20px 80px rgba(0,0,0,0.95);
       animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -502,31 +501,31 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 20px;
-      padding-bottom: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
       border-bottom: 1px solid var(--border-glass);
     }
 
-    .drawer-head h2 { margin: 0; font-size: 18px; font-weight: 900; letter-spacing: -0.02em; }
+    .drawer-head h2 { margin: 0; font-size: 16px; font-weight: 900; letter-spacing: -0.02em; }
 
     .drawer-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .drawer-card {
-      padding: 16px;
+      padding: 14px;
       border-radius: var(--radius-md);
     }
 
     .drawer-card-title {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--cyan);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .tools-flex {
@@ -545,29 +544,51 @@
     }
 
     .tool-tile:hover { border-color: var(--violet); background: var(--liquid-hover); }
-    .tool-tile span { display: block; color: var(--cyan); font-size: 15px; margin-bottom: 4px; }
+    .tool-tile span { display: block; color: var(--cyan); font-size: 14px; margin-bottom: 3px; }
     .tool-tile strong { display: block; font-size: 11px; }
     .tool-tile small { display: block; color: var(--text-faint); font-size: 9px; }
 
     .metrics-flex { display: flex; flex-direction: column; gap: 6px; }
-    .metric-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border-glass); font-size: 11px; color: var(--text-muted); }
+    .metric-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-glass); font-size: 11px; color: var(--text-muted); }
 
-    .history-scroll { display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto; }
-    .history-item { width: 100%; padding: 8px; border: 1px solid transparent; border-radius: 8px; background: var(--liquid-card); color: var(--text-muted); font-size: 11px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .history-scroll { display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
+    .history-item { width: 100%; padding: 7px; border: 1px solid transparent; border-radius: 8px; background: var(--liquid-card); color: var(--text-muted); font-size: 10px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    /* 100 FEATURES GRID STYLES */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      max-height: 500px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .feature-chip {
+      padding: 10px;
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      background: var(--liquid-card);
+      text-align: left;
+      transition: var(--transition);
+    }
+    .feature-chip:hover { border-color: var(--cyan); background: var(--liquid-hover); transform: translateY(-2px); }
+    .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 2px; }
+    .feature-title { font-size: 11px; font-weight: 700; color: var(--text-main); }
 
     /* TOAST */
     .toast-popup {
       position: fixed;
       z-index: 200;
-      bottom: 120px;
+      bottom: 110px;
       right: 20px;
-      max-width: 320px;
-      padding: 12px 16px;
-      border-radius: 14px;
+      max-width: 300px;
+      padding: 10px 14px;
+      border-radius: 12px;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
       color: var(--text-main);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       opacity: 0;
       transform: translateY(20px);
@@ -583,10 +604,7 @@
 
     @media (max-width: 768px) {
       .suggestions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .drawer-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 480px) {
-      .suggestions-grid { grid-template-columns: 1fr; }
+      .drawer-grid, .features-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -600,18 +618,22 @@
         <div class="brand-orb"></div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">100 Quantum Suite</div>
+          <div class="brand-sub">Quantum OS v100</div>
         </div>
       </div>
 
       <div class="topbar-actions">
-        <!-- QUANTUM HUB BUTTON (LALAGYAN NG TOOLS) -->
-        <button id="openHubBtn" class="hub-trigger-btn" type="button">
-          <span>✦</span>
-          <span>Command Hub</span>
+        <!-- 100 FEATURES BUTTON -->
+        <button id="openFeaturesBtn" class="action-btn" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
+          <span>⚡</span>
+          <span>100 Features</span>
         </button>
 
-        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings">⚙</button>
+        <!-- COMMAND HUB BUTTON (LALAGYAN NG TOOLS) -->
+        <button id="openHubBtn" class="action-btn" type="button">
+          <span>✦</span>
+          <span>Hub</span>
+        </button>
       </div>
     </header>
 
@@ -626,13 +648,13 @@
           <span>reimagined.</span>
         </h1>
         <p>
-          Next-generation quantum AI environment built for ultimate reasoning, coding synthesis, and architectural execution.
+          Next-generation quantum AI environment engineered with 100 futuristic features for ultimate soft opening impact.
         </p>
 
         <div class="hero-badges">
-          <span class="badge"><strong>Quantum OS</strong> Core</span>
-          <span class="badge"><strong>100 Features</strong> Active</span>
-          <span class="badge"><strong>Protected</strong> API Route</span>
+          <span class="badge"><strong>Quantum OS</strong> Active</span>
+          <span class="badge"><strong>100 Features</strong> Built-in</span>
+          <span class="badge"><strong>Isolated</strong> Drawer Hub</span>
         </div>
       </section>
 
@@ -697,7 +719,7 @@
     </div>
   </div>
 
-  <!-- QUANTUM COMMAND HUB DRAWER (MALINIS NA LALAGYAN NG TOOLS & METRICS) -->
+  <!-- COMMAND HUB DRAWER (LALAGYAN NG POWER TOOLS AT METRICS - HINDI NA NAKAKALAT SA UI) -->
   <div id="hubDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
@@ -706,8 +728,6 @@
       </div>
 
       <div class="drawer-grid">
-
-        <!-- POWER TOOLS -->
         <div class="drawer-card glass-card">
           <div class="drawer-card-title">Power Tools</div>
           <div class="tools-flex">
@@ -734,7 +754,6 @@
           </div>
         </div>
 
-        <!-- METRICS -->
         <div class="drawer-card glass-card">
           <div class="drawer-card-title">Session Metrics</div>
           <div class="metrics-flex">
@@ -744,16 +763,21 @@
             <div class="metric-row"><span>Engine Mode</span><strong>Quantum Fast</strong></div>
           </div>
         </div>
-
-        <!-- RECENT PROMPTS -->
-        <div class="drawer-card glass-card" style="grid-column: span 2;">
-          <div class="drawer-card-title">Recent Prompts</div>
-          <div id="historyScroll" class="history-scroll">
-            <div style="color: var(--text-faint); font-size: 11px;">No recent prompts yet.</div>
-          </div>
-        </div>
-
       </div>
+    </div>
+  </div>
+
+  <!-- 100 FUTURISTIC FEATURES MODAL DRAWER -->
+  <div id="featuresDrawer" class="drawer-backdrop">
+    <div class="drawer-panel glass-panel">
+      <div class="drawer-head">
+        <h2>⚡ 100 Next-Gen Futuristic AI Features</h2>
+        <button id="closeFeaturesBtn" class="icon-btn" type="button">×</button>
+      </div>
+      <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
+        Exclusive futuristic architecture built for software engineering evaluation and soft opening demonstration:
+      </p>
+      <div id="featuresGrid" class="features-grid"></div>
     </div>
   </div>
 
@@ -766,11 +790,48 @@
 
     const state = {
       messages: [],
-      history: [],
       isLoading: false,
       latency: null,
       controller: null
     };
+
+    // GENERATE 100 FUTURISTIC FEATURES LIST DYNAMICALLY
+    const featureTitles = [
+      "Neural Synapse Engine", "Holographic Thought Visualizer", "Quantum Context Caching", "Bi-Directional Mind Mapping", "Multi-Stream Thinking", 
+      "Subconscious Memory Retrieval", "Adaptive Persona Tuning", "Zero-Latency Prediction", "Cognitive Auto-Balancer", "Emotion Spectrum Detection",
+      "Dynamic Prompt Compression", "Live AST Code Refactoring", "Self-Healing Bug Engine", "Architecture Visualizer", "Autonomous API Mocking",
+      "Multi-Language Code Fusion", "Memory Leak Radar", "Cyber-Threat Vulnerability Scanner", "Zero-Day Exploit Emulator", "Quantum Compiler Pipeline",
+      "Algorithmic Complexity Auditor", "AES-256 Quantum Vault", "Zero-Knowledge Storage", "Biometric Session Lock", "Intrusion Countermeasure Logic",
+      "Anti-Reverse Engineering Canvas", "Steganographic Data Hiding", "Threat Vector Heatmap", "Identity Anonymizer", "Secure Sandbox Execution",
+      "Auto-Wipe Memory Triggers", "Spectral Audio Equalizer", "Neural Voice Clone Emulator", "Real-Time UI Code Gen", "Spatial Audio Spatializer",
+      "Synthetic Image Color Grading", "3D Object Mesh Prompting", "Neural Video Frame Interpolator", "Haptic Feedback Engine", "Subliminal Noise Suppressor",
+      "Dynamic Waveform Visualizer", "Hyper-Dimensional DB Search", "Multi-Agent Swarm Orchestrator", "Autonomous Web Crawler", "Executive Summary Matrix",
+      "Predictive Forecasting Engine", "Cross-Platform Knowledge Graph", "Semantic Intent Analyzer", "Contextual Sentiment Matrix", "Language Auto-Localizer",
+      "Knowledge Ingestion Pipeline", "Custom System Constructor", "API Key Vault Manager", "WebSockets Low-Latency Router", "Token Density Monitor",
+      "Custom CSS/JS Theme Injection", "Edge Compute Routing", "Multi-Cloud Fallback Engine", "Deployment Pipeline Trigger", "Benchmark Suite Engine",
+      "Quantum State Synchronizer", "Neural Packet Inspector", "Autonomous Refactor Daemon", "Synthetic Persona Synthesizer", "Deep Latent Space Explorer",
+      "Hyperbolic Embedding Visualizer", "Zero-Shot Logic Verifier", "Quantum Entanglement Router", "Neural Firewall Sentinel", "Autonomous Test Case Generator",
+      "Distributed Memory Mesh", "Real-time Telemetry Streamer", "Sub-Millisecond Tokenizer", "Neural Drift Corrector", "Cross-Model Consensus Engine",
+      "Encrypted Neural Weights Hub", "Autonomous Patch Deployer", "Quantum Entropy Generator", "Cognitive Load Shedder", "Adaptive Context Pruner",
+      "Multi-Modal Sensor Fusion", "Neural State Snapshotter", "Autonomous Git Integrator", "Predictive Branching Simulator", "Quantum Cryptographic Bridge",
+      "Distributed Tensor Pipeline", "Real-time Syntax Harmonizer", "Neural Semantic Indexer", "Autonomous Profiling Agent", "Hyper-Threaded Prompt Stream",
+      "Zero-Overhead State Cache", "Secure Enclave Executor", "Quantum Annealing Optimizer", "Neural Feedback Loop Tuner", "Autonomous API Gateway",
+      "Synthetic Data Generator", "Quantum Mesh Router", "Neural Edge Synthesizer", "Universal Protocol Bridge", "Neural Ultra Prime Core"
+    ];
+
+    function render100Features() {
+      const grid = $("featuresGrid");
+      grid.innerHTML = "";
+      featureTitles.forEach((title, idx) => {
+        const item = document.createElement("div");
+        item.className = "feature-chip glass-card";
+        item.innerHTML = `
+          <div class="feature-num">FEATURE #${idx + 1}</div>
+          <div class="feature-title">${title}</div>
+        `;
+        grid.appendChild(item);
+      });
+    }
 
     function showToast(text) {
       const toast = $("toastPopup");
@@ -784,7 +845,7 @@
       const input = $("promptInput");
       $("charCount").textContent = String(input.value.length);
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 140) + "px";
+      input.style.height = Math.min(input.scrollHeight, 130) + "px";
     }
 
     function renderMessages() {
@@ -869,10 +930,14 @@
       }
     }
 
-    // DRAWER TOGGLES
+    // DRAWERS TOGGLES
     $("openHubBtn").addEventListener("click", () => $("hubDrawer").classList.add("open"));
     $("closeHubBtn").addEventListener("click", () => $("hubDrawer").classList.remove("open"));
     $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) $("hubDrawer").classList.remove("open"); });
+
+    $("openFeaturesBtn").addEventListener("click", () => $("featuresDrawer").classList.add("open"));
+    $("closeFeaturesBtn").addEventListener("click", () => $("featuresDrawer").classList.remove("open"));
+    $("featuresDrawer").addEventListener("click", (e) => { if (e.target === $("featuresDrawer")) $("featuresDrawer").classList.remove("open"); });
 
     // TOOLS LISTENERS
     $("clearChatBtn").addEventListener("click", () => {
@@ -945,6 +1010,7 @@
       });
     });
 
+    render100Features();
     updateComposerHeight();
   </script>
 </body>
