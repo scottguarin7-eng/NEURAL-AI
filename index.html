@@ -2479,7 +2479,6 @@
           dom.engineDescription.textContent =
             "The API route returned an error.";
 
-          // Dito ipapakita na ang exact at totoong error message nang hindi nagpapanggap na busy
           addMessage(
             "Error: " + error.message,
             "assistant"
@@ -2770,4 +2769,50 @@
       }
     });
 
-    dom.settingsModal.classList.add("open"); // Wait, don't keep settings modal open on load! (Ensure it wasn't accidentally triggered, let's keep original close state).
+    dom.settingsModal.addEventListener("click", (event) => {
+      if (event.target === dom.settingsModal) {
+        closeSettings();
+      }
+    });
+
+    window.addEventListener("online", () => {
+      setEngineStatus("Back online");
+      showToast("Connection restored.");
+    });
+
+    window.addEventListener("offline", () => {
+      setEngineStatus("Offline", "error");
+      showToast("You are offline.");
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeSettings();
+      }
+
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "k"
+      ) {
+        event.preventDefault();
+        dom.prompt.focus();
+      }
+
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "n"
+      ) {
+        event.preventDefault();
+        clearConversation();
+      }
+    });
+
+    state.history = loadHistory();
+    applySettings();
+    updateModeUI();
+    updateComposer();
+    updateMetrics();
+    renderHistory();
+  </script>
+</body>
+</html>
