@@ -2,18 +2,18 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <meta name="theme-color" content="#020308">
-  <meta name="description" content="Neural Ultra Quantum Liquid Glass Workspace">
-  <title>Neural Ultra — Quantum Intelligence</title>
+  <meta name="description" content="Neural Ultra Next-Gen Quantum AI OS">
+  <title>Neural Ultra — Quantum OS</title>
 
   <style>
     :root {
-      --bg-base: #010206;
-      --bg-surface: #050712;
+      --bg-base: #020308;
+      --bg-surface: #060914;
       --liquid-glass: rgba(14, 18, 44, 0.75);
       --liquid-card: rgba(20, 26, 62, 0.55);
-      --liquid-hover: rgba(30, 39, 90, 0.75);
+      --liquid-hover: rgba(30, 39, 90, 0.8);
       --border-glass: rgba(255, 255, 255, 0.14);
       --border-lightning: rgba(108, 242, 255, 0.65);
       --text-main: #f5f7ff;
@@ -25,7 +25,7 @@
       --pink: #ff75c8;
       --green: #51f59c;
       --red: #ff6b8b;
-      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.7);
+      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.8);
       --radius-xl: 32px;
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -35,7 +35,7 @@
     [data-theme="light"] {
       --bg-base: #e2ecfb;
       --bg-surface: #cfdffc;
-      --liquid-glass: rgba(255, 255, 255, 0.82);
+      --liquid-glass: rgba(255, 255, 255, 0.85);
       --liquid-card: rgba(255, 255, 255, 0.95);
       --liquid-hover: rgba(255, 255, 255, 1);
       --border-glass: rgba(20, 45, 85, 0.16);
@@ -46,46 +46,27 @@
       --shadow-quantum: 0 30px 80px rgba(50, 85, 140, 0.22);
     }
 
-    [data-theme="high"] {
-      --bg-base: #000000;
-      --bg-surface: #0a0a0a;
-      --liquid-glass: #111111;
-      --liquid-card: #181818;
-      --liquid-hover: #222222;
-      --border-glass: #ffffff;
-      --border-lightning: #00ffff;
-      --text-main: #ffffff;
-      --text-muted: #ffffff;
-      --text-faint: #ffffff;
-      --cyan: #00ffff;
-      --violet: #ff00ff;
-      --pink: #ff00ff;
-      --green: #00ff66;
-      --red: #ff3b3b;
-    }
-
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
     body {
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
       color: var(--text-main);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.2), transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.22), transparent 40%),
-        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.16), transparent 45%),
+        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.22), transparent 35%),
+        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.25), transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.18), transparent 45%),
         linear-gradient(135deg, var(--bg-base), var(--bg-surface));
       background-attachment: fixed;
-      overflow-x: hidden;
     }
 
     body::before {
@@ -96,16 +77,16 @@
       opacity: 0.35;
       pointer-events: none;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.028) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.028) 1px, transparent 1px);
-      background-size: 42px 42px;
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 40px 40px;
     }
 
     body::after {
       position: fixed;
       inset: -30%;
       z-index: -2;
-      opacity: 0.15;
+      opacity: 0.18;
       pointer-events: none;
       content: "";
       background: conic-gradient(from 90deg, transparent, var(--cyan), transparent 30%, var(--violet), transparent 60%, var(--pink), transparent);
@@ -113,28 +94,19 @@
       animation: ambientSpin 26s linear infinite;
     }
 
-    button, input, textarea, select {
-      font: inherit;
-    }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; touch-action: manipulation; }
 
-    button {
-      cursor: pointer;
-      touch-action: manipulation;
-    }
-
-    button:disabled {
-      cursor: not-allowed;
-      opacity: 0.5;
-    }
-
-    /* APP CONTAINER (DAGDAG PADDED BOTTOM PARA SA FIXED COMPOSER) */
-    .app-container {
-      width: min(1380px, 100% - 24px);
+    /* LAYOUT CONTAINER */
+    .app-viewport {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      width: min(1200px, 100% - 24px);
       margin: 0 auto;
-      padding: 14px 0 130px; 
+      padding: 12px 0 140px; /* Space para sa sticky composer */
     }
 
-    /* LIQUID GLASS PANELS */
     .glass-panel {
       border: 1px solid var(--border-glass);
       background: var(--liquid-glass);
@@ -150,48 +122,44 @@
       -webkit-backdrop-filter: blur(26px);
     }
 
-    /* TOPbar */
+    /* TOPBAR */
     .topbar {
       position: sticky;
-      top: 12px;
-      z-index: 50;
+      top: 10px;
+      z-index: 60;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      min-height: 70px;
-      padding: 10px 18px;
-      border-radius: 24px;
+      gap: 12px;
+      padding: 10px 16px;
+      border-radius: 22px;
       border: 1px solid var(--border-lightning);
-      box-shadow: 0 12px 45px rgba(108, 242, 255, 0.18);
+      box-shadow: 0 10px 40px rgba(108, 242, 255, 0.2);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .brand-orb {
-      position: relative;
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      border-radius: 15px;
+      width: 40px;
+      height: 40px;
+      border-radius: 13px;
       background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
-      box-shadow: 0 0 28px rgba(108, 242, 255, 0.8), inset 0 0 16px rgba(255,255,255,0.45);
+      box-shadow: 0 0 25px rgba(108, 242, 255, 0.8);
       animation: coreBreathe 4s ease-in-out infinite;
     }
 
     .brand-title {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 900;
       letter-spacing: -0.04em;
     }
 
     .brand-sub {
-      margin-top: 2px;
-      color: var(--text-faint);
+      color: var(--cyan);
       font-size: 9px;
       font-weight: 800;
       letter-spacing: 0.14em;
@@ -201,94 +169,72 @@
     .topbar-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
     }
 
-    .mode-selector {
+    .hub-trigger-btn {
       display: flex;
-      gap: 3px;
-      padding: 4px;
-      border: 1px solid var(--border-glass);
-      border-radius: 14px;
-      background: rgba(0,0,0,0.3);
-    }
-
-    .mode-btn {
-      padding: 8px 16px;
-      border: 0;
-      border-radius: 10px;
-      color: var(--text-muted);
-      background: transparent;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      border: 1px solid var(--border-lightning);
+      border-radius: 12px;
+      color: #020308;
+      background: linear-gradient(135deg, var(--cyan), #b8ffff);
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 900;
+      box-shadow: 0 0 20px rgba(108, 242, 255, 0.4);
       transition: var(--transition);
     }
 
-    .mode-btn.active {
-      color: #010206;
-      background: var(--cyan);
-      box-shadow: 0 4px 22px rgba(108, 242, 255, 0.6);
+    .hub-trigger-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 30px rgba(108, 242, 255, 0.7);
     }
 
     .icon-btn {
       display: grid;
       place-items: center;
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
       border: 1px solid var(--border-glass);
-      border-radius: 13px;
+      border-radius: 12px;
       color: var(--text-main);
       background: var(--liquid-card);
-      transition: var(--transition);
     }
 
-    .icon-btn:hover {
-      border-color: var(--cyan);
-      background: var(--liquid-hover);
-      transform: translateY(-2px);
-    }
-
-    /* LAYOUT */
-    .workspace-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 320px;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .primary-col {
-      min-width: 0;
+    /* MAIN CONTENT */
+    .main-content {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      margin-top: 16px;
     }
 
     /* HERO */
     .hero {
       position: relative;
-      min-height: 400px;
       overflow: hidden;
-      padding: 44px 24px 28px;
+      padding: 36px 20px 24px;
       border-radius: var(--radius-xl);
       text-align: center;
       border: 1px solid var(--border-lightning);
     }
 
-    .hero-lightning-core {
+    .hero-core {
       position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 26px;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 20px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
-      box-shadow: 0 0 80px rgba(108, 242, 255, 0.7), 0 0 150px rgba(168, 124, 255, 0.45);
+      box-shadow: 0 0 70px rgba(108, 242, 255, 0.7), 0 0 130px rgba(168, 124, 255, 0.45);
       animation: coreBreathe 5s ease-in-out infinite;
     }
 
-    .hero-lightning-core::before {
+    .hero-core::before {
       position: absolute;
-      inset: -14px;
+      inset: -12px;
       border: 1px dashed rgba(108, 242, 255, 0.6);
       border-radius: 50%;
       content: "";
@@ -297,8 +243,8 @@
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 5.2vw, 4.5rem);
-      line-height: 0.92;
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 0.95;
       letter-spacing: -0.08em;
     }
 
@@ -310,23 +256,23 @@
     }
 
     .hero p {
-      max-width: 580px;
-      margin: 16px auto 0;
+      max-width: 560px;
+      margin: 14px auto 0;
       color: var(--text-muted);
-      font-size: 15px;
-      line-height: 1.65;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    .hero-pills {
+    .hero-badges {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 8px;
-      margin-top: 20px;
+      margin-top: 18px;
     }
 
-    .pill {
-      padding: 6px 12px;
+    .badge {
+      padding: 5px 12px;
       border: 1px solid var(--border-glass);
       border-radius: 999px;
       color: var(--text-muted);
@@ -334,52 +280,28 @@
       font-size: 11px;
     }
 
-    .pill strong {
-      color: var(--cyan);
-    }
+    .badge strong { color: var(--cyan); }
 
-    .engine-status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      color: var(--green);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 14px var(--green);
-      animation: pulseGlow 2s infinite;
-    }
-
-    /* TRANSCRIPT */
+    /* TRANSCRIPT PANEL */
     .transcript-panel {
       display: none;
-      padding: 20px;
+      padding: 18px;
       border-radius: var(--radius-lg);
     }
+    .transcript-panel.visible { display: block; }
 
-    .transcript-panel.visible {
-      display: block;
-    }
-
-    .transcript-header {
+    .transcript-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       padding-bottom: 8px;
       border-bottom: 1px solid var(--border-glass);
     }
 
-    .transcript-header h2 {
+    .transcript-head h2 {
       margin: 0;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
@@ -389,27 +311,26 @@
     .messages-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-      max-height: 500px;
+      gap: 12px;
+      max-height: 480px;
       overflow-y: auto;
-      padding-right: 4px;
     }
 
     .message {
-      max-width: 88%;
-      padding: 16px 18px;
-      border-radius: 20px;
-      line-height: 1.6;
+      max-width: 90%;
+      padding: 14px 16px;
+      border-radius: 18px;
       font-size: 14px;
+      line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
     }
 
     .message.user {
       margin-left: auto;
-      color: #010206;
+      color: #020308;
       background: linear-gradient(135deg, var(--cyan), #b5ffff);
-      box-shadow: 0 10px 28px rgba(108, 242, 255, 0.35);
+      box-shadow: 0 8px 24px rgba(108, 242, 255, 0.35);
       border-bottom-right-radius: 4px;
     }
 
@@ -422,140 +343,24 @@
     }
 
     .message-tag {
-      margin-bottom: 6px;
+      margin-bottom: 4px;
       font-size: 10px;
       font-weight: 900;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--text-faint);
     }
-
-    .message.user .message-tag {
-      color: rgba(1, 2, 6, 0.6);
-    }
-
-    /* STICKY FLOATING COMPOSER AT THE VERY BOTTOM */
-    .sticky-composer-container {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      padding: 12px 16px 20px;
-      background: linear-gradient(to top, var(--bg-base) 75%, transparent);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    .composer-inner {
-      width: min(1380px, 100%);
-      margin: 0 auto;
-      padding: 12px;
-      border-radius: 28px;
-      background: var(--liquid-glass);
-      border: 1px solid var(--border-lightning);
-      box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(108, 242, 255, 0.25);
-    }
-
-    .composer-form {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
-      padding: 6px 8px;
-      border-radius: 20px;
-      background: rgba(0, 0, 0, 0.35);
-    }
-
-    textarea {
-      flex: 1;
-      min-height: 48px;
-      max-height: 160px;
-      resize: none;
-      padding: 12px 10px;
-      border: 0;
-      outline: 0;
-      color: var(--text-main);
-      background: transparent;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-
-    textarea::placeholder {
-      color: var(--text-faint);
-    }
-
-    .send-btn {
-      display: grid;
-      place-items: center;
-      width: 52px;
-      height: 52px;
-      flex-shrink: 0;
-      border: 0;
-      border-radius: 16px;
-      color: #010206;
-      background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      box-shadow: 0 6px 25px rgba(108, 242, 255, 0.45);
-      font-size: 22px;
-      font-weight: 900;
-      transition: var(--transition);
-    }
-
-    .send-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 35px rgba(108, 242, 255, 0.7);
-    }
-
-    .send-btn.stop {
-      color: #fff;
-      background: linear-gradient(135deg, var(--red), #ffa1b4);
-    }
-
-    .composer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 8px 8px 2px;
-    }
-
-    .composer-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .chip {
-      padding: 6px 12px;
-      border: 1px solid var(--border-glass);
-      border-radius: 10px;
-      color: var(--text-muted);
-      background: transparent;
-      font-size: 11px;
-      font-weight: 600;
-      transition: var(--transition);
-    }
-
-    .chip:hover {
-      color: var(--text-main);
-      border-color: var(--cyan);
-      background: var(--liquid-card);
-    }
-
-    .char-counter {
-      color: var(--text-faint);
-      font-size: 11px;
-    }
+    .message.user .message-tag { color: rgba(2,3,8,0.6); }
 
     /* SUGGESTIONS GRID */
     .suggestions-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 16px;
+      gap: 10px;
     }
 
     .suggestion-card {
-      padding: 16px;
+      padding: 14px;
       border-radius: var(--radius-md);
       text-align: left;
       cursor: pointer;
@@ -566,409 +371,228 @@
       border-color: var(--cyan);
       background: var(--liquid-hover);
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
     .suggestion-icon {
       display: grid;
       place-items: center;
-      width: 32px;
-      height: 32px;
-      margin-bottom: 12px;
+      width: 30px;
+      height: 30px;
+      margin-bottom: 10px;
       border-radius: 10px;
       background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: #010206;
-      font-size: 14px;
-    }
-
-    .suggestion-card strong {
-      display: block;
+      color: #020308;
       font-size: 13px;
-      font-weight: 700;
     }
 
-    .suggestion-card small {
-      display: block;
-      margin-top: 4px;
-      color: var(--text-muted);
-      font-size: 11px;
+    .suggestion-card strong { display: block; font-size: 12px; }
+    .suggestion-card small { display: block; margin-top: 4px; color: var(--text-muted); font-size: 10px; }
+
+    /* STICKY FLOATING COMPOSER AT THE VERY BOTTOM */
+    .sticky-composer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      padding: 10px 14px 16px;
+      background: linear-gradient(to top, var(--bg-base) 80%, transparent);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .composer-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 26px;
+      background: var(--liquid-glass);
+      border: 1px solid var(--border-lightning);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(108, 242, 255, 0.25);
+    }
+
+    .composer-form {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      padding: 4px 6px;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    textarea {
+      flex: 1;
+      min-height: 44px;
+      max-height: 140px;
+      resize: none;
+      padding: 10px 8px;
+      border: 0;
+      outline: 0;
+      color: var(--text-main);
+      background: transparent;
+      font-size: 14px;
       line-height: 1.45;
     }
 
-    /* SIDEBAR */
-    .sidebar-col {
+    textarea::placeholder { color: var(--text-faint); }
+
+    .send-btn {
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      border: 0;
+      border-radius: 14px;
+      color: #020308;
+      background: linear-gradient(135deg, var(--cyan), #b8ffff);
+      box-shadow: 0 4px 20px rgba(108, 242, 255, 0.5);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .send-btn.stop { color: #fff; background: linear-gradient(135deg, var(--red), #ffa1b4); }
+
+    .composer-tools {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 6px 6px 0;
+    }
+
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+    .chip {
+      padding: 4px 10px;
+      border: 1px solid var(--border-glass);
+      border-radius: 8px;
+      color: var(--text-muted);
+      background: transparent;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .chip:hover { color: var(--text-main); border-color: var(--cyan); }
+    .counter { color: var(--text-faint); font-size: 10px; }
+
+    /* QUANTUM TOOLS DRAWER (ANG BAGONG LALAGYAN NG TOOLS AT METRICS) */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      place-items: flex-end center;
+      background: rgba(1, 2, 6, 0.85);
+      backdrop-filter: blur(16px);
+    }
+    .drawer-backdrop.open { display: grid; }
+
+    .drawer-panel {
+      width: min(900px, 100%);
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 24px;
+      border-radius: 32px 32px 0 0;
+      background: var(--liquid-glass);
+      border: 1px solid var(--border-lightning);
+      box-shadow: 0 -20px 80px rgba(0,0,0,0.9);
+      animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .drawer-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-glass);
+    }
+
+    .drawer-head h2 { margin: 0; font-size: 18px; font-weight: 900; letter-spacing: -0.02em; }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 14px;
     }
 
-    .side-card {
-      padding: 18px;
-      border-radius: var(--radius-lg);
+    .drawer-card {
+      padding: 16px;
+      border-radius: var(--radius-md);
     }
 
-    .side-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 14px;
-    }
-
-    .side-card-header h3 {
-      margin: 0;
-      font-size: 12px;
+    .drawer-card-title {
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--text-faint);
-    }
-
-    .side-card-header button {
-      border: 0;
-      background: transparent;
       color: var(--cyan);
-      font-size: 11px;
-      font-weight: 700;
+      margin-bottom: 12px;
     }
 
-    .metrics-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .metric-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 6px 0;
-      border-bottom: 1px solid var(--border-glass);
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .metric-row:last-child {
-      border-bottom: 0;
-    }
-
-    .metric-row strong {
-      color: var(--text-main);
-    }
-
-    .tools-grid {
+    .tools-flex {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
     }
 
     .tool-tile {
-      padding: 12px;
+      padding: 10px;
       border: 1px solid var(--border-glass);
       border-radius: 12px;
       background: var(--liquid-card);
       color: var(--text-main);
       text-align: left;
-      transition: var(--transition);
     }
 
-    .tool-tile:hover {
-      border-color: var(--violet);
-      background: var(--liquid-hover);
-      transform: translateY(-2px);
-    }
+    .tool-tile:hover { border-color: var(--violet); background: var(--liquid-hover); }
+    .tool-tile span { display: block; color: var(--cyan); font-size: 15px; margin-bottom: 4px; }
+    .tool-tile strong { display: block; font-size: 11px; }
+    .tool-tile small { display: block; color: var(--text-faint); font-size: 9px; }
 
-    .tool-tile span {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--cyan);
-      font-size: 16px;
-    }
+    .metrics-flex { display: flex; flex-direction: column; gap: 6px; }
+    .metric-row { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid var(--border-glass); font-size: 11px; color: var(--text-muted); }
 
-    .tool-tile strong {
-      display: block;
-      font-size: 11px;
-    }
-
-    .tool-tile small {
-      display: block;
-      margin-top: 2px;
-      color: var(--text-faint);
-      font-size: 9px;
-    }
-
-    .history-list {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-height: 180px;
-      overflow-y: auto;
-    }
-
-    .history-btn {
-      width: 100%;
-      padding: 8px 10px;
-      border: 1px solid transparent;
-      border-radius: 8px;
-      color: var(--text-muted);
-      background: var(--liquid-card);
-      text-align: left;
-      font-size: 12px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      transition: var(--transition);
-    }
-
-    .history-btn:hover {
-      border-color: var(--border-glass);
-      color: var(--text-main);
-      background: var(--liquid-hover);
-    }
-
-    .empty-state {
-      color: var(--text-faint);
-      font-size: 11px;
-      text-align: center;
-      padding: 12px 0;
-    }
-
-    /* MODAL */
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 150;
-      display: none;
-      place-items: center;
-      padding: 20px;
-      background: rgba(1, 2, 6, 0.85);
-      backdrop-filter: blur(16px);
-    }
-
-    .modal-backdrop.open {
-      display: grid;
-    }
-
-    .modal-box {
-      width: min(520px, 100%);
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;
-      padding: 24px;
-      border-radius: var(--radius-xl);
-      background: var(--liquid-glass);
-      border: 1px solid var(--border-lightning);
-      box-shadow: 0 30px 100px rgba(0,0,0,0.85);
-    }
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-    }
-
-    .modal-header h2 {
-      margin: 0;
-      font-size: 20px;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-    }
-
-    .setting-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border-glass);
-    }
-
-    .setting-item:last-child {
-      border-bottom: 0;
-    }
-
-    .setting-item strong {
-      display: block;
-      font-size: 13px;
-    }
-
-    .setting-item small {
-      display: block;
-      margin-top: 3px;
-      color: var(--text-faint);
-      font-size: 11px;
-    }
-
-    select {
-      padding: 8px 12px;
-      border: 1px solid var(--border-glass);
-      border-radius: 10px;
-      color: var(--text-main);
-      background: var(--liquid-card);
-    }
-
-    .toggle-switch {
-      position: relative;
-      width: 44px;
-      height: 24px;
-      flex-shrink: 0;
-    }
-
-    .toggle-switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .toggle-slider {
-      position: absolute;
-      inset: 0;
-      border: 1px solid var(--border-glass);
-      border-radius: 99px;
-      background: rgba(255,255,255,0.1);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .toggle-slider::before {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background: var(--text-muted);
-      content: "";
-      transition: var(--transition);
-    }
-
-    .toggle-switch input:checked + .toggle-slider {
-      background: var(--cyan);
-      border-color: var(--cyan);
-    }
-
-    .toggle-switch input:checked + .toggle-slider::before {
-      transform: translateX(20px);
-      background: #010206;
-    }
+    .history-scroll { display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto; }
+    .history-item { width: 100%; padding: 8px; border: 1px solid transparent; border-radius: 8px; background: var(--liquid-card); color: var(--text-muted); font-size: 11px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
     /* TOAST */
     .toast-popup {
       position: fixed;
       z-index: 200;
-      bottom: 110px;
-      right: 24px;
-      max-width: 360px;
-      padding: 14px 18px;
+      bottom: 120px;
+      right: 20px;
+      max-width: 320px;
+      padding: 12px 16px;
       border-radius: 14px;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
-      box-shadow: var(--shadow-quantum);
       color: var(--text-main);
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
       opacity: 0;
       transform: translateY(20px);
       pointer-events: none;
       transition: var(--transition);
     }
+    .toast-popup.show { opacity: 1; transform: translateY(0); }
 
-    .toast-popup.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ANIMATIONS */
-    @keyframes coreBreathe {
-      0%, 100% { transform: scale(1); filter: brightness(1); }
-      50% { transform: scale(1.08); filter: brightness(1.3); }
-    }
-
-    @keyframes spinRing {
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes pulseGlow {
-      50% { opacity: 0.4; transform: scale(0.85); }
-    }
-
-    @keyframes ambientSpin {
-      to { transform: rotate(360deg); }
-    }
-
-    .typing-dots {
-      display: inline-flex;
-      gap: 4px;
-      align-items: center;
-    }
-
-    .typing-dots i {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--cyan);
-      animation: dotBounce 1s infinite ease-in-out;
-    }
-
-    .typing-dots i:nth-child(2) { animation-delay: 0.15s; }
-    .typing-dots i:nth-child(3) { animation-delay: 0.3s; }
-
-    @keyframes dotBounce {
-      0%, 80%, 100% { transform: translateY(0); opacity: 0.3; }
-      40% { transform: translateY(-5px); opacity: 1; }
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 1100px) {
-      .workspace-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-      .sidebar-col {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
+    @keyframes coreBreathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.08); filter: brightness(1.3); } }
+    @keyframes spinRing { to { transform: rotate(360deg); } }
+    @keyframes ambientSpin { to { transform: rotate(360deg); } }
+    @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
 
     @media (max-width: 768px) {
-      .app-container {
-        width: 100%;
-        padding: 8px 10px 115px;
-      }
-      .topbar {
-        top: 6px;
-        border-radius: 16px;
-        min-height: 62px;
-        padding: 8px 12px;
-      }
-      .hero {
-        min-height: 340px;
-        padding: 32px 16px 20px;
-      }
-      .hero-lightning-core {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 16px;
-      }
-      .suggestions-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-      .sidebar-col {
-        grid-template-columns: 1fr;
-      }
-      .sticky-composer-container {
-        padding: 8px 10px 14px;
-      }
+      .suggestions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .drawer-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 480px) {
-      .suggestions-grid {
-        grid-template-columns: 1fr;
-      }
+      .suggestions-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <div class="app-container">
+  <div class="app-viewport">
 
     <!-- TOPBAR -->
     <header class="topbar glass-panel">
@@ -976,144 +600,117 @@
         <div class="brand-orb"></div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Liquid Glass Quantum</div>
+          <div class="brand-sub">100 Quantum Suite</div>
         </div>
       </div>
 
       <div class="topbar-actions">
-        <div class="mode-selector">
-          <button id="fastModeBtn" class="mode-btn active" type="button">Fast</button>
-          <button id="ultraModeBtn" class="mode-btn" type="button">Ultra</button>
-        </div>
-
-        <button id="settingsToggleBtn" class="icon-btn" type="button" aria-label="Settings" title="Settings">
-          ⚙
+        <!-- QUANTUM HUB BUTTON (LALAGYAN NG TOOLS) -->
+        <button id="openHubBtn" class="hub-trigger-btn" type="button">
+          <span>✦</span>
+          <span>Command Hub</span>
         </button>
+
+        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings">⚙</button>
       </div>
     </header>
 
-    <!-- WORKSPACE GRID -->
-    <div class="workspace-grid">
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-content">
 
-      <!-- PRIMARY COLUMN -->
-      <div class="primary-col">
+      <!-- HERO BANNER -->
+      <section class="hero glass-panel">
+        <div class="hero-core"></div>
+        <h1>
+          Intelligence<br>
+          <span>reimagined.</span>
+        </h1>
+        <p>
+          Next-generation quantum AI environment built for ultimate reasoning, coding synthesis, and architectural execution.
+        </p>
 
-        <!-- HERO BANNER -->
-        <section class="hero glass-panel">
-          <div class="hero-lightning-core"></div>
-          <h1>
-            Intelligence<br>
-            <span>without friction.</span>
-          </h1>
-          <p>
-            An elite liquid glass AI workspace engineered for deep thinking, flawless coding, rapid planning, and absolute clarity.
-          </p>
-
-          <div class="hero-pills">
-            <span class="pill"><strong id="heroModeText">Fast</strong> response mode</span>
-            <span class="pill"><strong>Protected</strong> API route</span>
-            <span class="pill"><strong>Liquid Glass</strong> UI</span>
-          </div>
-
-          <div class="engine-status-badge">
-            <span class="status-dot"></span>
-            <span id="engineStatusText">Fast engine online</span>
-          </div>
-        </section>
-
-        <!-- CONVERSATION TRANSCRIPT -->
-        <section id="transcriptPanel" class="transcript-panel glass-panel">
-          <div class="transcript-header">
-            <h2>Active Session</h2>
-            <span id="messageCountBadge">0 messages</span>
-          </div>
-          <div id="messagesList" class="messages-list"></div>
-        </section>
-
-        <!-- SUGGESTIONS -->
-        <div class="suggestions-grid">
-          <button class="suggestion-card glass-card" type="button" data-prompt="Explain artificial intelligence in simple English with one practical example.">
-            <div class="suggestion-icon">✦</div>
-            <strong>Explain anything</strong>
-            <small>Turn complex ideas into crystal-clear clarity.</small>
-          </button>
-
-          <button class="suggestion-card glass-card" type="button" data-prompt="Create a realistic weekly productivity plan with priorities, breaks, and measurable goals.">
-            <div class="suggestion-icon">◷</div>
-            <strong>Build a plan</strong>
-            <small>Transform ambitions into structured systems.</small>
-          </button>
-
-          <button class="suggestion-card glass-card" type="button" data-prompt="Help me write a polished professional email. Ask for missing context if needed.">
-            <div class="suggestion-icon">✎</div>
-            <strong>Write better</strong>
-            <small>Draft emails, scripts, and content instantly.</small>
-          </button>
-
-          <button class="suggestion-card glass-card" type="button" data-prompt="Give me a beginner-friendly coding project and explain how to build it step by step.">
-            <div class="suggestion-icon">⌘</div>
-            <strong>Make something</strong>
-            <small>Explore coding and creative creation.</small>
-          </button>
+        <div class="hero-badges">
+          <span class="badge"><strong>Quantum OS</strong> Core</span>
+          <span class="badge"><strong>100 Features</strong> Active</span>
+          <span class="badge"><strong>Protected</strong> API Route</span>
         </div>
+      </section>
 
+      <!-- CONVERSATION TRANSCRIPT -->
+      <section id="transcriptPanel" class="transcript-panel glass-panel">
+        <div class="transcript-head">
+          <h2>Active Session</h2>
+          <span id="msgCountBadge">0 messages</span>
+        </div>
+        <div id="messagesList" class="messages-list"></div>
+      </section>
+
+      <!-- SUGGESTIONS -->
+      <div class="suggestions-grid">
+        <button class="suggestion-card glass-card" type="button" data-prompt="Explain artificial intelligence in simple English with one practical example.">
+          <div class="suggestion-icon">✦</div>
+          <strong>Explain anything</strong>
+          <small>Turn complex ideas into clear clarity.</small>
+        </button>
+
+        <button class="suggestion-card glass-card" type="button" data-prompt="Create a realistic weekly productivity plan with priorities, breaks, and measurable goals.">
+          <div class="suggestion-icon">◷</div>
+          <strong>Build a plan</strong>
+          <small>Transform ambitions into systems.</small>
+        </button>
+
+        <button class="suggestion-card glass-card" type="button" data-prompt="Help me write a polished professional email. Ask for missing context if needed.">
+          <div class="suggestion-icon">✎</div>
+          <strong>Write better</strong>
+          <small>Draft emails and scripts instantly.</small>
+        </button>
+
+        <button class="suggestion-card glass-card" type="button" data-prompt="Give me a beginner-friendly coding project and explain how to build it step by step.">
+          <div class="suggestion-icon">⌘</div>
+          <strong>Make something</strong>
+          <small>Explore coding and creation.</small>
+        </button>
       </div>
 
-      <!-- SIDEBAR COLUMN -->
-      <aside class="sidebar-col">
+    </main>
 
-        <!-- ENGINE STATUS -->
-        <section class="side-card glass-panel">
-          <div class="side-card-header">
-            <h3>Engine Status</h3>
-            <span class="pill">v9.5</span>
-          </div>
-          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; color: var(--green);">
-            <span class="status-dot"></span>
-            <span id="sidebarEngineState">Operational</span>
-          </div>
-          <p id="sidebarEngineDesc" style="margin: 10px 0 0; color: var(--text-muted); font-size: 12px; line-height: 1.5;">
-            Connected via secure liquid gateway. Ready for lightning reasoning.
-          </p>
-        </section>
+  </div>
 
-        <!-- METRICS -->
-        <section class="side-card glass-panel">
-          <div class="side-card-header">
-            <h3>Quantum Metrics</h3>
-            <button id="resetMetricsBtn" type="button">Reset</button>
-          </div>
-          <div class="metrics-list">
-            <div class="metric-row">
-              <span>Mode</span>
-              <strong id="metricMode">Fast</strong>
-            </div>
-            <div class="metric-row">
-              <span>Messages</span>
-              <strong id="metricMessages">0</strong>
-            </div>
-            <div class="metric-row">
-              <span>Words</span>
-              <strong id="metricWords">0</strong>
-            </div>
-            <div class="metric-row">
-              <span>Retries</span>
-              <strong id="metricRetries">0</strong>
-            </div>
-            <div class="metric-row">
-              <span>Latency</span>
-              <strong id="metricLatency">—</strong>
-            </div>
-          </div>
-        </section>
+  <!-- FLOATING STICKY COMPOSER -->
+  <div class="sticky-composer">
+    <div class="composer-inner">
+      <form id="chatForm" class="composer-form">
+        <textarea id="promptInput" rows="1" maxlength="12000" autocomplete="off" placeholder="Ask Neural Ultra anything..."></textarea>
+        <button id="voiceBtn" class="icon-btn" type="button" title="Voice">🎙</button>
+        <button id="sendBtn" class="send-btn" type="submit" title="Send">↑</button>
+      </form>
 
-        <!-- TOOLS -->
-        <section class="side-card glass-panel">
-          <div class="side-card-header">
-            <h3>Power Tools</h3>
-            <span style="color: var(--cyan); font-size: 11px;">Active</span>
-          </div>
-          <div class="tools-grid">
+      <div class="composer-tools">
+        <div class="chips">
+          <button class="chip" type="button" data-insert="Be concise and practical.">Concise</button>
+          <button class="chip" type="button" data-insert="Explain step by step.">Step by step</button>
+          <button class="chip" type="button" data-insert="Provide a clear example.">Example</button>
+          <button id="clearInputBtn" class="chip" type="button">Clear</button>
+        </div>
+        <div class="counter"><span id="charCount">0</span>/12000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUANTUM COMMAND HUB DRAWER (MALINIS NA LALAGYAN NG TOOLS & METRICS) -->
+  <div id="hubDrawer" class="drawer-backdrop">
+    <div class="drawer-panel glass-panel">
+      <div class="drawer-head">
+        <h2>Quantum Command Hub Suite</h2>
+        <button id="closeHubBtn" class="icon-btn" type="button">×</button>
+      </div>
+
+      <div class="drawer-grid">
+
+        <!-- POWER TOOLS -->
+        <div class="drawer-card glass-card">
+          <div class="drawer-card-title">Power Tools</div>
+          <div class="tools-flex">
             <button id="clearChatBtn" class="tool-tile" type="button">
               <span>⌫</span>
               <strong>Clear chat</strong>
@@ -1122,7 +719,7 @@
             <button id="exportChatBtn" class="tool-tile" type="button">
               <span>⇩</span>
               <strong>Export</strong>
-              <small>Save transcript</small>
+              <small>Transcript</small>
             </button>
             <button id="copyLastBtn" class="tool-tile" type="button">
               <span>▣</span>
@@ -1135,648 +732,220 @@
               <small>Read aloud</small>
             </button>
           </div>
-        </section>
+        </div>
+
+        <!-- METRICS -->
+        <div class="drawer-card glass-card">
+          <div class="drawer-card-title">Session Metrics</div>
+          <div class="metrics-flex">
+            <div class="metric-row"><span>Messages</span><strong id="mCount">0</strong></div>
+            <div class="metric-row"><span>Words</span><strong id="mWords">0</strong></div>
+            <div class="metric-row"><span>Latency</span><strong id="mLatency">—</strong></div>
+            <div class="metric-row"><span>Engine Mode</span><strong>Quantum Fast</strong></div>
+          </div>
+        </div>
 
         <!-- RECENT PROMPTS -->
-        <section class="side-card glass-panel">
-          <div class="side-card-header">
-            <h3>Recent Prompts</h3>
-            <button id="clearHistoryBtn" type="button">Clear</button>
+        <div class="drawer-card glass-card" style="grid-column: span 2;">
+          <div class="drawer-card-title">Recent Prompts</div>
+          <div id="historyScroll" class="history-scroll">
+            <div style="color: var(--text-faint); font-size: 11px;">No recent prompts yet.</div>
           </div>
-          <div id="historyList" class="history-list">
-            <div class="empty-state">Recent prompts will appear here.</div>
-          </div>
-        </section>
-
-      </aside>
-
-    </div>
-  </div>
-
-  <!-- STICKY FLOATING COMPOSER AT THE VERY BOTTOM -->
-  <div class="sticky-composer-container">
-    <div class="composer-inner">
-      <form id="chatForm" class="composer-form">
-        <textarea
-          id="promptInput"
-          rows="1"
-          maxlength="12000"
-          autocomplete="off"
-          placeholder="Ask Neural Ultra anything..."
-          aria-label="Message"
-        ></textarea>
-
-        <button id="voiceInputBtn" class="icon-btn" type="button" aria-label="Voice input" title="Voice input">
-          🎙
-        </button>
-
-        <button id="sendBtn" class="send-btn" type="submit" aria-label="Send message" title="Send message">
-          ↑
-        </button>
-      </form>
-
-      <div class="composer-bottom">
-        <div class="composer-chips">
-          <button class="chip" type="button" data-insert="Be concise and practical.">Concise</button>
-          <button class="chip" type="button" data-insert="Explain step by step.">Step by step</button>
-          <button class="chip" type="button" data-insert="Provide a clear example.">Example</button>
-          <button id="clearInputBtn" class="chip" type="button">Clear</button>
         </div>
-        <div class="char-counter">
-          <span id="charCount">0</span>/12000
-        </div>
+
       </div>
     </div>
   </div>
 
-  <!-- SETTINGS MODAL -->
-  <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal-box glass-panel">
-      <div class="modal-header">
-        <h2 id="modalTitle">Workspace Settings</h2>
-        <button id="closeModalBtn" class="icon-btn" type="button" aria-label="Close">×</button>
-      </div>
+  <div id="toastPopup" class="toast-popup"></div>
 
-      <div class="setting-item">
-        <div>
-          <strong>Visual Theme</strong>
-          <small>Choose your liquid glass environment.</small>
-        </div>
-        <select id="themeSelect">
-          <option value="dark">Obsidian</option>
-          <option value="light">Cloud</option>
-          <option value="high">High Contrast</option>
-        </select>
-      </div>
-
-      <div class="setting-item">
-        <div>
-          <strong>Speech Output</strong>
-          <small>Automatically read assistant replies aloud.</small>
-        </div>
-        <label class="toggle-switch">
-          <input id="speakToggle" type="checkbox">
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
-      <div class="setting-item">
-        <div>
-          <strong>Privacy Mode</strong>
-          <small>Do not save chat history or recent prompts.</small>
-        </div>
-        <label class="toggle-switch">
-          <input id="privacyToggle" type="checkbox">
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
-      <div class="setting-item">
-        <div>
-          <strong>Enter to Send</strong>
-          <small>Press Enter to send; Shift+Enter for newline.</small>
-        </div>
-        <label class="toggle-switch">
-          <input id="enterToSendToggle" type="checkbox" checked>
-          <span class="toggle-slider"></span>
-        </label>
-      </div>
-
-      <div style="display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;">
-        <button id="resetSettingsBtn" class="chip" type="button" style="padding: 10px 16px;">Reset Defaults</button>
-        <button id="saveSettingsBtn" class="send-btn" type="button" style="width: auto; padding: 0 20px; font-size: 14px; border-radius: 12px;">Done</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastPopup" class="toast-popup" role="status"></div>
-
-  <!-- APP SCRIPT -->
   <script>
     "use strict";
 
     const $ = (id) => document.getElementById(id);
 
-    const STORAGE_KEYS = {
-      settings: "neural-ultra-settings-v7",
-      history: "neural-ultra-history-v7"
-    };
-
-    const DEFAULT_SETTINGS = {
-      theme: "dark",
-      speak: false,
-      privacy: false,
-      enterToSend: true
-    };
-
     const state = {
       messages: [],
       history: [],
-      mode: "fast",
-      controller: null,
       isLoading: false,
-      retries: 0,
       latency: null,
-      settings: loadStoredSettings()
+      controller: null
     };
-
-    function loadStoredSettings() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEYS.settings));
-        return { ...DEFAULT_SETTINGS, ...(saved || {}) };
-      } catch {
-        return { ...DEFAULT_SETTINGS };
-      }
-    }
-
-    function saveStoredSettings() {
-      localStorage.setItem(STORAGE_KEYS.settings, JSON.stringify(state.settings));
-    }
-
-    function loadStoredHistory() {
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEYS.history));
-        return Array.isArray(saved) ? saved : [];
-      } catch {
-        return [];
-      }
-    }
-
-    function saveStoredHistory() {
-      if (state.settings.privacy) {
-        localStorage.removeItem(STORAGE_KEYS.history);
-        return;
-      }
-      localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(state.history.slice(0, 12)));
-    }
 
     function showToast(text) {
       const toast = $("toastPopup");
       toast.textContent = text;
       toast.classList.add("show");
-      clearTimeout(window._toastTimer);
-      window._toastTimer = setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2700);
-    }
-
-    function updateEngineStatus(text, statusType = "ready") {
-      $("engineStatusText").textContent = text;
-      $("sidebarEngineState").textContent = text;
-
-      const dotColor = statusType === "busy" ? "var(--yellow)" : statusType === "error" ? "var(--red)" : "var(--green)";
-      document.querySelectorAll(".status-dot").forEach(dot => {
-        dot.style.background = dotColor;
-        dot.style.boxShadow = `0 0 12px ${dotColor}`;
-      });
+      clearTimeout(window._t);
+      window._t = setTimeout(() => toast.classList.remove("show"), 2500);
     }
 
     function updateComposerHeight() {
       const input = $("promptInput");
       $("charCount").textContent = String(input.value.length);
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 160) + "px";
-    }
-
-    function calculateTotalWords() {
-      return state.messages.reduce((acc, msg) => {
-        const words = String(msg.text || "").trim().split(/\s+/).filter(Boolean);
-        return acc + words.length;
-      }, 0);
-    }
-
-    function updateMetricsUI() {
-      const msgCount = state.messages.length;
-      const wordCount = calculateTotalWords();
-
-      $("metricMessages").textContent = String(msgCount);
-      $("metricWords").textContent = String(wordCount);
-      $("metricRetries").textContent = String(state.retries);
-      $("metricLatency").textContent = state.latency ? state.latency + " ms" : "—";
-      $("metricMode").textContent = state.mode === "fast" ? "Fast" : "Ultra";
-      $("messageCountBadge").textContent = msgCount + (msgCount === 1 ? " message" : " messages");
-    }
-
-    function updateModeUI() {
-      const isFast = state.mode === "fast";
-      $("fastModeBtn").classList.toggle("active", isFast);
-      $("ultraModeBtn").classList.toggle("active", !isFast);
-      $("heroModeText").textContent = isFast ? "Fast" : "Ultra";
-      updateEngineStatus(isFast ? "Fast engine online" : "Ultra engine online");
+      input.style.height = Math.min(input.scrollHeight, 140) + "px";
     }
 
     function renderMessages() {
-      const container = $("messagesList");
-      container.innerHTML = "";
+      const list = $("messagesList");
+      list.innerHTML = "";
 
       state.messages.forEach(msg => {
-        const article = document.createElement("article");
-        article.className = "message " + msg.role;
+        const art = document.createElement("article");
+        art.className = "message " + msg.role;
 
         const tag = document.createElement("div");
         tag.className = "message-tag";
         tag.textContent = msg.role === "user" ? "You" : "Neural Ultra";
 
-        const content = document.createElement("div");
-        content.textContent = msg.text;
+        const text = document.createElement("div");
+        text.textContent = msg.text;
 
-        article.append(tag, content);
-        container.appendChild(article);
+        art.append(tag, text);
+        list.appendChild(art);
       });
 
-      const hasMsgs = state.messages.length > 0;
-      $("transcriptPanel").classList.toggle("visible", hasMsgs);
-      updateMetricsUI();
+      const has = state.messages.length > 0;
+      $("transcriptPanel").classList.toggle("visible", has);
+      $("msgCountBadge").textContent = state.messages.length + " msgs";
+      $("mCount").textContent = String(state.messages.length);
 
-      if (hasMsgs) {
-        container.scrollTop = container.scrollHeight;
-      }
+      const words = state.messages.reduce((a, b) => a + (b.text || "").split(/\s+/).filter(Boolean).length, 0);
+      $("mWords").textContent = String(words);
+
+      if (has) list.scrollTop = list.scrollHeight;
     }
 
     function appendMessage(text, role) {
-      state.messages.push({ text: String(text), role, time: Date.now() });
+      state.messages.push({ text: String(text), role });
       renderMessages();
     }
 
-    function renderHistoryUI() {
-      const list = $("historyList");
-      list.innerHTML = "";
-
-      if (!state.history.length) {
-        list.innerHTML = '<div class="empty-state">Recent prompts will appear here.</div>';
-        return;
-      }
-
-      state.history.forEach(promptText => {
-        const btn = document.createElement("button");
-        btn.className = "history-btn";
-        btn.type = "button";
-        btn.textContent = promptText;
-        btn.title = promptText;
-        btn.addEventListener("click", () => setPromptValue(promptText));
-        list.appendChild(btn);
-      });
-    }
-
-    function addHistoryPrompt(text) {
-      if (state.settings.privacy) return;
-      const clean = String(text).trim();
-      if (!clean) return;
-
-      state.history = [clean, ...state.history.filter(i => i !== clean)].slice(0, 12);
-      saveStoredHistory();
-      renderHistoryUI();
-    }
-
-    function setPromptValue(text) {
-      const input = $("promptInput");
-      input.value = text;
-      updateComposerHeight();
-      input.focus();
-    }
-
-    function insertPromptText(text) {
-      const input = $("promptInput");
-      const current = input.value.trim();
-      input.value = current ? current + " " + text : text;
-      updateComposerHeight();
-      input.focus();
-    }
-
-    function clearConversation() {
-      state.messages = [];
-      renderMessages();
-      updateEngineStatus("Session cleared");
-      showToast("Conversation cleared.");
-    }
-
-    function resetWorkspaceMetrics() {
-      state.retries = 0;
-      state.latency = null;
-      updateMetricsUI();
-      showToast("Metrics reset.");
-    }
-
-    function copyLatestResponse() {
-      let targetText = "";
-      for (let i = state.messages.length - 1; i >= 0; i--) {
-        if (state.messages[i].role === "assistant") {
-          targetText = state.messages[i].text;
-          break;
-        }
-      }
-
-      if (!targetText) {
-        showToast("No response to copy.");
-        return;
-      }
-
-      navigator.clipboard.writeText(targetText)
-        .then(() => showToast("Copied to clipboard."))
-        .catch(() => showToast("Clipboard access denied."));
-    }
-
-    function speakLatestResponse() {
-      let targetText = "";
-      for (let i = state.messages.length - 1; i >= 0; i--) {
-        if (state.messages[i].role === "assistant") {
-          targetText = state.messages[i].text;
-          break;
-        }
-      }
-
-      if (!targetText) {
-        showToast("No response to speak.");
-        return;
-      }
-
-      if (!("speechSynthesis" in window)) {
-        showToast("Speech synthesis not supported.");
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(new SpeechSynthesisUtterance(targetText));
-    }
-
-    function exportTranscript() {
-      if (!state.messages.length) {
-        showToast("No conversation to export.");
-        return;
-      }
-
-      const transcript = state.messages.map(m => `${m.role === 'user' ? 'YOU' : 'NEURAL ULTRA'}:\n${m.text}\n`).join("\n---\n\n");
-      const blob = new Blob([transcript], { type: "text/plain;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "neural-ultra-transcript.txt";
-      link.click();
-      setTimeout(() => URL.revokeObjectURL(url), 500);
-      showToast("Transcript exported.");
-    }
-
-    function createLoadingIndicator() {
-      const container = $("messagesList");
-      const article = document.createElement("article");
-      article.id = "loadingBubble";
-      article.className = "message assistant";
-
-      const tag = document.createElement("div");
-      tag.className = "message-tag";
-      tag.textContent = "Neural Ultra";
-
-      const dots = document.createElement("div");
-      dots.className = "typing-dots";
-      dots.innerHTML = "<i></i><i></i><i></i>";
-
-      article.append(tag, dots);
-      container.appendChild(article);
-      $("transcriptPanel").classList.add("visible");
-      container.scrollTop = container.scrollHeight;
-    }
-
-    function removeLoadingIndicator() {
-      const bubble = $("loadingBubble");
-      if (bubble) bubble.remove();
-    }
-
-    async function handleSendMessage(val) {
-      const promptText = String(val || "").trim();
-      if (!promptText) {
-        showToast("Please write a message first.");
-        return;
-      }
-
-      if (state.isLoading) return;
-
-      if (!navigator.onLine) {
-        updateEngineStatus("Offline", "error");
-        showToast("You are offline.");
-        return;
-      }
+    async function handleSend(val) {
+      const prompt = String(val || "").trim();
+      if (!prompt || state.isLoading) return;
 
       const startTime = Date.now();
-      appendMessage(promptText, "user");
-      addHistoryPrompt(promptText);
-      setPromptValue("");
+      appendMessage(prompt, "user");
+      $("promptInput").value = "";
+      updateComposerHeight();
 
-      createLoadingIndicator();
       state.isLoading = true;
       state.controller = new AbortController();
-
-      const sendBtn = $("sendBtn");
-      sendBtn.textContent = "■";
-      sendBtn.classList.add("stop");
-      updateEngineStatus("Connecting to Gemini...", "busy");
+      const btn = $("sendBtn");
+      btn.textContent = "■";
+      btn.classList.add("stop");
 
       try {
-        const response = await fetch("/api/chat", {
+        const res = await fetch("/api/chat", {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            message: promptText,
-            mode: state.mode
-          }),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: prompt, mode: "fast" }),
           signal: state.controller.signal
         });
 
-        const data = await response.json().catch(() => ({}));
-
-        if (!response.ok) {
-          const err = new Error(data.error || "Gemini request failed.");
-          err.status = response.status;
-          throw err;
-        }
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.error || "Request failed.");
 
         const answer = String(data.text || "").trim();
-        if (!answer) {
-          throw new Error("Gemini returned an empty response.");
-        }
+        if (!answer) throw new Error("Empty response.");
 
         state.latency = Date.now() - startTime;
-        removeLoadingIndicator();
+        $("mLatency").textContent = state.latency + " ms";
         appendMessage(answer, "assistant");
-        updateEngineStatus("Operational");
-
-        $("sidebarEngineDesc").textContent = "Lightning response generated successfully.";
-
-        if (state.settings.speak && "speechSynthesis" in window) {
-          window.speechSynthesis.speak(new SpeechSynthesisUtterance(answer));
-        }
       } catch (err) {
-        removeLoadingIndicator();
         if (err.name === "AbortError") {
-          updateEngineStatus("Cancelled");
-          showToast("Request stopped.");
+          showToast("Response stopped.");
         } else {
-          updateEngineStatus("Error", "error");
           appendMessage("Error: " + err.message, "assistant");
           showToast(err.message);
         }
       } finally {
         state.isLoading = false;
         state.controller = null;
-        sendBtn.textContent = "↑";
-        sendBtn.classList.remove("stop");
-        updateMetricsUI();
+        btn.textContent = "↑";
+        btn.classList.remove("stop");
       }
     }
 
-    function startVoiceRecognition() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        showToast("Voice input not supported in this browser.");
-        return;
-      }
+    // DRAWER TOGGLES
+    $("openHubBtn").addEventListener("click", () => $("hubDrawer").classList.add("open"));
+    $("closeHubBtn").addEventListener("click", () => $("hubDrawer").classList.remove("open"));
+    $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) $("hubDrawer").classList.remove("open"); });
 
-      const rec = new SpeechRecognition();
-      rec.lang = "en-US";
-      rec.interimResults = false;
+    // TOOLS LISTENERS
+    $("clearChatBtn").addEventListener("click", () => {
+      state.messages = [];
+      renderMessages();
+      showToast("Session cleared.");
+      $("hubDrawer").classList.remove("open");
+    });
 
-      rec.onstart = () => showToast("Listening...");
-      rec.onresult = (e) => {
-        const transcript = e.results[0][0].transcript;
-        insertPromptText(transcript);
-      };
-      rec.onerror = () => showToast("Voice recognition failed.");
-      rec.start();
-    }
+    $("exportChatBtn").addEventListener("click", () => {
+      if (!state.messages.length) return showToast("Nothing to export.");
+      const text = state.messages.map(m => `${m.role.toUpperCase()}: ${m.text}`).join("\n\n");
+      const blob = new Blob([text], { type: "text/plain" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "neural-ultra-transcript.txt";
+      a.click();
+      showToast("Transcript exported.");
+    });
 
-    function applyUserSettings() {
-      document.documentElement.dataset.theme = state.settings.theme;
-      $("themeSelect").value = state.settings.theme;
-      $("speakToggle").checked = state.settings.speak;
-      $("privacyToggle").checked = state.settings.privacy;
-      $("enterToSendToggle").checked = state.settings.enterToSend;
+    $("copyLastBtn").addEventListener("click", () => {
+      const last = [...state.messages].reverse().find(m => m.role === "assistant");
+      if (!last) return showToast("No response to copy.");
+      navigator.clipboard.writeText(last.text);
+      showToast("Copied to clipboard.");
+    });
 
-      if (state.settings.privacy) {
-        state.history = [];
-        localStorage.removeItem(STORAGE_KEYS.history);
-        renderHistoryUI();
-      }
-    }
+    $("speakLastBtn").addEventListener("click", () => {
+      const last = [...state.messages].reverse().find(m => m.role === "assistant");
+      if (!last) return showToast("No response to speak.");
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(new SpeechSynthesisUtterance(last.text));
+      showToast("Reading response...");
+    });
 
-    // EVENT LISTENERS
+    // FORM SUBMIT
     $("chatForm").addEventListener("submit", (e) => {
       e.preventDefault();
-      if (state.isLoading && state.controller) {
-        state.controller.abort();
-      } else {
-        handleSendMessage($("promptInput").value);
-      }
+      if (state.isLoading && state.controller) state.controller.abort();
+      else handleSend($("promptInput").value);
     });
 
     $("promptInput").addEventListener("input", updateComposerHeight);
-
     $("promptInput").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey && state.settings.enterToSend) {
+      if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault();
         $("chatForm").requestSubmit();
       }
     });
 
-    $("fastModeBtn").addEventListener("click", () => {
-      state.mode = "fast";
-      updateModeUI();
-      showToast("Fast mode active.");
+    $("clearInputBtn").addEventListener("click", () => {
+      $("promptInput").value = "";
+      updateComposerHeight();
     });
 
-    $("ultraModeBtn").addEventListener("click", () => {
-      state.mode = "ultra";
-      updateModeUI();
-      showToast("Ultra mode active.");
-    });
-
-    $("voiceInputBtn").addEventListener("click", startVoiceRecognition);
-    $("clearInputBtn").addEventListener("click", () => setPromptValue(""));
-    $("clearChatBtn").addEventListener("click", clearConversation);
-    $("resetMetricsBtn").addEventListener("click", resetWorkspaceMetrics);
-    $("exportChatBtn").addEventListener("click", exportTranscript);
-    $("copyLastBtn").addEventListener("click", copyLatestResponse);
-    $("speakLastBtn").addEventListener("click", speakLatestResponse);
-
-    $("clearHistoryBtn").addEventListener("click", () => {
-      state.history = [];
-      saveStoredHistory();
-      renderHistoryUI();
-      showToast("Recent prompts cleared.");
-    });
-
-    $("settingsToggleBtn").addEventListener("click", () => $("settingsModal").classList.add("open"));
-    $("closeModalBtn").addEventListener("click", () => $("settingsModal").classList.remove("open"));
-    $("saveSettingsBtn").addEventListener("click", () => $("settingsModal").classList.remove("open"));
-
-    $("resetSettingsBtn").addEventListener("click", () => {
-      state.settings = { ...DEFAULT_SETTINGS };
-      saveStoredSettings();
-      applyUserSettings();
-      showToast("Settings reset to defaults.");
-    });
-
-    $("themeSelect").addEventListener("change", () => {
-      state.settings.theme = $("themeSelect").value;
-      saveStoredSettings();
-      applyUserSettings();
-      showToast("Theme updated.");
-    });
-
-    $("speakToggle").addEventListener("change", () => {
-      state.settings.speak = $("speakToggle").checked;
-      saveStoredSettings();
-    });
-
-    $("privacyToggle").addEventListener("change", () => {
-      state.settings.privacy = $("privacyToggle").checked;
-      saveStoredSettings();
-      applyUserSettings();
-      showToast("Privacy mode updated.");
-    });
-
-    $("enterToSendToggle").addEventListener("change", () => {
-      state.settings.enterToSend = $("enterToSendToggle").checked;
-      saveStoredSettings();
-    });
-
-    document.querySelectorAll("[data-prompt]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        setPromptValue(btn.dataset.prompt);
+    document.querySelectorAll("[data-prompt]").forEach(b => {
+      b.addEventListener("click", () => {
+        $("promptInput").value = b.dataset.prompt;
+        updateComposerHeight();
+        $("promptInput").focus();
       });
     });
 
-    document.querySelectorAll("[data-insert]").forEach(btn => {
-      btn.addEventListener("click", () => {
-        insertPromptText(btn.dataset.insert);
+    document.querySelectorAll("[data-insert]").forEach(b => {
+      b.addEventListener("click", () => {
+        const cur = $("promptInput").value.trim();
+        $("promptInput").value = cur ? cur + " " + b.dataset.insert : b.dataset.insert;
+        updateComposerHeight();
+        $("promptInput").focus();
       });
     });
 
-    $("settingsModal").addEventListener("click", (e) => {
-      if (e.target === $("settingsModal")) {
-        $("settingsModal").classList.remove("open");
-      }
-    });
-
-    window.addEventListener("online", () => {
-      updateEngineStatus("Operational");
-      showToast("Connection restored.");
-    });
-
-    window.addEventListener("offline", () => {
-      updateEngineStatus("Offline", "error");
-      showToast("You are offline.");
-    });
-
-    // INITIALIZATION
-    state.history = loadStoredHistory();
-    applyUserSettings();
-    updateModeUI();
     updateComposerHeight();
-    updateMetricsUI();
-    renderHistoryUI();
   </script>
 </body>
 </html>
