@@ -9,7 +9,7 @@
     :root {
       --bg: #050713;
       --glass: rgba(255,255,255,.09);
-      --glass-strong: rgba(255,255,255,.14);
+      --glass-strong: rgba(255,255,255,.16);
       --line: rgba(255,255,255,.18);
       --text: #f7f9ff;
       --muted: rgba(247,249,255,.65);
@@ -21,8 +21,8 @@
 
     [data-theme="light"] {
       --bg: #eaf1fb;
-      --glass: rgba(255,255,255,.72);
-      --glass-strong: rgba(255,255,255,.92);
+      --glass: rgba(255,255,255,.75);
+      --glass-strong: rgba(255,255,255,.95);
       --line: rgba(12,23,48,.16);
       --text: #101d38;
       --muted: rgba(16,29,56,.64);
@@ -43,12 +43,8 @@
       box-sizing: border-box;
     }
 
-    html,
     body {
-      min-height: 100%;
-    }
-
-    body {
+      min-height: 100vh;
       margin: 0;
       color: var(--text);
       font-family: Arial, sans-serif;
@@ -81,7 +77,7 @@
     }
 
     .app {
-      width: min(1180px, calc(100% - 28px));
+      width: min(1160px, calc(100% - 28px));
       min-height: 100vh;
       margin: auto;
       padding: 16px 0 24px;
@@ -91,7 +87,7 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       background: var(--glass);
-      box-shadow: 0 24px 80px rgba(0,0,0,.25);
+      box-shadow: 0 24px 80px #0005;
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
     }
@@ -116,13 +112,14 @@
       display: grid;
       place-items: center;
       border-radius: 14px;
-      background: rgba(101,245,255,.14);
-      box-shadow: 0 0 28px rgba(101,245,255,.36);
+      background: #65f5ff22;
+      box-shadow: 0 0 28px #65f5ff66;
     }
 
     .brand-mark::after {
       width: 12px;
       height: 12px;
+      display: block;
       border-radius: 50%;
       background: var(--cyan);
       box-shadow: 0 0 20px var(--cyan);
@@ -177,30 +174,27 @@
       border: 1px solid var(--line);
       border-radius: 13px;
       color: var(--text);
-      background: rgba(255,255,255,.07);
+      background: #ffffff12;
     }
 
     .layout {
       display: grid;
-      grid-template-columns: minmax(0,1fr) 285px;
+      grid-template-columns: minmax(0, 1fr) 285px;
       gap: 14px;
       margin-top: 14px;
     }
 
     .main {
-      min-height: 720px;
+      min-height: 700px;
       padding: 22px;
     }
 
     .hero {
       min-height: 300px;
-      display: grid;
-      place-items: center;
       text-align: center;
     }
 
     .orb {
-      position: relative;
       width: 126px;
       height: 126px;
       margin: 18px auto 30px;
@@ -211,26 +205,9 @@
         radial-gradient(circle at 68% 70%, var(--violet), transparent 62%),
         #151b4d;
       box-shadow:
-        0 0 48px rgba(101,245,255,.58),
-        0 0 120px rgba(164,124,255,.35);
+        0 0 48px #65f5ff99,
+        0 0 120px #a47cff55;
       animation: breathe 4s ease-in-out infinite;
-    }
-
-    .orb::before,
-    .orb::after {
-      position: absolute;
-      inset: -18px;
-      border: 1px solid rgba(101,245,255,.42);
-      border-radius: 50%;
-      content: "";
-      animation: rotate 9s linear infinite;
-    }
-
-    .orb::after {
-      inset: -36px;
-      border-color: rgba(164,124,255,.32);
-      animation-direction: reverse;
-      animation-duration: 14s;
     }
 
     h1 {
@@ -281,12 +258,10 @@
       color: #061016;
       border-color: transparent;
       background: var(--cyan);
-      border-bottom-right-radius: 6px;
     }
 
     .message.assistant {
-      background: rgba(0,0,0,.18);
-      border-bottom-left-radius: 6px;
+      background: #0003;
     }
 
     .composer {
@@ -296,7 +271,7 @@
       padding: 8px 8px 8px 15px;
       border: 1px solid var(--line);
       border-radius: 23px;
-      background: rgba(0,0,0,.19);
+      background: #0003;
     }
 
     textarea {
@@ -328,7 +303,7 @@
 
     .suggestions {
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-top: 12px;
     }
@@ -338,7 +313,7 @@
       border: 1px solid var(--line);
       border-radius: 14px;
       color: var(--muted);
-      background: rgba(255,255,255,.05);
+      background: #ffffff0d;
     }
 
     .suggestion {
@@ -416,7 +391,7 @@
     }
 
     .danger {
-      color: white;
+      color: #fff;
       border-color: var(--red);
       background: var(--red);
     }
@@ -434,7 +409,7 @@
       display: none;
       place-items: center;
       padding: 18px;
-      background: rgba(0,0,0,.68);
+      background: #000b;
     }
 
     .modal-backdrop.open {
@@ -442,7 +417,7 @@
     }
 
     .modal {
-      width: min(520px,100%);
+      width: min(520px, 100%);
       padding: 22px;
     }
 
@@ -477,7 +452,6 @@
       padding: 12px 15px;
       border: 1px solid var(--line);
       border-radius: 14px;
-      color: var(--text);
       background: var(--glass-strong);
       opacity: 0;
       pointer-events: none;
@@ -497,12 +471,6 @@
       }
     }
 
-    @keyframes rotate {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
     @media (max-width: 850px) {
       .layout {
         grid-template-columns: 1fr;
@@ -510,7 +478,7 @@
 
       aside {
         display: grid;
-        grid-template-columns: repeat(3,1fr);
+        grid-template-columns: repeat(3, 1fr);
       }
     }
 
@@ -536,10 +504,6 @@
       aside {
         grid-template-columns: 1fr;
       }
-
-      .message {
-        max-width: 94%;
-      }
     }
   </style>
 </head>
@@ -553,7 +517,9 @@
 
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-subtitle">Liquid-glass Gemini workspace</div>
+          <div class="brand-subtitle">
+            Liquid-glass Gemini workspace
+          </div>
         </div>
       </div>
 
@@ -684,22 +650,6 @@
             <button id="exportChat" class="tool-button primary" type="button">
               Export
             </button>
-
-            <button id="saveNote" class="tool-button" type="button">
-              Notes
-            </button>
-
-            <button id="addTask" class="tool-button" type="button">
-              Tasks
-            </button>
-
-            <button id="calculate" class="tool-button" type="button">
-              Calc
-            </button>
-
-            <button id="startTimer" class="tool-button" type="button">
-              Timer
-            </button>
           </div>
         </section>
       </aside>
@@ -735,10 +685,6 @@
         <span>Privacy mode</span>
         <input id="privacy" type="checkbox">
       </div>
-
-      <button id="reset" class="tool-button danger" type="button">
-        Reset local settings
-      </button>
     </section>
   </div>
 
@@ -747,65 +693,72 @@
   <script>
     "use strict";
 
-    const byId = (id) => document.getElementById(id);
+    const get = (id) => document.getElementById(id);
 
-    const form = byId("chatForm");
-    const promptBox = byId("prompt");
-    const messageBox = byId("messages");
-    const statusBox = byId("status");
-    const toastBox = byId("toast");
-    const sendButton = byId("send");
+    const form = get("chatForm");
+    const promptBox = get("prompt");
+    const messagesBox = get("messages");
+    const statusBox = get("status");
+    const toastBox = get("toast");
+    const sendButton = get("send");
 
     let messages = [];
-    let currentMode = "fast";
-    let requestController = null;
+    let mode = "fast";
+    let controller = null;
     let speakEnabled = false;
 
-    function showToast(message) {
+    function toast(message) {
       toastBox.textContent = message;
       toastBox.classList.add("show");
 
-      window.clearTimeout(window.neuralToast);
+      clearTimeout(window.neuralToastTimer);
 
-      window.neuralToast = window.setTimeout(() => {
+      window.neuralToastTimer = setTimeout(() => {
         toastBox.classList.remove("show");
       }, 2200);
     }
 
     function setStatus(message) {
       statusBox.textContent = message;
-      byId("engineState").textContent =
+
+      get("engineState").textContent =
         message.toLowerCase().includes("error")
           ? "Error"
           : "Ready";
     }
 
     function updateMetrics() {
-      byId("modeValue").textContent =
-        currentMode === "fast" ? "Fast" : "Ultra";
+      get("modeValue").textContent =
+        mode === "fast" ? "Fast" : "Ultra";
 
-      byId("messageValue").textContent =
+      get("messageValue").textContent =
         String(messages.length);
 
       const words = messages.reduce((total, item) => {
-        const list = item.text.trim().split(/s+/);
-        return total + (item.text.trim() ? list.length : 0);
+        const clean = item.text.trim();
+
+        if (!clean) {
+          return total;
+        }
+
+        return total + clean.split(/s+/).length;
       }, 0);
 
-      byId("wordValue").textContent = String(words);
+      get("wordValue").textContent = String(words);
     }
 
     function addMessage(text, role) {
-      const article = document.createElement("article");
-      article.className = "message " + role;
-      article.textContent = text;
+      const element = document.createElement("article");
 
-      messageBox.appendChild(article);
-      messageBox.classList.add("visible");
-      messageBox.scrollTop = messageBox.scrollHeight;
+      element.className = "message " + role;
+      element.textContent = text;
+
+      messagesBox.appendChild(element);
+      messagesBox.classList.add("visible");
+      messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 
-    function addChatMessage(text, role) {
+    function saveMessage(text, role) {
       messages.push({
         text: text,
         role: role
@@ -817,35 +770,30 @@
 
     function clearChat() {
       messages = [];
-      messageBox.innerHTML = "";
-      messageBox.classList.remove("visible");
+      messagesBox.innerHTML = "";
+      messagesBox.classList.remove("visible");
       updateMetrics();
       setStatus("Conversation cleared");
-      showToast("Chat cleared.");
+      toast("Chat cleared.");
     }
 
-    function localReply(question) {
-      return "Demo mode is working. Your message was received:
-
-" + question;
-    }
-
-    async function sendMessage(text) {
-      const question = text.trim();
+    async function sendMessage(value) {
+      const question = value.trim();
 
       if (!question) {
-        showToast("Type a message first.");
+        toast("Type a message first.");
         return;
       }
 
-      addChatMessage(question, "user");
+      saveMessage(question, "user");
+
       promptBox.value = "";
       promptBox.style.height = "auto";
-      setStatus("Thinking...");
       sendButton.textContent = "■";
+      setStatus("Connecting to Gemini...");
 
       try {
-        requestController = new AbortController();
+        controller = new AbortController();
 
         const response = await fetch("/api/chat", {
           method: "POST",
@@ -854,22 +802,22 @@
           },
           body: JSON.stringify({
             message: question,
-            mode: currentMode
+            mode: mode
           }),
-          signal: requestController.signal
+          signal: controller.signal
         });
 
         const data = await response.json().catch(() => ({}));
 
         if (!response.ok) {
           throw new Error(
-            data.error || "API request failed."
+            data.error || "Gemini request failed."
           );
         }
 
-        const answer = data.text || localReply(question);
+        const answer = data.text || "No answer returned.";
 
-        addChatMessage(answer, "assistant");
+        saveMessage(answer, "assistant");
         setStatus("Gemini ready");
 
         if (
@@ -882,15 +830,18 @@
         }
       } catch (error) {
         if (error.name === "AbortError") {
-          setStatus("Stopped");
-          showToast("Request stopped.");
+          setStatus("Response stopped");
+          toast("Stopped.");
         } else {
-          addChatMessage(localReply(question), "assistant");
-          setStatus("Demo mode");
-          showToast("API unavailable; demo reply shown.");
+          setStatus("Gemini error");
+          saveMessage(
+            "Error: " + error.message,
+            "assistant"
+          );
+          toast(error.message);
         }
       } finally {
-        requestController = null;
+        controller = null;
         sendButton.textContent = "↑";
       }
     }
@@ -898,8 +849,8 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
 
-      if (requestController) {
-        requestController.abort();
+      if (controller) {
+        controller.abort();
       } else {
         sendMessage(promptBox.value);
       }
@@ -921,35 +872,35 @@
         Math.min(promptBox.scrollHeight, 150) + "px";
     });
 
-    byId("fastMode").addEventListener("click", () => {
-      currentMode = "fast";
-      byId("fastMode").classList.add("active");
-      byId("ultraMode").classList.remove("active");
-      byId("modeValue").textContent = "Fast";
+    get("fastMode").addEventListener("click", () => {
+      mode = "fast";
+      get("fastMode").classList.add("active");
+      get("ultraMode").classList.remove("active");
       setStatus("Fast engine ready");
+      updateMetrics();
     });
 
-    byId("ultraMode").addEventListener("click", () => {
-      currentMode = "ultra";
-      byId("ultraMode").classList.add("active");
-      byId("fastMode").classList.remove("active");
-      byId("modeValue").textContent = "Ultra";
+    get("ultraMode").addEventListener("click", () => {
+      mode = "ultra";
+      get("ultraMode").classList.add("active");
+      get("fastMode").classList.remove("active");
       setStatus("Ultra engine ready");
+      updateMetrics();
     });
 
-    byId("openSettings").addEventListener("click", () => {
-      byId("settingsModal").classList.add("open");
+    get("openSettings").addEventListener("click", () => {
+      get("settingsModal").classList.add("open");
     });
 
-    byId("closeSettings").addEventListener("click", () => {
-      byId("settingsModal").classList.remove("open");
+    get("closeSettings").addEventListener("click", () => {
+      get("settingsModal").classList.remove("open");
     });
 
-    byId("clearChat").addEventListener("click", clearChat);
+    get("clearChat").addEventListener("click", clearChat);
 
-    byId("exportChat").addEventListener("click", () => {
+    get("exportChat").addEventListener("click", () => {
       if (messages.length === 0) {
-        showToast("Nothing to export.");
+        toast("Nothing to export.");
         return;
       }
 
@@ -972,72 +923,11 @@
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = "neural-ultra.txt";
+      link.download = "neural-ultra-chat.txt";
       link.click();
 
       URL.revokeObjectURL(url);
-      showToast("Chat exported.");
-    });
-
-    byId("saveNote").addEventListener("click", () => {
-      const note = window.prompt("Write a note:");
-
-      if (note) {
-        showToast("Note saved.");
-      }
-    });
-
-    byId("addTask").addEventListener("click", () => {
-      const task = window.prompt("Write a task:");
-
-      if (task) {
-        showToast("Task saved.");
-      }
-    });
-
-    byId("calculate").addEventListener("click", () => {
-      const expression = window.prompt("Example: 2 + 2");
-
-      if (!expression) {
-        return;
-      }
-
-      if (!/^[0-9+*/().% -]+$/.test(expression)) {
-        showToast("Invalid calculation.");
-        return;
-      }
-
-      try {
-        const result = Function(
-          '"use strict";return (' +
-            expression +
-            ")"
-        )();
-
-        showToast("Result: " + result);
-      } catch {
-        showToast("Invalid calculation.");
-      }
-    });
-
-    byId("startTimer").addEventListener("click", () => {
-      const seconds = Number(
-        window.prompt("Timer seconds:")
-      );
-
-      if (
-        !Number.isFinite(seconds) ||
-        seconds <= 0
-      ) {
-        showToast("Enter a valid number.");
-        return;
-      }
-
-      showToast("Timer started.");
-
-      window.setTimeout(() => {
-        showToast("Timer finished.");
-      }, seconds * 1000);
+      toast("Chat exported.");
     });
 
     document.querySelectorAll(".suggestion").forEach((button) => {
@@ -1047,80 +937,44 @@
       });
     });
 
-    byId("voice").addEventListener("click", () => {
-      const SpeechRecognition =
-        window.SpeechRecognition ||
-        window.webkitSpeechRecognition;
+    get("theme").addEventListener("change", () => {
+      const value = get("theme").value;
 
-      if (!SpeechRecognition) {
-        showToast("Voice input is unsupported.");
-        return;
-      }
-
-      const recognition = new SpeechRecognition();
-
-      recognition.lang = "en-US";
-
-      recognition.onstart = () => {
-        setStatus("Listening...");
-      };
-
-      recognition.onresult = (event) => {
-        promptBox.value =
-          event.results[0][0].transcript;
-
-        promptBox.focus();
-        setStatus("Fast engine ready");
-      };
-
-      recognition.onerror = () => {
-        showToast("Voice input failed.");
-      };
-
-      recognition.start();
-    });
-
-    byId("theme").addEventListener("change", () => {
-      const selected = byId("theme").value;
-
-      if (selected === "dark") {
+      if (value === "dark") {
         document.documentElement.removeAttribute("data-theme");
       } else {
-        document.documentElement.dataset.theme = selected;
+        document.documentElement.dataset.theme = value;
       }
 
-      showToast("Theme changed.");
+      toast("Theme changed.");
     });
 
-    byId("speak").addEventListener("change", () => {
-      speakEnabled = byId("speak").checked;
-      showToast("Speech setting changed.");
+    get("speak").addEventListener("change", () => {
+      speakEnabled = get("speak").checked;
+      toast("Speech setting changed.");
     });
 
-    byId("privacy").addEventListener("change", () => {
-      if (byId("privacy").checked) {
-        messages = [];
-        messageBox.innerHTML = "";
-        messageBox.classList.remove("visible");
-        updateMetrics();
+    get("privacy").addEventListener("change", () => {
+      if (get("privacy").checked) {
+        clearChat();
       }
 
-      showToast("Privacy setting changed.");
+      toast("Privacy setting changed.");
     });
 
-    byId("reset").addEventListener("click", () => {
-      currentMode = "fast";
-      speakEnabled = false;
-      messages = [];
-      messageBox.innerHTML = "";
-      messageBox.classList.remove("visible");
-      byId("privacy").checked = false;
-      byId("speak").checked = false;
-      byId("theme").value = "dark";
-      document.documentElement.removeAttribute("data-theme");
-      updateMetrics();
-      setStatus("Reset complete");
-      showToast("Reset complete.");
+    /*
+      Temporary click test.
+      Remove this block after confirming that buttons respond.
+    */
+    document.body.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+
+      if (button) {
+        alert(
+          "GUMAGANA ANG CLICK: " +
+          button.textContent.trim()
+        );
+      }
     });
 
     updateMetrics();
