@@ -3,67 +3,65 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#03040b">
-  <meta name="description" content="Neural Ultra Quantum Gemini Workspace">
+  <meta name="theme-color" content="#020308">
+  <meta name="description" content="Neural Ultra Quantum Liquid Glass Workspace">
   <title>Neural Ultra — Quantum Intelligence</title>
 
   <style>
     :root {
-      --bg-base: #03040b;
-      --bg-surface: #070918;
-      --glass-panel: rgba(14, 18, 43, 0.72);
-      --glass-card: rgba(22, 28, 66, 0.55);
-      --glass-hover: rgba(30, 39, 88, 0.7);
-      --border-subtle: rgba(255, 255, 255, 0.12);
-      --border-glow: rgba(108, 242, 255, 0.4);
-      --text-main: #f4f6ff;
-      --text-muted: #9ba6d0;
-      --text-faint: #646f9b;
-      --accent-cyan: #6cf2ff;
-      --accent-blue: #4f8aff;
-      --accent-violet: #a87cff;
-      --accent-pink: #ff75c8;
-      --accent-green: #51f59c;
-      --accent-yellow: #ffdf75;
-      --accent-red: #ff6b8b;
-      --shadow-quantum: 0 24px 80px rgba(0, 0, 0, 0.55);
+      --bg-base: #020308;
+      --bg-surface: #060814;
+      --liquid-glass: rgba(18, 24, 54, 0.65);
+      --liquid-card: rgba(26, 34, 76, 0.45);
+      --liquid-hover: rgba(36, 48, 104, 0.65);
+      --border-glass: rgba(255, 255, 255, 0.14);
+      --border-lightning: rgba(108, 242, 255, 0.55);
+      --text-main: #f5f7ff;
+      --text-muted: #9faad4;
+      --text-faint: #6774a6;
+      --cyan: #6cf2ff;
+      --blue: #599dff;
+      --violet: #a87cff;
+      --pink: #ff75c8;
+      --green: #51f59c;
+      --red: #ff6b8b;
+      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.65);
       --radius-xl: 32px;
-      --radius-lg: 22px;
-      --radius-md: 14px;
-      --transition-snappy: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --transition: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     [data-theme="light"] {
-      --bg-base: #e2ecfb;
-      --bg-surface: #d1e4fc;
-      --glass-panel: rgba(255, 255, 255, 0.82);
-      --glass-card: rgba(255, 255, 255, 0.94);
-      --glass-hover: rgba(255, 255, 255, 1);
-      --border-subtle: rgba(20, 45, 85, 0.14);
-      --border-glow: rgba(0, 140, 255, 0.35);
-      --text-main: #0b1736;
-      --text-muted: #4e5f8a;
-      --text-faint: #7887b0;
-      --shadow-quantum: 0 24px 70px rgba(45, 80, 130, 0.18);
+      --bg-base: #e6effb;
+      --bg-surface: #d3e3fc;
+      --liquid-glass: rgba(255, 255, 255, 0.78);
+      --liquid-card: rgba(255, 255, 255, 0.92);
+      --liquid-hover: rgba(255, 255, 255, 1);
+      --border-glass: rgba(20, 45, 85, 0.16);
+      --border-lightning: rgba(0, 140, 255, 0.45);
+      --text-main: #0c1838;
+      --text-muted: #526391;
+      --text-faint: #7988b5;
+      --shadow-quantum: 0 30px 80px rgba(50, 85, 140, 0.2);
     }
 
     [data-theme="high"] {
       --bg-base: #000000;
       --bg-surface: #0a0a0a;
-      --glass-panel: #111111;
-      --glass-card: #181818;
-      --glass-hover: #222222;
-      --border-subtle: #ffffff;
-      --border-glow: #00ffff;
+      --liquid-glass: #111111;
+      --liquid-card: #181818;
+      --liquid-hover: #222222;
+      --border-glass: #ffffff;
+      --border-lightning: #00ffff;
       --text-main: #ffffff;
       --text-muted: #ffffff;
       --text-faint: #ffffff;
-      --accent-cyan: #00ffff;
-      --accent-violet: #ff00ff;
-      --accent-pink: #ff00ff;
-      --accent-green: #00ff66;
-      --accent-yellow: #ffff00;
-      --accent-red: #ff3b3b;
+      --cyan: #00ffff;
+      --violet: #ff00ff;
+      --pink: #ff00ff;
+      --green: #00ff66;
+      --red: #ff3b3b;
     }
 
     * {
@@ -82,9 +80,9 @@
       color: var(--text-main);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.15), transparent 30%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.18), transparent 35%),
-        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.12), transparent 40%),
+        radial-gradient(circle at 15% 10%, rgba(108, 242, 255, 0.18), transparent 35%),
+        radial-gradient(circle at 85% 15%, rgba(168, 124, 255, 0.2), transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.15), transparent 45%),
         linear-gradient(135deg, var(--bg-base), var(--bg-surface));
       background-attachment: fixed;
       overflow-x: hidden;
@@ -93,14 +91,26 @@
     body::before {
       position: fixed;
       inset: 0;
-      z-index: -2;
+      z-index: -3;
       content: "";
-      opacity: 0.28;
+      opacity: 0.32;
       pointer-events: none;
       background-image: 
-        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-      background-size: 40px 40px;
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    body::after {
+      position: fixed;
+      inset: -30%;
+      z-index: -2;
+      opacity: 0.14;
+      pointer-events: none;
+      content: "";
+      background: conic-gradient(from 90deg, transparent, var(--cyan), transparent 30%, var(--violet), transparent 60%, var(--pink), transparent);
+      filter: blur(130px);
+      animation: ambientSpin 28s linear infinite;
     }
 
     button, input, textarea, select {
@@ -118,25 +128,25 @@
     }
 
     .app-container {
-      width: min(1420px, 100% - 24px);
+      width: min(1380px, 100% - 24px);
       margin: 0 auto;
-      padding: 16px 0 48px;
+      padding: 14px 0 110px; /* Dagdag space sa baba para sa sticky composer */
     }
 
-    /* GLASS PANELS */
+    /* LIQUID GLASS PANELS */
     .glass-panel {
-      border: 1px solid var(--border-subtle);
-      background: var(--glass-panel);
+      border: 1px solid var(--border-glass);
+      background: var(--liquid-glass);
       box-shadow: var(--shadow-quantum);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
     }
 
     .glass-card {
-      border: 1px solid var(--border-subtle);
-      background: var(--glass-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      background: var(--liquid-card);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
 
     /* TOPBAR */
@@ -148,9 +158,11 @@
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      min-height: 68px;
-      padding: 10px 16px;
-      border-radius: 22px;
+      min-height: 70px;
+      padding: 10px 18px;
+      border-radius: 24px;
+      border: 1px solid var(--border-lightning);
+      box-shadow: 0 10px 40px rgba(108, 242, 255, 0.15);
     }
 
     .brand {
@@ -161,17 +173,17 @@
 
     .brand-orb {
       position: relative;
-      width: 42px;
-      height: 42px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
-      border-radius: 14px;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--accent-cyan) 40%, var(--accent-violet));
-      box-shadow: 0 0 20px rgba(108, 242, 255, 0.6);
-      animation: corePulse 4s ease-in-out infinite;
+      border-radius: 15px;
+      background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
+      box-shadow: 0 0 25px rgba(108, 242, 255, 0.75), inset 0 0 15px rgba(255,255,255,0.4);
+      animation: coreBreathe 4s ease-in-out infinite;
     }
 
     .brand-title {
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 900;
       letter-spacing: -0.04em;
     }
@@ -180,8 +192,8 @@
       margin-top: 2px;
       color: var(--text-faint);
       font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-weight: 800;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
@@ -195,51 +207,51 @@
       display: flex;
       gap: 3px;
       padding: 4px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-glass);
       border-radius: 14px;
-      background: rgba(0,0,0,0.2);
+      background: rgba(0,0,0,0.25);
     }
 
     .mode-btn {
-      padding: 8px 14px;
+      padding: 8px 16px;
       border: 0;
       border-radius: 10px;
       color: var(--text-muted);
       background: transparent;
       font-size: 12px;
       font-weight: 800;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .mode-btn.active {
-      color: #03040b;
-      background: var(--accent-cyan);
-      box-shadow: 0 4px 18px rgba(108, 242, 255, 0.4);
+      color: #020308;
+      background: var(--cyan);
+      box-shadow: 0 4px 20px rgba(108, 242, 255, 0.5);
     }
 
     .icon-btn {
       display: grid;
       place-items: center;
-      width: 40px;
-      height: 40px;
+      width: 42px;
+      height: 42px;
       flex-shrink: 0;
-      border: 1px solid var(--border-subtle);
-      border-radius: 12px;
+      border: 1px solid var(--border-glass);
+      border-radius: 13px;
       color: var(--text-main);
-      background: var(--glass-card);
-      transition: var(--transition-snappy);
+      background: var(--liquid-card);
+      transition: var(--transition);
     }
 
     .icon-btn:hover {
-      border-color: var(--accent-cyan);
-      background: var(--glass-hover);
+      border-color: var(--cyan);
+      background: var(--liquid-hover);
       transform: translateY(-2px);
     }
 
-    /* MAIN LAYOUT */
+    /* LAYOUT */
     .workspace-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 330px;
+      grid-template-columns: minmax(0, 1fr) 320px;
       gap: 16px;
       margin-top: 16px;
     }
@@ -254,50 +266,51 @@
     /* HERO */
     .hero {
       position: relative;
-      min-height: 420px;
+      min-height: 400px;
       overflow: hidden;
-      padding: 48px 24px 32px;
+      padding: 44px 24px 28px;
       border-radius: var(--radius-xl);
       text-align: center;
+      border: 1px solid var(--border-lightning);
     }
 
-    .hero-quantum-core {
+    .hero-lightning-core {
       position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 28px;
+      width: 125px;
+      height: 125px;
+      margin: 0 auto 26px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff, var(--accent-cyan) 30%, var(--accent-violet) 70%, var(--accent-pink));
-      box-shadow: 0 0 60px rgba(108, 242, 255, 0.5), 0 0 120px rgba(168, 124, 255, 0.3);
-      animation: corePulse 5s ease-in-out infinite;
+      background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
+      box-shadow: 0 0 70px rgba(108, 242, 255, 0.65), 0 0 140px rgba(168, 124, 255, 0.4);
+      animation: coreBreathe 5s ease-in-out infinite;
     }
 
-    .hero-quantum-core::before {
+    .hero-lightning-core::before {
       position: absolute;
-      inset: -12px;
-      border: 1px dashed rgba(255, 255, 255, 0.35);
+      inset: -14px;
+      border: 1px dashed rgba(108, 242, 255, 0.5);
       border-radius: 50%;
       content: "";
-      animation: spinSlow 15s linear infinite;
+      animation: spinRing 14s linear infinite;
     }
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      font-size: clamp(2.4rem, 5.2vw, 4.5rem);
       line-height: 0.92;
       letter-spacing: -0.08em;
     }
 
     .hero h1 span {
       color: transparent;
-      background: linear-gradient(100deg, var(--accent-cyan), var(--accent-blue), var(--accent-violet), var(--accent-pink));
+      background: linear-gradient(100deg, var(--cyan), var(--blue), var(--violet), var(--pink));
       background-clip: text;
       -webkit-background-clip: text;
     }
 
     .hero p {
-      max-width: 600px;
-      margin: 18px auto 0;
+      max-width: 580px;
+      margin: 16px auto 0;
       color: var(--text-muted);
       font-size: 15px;
       line-height: 1.65;
@@ -308,12 +321,12 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 8px;
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
     .pill {
       padding: 6px 12px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-glass);
       border-radius: 999px;
       color: var(--text-muted);
       background: rgba(255,255,255,0.03);
@@ -321,15 +334,15 @@
     }
 
     .pill strong {
-      color: var(--accent-cyan);
+      color: var(--cyan);
     }
 
     .engine-status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      margin-top: 20px;
-      color: var(--accent-green);
+      margin-top: 18px;
+      color: var(--green);
       font-size: 12px;
       font-weight: 800;
     }
@@ -338,12 +351,12 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--accent-green);
-      box-shadow: 0 0 12px var(--accent-green);
+      background: var(--green);
+      box-shadow: 0 0 14px var(--green);
       animation: pulseGlow 2s infinite;
     }
 
-    /* CONVERSATION TRANSCRIPT */
+    /* TRANSCRIPT */
     .transcript-panel {
       display: none;
       padding: 20px;
@@ -360,7 +373,7 @@
       justify-content: space-between;
       margin-bottom: 14px;
       padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-glass);
     }
 
     .transcript-header h2 {
@@ -376,7 +389,7 @@
       display: flex;
       flex-direction: column;
       gap: 14px;
-      max-height: 520px;
+      max-height: 500px;
       overflow-y: auto;
       padding-right: 4px;
     }
@@ -384,7 +397,7 @@
     .message {
       max-width: 88%;
       padding: 16px 18px;
-      border-radius: 18px;
+      border-radius: 20px;
       line-height: 1.6;
       font-size: 14px;
       white-space: pre-wrap;
@@ -393,17 +406,17 @@
 
     .message.user {
       margin-left: auto;
-      color: #03040b;
-      background: linear-gradient(135deg, var(--accent-cyan), #a1fdff);
-      box-shadow: 0 8px 24px rgba(108, 242, 255, 0.25);
+      color: #020308;
+      background: linear-gradient(135deg, var(--cyan), #b5ffff);
+      box-shadow: 0 10px 28px rgba(108, 242, 255, 0.3);
       border-bottom-right-radius: 4px;
     }
 
     .message.assistant {
       margin-right: auto;
       color: var(--text-main);
-      background: var(--glass-card);
-      border: 1px solid var(--border-subtle);
+      background: var(--liquid-card);
+      border: 1px solid var(--border-glass);
       border-bottom-left-radius: 4px;
     }
 
@@ -417,31 +430,45 @@
     }
 
     .message.user .message-tag {
-      color: rgba(3, 4, 11, 0.6);
+      color: rgba(2, 3, 8, 0.6);
     }
 
-    /* COMPOSER */
-    .composer-wrap {
-      padding: 8px;
-      border-radius: var(--radius-lg);
-      background: var(--glass-panel);
-      border: 1px solid var(--border-glow);
-      box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+    /* STICKY BOTTOM COMPOSER (ASK NEURAL AI PINNED SA PINAKA BABA) */
+    .sticky-composer-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 99;
+      padding: 12px 16px 20px;
+      background: linear-gradient(to top, var(--bg-base) 75%, transparent);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .composer-inner {
+      width: min(1380px, 100%);
+      margin: 0 auto;
+      padding: 10px;
+      border-radius: 26px;
+      background: var(--liquid-glass);
+      border: 1px solid var(--border-lightning);
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5), 0 0 25px rgba(108, 242, 255, 0.2);
     }
 
     .composer-form {
       display: flex;
       align-items: flex-end;
       gap: 10px;
-      padding: 8px;
-      border-radius: 16px;
-      background: rgba(0, 0, 0, 0.25);
+      padding: 6px 8px;
+      border-radius: 18px;
+      background: rgba(0, 0, 0, 0.3);
     }
 
     textarea {
       flex: 1;
       min-height: 48px;
-      max-height: 180px;
+      max-height: 160px;
       resize: none;
       padding: 12px 10px;
       border: 0;
@@ -463,23 +490,23 @@
       height: 52px;
       flex-shrink: 0;
       border: 0;
-      border-radius: 14px;
-      color: #03040b;
-      background: linear-gradient(135deg, var(--accent-cyan), #b8ffff);
-      box-shadow: 0 6px 22px rgba(108, 242, 255, 0.35);
+      border-radius: 15px;
+      color: #020308;
+      background: linear-gradient(135deg, var(--cyan), #b8ffff);
+      box-shadow: 0 6px 24px rgba(108, 242, 255, 0.4);
       font-size: 22px;
       font-weight: 900;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .send-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 30px rgba(108, 242, 255, 0.6);
+      box-shadow: 0 10px 32px rgba(108, 242, 255, 0.65);
     }
 
     .send-btn.stop {
       color: #fff;
-      background: linear-gradient(135deg, var(--accent-red), #ffa1b4);
+      background: linear-gradient(135deg, var(--red), #ffa1b4);
     }
 
     .composer-bottom {
@@ -487,7 +514,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 8px 8px 2px;
+      padding: 6px 8px 2px;
     }
 
     .composer-chips {
@@ -497,20 +524,20 @@
     }
 
     .chip {
-      padding: 6px 10px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 8px;
+      padding: 6px 12px;
+      border: 1px solid var(--border-glass);
+      border-radius: 9px;
       color: var(--text-muted);
       background: transparent;
       font-size: 11px;
       font-weight: 600;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .chip:hover {
       color: var(--text-main);
-      border-color: var(--accent-cyan);
-      background: var(--glass-card);
+      border-color: var(--cyan);
+      background: var(--liquid-card);
     }
 
     .char-counter {
@@ -523,6 +550,7 @@
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 12px;
+      margin-top: 16px;
     }
 
     .suggestion-card {
@@ -530,14 +558,14 @@
       border-radius: var(--radius-md);
       text-align: left;
       cursor: pointer;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .suggestion-card:hover {
-      border-color: var(--accent-cyan);
-      background: var(--glass-hover);
+      border-color: var(--cyan);
+      background: var(--liquid-hover);
       transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.3);
     }
 
     .suggestion-icon {
@@ -547,8 +575,8 @@
       height: 32px;
       margin-bottom: 12px;
       border-radius: 10px;
-      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
-      color: #03040b;
+      background: linear-gradient(135deg, var(--cyan), var(--violet));
+      color: #020308;
       font-size: 14px;
     }
 
@@ -566,7 +594,7 @@
       line-height: 1.45;
     }
 
-    /* SIDEBAR COLUMN */
+    /* SIDEBAR */
     .sidebar-col {
       display: flex;
       flex-direction: column;
@@ -597,7 +625,7 @@
     .side-card-header button {
       border: 0;
       background: transparent;
-      color: var(--accent-cyan);
+      color: var(--cyan);
       font-size: 11px;
       font-weight: 700;
     }
@@ -613,7 +641,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 6px 0;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-glass);
       font-size: 12px;
       color: var(--text-muted);
     }
@@ -634,24 +662,24 @@
 
     .tool-tile {
       padding: 12px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-glass);
       border-radius: 12px;
-      background: var(--glass-card);
+      background: var(--liquid-card);
       color: var(--text-main);
       text-align: left;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .tool-tile:hover {
-      border-color: var(--accent-violet);
-      background: var(--glass-hover);
+      border-color: var(--violet);
+      background: var(--liquid-hover);
       transform: translateY(-2px);
     }
 
     .tool-tile span {
       display: block;
       margin-bottom: 6px;
-      color: var(--accent-cyan);
+      color: var(--cyan);
       font-size: 16px;
     }
 
@@ -681,19 +709,19 @@
       border: 1px solid transparent;
       border-radius: 8px;
       color: var(--text-muted);
-      background: var(--glass-card);
+      background: var(--liquid-card);
       text-align: left;
       font-size: 12px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .history-btn:hover {
-      border-color: var(--border-subtle);
+      border-color: var(--border-glass);
       color: var(--text-main);
-      background: var(--glass-hover);
+      background: var(--liquid-hover);
     }
 
     .empty-state {
@@ -707,12 +735,12 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      z-index: 150;
       display: none;
       place-items: center;
       padding: 20px;
-      background: rgba(3, 4, 11, 0.75);
-      backdrop-filter: blur(12px);
+      background: rgba(2, 3, 8, 0.8);
+      backdrop-filter: blur(14px);
     }
 
     .modal-backdrop.open {
@@ -725,9 +753,9 @@
       overflow-y: auto;
       padding: 24px;
       border-radius: var(--radius-xl);
-      background: var(--glass-panel);
-      border: 1px solid var(--border-glow);
-      box-shadow: 0 30px 100px rgba(0,0,0,0.7);
+      background: var(--liquid-glass);
+      border: 1px solid var(--border-lightning);
+      box-shadow: 0 30px 100px rgba(0,0,0,0.8);
     }
 
     .modal-header {
@@ -750,7 +778,7 @@
       justify-content: space-between;
       gap: 16px;
       padding: 14px 0;
-      border-bottom: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-glass);
     }
 
     .setting-item:last-child {
@@ -771,10 +799,10 @@
 
     select {
       padding: 8px 12px;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-glass);
       border-radius: 10px;
       color: var(--text-main);
-      background: var(--glass-card);
+      background: var(--liquid-card);
     }
 
     .toggle-switch {
@@ -793,11 +821,11 @@
     .toggle-slider {
       position: absolute;
       inset: 0;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border-glass);
       border-radius: 99px;
       background: rgba(255,255,255,0.1);
       cursor: pointer;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .toggle-slider::before {
@@ -809,30 +837,30 @@
       border-radius: 50%;
       background: var(--text-muted);
       content: "";
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .toggle-switch input:checked + .toggle-slider {
-      background: var(--accent-cyan);
-      border-color: var(--accent-cyan);
+      background: var(--cyan);
+      border-color: var(--cyan);
     }
 
     .toggle-switch input:checked + .toggle-slider::before {
       transform: translateX(20px);
-      background: #03040b;
+      background: #020308;
     }
 
     /* TOAST */
     .toast-popup {
       position: fixed;
       z-index: 200;
-      bottom: 24px;
+      bottom: 100px;
       right: 24px;
       max-width: 360px;
       padding: 14px 18px;
       border-radius: 14px;
-      background: var(--glass-panel);
-      border: 1px solid var(--border-glow);
+      background: var(--liquid-glass);
+      border: 1px solid var(--border-lightning);
       box-shadow: var(--shadow-quantum);
       color: var(--text-main);
       font-size: 13px;
@@ -840,7 +868,7 @@
       opacity: 0;
       transform: translateY(20px);
       pointer-events: none;
-      transition: var(--transition-snappy);
+      transition: var(--transition);
     }
 
     .toast-popup.show {
@@ -849,17 +877,21 @@
     }
 
     /* ANIMATIONS */
-    @keyframes corePulse {
+    @keyframes coreBreathe {
       0%, 100% { transform: scale(1); filter: brightness(1); }
-      50% { transform: scale(1.06); filter: brightness(1.25); }
+      50% { transform: scale(1.07); filter: brightness(1.28); }
     }
 
-    @keyframes spinSlow {
+    @keyframes spinRing {
       to { transform: rotate(360deg); }
     }
 
     @keyframes pulseGlow {
       50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    @keyframes ambientSpin {
+      to { transform: rotate(360deg); }
     }
 
     .typing-dots {
@@ -872,7 +904,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--accent-cyan);
+      background: var(--cyan);
       animation: dotBounce 1s infinite ease-in-out;
     }
 
@@ -898,28 +930,31 @@
     @media (max-width: 768px) {
       .app-container {
         width: 100%;
-        padding: 8px 10px 32px;
+        padding: 8px 10px 100px;
       }
       .topbar {
         top: 6px;
         border-radius: 16px;
-        min-height: 60px;
+        min-height: 62px;
         padding: 8px 12px;
       }
       .hero {
-        min-height: 360px;
-        padding: 36px 16px 24px;
+        min-height: 350px;
+        padding: 34px 16px 22px;
       }
-      .hero-quantum-core {
-        width: 100px;
-        height: 100px;
-        margin-bottom: 20px;
+      .hero-lightning-core {
+        width: 95px;
+        height: 95px;
+        margin-bottom: 18px;
       }
       .suggestions-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
       .sidebar-col {
         grid-template-columns: 1fr;
+      }
+      .sticky-composer-container {
+        padding: 8px 10px 14px;
       }
     }
 
@@ -940,7 +975,7 @@
         <div class="brand-orb"></div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Quantum Workspace</div>
+          <div class="brand-sub">Liquid Glass Quantum</div>
         </div>
       </div>
 
@@ -964,19 +999,19 @@
 
         <!-- HERO BANNER -->
         <section class="hero glass-panel">
-          <div class="hero-quantum-core"></div>
+          <div class="hero-lightning-core"></div>
           <h1>
             Intelligence<br>
             <span>without friction.</span>
           </h1>
           <p>
-            An elite quantum-grade AI workspace engineered for deep thinking, flawless coding, rapid planning, and absolute clarity.
+            An elite liquid glass AI workspace engineered for deep thinking, flawless coding, rapid planning, and absolute clarity.
           </p>
 
           <div class="hero-pills">
             <span class="pill"><strong id="heroModeText">Fast</strong> response mode</span>
             <span class="pill"><strong>Protected</strong> API route</span>
-            <span class="pill"><strong>Quantum</strong> UI</span>
+            <span class="pill"><strong>Liquid Glass</strong> UI</span>
           </div>
 
           <div class="engine-status-badge">
@@ -993,40 +1028,6 @@
           </div>
           <div id="messagesList" class="messages-list"></div>
         </section>
-
-        <!-- COMPOSER -->
-        <div class="composer-wrap">
-          <form id="chatForm" class="composer-form">
-            <textarea
-              id="promptInput"
-              rows="1"
-              maxlength="12000"
-              autocomplete="off"
-              placeholder="Ask Neural Ultra anything..."
-              aria-label="Message"
-            ></textarea>
-
-            <button id="voiceInputBtn" class="icon-btn" type="button" aria-label="Voice input" title="Voice input">
-              🎙
-            </button>
-
-            <button id="sendBtn" class="send-btn" type="submit" aria-label="Send message" title="Send message">
-              ↑
-            </button>
-          </form>
-
-          <div class="composer-bottom">
-            <div class="composer-chips">
-              <button class="chip" type="button" data-insert="Be concise and practical.">Concise</button>
-              <button class="chip" type="button" data-insert="Explain step by step.">Step by step</button>
-              <button class="chip" type="button" data-insert="Provide a clear example.">Example</button>
-              <button id="clearInputBtn" class="chip" type="button">Clear</button>
-            </div>
-            <div class="char-counter">
-              <span id="charCount">0</span>/12000
-            </div>
-          </div>
-        </div>
 
         <!-- SUGGESTIONS -->
         <div class="suggestions-grid">
@@ -1064,14 +1065,14 @@
         <section class="side-card glass-panel">
           <div class="side-card-header">
             <h3>Engine Status</h3>
-            <span class="pill">v4.2</span>
+            <span class="pill">v6.0</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; color: var(--accent-green);">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 13px; color: var(--green);">
             <span class="status-dot"></span>
             <span id="sidebarEngineState">Operational</span>
           </div>
           <p id="sidebarEngineDesc" style="margin: 10px 0 0; color: var(--text-muted); font-size: 12px; line-height: 1.5;">
-            Connected via secure gateway. Ready for quantum reasoning.
+            Connected via secure liquid gateway. Ready for lightning reasoning.
           </p>
         </section>
 
@@ -1109,7 +1110,7 @@
         <section class="side-card glass-panel">
           <div class="side-card-header">
             <h3>Power Tools</h3>
-            <span style="color: var(--accent-cyan); font-size: 11px;">Active</span>
+            <span style="color: var(--cyan); font-size: 11px;">Active</span>
           </div>
           <div class="tools-grid">
             <button id="clearChatBtn" class="tool-tile" type="button">
@@ -1151,6 +1152,42 @@
     </div>
   </div>
 
+  <!-- STICKY BOTTOM COMPOSER (ASK NEURAL ULTRA PINNED SA PINAKA BABA) -->
+  <div class="sticky-composer-container">
+    <div class="composer-inner">
+      <form id="chatForm" class="composer-form">
+        <textarea
+          id="promptInput"
+          rows="1"
+          maxlength="12000"
+          autocomplete="off"
+          placeholder="Ask Neural Ultra anything..."
+          aria-label="Message"
+        ></textarea>
+
+        <button id="voiceInputBtn" class="icon-btn" type="button" aria-label="Voice input" title="Voice input">
+          🎙
+        </button>
+
+        <button id="sendBtn" class="send-btn" type="submit" aria-label="Send message" title="Send message">
+          ↑
+        </button>
+      </form>
+
+      <div class="composer-bottom">
+        <div class="composer-chips">
+          <button class="chip" type="button" data-insert="Be concise and practical.">Concise</button>
+          <button class="chip" type="button" data-insert="Explain step by step.">Step by step</button>
+          <button class="chip" type="button" data-insert="Provide a clear example.">Example</button>
+          <button id="clearInputBtn" class="chip" type="button">Clear</button>
+        </div>
+        <div class="char-counter">
+          <span id="charCount">0</span>/12000
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- SETTINGS MODAL -->
   <div id="settingsModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal-box glass-panel">
@@ -1162,7 +1199,7 @@
       <div class="setting-item">
         <div>
           <strong>Visual Theme</strong>
-          <small>Choose your quantum color environment.</small>
+          <small>Choose your liquid glass environment.</small>
         </div>
         <select id="themeSelect">
           <option value="dark">Obsidian</option>
@@ -1221,8 +1258,8 @@
     const $ = (id) => document.getElementById(id);
 
     const STORAGE_KEYS = {
-      settings: "neural-ultra-settings-v5",
-      history: "neural-ultra-history-v5"
+      settings: "neural-ultra-settings-v6",
+      history: "neural-ultra-history-v6"
     };
 
     const DEFAULT_SETTINGS = {
@@ -1287,7 +1324,7 @@
       $("engineStatusText").textContent = text;
       $("sidebarEngineState").textContent = text;
 
-      const dotColor = statusType === "busy" ? "var(--accent-yellow)" : statusType === "error" ? "var(--accent-red)" : "var(--accent-green)";
+      const dotColor = statusType === "busy" ? "var(--yellow)" : statusType === "error" ? "var(--red)" : "var(--green)";
       document.querySelectorAll(".status-dot").forEach(dot => {
         dot.style.background = dotColor;
         dot.style.boxShadow = `0 0 12px ${dotColor}`;
@@ -1298,7 +1335,7 @@
       const input = $("promptInput");
       $("charCount").textContent = String(input.value.length);
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 180) + "px";
+      input.style.height = Math.min(input.scrollHeight, 160) + "px";
     }
 
     function calculateTotalWords() {
@@ -1565,7 +1602,7 @@
         appendMessage(answer, "assistant");
         updateEngineStatus("Operational");
 
-        $("sidebarEngineDesc").textContent = "Quantum response generated successfully.";
+        $("sidebarEngineDesc").textContent = "Lightning response generated successfully.";
 
         if (state.settings.speak && "speechSynthesis" in window) {
           window.speechSynthesis.speak(new SpeechSynthesisUtterance(answer));
