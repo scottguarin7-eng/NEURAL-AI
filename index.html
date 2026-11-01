@@ -2,20 +2,21 @@
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#020308">
-  <meta name="description" content="Neural Ultra Next-Gen Quantum AI OS">
+  <meta name="description" content="Neural Ultra Enterprise Quantum OS">
   <title>Neural Ultra — Quantum OS v100</title>
 
   <style>
     :root {
-      --bg-base: #010206;
-      --bg-surface: #050814;
-      --liquid-glass: rgba(14, 18, 44, 0.78);
-      --liquid-card: rgba(20, 26, 62, 0.58);
-      --liquid-hover: rgba(30, 39, 90, 0.85);
-      --border-glass: rgba(255, 255, 255, 0.14);
+      --bg-base: #020309;
+      --bg-surface: #060917;
+      --liquid-glass: rgba(13, 17, 40, 0.82);
+      --liquid-card: rgba(20, 27, 62, 0.65);
+      --liquid-hover: rgba(32, 42, 98, 0.85);
+      --border-glass: rgba(255, 255, 255, 0.15);
       --border-lightning: rgba(108, 242, 255, 0.7);
+      --border-glow: 0 0 20px rgba(108, 242, 255, 0.35);
       --text-main: #f5f7ff;
       --text-muted: #9faad4;
       --text-faint: #6774a6;
@@ -25,10 +26,10 @@
       --pink: #ff75c8;
       --green: #51f59c;
       --red: #ff6b8b;
-      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.85);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --radius-md: 16px;
+      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.9);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
       --transition: 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
@@ -43,7 +44,6 @@
       --text-main: #0c1838;
       --text-muted: #526391;
       --text-faint: #7988b5;
-      --shadow-quantum: 0 30px 80px rgba(50, 85, 140, 0.22);
     }
 
     * {
@@ -62,9 +62,9 @@
       color: var(--text-main);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.24), transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.28), transparent 40%),
-        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.2), transparent 45%),
+        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.22), transparent 35%),
+        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.25), transparent 40%),
+        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.18), transparent 45%),
         linear-gradient(135deg, var(--bg-base), var(--bg-surface));
       background-attachment: fixed;
     }
@@ -74,24 +74,24 @@
       inset: 0;
       z-index: -3;
       content: "";
-      opacity: 0.35;
+      opacity: 0.3;
       pointer-events: none;
       background-image: 
         linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
         linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
+      background-size: 36px 36px;
     }
 
     body::after {
       position: fixed;
       inset: -30%;
       z-index: -2;
-      opacity: 0.18;
+      opacity: 0.15;
       pointer-events: none;
       content: "";
       background: conic-gradient(from 90deg, transparent, var(--cyan), transparent 30%, var(--violet), transparent 60%, var(--pink), transparent);
       filter: blur(140px);
-      animation: ambientSpin 26s linear infinite;
+      animation: ambientSpin 28s linear infinite;
     }
 
     button, input, textarea, select { font: inherit; }
@@ -101,24 +101,24 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
-      width: min(1200px, 100% - 20px);
+      width: min(1100px, 100% - 24px);
       margin: 0 auto;
-      padding: 12px 0 130px;
+      padding: 12px 0 140px;
     }
 
     .glass-panel {
       border: 1px solid var(--border-glass);
       background: var(--liquid-glass);
       box-shadow: var(--shadow-quantum);
-      backdrop-filter: blur(36px);
-      -webkit-backdrop-filter: blur(36px);
+      backdrop-filter: blur(32px);
+      -webkit-backdrop-filter: blur(32px);
     }
 
     .glass-card {
       border: 1px solid var(--border-glass);
       background: var(--liquid-card);
-      backdrop-filter: blur(26px);
-      -webkit-backdrop-filter: blur(26px);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
 
     /* TOPBAR */
@@ -131,9 +131,9 @@
       justify-content: space-between;
       gap: 10px;
       padding: 10px 16px;
-      border-radius: 22px;
+      border-radius: 20px;
       border: 1px solid var(--border-lightning);
-      box-shadow: 0 10px 40px rgba(108, 242, 255, 0.22);
+      box-shadow: 0 10px 35px rgba(108, 242, 255, 0.2);
     }
 
     .brand {
@@ -143,9 +143,9 @@
     }
 
     .brand-orb {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 11px;
       background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
       box-shadow: 0 0 25px rgba(108, 242, 255, 0.85);
       animation: coreBreathe 4s ease-in-out infinite;
@@ -182,13 +182,13 @@
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
       font-size: 11px;
       font-weight: 900;
-      box-shadow: 0 0 20px rgba(108, 242, 255, 0.4);
+      box-shadow: 0 0 18px rgba(108, 242, 255, 0.4);
       transition: var(--transition);
     }
 
     .action-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 30px rgba(108, 242, 255, 0.7);
+      box-shadow: 0 0 28px rgba(108, 242, 255, 0.7);
     }
 
     .icon-btn {
@@ -200,6 +200,12 @@
       border-radius: 12px;
       color: var(--text-main);
       background: var(--liquid-card);
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      border-color: var(--cyan);
+      background: var(--liquid-hover);
     }
 
     /* MAIN CONTENT */
@@ -222,9 +228,9 @@
 
     .hero-core {
       position: relative;
-      width: 100px;
-      height: 100px;
-      margin: 0 auto 18px;
+      width: 95px;
+      height: 95px;
+      margin: 0 auto 16px;
       border-radius: 50%;
       background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
       box-shadow: 0 0 70px rgba(108, 242, 255, 0.75), 0 0 130px rgba(168, 124, 255, 0.5);
@@ -242,7 +248,7 @@
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2rem, 4.8vw, 3.8rem);
+      font-size: clamp(2rem, 4.8vw, 3.6rem);
       line-height: 0.95;
       letter-spacing: -0.08em;
     }
@@ -255,7 +261,7 @@
     }
 
     .hero p {
-      max-width: 540px;
+      max-width: 520px;
       margin: 12px auto 0;
       color: var(--text-muted);
       font-size: 13px;
@@ -395,16 +401,16 @@
       right: 0;
       z-index: 90;
       padding: 8px 12px 14px;
-      background: linear-gradient(to top, var(--bg-base) 80%, transparent);
+      background: linear-gradient(to top, var(--bg-base) 85%, transparent);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
     }
 
     .composer-inner {
-      width: min(1200px, 100%);
+      width: min(1100px, 100%);
       margin: 0 auto;
       padding: 10px;
-      border-radius: 24px;
+      border-radius: 22px;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
       box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(108, 242, 255, 0.25);
@@ -421,8 +427,8 @@
 
     textarea {
       flex: 1;
-      min-height: 42px;
-      max-height: 130px;
+      min-height: 40px;
+      max-height: 120px;
       resize: none;
       padding: 10px 8px;
       border: 0;
@@ -438,14 +444,14 @@
     .send-btn {
       display: grid;
       place-items: center;
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       flex-shrink: 0;
       border: 0;
-      border-radius: 13px;
+      border-radius: 12px;
       color: #010206;
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      box-shadow: 0 4px 20px rgba(108, 242, 255, 0.5);
+      box-shadow: 0 4px 18px rgba(108, 242, 255, 0.5);
       font-size: 18px;
       font-weight: 900;
     }
@@ -473,7 +479,7 @@
     .chip:hover { color: var(--text-main); border-color: var(--cyan); }
     .counter { color: var(--text-faint); font-size: 10px; }
 
-    /* MODAL DRAWERS (COMMAND HUB & 100 FEATURES) */
+    /* MODAL DRAWERS (PERFECT FULL-WIDTH LAYOUT FOR MOBILE) */
     .drawer-backdrop {
       position: fixed;
       inset: 0;
@@ -486,11 +492,11 @@
     .drawer-backdrop.open { display: grid; }
 
     .drawer-panel {
-      width: min(950px, 100%);
-      max-height: 85vh;
+      width: min(850px, 100%);
+      max-height: 88vh;
       overflow-y: auto;
-      padding: 22px;
-      border-radius: 30px 30px 0 0;
+      padding: 20px;
+      border-radius: 28px 28px 0 0;
       background: var(--liquid-glass);
       border: 1px solid var(--border-lightning);
       box-shadow: 0 -20px 80px rgba(0,0,0,0.95);
@@ -508,64 +514,87 @@
 
     .drawer-head h2 { margin: 0; font-size: 16px; font-weight: 900; letter-spacing: -0.02em; }
 
-    .drawer-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+    /* INAYOS ANG DRAWER GRID PARA HINDI NAKASIKSIK ANG TOOLS */
+    .drawer-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
     }
 
     .drawer-card {
-      padding: 14px;
+      padding: 16px;
       border-radius: var(--radius-md);
+      background: var(--liquid-card);
+      border: 1px solid var(--border-glass);
     }
 
     .drawer-card-title {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 800;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--cyan);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .tools-flex {
+    /* POWER TOOLS FULL FLEX LAYOUT */
+    .tools-grid-layout {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
+      gap: 10px;
     }
 
-    .tool-tile {
-      padding: 10px;
+    .tool-tile-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      min-height: 54px;
       border: 1px solid var(--border-glass);
       border-radius: 12px;
-      background: var(--liquid-card);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       text-align: left;
+      transition: var(--transition);
     }
 
-    .tool-tile:hover { border-color: var(--violet); background: var(--liquid-hover); }
-    .tool-tile span { display: block; color: var(--cyan); font-size: 14px; margin-bottom: 3px; }
-    .tool-tile strong { display: block; font-size: 11px; }
-    .tool-tile small { display: block; color: var(--text-faint); font-size: 9px; }
+    .tool-tile-btn:hover {
+      border-color: var(--cyan);
+      background: var(--liquid-hover);
+      transform: translateY(-2px);
+    }
 
-    .metrics-flex { display: flex; flex-direction: column; gap: 6px; }
-    .metric-row { display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid var(--border-glass); font-size: 11px; color: var(--text-muted); }
+    .tool-icon {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(108, 242, 255, 0.12);
+      color: var(--cyan);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
 
-    .history-scroll { display: flex; flex-direction: column; gap: 6px; max-height: 120px; overflow-y: auto; }
-    .history-item { width: 100%; padding: 7px; border: 1px solid transparent; border-radius: 8px; background: var(--liquid-card); color: var(--text-muted); font-size: 10px; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tool-info strong { display: block; font-size: 12px; font-weight: 700; }
+    .tool-info small { display: block; color: var(--text-faint); font-size: 10px; margin-top: 1px; }
+
+    .metrics-flex { display: flex; flex-direction: column; gap: 8px; }
+    .metric-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-glass); font-size: 12px; color: var(--text-muted); }
+    .metric-row:last-child { border-bottom: 0; }
 
     /* 100 FEATURES GRID STYLES */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 8px;
-      max-height: 500px;
+      gap: 10px;
+      max-height: 480px;
       overflow-y: auto;
       padding-right: 4px;
     }
 
     .feature-chip {
-      padding: 10px;
+      padding: 12px;
       border: 1px solid var(--border-glass);
       border-radius: 12px;
       background: var(--liquid-card);
@@ -573,8 +602,29 @@
       transition: var(--transition);
     }
     .feature-chip:hover { border-color: var(--cyan); background: var(--liquid-hover); transform: translateY(-2px); }
-    .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 2px; }
+    .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 3px; }
     .feature-title { font-size: 11px; font-weight: 700; color: var(--text-main); }
+
+    /* SETTINGS MODAL FORM STYLES */
+    .setting-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .setting-item:last-child { border-bottom: 0; }
+    .setting-item strong { display: block; font-size: 13px; }
+    .setting-item small { display: block; color: var(--text-faint); font-size: 10px; margin-top: 2px; }
+
+    select {
+      padding: 6px 10px;
+      border: 1px solid var(--border-glass);
+      border-radius: 8px;
+      color: var(--text-main);
+      background: var(--liquid-card);
+    }
 
     /* TOAST */
     .toast-popup {
@@ -604,7 +654,8 @@
 
     @media (max-width: 768px) {
       .suggestions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .drawer-grid, .features-grid { grid-template-columns: 1fr; }
+      .tools-grid-layout { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -629,11 +680,14 @@
           <span>100 Features</span>
         </button>
 
-        <!-- COMMAND HUB BUTTON (LALAGYAN NG TOOLS) -->
+        <!-- COMMAND HUB BUTTON (INAYOS NA LALAGYAN NG TOOLS) -->
         <button id="openHubBtn" class="action-btn" type="button">
           <span>✦</span>
           <span>Hub</span>
         </button>
+
+        <!-- WORKING SETTINGS BUTTON (⚙) -->
+        <button id="settingsBtn" class="icon-btn" type="button" aria-label="Settings" title="Settings">⚙</button>
       </div>
     </header>
 
@@ -654,7 +708,7 @@
         <div class="hero-badges">
           <span class="badge"><strong>Quantum OS</strong> Active</span>
           <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>Isolated</strong> Drawer Hub</span>
+          <span class="badge"><strong>Isolated</strong> Command Hub</span>
         </div>
       </section>
 
@@ -719,65 +773,111 @@
     </div>
   </div>
 
-  <!-- COMMAND HUB DRAWER (LALAGYAN NG POWER TOOLS AT METRICS - HINDI NA NAKAKALAT SA UI) -->
+  <!-- COMMAND HUB DRAWER (MALINIS AT MALUWAG NA LALAGYAN NG POWER TOOLS & METRICS) -->
   <div id="hubDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
-        <h2>Quantum Command Hub Suite</h2>
+        <h2>✦ Quantum Command Hub</h2>
         <button id="closeHubBtn" class="icon-btn" type="button">×</button>
       </div>
 
-      <div class="drawer-grid">
-        <div class="drawer-card glass-card">
+      <div class="drawer-sections">
+        <!-- POWER TOOLS -->
+        <div class="drawer-card">
           <div class="drawer-card-title">Power Tools</div>
-          <div class="tools-flex">
-            <button id="clearChatBtn" class="tool-tile" type="button">
-              <span>⌫</span>
-              <strong>Clear chat</strong>
-              <small>New session</small>
+          <div class="tools-grid-layout">
+            <button id="clearChatBtn" class="tool-tile-btn" type="button">
+              <div class="tool-icon">⌫</div>
+              <div class="tool-info">
+                <strong>Clear chat</strong>
+                <small>Start clean session</small>
+              </div>
             </button>
-            <button id="exportChatBtn" class="tool-tile" type="button">
-              <span>⇩</span>
-              <strong>Export</strong>
-              <small>Transcript</small>
+
+            <button id="exportChatBtn" class="tool-tile-btn" type="button">
+              <div class="tool-icon">⇩</div>
+              <div class="tool-info">
+                <strong>Export</strong>
+                <small>Save transcript file</small>
+              </div>
             </button>
-            <button id="copyLastBtn" class="tool-tile" type="button">
-              <span>▣</span>
-              <strong>Copy last</strong>
-              <small>Clipboard</small>
+
+            <button id="copyLastBtn" class="tool-tile-btn" type="button">
+              <div class="tool-icon">▣</div>
+              <div class="tool-info">
+                <strong>Copy last</strong>
+                <small>Save to clipboard</small>
+              </div>
             </button>
-            <button id="speakLastBtn" class="tool-tile" type="button">
-              <span>◖</span>
-              <strong>Speak</strong>
-              <small>Read aloud</small>
+
+            <button id="speakLastBtn" class="tool-tile-btn" type="button">
+              <div class="tool-icon">◖</div>
+              <div class="tool-info">
+                <strong>Speak</strong>
+                <small>Read aloud response</small>
+              </div>
             </button>
           </div>
         </div>
 
-        <div class="drawer-card glass-card">
-          <div class="drawer-card-title">Session Metrics</div>
+        <!-- SESSION METRICS -->
+        <div class="drawer-card">
+          <div class="drawer-card-title">Session Telemetry</div>
           <div class="metrics-flex">
-            <div class="metric-row"><span>Messages</span><strong id="mCount">0</strong></div>
-            <div class="metric-row"><span>Words</span><strong id="mWords">0</strong></div>
-            <div class="metric-row"><span>Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Mode</span><strong>Quantum Fast</strong></div>
+            <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
+            <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
+            <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Quantum Ultra</strong></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 100 FUTURISTIC FEATURES MODAL DRAWER -->
+  <!-- 100 FUTURISTIC FEATURES DRAWER -->
   <div id="featuresDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
-        <h2>⚡ 100 Next-Gen Futuristic AI Features</h2>
+        <h2>⚡ 100 Futuristic AI OS Features</h2>
         <button id="closeFeaturesBtn" class="icon-btn" type="button">×</button>
       </div>
       <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
         Exclusive futuristic architecture built for software engineering evaluation and soft opening demonstration:
       </p>
       <div id="featuresGrid" class="features-grid"></div>
+    </div>
+  </div>
+
+  <!-- WORKING SETTINGS MODAL -->
+  <div id="settingsDrawer" class="drawer-backdrop">
+    <div class="drawer-panel glass-panel">
+      <div class="drawer-head">
+        <h2>⚙ Workspace Settings</h2>
+        <button id="closeSettingsBtn" class="icon-btn" type="button">×</button>
+      </div>
+
+      <div class="drawer-sections">
+        <div class="drawer-card">
+          <div class="setting-item">
+            <div>
+              <strong>Visual Theme</strong>
+              <small>Quantum color environment</small>
+            </div>
+            <select id="themeSelect">
+              <option value="dark">Obsidian Glow</option>
+              <option value="light">Cloud Neon</option>
+            </select>
+          </div>
+
+          <div class="setting-item">
+            <div>
+              <strong>Enter Key Action</strong>
+              <small>Press Enter to send message directly</small>
+            </div>
+            <input type="checkbox" id="enterToggle" checked style="accent-color: var(--cyan);">
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -795,7 +895,7 @@
       controller: null
     };
 
-    // GENERATE 100 FUTURISTIC FEATURES LIST DYNAMICALLY
+    // GENERATE 100 FUTURISTIC FEATURES MATRIX
     const featureTitles = [
       "Neural Synapse Engine", "Holographic Thought Visualizer", "Quantum Context Caching", "Bi-Directional Mind Mapping", "Multi-Stream Thinking", 
       "Subconscious Memory Retrieval", "Adaptive Persona Tuning", "Zero-Latency Prediction", "Cognitive Auto-Balancer", "Emotion Spectrum Detection",
@@ -824,7 +924,7 @@
       grid.innerHTML = "";
       featureTitles.forEach((title, idx) => {
         const item = document.createElement("div");
-        item.className = "feature-chip glass-card";
+        item.className = "feature-chip";
         item.innerHTML = `
           <div class="feature-num">FEATURE #${idx + 1}</div>
           <div class="feature-title">${title}</div>
@@ -845,7 +945,7 @@
       const input = $("promptInput");
       $("charCount").textContent = String(input.value.length);
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 130) + "px";
+      input.style.height = Math.min(input.scrollHeight, 120) + "px";
     }
 
     function renderMessages() {
@@ -930,7 +1030,7 @@
       }
     }
 
-    // DRAWERS TOGGLES
+    // DRAWER LISTENERS & TOGGLES
     $("openHubBtn").addEventListener("click", () => $("hubDrawer").classList.add("open"));
     $("closeHubBtn").addEventListener("click", () => $("hubDrawer").classList.remove("open"));
     $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) $("hubDrawer").classList.remove("open"); });
@@ -939,7 +1039,12 @@
     $("closeFeaturesBtn").addEventListener("click", () => $("featuresDrawer").classList.remove("open"));
     $("featuresDrawer").addEventListener("click", (e) => { if (e.target === $("featuresDrawer")) $("featuresDrawer").classList.remove("open"); });
 
-    // TOOLS LISTENERS
+    // SETTINGS BUTTON EVENT LISTENER (FIXED GUMAGANA NA!)
+    $("settingsBtn").addEventListener("click", () => $("settingsDrawer").classList.add("open"));
+    $("closeSettingsBtn").addEventListener("click", () => $("settingsDrawer").classList.remove("open"));
+    $("settingsDrawer").addEventListener("click", (e) => { if (e.target === $("settingsDrawer")) $("settingsDrawer").classList.remove("open"); });
+
+    // POWER TOOLS LISTENERS
     $("clearChatBtn").addEventListener("click", () => {
       state.messages = [];
       renderMessages();
@@ -982,7 +1087,7 @@
 
     $("promptInput").addEventListener("input", updateComposerHeight);
     $("promptInput").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey) {
+      if (e.key === "Enter" && !e.shiftKey && $("enterToggle").checked) {
         e.preventDefault();
         $("chatForm").requestSubmit();
       }
