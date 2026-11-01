@@ -2059,7 +2059,7 @@
         const text = String(item.text || "").trim();
 
         return text
-          ? total + text.split(/s+/).length
+          ? total + text.split(/\s+/).length
           : total;
       }, 0);
     }
@@ -2340,12 +2340,9 @@
             ? "YOU"
             : "NEURAL ULTRA";
 
-          return speaker + "
-" + item.text;
+          return speaker + "\n" + item.text;
         })
-        .join("
-
-");
+        .join("\n\n");
 
       const file = new Blob([transcript], {
         type: "text/plain;charset=utf-8"
@@ -2854,4 +2851,4 @@
     renderHistory();
   </script>
 </body>
-  </html>
+</html>
