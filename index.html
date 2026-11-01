@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000105">
-  <meta name="description" content="Neural Ultra Full Power King AI OS">
-  <title>Neural Ultra — Full Power King AI OS</title>
+  <meta name="description" content="Neural Ultra Functional AI OS">
+  <title>Neural Ultra — Functional 100 Features AI OS</title>
 
   <style>
     :root {
@@ -22,6 +22,7 @@
       --blue: #599dff;
       --violet: #a87cff;
       --pink: #ff75c8;
+      --green: #51f59c;
       --shadow-master: 0 50px 140px rgba(0, 0, 0, 0.99), 
                        inset 0 1px 4px rgba(255, 255, 255, 0.95), 
                        inset 0 -4px 10px rgba(0, 0, 0, 0.98);
@@ -52,7 +53,6 @@
       background-attachment: fixed;
     }
 
-    /* MASTER-LEVEL AMBIENT FLUID ORBS */
     .ambient-glows {
       position: fixed;
       inset: 0;
@@ -94,7 +94,6 @@
       padding: 12px 0 140px;
     }
 
-    /* MASTER APPLE VISIONOS GLASS PANEL WITH MICRO-SPRING */
     .glass-panel {
       position: relative;
       background: var(--glass-base);
@@ -104,12 +103,10 @@
       box-shadow: var(--shadow-master);
       border-radius: var(--radius-xl);
       overflow: hidden;
-      will-change: transform;
       transition: transform 0.6s var(--apple-spring), box-shadow 0.6s var(--apple-spring), border-color 0.6s var(--fluid-smooth);
     }
     .glass-panel:hover {
       border-color: var(--border-glow);
-      box-shadow: 0 60px 160px rgba(0, 0, 0, 0.99), 0 0 50px rgba(108, 242, 255, 0.3), inset 0 1px 4px rgba(255, 255, 255, 1);
     }
 
     .glass-panel::before {
@@ -132,7 +129,6 @@
       box-shadow: 0 25px 60px rgba(0, 0, 0, 0.75), inset 0 1px 3px rgba(255, 255, 255, 0.7);
       border-radius: var(--radius-md);
       overflow: hidden;
-      will-change: transform;
       transition: transform 0.5s var(--apple-spring), background 0.3s ease, border-color 0.3s ease, box-shadow 0.4s ease;
     }
     .glass-card::before {
@@ -199,7 +195,6 @@
       border: 1px solid rgba(255, 255, 255, 1);
       transition: transform 0.5s var(--apple-spring);
     }
-    .brand-logo-core:hover { transform: scale(1.1) rotate(10deg); }
     .brand-logo-core:active { transform: scale(0.8) rotate(-20deg); }
 
     @keyframes logoMasterPulse {
@@ -239,9 +234,9 @@
       color: var(--text-main);
       background: var(--glass-card);
       box-shadow: inset 0 1px 3px rgba(255,255,255,0.6);
-      transition: transform 0.5s var(--apple-spring), background 0.3s ease, border-color 0.3s ease;
+      transition: transform 0.5s var(--apple-spring), background 0.3s ease;
     }
-    .icon-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: scale(1.12) rotate(5deg); }
+    .icon-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: scale(1.12); }
     .icon-btn:active { transform: scale(0.85) rotate(-15deg); }
 
     /* MAIN CONTENT */
@@ -252,14 +247,13 @@
       margin-top: 16px;
     }
 
-    /* MASTER HERO BANNER WITH FLUID 3D SPHERE & SPRING PHYSICS */
+    /* HERO BANNER */
     .hero {
       padding: 48px 20px 36px;
       text-align: center;
       border: 1px solid var(--border-glow);
     }
 
-    /* MASTER 3D REALISTIC GLOWING LIGHT SPHERE WITH FLUID WARP */
     .hero-3d-sphere-container {
       position: relative;
       width: 160px;
@@ -290,7 +284,6 @@
                   inset 0 -18px 35px rgba(0, 0, 0, 0.95);
       border: 2.5px solid rgba(255, 255, 255, 1);
       animation: masterFloat 4.5s ease-in-out infinite;
-      will-change: transform;
     }
 
     .sphere-core-3d::before {
@@ -325,7 +318,6 @@
       -webkit-background-clip: text;
     }
 
-    /* MASTER LIVE TYPING ANIMATION */
     .typing-container {
       margin: 16px auto 0;
       font-size: 17px;
@@ -363,25 +355,21 @@
       line-height: 1.6;
     }
 
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+    .active-feature-badge {
+      display: inline-flex;
+      align-items: center;
       gap: 6px;
-      margin-top: 18px;
-    }
-    .badge {
-      padding: 5px 12px;
-      border: 1px solid var(--border-outer);
+      margin-top: 16px;
+      padding: 6px 14px;
       border-radius: 999px;
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.03);
-      font-size: 10px;
-      box-shadow: inset 0 1px 3px rgba(255,255,255,0.5);
-      transition: transform 0.4s var(--apple-spring), border-color 0.3s ease;
+      background: rgba(108, 242, 255, 0.12);
+      border: 1px solid var(--border-glow);
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 800;
+      box-shadow: 0 0 20px rgba(108, 242, 255, 0.3);
     }
-    .badge:hover { transform: translateY(-3px) scale(1.05); border-color: var(--cyan); }
-    .badge strong { color: var(--cyan); }
+    .active-feature-badge span { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 8px var(--green); }
 
     /* TRANSCRIPT PANEL */
     .transcript-panel {
@@ -435,7 +423,7 @@
     .message-tag { margin-bottom: 4px; font-size: 9px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
     .message.user .message-tag { color: rgba(0,1,5,0.6); }
 
-    /* SUGGESTIONS GRID WITH SPRING HOVER */
+    /* SUGGESTIONS GRID */
     .suggestions-grid {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -466,7 +454,7 @@
     .suggestion-card strong { display: block; font-size: 12px; }
     .suggestion-card small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
 
-    /* STICKY FLOATING COMPOSER AT THE VERY BOTTOM */
+    /* STICKY COMPOSER */
     .sticky-composer {
       position: fixed;
       bottom: 0;
@@ -486,7 +474,7 @@
       border-radius: 34px;
       background: var(--glass-base);
       border: 1px solid var(--border-glow);
-      box-shadow: sim(-35px 90px rgba(0, 0, 0, 0.99), 0 0 60px rgba(108, 242, 255, 0.5), inset 0 1px 5px rgba(255,255,255,0.95));
+      box-shadow: 0 -35px 90px rgba(0, 0, 0, 0.99), 0 0 60px rgba(108, 242, 255, 0.5), inset 0 1px 5px rgba(255,255,255,0.95);
       backdrop-filter: blur(75px) saturate(260%);
       -webkit-backdrop-filter: blur(75px) saturate(260%);
       transition: transform 0.5s var(--apple-spring), border-color 0.3s ease;
@@ -656,7 +644,7 @@
     .metric-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-outer); font-size: 12px; color: var(--text-muted); }
     .metric-row:last-child { border-bottom: 0; }
 
-    /* 100 FEATURES GRID */
+    /* 100 FUNCTIONAL FEATURES GRID */
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -672,10 +660,11 @@
       border-radius: 14px;
       background: var(--glass-card);
       text-align: left;
+      cursor: pointer;
       box-shadow: inset 0 1px 3px rgba(255,255,255,0.25);
-      transition: transform 0.5s var(--apple-spring), border-color 0.3s ease;
+      transition: transform 0.4s var(--apple-spring), border-color 0.3s ease, background 0.3s ease;
     }
-    .feature-chip:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-4px) scale(1.03); }
+    .feature-chip:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-4px) scale(1.03); box-shadow: 0 10px 30px rgba(108,242,255,0.3); }
     .feature-chip:active { transform: scale(0.94); }
     .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 3px; }
     .feature-title { font-size: 11px; font-weight: 700; color: var(--text-main); }
@@ -730,7 +719,6 @@
 </head>
 <body>
 
-  <!-- AMBIENT GLOWS -->
   <div class="ambient-glows">
     <div class="ambient-orb"></div>
     <div class="ambient-orb"></div>
@@ -747,14 +735,15 @@
         </div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Master King OS</div>
+          <div class="brand-sub">Functional AI OS</div>
         </div>
       </div>
 
       <div class="topbar-actions">
+        <!-- 100 FEATURES BUTTON NA BUBUKSAN ANG INTERAKTIBONG MODULES -->
         <button id="openFeaturesBtn" class="action-btn" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
           <span>⚡</span>
-          <span>100 Features</span>
+          <span>100 Features (Active)</span>
         </button>
 
         <button id="openHubBtn" class="action-btn" type="button">
@@ -769,7 +758,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
 
-      <!-- MASTER HERO BANNER -->
+      <!-- HERO BANNER -->
       <section class="hero glass-panel">
         <div class="hero-3d-sphere-container">
           <div class="sphere-ambient-glow"></div>
@@ -781,20 +770,17 @@
           <span>reimagined.</span>
         </h1>
 
-        <!-- MASTER LIVE TYPING ANIMATION -->
         <div class="typing-container">
           <span id="typedText"></span><span class="typing-cursor"></span>
         </div>
 
-        <p>
-          Next-generation quantum AI environment engineered with master-level Apple spring physics, ultra-polished 3D lighting, and 100 futuristic features.
-        </p>
-
-        <div class="hero-badges">
-          <span class="badge"><strong>Quantum OS</strong> Full Power Edition</span>
-          <span class="badge"><strong>100 Features</strong> Unlocked</span>
-          <span class="badge"><strong>Apple-Grade</strong> Spring Physics</span>
+        <div id="activeFeatureBadge" class="active-feature-badge" style="display: none;">
+          <span></span> Active Module: <strong id="selectedFeatureName">—</strong>
         </div>
+
+        <p>
+          Next-generation quantum AI environment engineered with interactive 100 features, master spring physics, and real-time AI processing.
+        </p>
       </section>
 
       <!-- CONVERSATION TRANSCRIPT -->
@@ -910,22 +896,22 @@
             <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
             <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
             <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Master Spring Core</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Functional 100 Engine</strong></div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 100 FUTURISTIC FEATURES DRAWER -->
+  <!-- 100 FUNCTIONAL FEATURES DRAWER -->
   <div id="featuresDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
-        <h2>⚡ 100 Futuristic AI OS Features</h2>
+        <h2>⚡ 100 Functional AI OS Modules</h2>
         <button id="closeFeaturesBtn" class="icon-btn" type="button">×</button>
       </div>
       <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
-        Exclusive futuristic architecture built for software engineering evaluation and soft opening demonstration:
+        Pindutin ang alinman sa 100 features sa ibaba upang i-activate ito at direktang gamitin sa susunod na prompt ng AI:
       </p>
       <div id="featuresGrid" class="features-grid"></div>
     </div>
@@ -971,11 +957,10 @@
 
     const $ = (id) => document.getElementById(id);
 
-    // MASTER-LEVEL LIVE TYPING ANIMATION
     const wordsToType = [
       "NEURAL ULTRA SUPREME",
-      "MASTER KING QUANTUM OS",
-      "5000 IQ FULL POWER AI",
+      "ACTIVE 100 AI MODULES",
+      "5000 IQ FULL POWER",
       "VISIONOS FLUID GLASS",
       "ENTERPRISE AI SUPREME"
     ];
@@ -997,7 +982,7 @@
       let speed = isDeleting ? 25 : 60;
 
       if (!isDeleting && charIdx === currentWord.length) {
-        speed = 2400; // Pause at end
+        speed = 2400;
         isDeleting = true;
       } else if (isDeleting && charIdx === 0) {
         isDeleting = false;
@@ -1013,7 +998,8 @@
       messages: [],
       isLoading: false,
       latency: null,
-      controller: null
+      controller: null,
+      activeFeature: null
     };
 
     const featureTitles = [
@@ -1046,9 +1032,21 @@
         const item = document.createElement("div");
         item.className = "feature-chip";
         item.innerHTML = `
-          <div class="feature-num">FEATURE #${idx + 1}</div>
+          <div class="feature-num">MODULE #${idx + 1}</div>
           <div class="feature-title">${title}</div>
         `;
+        // KAPAG PININDOT, IA-ACTIVATE ITO SA AI SYSTEM
+        item.addEventListener("click", () => {
+          state.activeFeature = title;
+          $("selectedFeatureName").textContent = title;
+          $("activeFeatureBadge").style.display = "inline-flex";
+          toggleDrawer("featuresDrawer", false);
+          showToast(`Module Activated: ${title}`);
+          const promptInput = $("promptInput");
+          promptInput.value = `[Using ${title}] `;
+          promptInput.focus();
+          updateComposerHeight();
+        });
         grid.appendChild(item);
       });
     }
@@ -1104,8 +1102,12 @@
     }
 
     async function handleSend(val) {
-      const prompt = String(val || "").trim();
+      let prompt = String(val || "").trim();
       if (!prompt || state.isLoading) return;
+
+      if (state.activeFeature) {
+        prompt = `[Module: ${state.activeFeature}] ${prompt}`;
+      }
 
       const startTime = Date.now();
       appendMessage(prompt, "user");
@@ -1213,6 +1215,8 @@
 
     $("clearInputBtn").addEventListener("click", () => {
       $("promptInput").value = "";
+      state.activeFeature = null;
+      $("activeFeatureBadge").style.display = "none";
       updateComposerHeight();
     });
 
