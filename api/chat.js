@@ -1,4 +1,4 @@
-const MODEL = "gemini-3.8-flash";
+const MODEL = "";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
