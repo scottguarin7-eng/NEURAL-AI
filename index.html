@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000105">
-  <meta name="description" content="Neural Ultra Functional AI OS">
-  <title>Neural Ultra — Functional 100 Features AI OS</title>
+  <meta name="description" content="Neural Ultra Clean Functional AI OS">
+  <title>Neural Ultra — Clean 100 Features AI OS</title>
 
   <style>
     :root {
@@ -105,9 +105,7 @@
       overflow: hidden;
       transition: transform 0.6s var(--apple-spring), box-shadow 0.6s var(--apple-spring), border-color 0.6s var(--fluid-smooth);
     }
-    .glass-panel:hover {
-      border-color: var(--border-glow);
-    }
+    .glass-panel:hover { border-color: var(--border-glow); }
 
     .glass-panel::before {
       content: "";
@@ -740,10 +738,10 @@
       </div>
 
       <div class="topbar-actions">
-        <!-- 100 FEATURES BUTTON NA BUBUKSAN ANG INTERAKTIBONG MODULES -->
+        <!-- 100 FEATURES BUTTON NA BUBUKSAN ANG INTERAKTIBONG DRAWER NG MODULES -->
         <button id="openFeaturesBtn" class="action-btn" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
           <span>⚡</span>
-          <span>100 Features (Active)</span>
+          <span>100 Modules</span>
         </button>
 
         <button id="openHubBtn" class="action-btn" type="button">
@@ -758,7 +756,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
 
-      <!-- HERO BANNER -->
+      <!-- HERO BANNER (WALA NA ANG MGA HILAW NA FEATURES SA TAAS) -->
       <section class="hero glass-panel">
         <div class="hero-3d-sphere-container">
           <div class="sphere-ambient-glow"></div>
@@ -779,7 +777,7 @@
         </div>
 
         <p>
-          Next-generation quantum AI environment engineered with interactive 100 features, master spring physics, and real-time AI processing.
+          Next-generation quantum AI environment engineered with interactive 100 functional modules, master spring physics, and real-time AI execution.
         </p>
       </section>
 
@@ -903,7 +901,7 @@
     </div>
   </div>
 
-  <!-- 100 FUNCTIONAL FEATURES DRAWER -->
+  <!-- 100 FUNCTIONAL FEATURES DRAWER (KOMPLETO AT NAKALAGAY NA DITO ANG LAHAT) -->
   <div id="featuresDrawer" class="drawer-backdrop">
     <div class="drawer-panel glass-panel">
       <div class="drawer-head">
@@ -911,7 +909,7 @@
         <button id="closeFeaturesBtn" class="icon-btn" type="button">×</button>
       </div>
       <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
-        Pindutin ang alinman sa 100 features sa ibaba upang i-activate ito at direktang gamitin sa susunod na prompt ng AI:
+        Pindutin ang alinman sa 100 modules sa ibaba upang i-activate ito at direktang gamitin sa bawat tanong mo sa AI:
       </p>
       <div id="featuresGrid" class="features-grid"></div>
     </div>
@@ -1035,7 +1033,6 @@
           <div class="feature-num">MODULE #${idx + 1}</div>
           <div class="feature-title">${title}</div>
         `;
-        // KAPAG PININDOT, IA-ACTIVATE ITO SA AI SYSTEM
         item.addEventListener("click", () => {
           state.activeFeature = title;
           $("selectedFeatureName").textContent = title;
