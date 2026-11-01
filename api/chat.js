@@ -1,4 +1,4 @@
-const MODEL = "grok-beta";
+const MODEL = "grok-4.7";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -24,7 +24,9 @@ async function callGrokAI(apiKey, message, signal) {
           role: "user",
           content: message
         }
-      ]
+      ],
+      temperature: 0.7,
+      max_tokens: 512
     }),
     signal
   });
