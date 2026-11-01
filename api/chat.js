@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       });
     }
 
-    const model = "gemini-2.5-flash";
+    const model = "gemini-3.8-flash";
 
     const contents = [
       {
