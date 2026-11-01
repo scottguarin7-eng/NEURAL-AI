@@ -1,4 +1,4 @@
-const MODEL = "llama-3.1-8b-instant";
+const MODEL = "llama3-8b-8192";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
