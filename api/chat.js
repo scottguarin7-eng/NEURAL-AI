@@ -1,4 +1,4 @@
-const MODEL = "gpt-4o-mini";
+const MODEL = "gemini-2.5-flash";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -8,25 +8,24 @@ function wait(ms) {
   });
 }
 
-async function callOpenAI(apiKey, message, signal) {
-  const endpoint = "https://api.openai.com/v1/chat/completions";
+async function callGeminiAI(apiKey, message, signal) {
+  const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${apiKey}`;
 
   return fetch(endpoint, {
     method: "POST",
     headers: {
-      "Authorization": "Bearer " + apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      model: MODEL,
-      messages: [
+      contents: [
         {
-          role: "user",
-          content: message
+          parts: [
+            {
+              text: message
+            }
+          ]
         }
-      ],
-      temperature: 0.7,
-      max_tokens: 512
+      ]
     }),
     signal
   });
@@ -39,14 +38,14 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.GEMINI_API_KEY;
   const message = String(
     req.body?.message || ""
   ).trim();
 
   if (!apiKey) {
     return res.status(500).json({
-      error: "OPENAI_API_KEY is missing in Vercel environment variables."
+      error: "GEMINI_API_KEY is missing in Vercel environment variables."
     });
   }
 
@@ -68,7 +67,7 @@ export default async function handler(req, res) {
     }, REQUEST_TIMEOUT);
 
     try {
-      const response = await callOpenAI(
+      const response = await callGeminiAI(
         apiKey,
         message,
         controller.signal
@@ -78,11 +77,11 @@ export default async function handler(req, res) {
 
       if (response.ok) {
         const text =
-          data?.choices?.[0]?.message?.content;
+          data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
         if (!text) {
           return res.status(502).json({
-            error: "OpenAI returned an empty response.",
+            error: "Gemini returned an empty response.",
             provider: data
           });
         }
@@ -96,7 +95,7 @@ export default async function handler(req, res) {
 
       const providerError =
         data?.error?.message ||
-        `OpenAI returned HTTP ${response.status}.`;
+        `Gemini returned HTTP ${response.status}.`;
 
       const retryable = [
         408,
@@ -123,7 +122,7 @@ export default async function handler(req, res) {
       ) {
         return res.status(504).json({
           error:
-            "OpenAI did not respond within 60 seconds. " +
+            "Gemini did not respond within 60 seconds. " +
             "The provider may be busy or unavailable."
         });
       }
@@ -144,6 +143,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(504).json({
-    error: "OpenAI request timed out."
+    error: "Gemini request timed out."
   });
 }
