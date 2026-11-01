@@ -1,854 +1,364 @@
+```html
 <!doctype html>
 <html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#020308">
-  <meta name="description" content="Neural Ultra Enterprise Quantum OS">
-  <title>Neural Ultra — Liquid Flow OS</title>
+  <meta name="description" content="Neural Ultra VisionOS 26 Hyper-Realistic Liquid Glass Quantum Workspace">
+  <title>Neural Ultra — Liquid Glass VisionOS Quantum Suite</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cyan: '#6cf2ff',
+              violet: '#a87cff',
+              pink: '#ff75c8',
+              blue: '#599dff',
+              obsidian: '#020308',
+              surface: '#060917'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'Inter', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <!-- FontAwesome Icons for High-End Controls -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
+    /* HYPER-REALISTIC LIQUID GLASS SYSTEM STYLES */
     :root {
-      --bg-base: #020309;
-      --bg-surface: #060917;
-      --liquid-glass: rgba(13, 17, 40, 0.78);
-      --liquid-card: rgba(20, 27, 62, 0.6);
-      --liquid-hover: rgba(32, 42, 98, 0.85);
-      --border-glass: rgba(255, 255, 255, 0.16);
-      --border-lightning: rgba(108, 242, 255, 0.75);
-      --text-main: #f5f7ff;
-      --text-muted: #9faad4;
-      --text-faint: #6774a6;
+      --bg-base: #010206;
+      --liquid-glass: rgba(16, 22, 48, 0.65);
+      --liquid-border: rgba(255, 255, 255, 0.22);
+      --liquid-glow: rgba(108, 242, 255, 0.45);
       --cyan: #6cf2ff;
-      --blue: #599dff;
       --violet: #a87cff;
       --pink: #ff75c8;
-      --green: #51f59c;
-      --red: #ff6b8b;
-      --shadow-quantum: 0 30px 100px rgba(0, 0, 0, 0.9);
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-      /* ELASTIC APPLE SPRING TRANSITION */
       --spring-physics: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --smooth-fluid: cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    [data-theme="light"] {
-      --bg-base: #e2ecfb;
-      --bg-surface: #cfdffc;
-      --liquid-glass: rgba(255, 255, 255, 0.88);
-      --liquid-card: rgba(255, 255, 255, 0.96);
-      --liquid-hover: rgba(255, 255, 255, 1);
-      --border-glass: rgba(20, 45, 85, 0.16);
-      --border-lightning: rgba(0, 140, 255, 0.55);
-      --text-main: #0c1838;
-      --text-muted: #526391;
-      --text-faint: #7988b5;
+      --fluid-smooth: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
-    }
-
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-      overflow-x: hidden;
+      user-select: none;
     }
 
     body {
-      color: var(--text-main);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, ui-sans-serif, system-ui, sans-serif;
-      background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.22), transparent 35%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.25), transparent 40%),
-        radial-gradient(circle at 50% 95%, rgba(255, 117, 200, 0.18), transparent 45%),
-        linear-gradient(135deg, var(--bg-base), var(--bg-surface));
-      background-attachment: fixed;
+      background-color: var(--bg-base);
+      color: #f5f7ff;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    body::before {
+    /* WEBGL / CANVAS BACKGROUND GLASS REFRACTION OVERLAY */
+    #glassCanvas {
       position: fixed;
       inset: 0;
-      z-index: -3;
-      content: "";
-      opacity: 0.25;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
       pointer-events: none;
-      background-image: 
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 36px 36px;
     }
 
-    body::after {
-      position: fixed;
-      inset: -30%;
-      z-index: -2;
-      opacity: 0.15;
-      pointer-events: none;
-      content: "";
-      background: conic-gradient(from 90deg, transparent, var(--cyan), transparent 30%, var(--violet), transparent 60%, var(--pink), transparent);
-      filter: blur(140px);
-      animation: ambientSpin 28s linear infinite;
+    /* HIGH-FIDELITY GLASSMORPHIC PANELS */
+    .vision-glass {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+      backdrop-filter: blur(40px) saturate(200%);
+      -webkit-backdrop-filter: blur(40px) saturate(200%);
+      border: 1px solid var(--liquid-border);
+      box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.8),
+        inset 0 1px 2px rgba(255, 255, 255, 0.4),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+      position: relative;
     }
 
-    button, input, textarea, select { font: inherit; }
-    button { cursor: pointer; touch-action: manipulation; }
+    .vision-glass::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(108, 242, 255, 0.6), transparent 40%, rgba(168, 124, 255, 0.5));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
 
-    /* LIQUID RIPPLE EFFECT */
-    .liquid-ripple {
+    /* LIQUID MORPHING CAPSULE & BUTTONS */
+    .liquid-capsule {
+      transition: transform 0.45s var(--spring-physics), box-shadow 0.35s var(--fluid-smooth), background 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .liquid-capsule:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 40px rgba(108, 242, 255, 0.35), inset 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+
+    .liquid-capsule:active {
+      transform: scale(0.92) stretch;
+      transition: transform 0.1s var(--fluid-smooth);
+    }
+
+    /* DYNAMIC LENS REFRACTION GLOW */
+    .lens-refract {
       position: relative;
       overflow: hidden;
     }
 
-    .liquid-ripple::after {
+    .lens-refract::after {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(108,242,255,0.2) 50%, transparent 70%);
-      border-radius: 50%;
-      transform: scale(0);
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.4) 0%, rgba(108, 242, 255, 0.15) 35%, transparent 70%);
       opacity: 0;
+      transform: scale(0.3);
+      transition: transform 0.5s var(--fluid-smooth), opacity 0.4s ease;
       pointer-events: none;
-      transition: transform 0.5s var(--smooth-fluid), opacity 0.5s var(--smooth-fluid);
     }
 
-    .liquid-ripple:active::after {
-      transform: scale(3);
+    .lens-refract:active::after {
       opacity: 1;
+      transform: scale(1);
       transition: 0s;
     }
 
-    .app-viewport {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      width: min(1100px, 100% - 24px);
-      margin: 0 auto;
-      padding: 12px 0 140px;
-    }
-
-    .glass-panel {
-      border: 1px solid var(--border-glass);
-      background: var(--liquid-glass);
-      box-shadow: var(--shadow-quantum);
-      backdrop-filter: blur(32px);
-      -webkit-backdrop-filter: blur(32px);
-      transition: transform 0.4s var(--spring-physics), box-shadow 0.4s var(--smooth-fluid), border-color 0.4s var(--smooth-fluid);
-    }
-
-    .glass-card {
-      border: 1px solid var(--border-glass);
-      background: var(--liquid-card);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      transition: transform 0.35s var(--spring-physics), background 0.3s var(--smooth-fluid), border-color 0.3s var(--smooth-fluid);
-    }
-
-    /* TOPBAR WITH FLUID SPRING ANIMATIONS */
-    .topbar {
-      position: sticky;
-      top: 10px;
-      z-index: 60;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 10px 16px;
-      border-radius: 20px;
-      border: 1px solid var(--border-lightning);
-      box-shadow: 0 10px 35px rgba(108, 242, 255, 0.2);
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-orb {
-      width: 36px;
-      height: 36px;
-      border-radius: 11px;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--cyan) 40%, var(--violet));
-      box-shadow: 0 0 25px rgba(108, 242, 255, 0.85);
-      animation: coreBreathe 4s ease-in-out infinite;
-      transition: transform 0.5s var(--spring-physics);
-    }
-
-    .brand-orb:active {
-      transform: scale(0.85) rotate(-10deg);
-    }
-
-    .brand-title {
-      font-size: 15px;
-      font-weight: 900;
-      letter-spacing: -0.04em;
-    }
-
-    .brand-sub {
-      color: var(--cyan);
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-    }
-
-    .topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* SATISFYING BUTTON MORPHING */
-    .action-btn {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border: 1px solid var(--border-lightning);
-      border-radius: 14px;
-      color: #010206;
-      background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      font-size: 11px;
-      font-weight: 900;
-      box-shadow: 0 4px 18px rgba(108, 242, 255, 0.4);
-      transition: transform 0.35s var(--spring-physics), box-shadow 0.35s var(--smooth-fluid), filter 0.2s ease;
-    }
-
-    .action-btn:hover {
-      transform: translateY(-2px) scale(1.03);
-      box-shadow: 0 8px 28px rgba(108, 242, 255, 0.7);
-    }
-
-    .action-btn:active {
-      transform: scale(0.92);
-      filter: brightness(1.2);
-    }
-
-    .icon-btn {
-      display: grid;
-      place-items: center;
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--border-glass);
-      border-radius: 12px;
-      color: var(--text-main);
-      background: var(--liquid-card);
-      transition: transform 0.35s var(--spring-physics), background 0.3s var(--smooth-fluid), border-color 0.3s var(--smooth-fluid);
-    }
-
-    .icon-btn:hover {
-      border-color: var(--cyan);
-      background: var(--liquid-hover);
-      transform: scale(1.06);
-    }
-
-    .icon-btn:active {
-      transform: scale(0.88) rotate(15deg);
-    }
-
-    /* MAIN CONTENT */
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-top: 14px;
-    }
-
-    /* HERO WITH FLUID LIGHTING */
-    .hero {
-      position: relative;
-      overflow: hidden;
-      padding: 32px 18px 22px;
-      border-radius: var(--radius-xl);
-      text-align: center;
-      border: 1px solid var(--border-lightning);
-    }
-
-    .hero-core {
-      position: relative;
-      width: 95px;
-      height: 95px;
-      margin: 0 auto 16px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #fff, var(--cyan) 30%, var(--violet) 70%, var(--pink));
-      box-shadow: 0 0 70px rgba(108, 242, 255, 0.75), 0 0 130px rgba(168, 124, 255, 0.5);
-      animation: coreBreathe 5s ease-in-out infinite;
-      transition: transform 0.6s var(--spring-physics);
-      cursor: pointer;
-    }
-
-    .hero-core:hover {
-      transform: scale(1.12) rotate(5deg);
-    }
-
-    .hero-core::before {
-      position: absolute;
-      inset: -12px;
-      border: 1px dashed rgba(108, 242, 255, 0.6);
-      border-radius: 50%;
-      content: "";
-      animation: spinRing 14s linear infinite;
-    }
-
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(2rem, 4.8vw, 3.6rem);
-      line-height: 0.95;
-      letter-spacing: -0.08em;
-    }
-
-    .hero h1 span {
-      color: transparent;
-      background: linear-gradient(100deg, var(--cyan), var(--blue), var(--violet), var(--pink));
-      background-clip: text;
-      -webkit-background-clip: text;
-    }
-
-    .hero p {
-      max-width: 520px;
-      margin: 12px auto 0;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.6;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 6px;
-      margin-top: 16px;
-    }
-
-    .badge {
-      padding: 4px 10px;
-      border: 1px solid var(--border-glass);
+    /* CUSTOM GLASS RANGE SLIDER */
+    input[type="range"].glass-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 12px;
       border-radius: 999px;
-      color: var(--text-muted);
-      background: rgba(255,255,255,0.03);
-      font-size: 10px;
-      transition: transform 0.3s var(--spring-physics), border-color 0.3s ease;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      outline: none;
+      backdrop-filter: blur(10px);
     }
 
-    .badge:hover {
-      transform: translateY(-2px);
-      border-color: var(--cyan);
-    }
-
-    .badge strong { color: var(--cyan); }
-
-    /* TRANSCRIPT PANEL */
-    .transcript-panel {
-      display: none;
-      padding: 16px;
-      border-radius: var(--radius-lg);
-    }
-    .transcript-panel.visible { 
-      display: block; 
-      animation: liquidPop 0.4s var(--spring-physics);
-    }
-
-    .transcript-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      padding-bottom: 6px;
-      border-bottom: 1px solid var(--border-glass);
-    }
-
-    .transcript-head h2 {
-      margin: 0;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-    }
-
-    .messages-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 440px;
-      overflow-y: auto;
-    }
-
-    .message {
-      max-width: 90%;
-      padding: 14px 16px;
-      border-radius: 18px;
-      font-size: 13px;
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-break: break-word;
-      animation: bubbleBounce 0.4s var(--spring-physics);
-    }
-
-    .message.user {
-      margin-left: auto;
-      color: #010206;
-      background: linear-gradient(135deg, var(--cyan), #b5ffff);
-      box-shadow: 0 8px 24px rgba(108, 242, 255, 0.35);
-      border-bottom-right-radius: 4px;
-    }
-
-    .message.assistant {
-      margin-right: auto;
-      color: var(--text-main);
-      background: var(--liquid-card);
-      border: 1px solid var(--border-glass);
-      border-bottom-left-radius: 4px;
-    }
-
-    .message-tag {
-      margin-bottom: 4px;
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-    }
-    .message.user .message-tag { color: rgba(1,2,6,0.6); }
-
-    /* SUGGESTIONS GRID WITH SATISFYING HOVER & PUSH */
-    .suggestions-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .suggestion-card {
-      padding: 14px;
-      border-radius: var(--radius-md);
-      text-align: left;
+    input[type="range"].glass-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fff, var(--cyan));
+      box-shadow: 0 0 20px var(--cyan), 0 4px 10px rgba(0,0,0,0.5);
       cursor: pointer;
-      transition: transform 0.35s var(--spring-physics), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.3s var(--spring-physics);
     }
 
-    .suggestion-card:hover {
-      border-color: var(--cyan);
-      background: var(--liquid-hover);
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    input[type="range"].glass-slider::-webkit-slider-thumb:hover {
+      transform: scale(1.25);
     }
 
-    .suggestion-card:active {
-      transform: scale(0.95);
-    }
-
-    .suggestion-icon {
-      display: grid;
-      place-items: center;
-      width: 28px;
-      height: 28px;
-      margin-bottom: 10px;
-      border-radius: 9px;
-      background: linear-gradient(135deg, var(--cyan), var(--violet));
-      color: #010206;
-      font-size: 12px;
-      transition: transform 0.35s var(--spring-physics);
-    }
-
-    .suggestion-card:hover .suggestion-icon {
-      transform: rotate(15deg) scale(1.1);
-    }
-
-    .suggestion-card strong { display: block; font-size: 11px; }
-    .suggestion-card small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
-
-    /* STICKY FLOATING COMPOSER AT THE VERY BOTTOM */
-    .sticky-composer {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 90;
-      padding: 8px 12px 14px;
-      background: linear-gradient(to top, var(--bg-base) 85%, transparent);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-    }
-
-    .composer-inner {
-      width: min(1100px, 100%);
-      margin: 0 auto;
-      padding: 10px;
-      border-radius: 22px;
-      background: var(--liquid-glass);
-      border: 1px solid var(--border-lightning);
-      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.75), 0 0 30px rgba(108, 242, 255, 0.25);
-      transition: transform 0.4s var(--spring-physics), border-color 0.3s ease;
-    }
-
-    .composer-inner:focus-within {
-      border-color: var(--cyan);
-      transform: translateY(-2px);
-    }
-
-    .composer-form {
+    /* FLUID TAB INDICATOR MORPH */
+    .tab-track {
+      position: relative;
       display: flex;
-      align-items: flex-end;
-      gap: 8px;
-      padding: 4px 6px;
-      border-radius: 16px;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      padding: 4px;
     }
 
-    textarea {
-      flex: 1;
-      min-height: 40px;
-      max-height: 120px;
-      resize: none;
-      padding: 10px 8px;
-      border: 0;
-      outline: 0;
-      color: var(--text-main);
-      background: transparent;
-      font-size: 13px;
-      line-height: 1.4;
-    }
-
-    textarea::placeholder { color: var(--text-faint); }
-
-    .send-btn {
-      display: grid;
-      place-items: center;
-      width: 44px;
-      height: 44px;
-      flex-shrink: 0;
-      border: 0;
-      border-radius: 12px;
-      color: #010206;
-      background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      box-shadow: 0 4px 18px rgba(108, 242, 255, 0.5);
-      font-size: 18px;
-      font-weight: 900;
-      transition: transform 0.35s var(--spring-physics), filter 0.2s ease;
-    }
-
-    .send-btn:hover {
-      transform: scale(1.08);
-    }
-
-    .send-btn:active {
-      transform: scale(0.9);
-    }
-
-    .send-btn.stop { color: #fff; background: linear-gradient(135deg, var(--red), #ffa1b4); }
-
-    .composer-tools {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      padding: 6px 6px 0;
-    }
-
-    .chips { display: flex; gap: 6px; flex-wrap: wrap; }
-    .chip {
-      padding: 4px 10px;
-      border: 1px solid var(--border-glass);
-      border-radius: 8px;
-      color: var(--text-muted);
-      background: transparent;
-      font-size: 10px;
-      font-weight: 600;
-      transition: transform 0.3s var(--spring-physics), border-color 0.2s ease, background 0.2s ease;
-    }
-    .chip:hover { color: var(--text-main); border-color: var(--cyan); transform: translateY(-2px); background: var(--liquid-card); }
-    .chip:active { transform: scale(0.92); }
-    .counter { color: var(--text-faint); font-size: 10px; }
-
-    /* MODAL DRAWERS WITH IOS SLIDE & SPRING POP */
-    .drawer-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 150;
-      display: none;
-      place-items: flex-end center;
-      background: rgba(1, 2, 6, 0.88);
-      backdrop-filter: blur(18px);
-      opacity: 0;
-      transition: opacity 0.35s var(--smooth-fluid);
-    }
-
-    .drawer-backdrop.open { 
-      display: grid;
-      opacity: 1;
-    }
-
-    .drawer-panel {
-      width: min(850px, 100%);
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: 20px;
-      border-radius: 28px 28px 0 0;
-      background: var(--liquid-glass);
-      border: 1px solid var(--border-lightning);
-      box-shadow: 0 -20px 80px rgba(0,0,0,0.95);
-      transform: translateY(100%);
-      transition: transform 0.45s var(--spring-physics);
-    }
-
-    .drawer-backdrop.open .drawer-panel {
-      transform: translateY(0);
-    }
-
-    .drawer-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid var(--border-glass);
-    }
-
-    .drawer-head h2 { margin: 0; font-size: 16px; font-weight: 900; letter-spacing: -0.02em; }
-
-    .drawer-sections {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .drawer-card {
-      padding: 16px;
-      border-radius: var(--radius-md);
-      background: var(--liquid-card);
-      border: 1px solid var(--border-glass);
-    }
-
-    .drawer-card-title {
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--cyan);
-      margin-bottom: 12px;
-    }
-
-    .tools-grid-layout {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    .tool-tile-btn {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 14px;
-      min-height: 54px;
-      border: 1px solid var(--border-glass);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-main);
-      text-align: left;
-      transition: transform 0.35s var(--spring-physics), background 0.3s ease, border-color 0.3s ease;
-    }
-
-    .tool-tile-btn:hover {
-      border-color: var(--cyan);
-      background: var(--liquid-hover);
-      transform: translateY(-3px) scale(1.02);
-    }
-
-    .tool-tile-btn:active {
-      transform: scale(0.94);
-    }
-
-    .tool-icon {
-      display: grid;
-      place-items: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(108, 242, 255, 0.12);
-      color: var(--cyan);
-      font-size: 15px;
-      flex-shrink: 0;
-      transition: transform 0.35s var(--spring-physics);
-    }
-
-    .tool-tile-btn:hover .tool-icon {
-      transform: scale(1.15) rotate(-8deg);
-    }
-
-    .tool-info strong { display: block; font-size: 12px; font-weight: 700; }
-    .tool-info small { display: block; color: var(--text-faint); font-size: 10px; margin-top: 1px; }
-
-    .metrics-flex { display: flex; flex-direction: column; gap: 8px; }
-    .metric-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border-glass); font-size: 12px; color: var(--text-muted); }
-    .metric-row:last-child { border-bottom: 0; }
-
-    /* 100 FEATURES GRID STYLES */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      max-height: 480px;
-      overflow-y: auto;
-      padding-right: 4px;
-    }
-
-    .feature-chip {
-      padding: 12px;
-      border: 1px solid var(--border-glass);
-      border-radius: 12px;
-      background: var(--liquid-card);
-      text-align: left;
-      transition: transform 0.35s var(--spring-physics), border-color 0.3s ease;
-    }
-    .feature-chip:hover { border-color: var(--cyan); background: var(--liquid-hover); transform: translateY(-3px) scale(1.02); }
-    .feature-chip:active { transform: scale(0.94); }
-    .feature-num { font-size: 9px; font-weight: 900; color: var(--cyan); letter-spacing: 0.08em; margin-bottom: 3px; }
-    .feature-title { font-size: 11px; font-weight: 700; color: var(--text-main); }
-
-    /* SETTINGS MODAL FORM STYLES */
-    .setting-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border-glass);
-    }
-    .setting-item:last-child { border-bottom: 0; }
-    .setting-item strong { display: block; font-size: 13px; }
-    .setting-item small { display: block; color: var(--text-faint); font-size: 10px; margin-top: 2px; }
-
-    select {
-      padding: 6px 10px;
-      border: 1px solid var(--border-glass);
-      border-radius: 8px;
-      color: var(--text-main);
-      background: var(--liquid-card);
-    }
-
-    /* TOAST WITH FLUID BOUNCE */
-    .toast-popup {
-      position: fixed;
-      z-index: 200;
-      bottom: 110px;
-      right: 20px;
-      max-width: 300px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      background: var(--liquid-glass);
-      border: 1px solid var(--border-lightning);
-      color: var(--text-main);
-      font-size: 11px;
-      font-weight: 600;
-      opacity: 0;
-      transform: translateY(20px) scale(0.9);
+    .tab-pill {
+      position: absolute;
+      top: 4px;
+      bottom: 4px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      box-shadow: 0 4px 20px rgba(108, 242, 255, 0.5);
+      transition: left 0.45s var(--spring-physics), width 0.45s var(--spring-physics);
       pointer-events: none;
-      transition: transform 0.4s var(--spring-physics), opacity 0.3s ease;
     }
-    .toast-popup.show { opacity: 1; transform: translateY(0) scale(1); }
 
-    @keyframes coreBreathe { 0%, 100% { transform: scale(1); filter: brightness(1); } 50% { transform: scale(1.08); filter: brightness(1.3); } }
-    @keyframes spinRing { to { transform: rotate(360deg); } }
-    @keyframes ambientSpin { to { transform: rotate(360deg); } }
-    @keyframes bubbleBounce { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    @keyframes liquidPop { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    /* SCROLLBAR CUSTOMIZATION */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0.2);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--cyan);
+    }
 
-    @media (max-width: 768px) {
-      .suggestions-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .tools-grid-layout { grid-template-columns: 1fr; }
-      .features-grid { grid-template-columns: 1fr; }
+    /* BREATHING ORB ANIMATION */
+    @keyframes coreBreathe {
+      0%, 100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+      50% { transform: scale(1.1) rotate(6deg); filter: brightness(1.35); }
+    }
+    .animate-core {
+      animation: coreBreathe 5s ease-in-out infinite;
+    }
+
+    @keyframes spinRing {
+      to { transform: rotate(360deg); }
+    }
+    .animate-ring {
+      animation: spinRing 18s linear infinite;
     }
   </style>
 </head>
-<body>
+<body class="antialiased selection:bg-brand-cyan selection:text-black">
 
-  <div class="app-viewport">
+  <!-- REAL-TIME WEBGL / CANVAS GLASS REFRACTION SHADER -->
+  <canvas id="glassCanvas"></canvas>
 
-    <!-- TOPBAR -->
-    <header class="topbar glass-panel">
-      <div class="brand">
-        <div class="brand-orb"></div>
+  <!-- MAIN VIEWPORT CONTAINER -->
+  <div class="relative z-10 flex flex-col min-h-screen max-w-7xl mx-auto px-4 py-4 pb-36">
+
+    <!-- VISION OS LIQUID TOPBAR -->
+    <header class="topbar vision-glass rounded-3xl p-3 px-6 flex items-center justify-between sticky top-4 z-50 transition-all duration-300">
+      <div class="flex items-center gap-4">
+        <!-- BREATHING LIQUID CORE ORB -->
+        <div id="topbarOrb" class="liquid-capsule lens-refract w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-cyan via-brand-blue to-brand-violet shadow-[0_0_25px_rgba(108,242,255,0.7)] flex items-center justify-center animate-core">
+          <i class="fa-solid fa-atom text-black text-lg"></i>
+        </div>
         <div>
-          <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">Liquid Flow OS</div>
+          <div class="font-black text-base tracking-tight flex items-center gap-2">
+            Neural Ultra <span class="text-[10px] bg-gradient-to-r from-brand-cyan to-brand-pink text-black px-2 py-0.5 rounded-full font-black uppercase tracking-widest">VisionOS 26</span>
+          </div>
+          <div class="text-[10px] font-semibold text-brand-cyan tracking-widest uppercase opacity-90">Hyper-Realistic Quantum Workspace</div>
         </div>
       </div>
 
-      <div class="topbar-actions">
-        <button id="openFeaturesBtn" class="action-btn liquid-ripple" type="button" style="background: linear-gradient(135deg, var(--violet), var(--pink)); color: #fff;">
-          <span>⚡</span>
+      <!-- INTERACTIVE FLUID CONTROLS -->
+      <div class="flex items-center gap-3">
+        <!-- MODE SELECTOR TAB morph -->
+        <div class="tab-track relative hidden md:flex items-center w-48">
+          <div id="tabPill" class="tab-pill w-1/2 left-1"></div>
+          <button id="modeFastBtn" class="relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-black transition-colors" onclick="switchMode('fast')">Fast</button>
+          <button id="modeUltraBtn" class="relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-white/70 hover:text-white transition-colors" onclick="switchMode('ultra')">Ultra</button>
+        </div>
+
+        <!-- 100 FEATURES DRAWER TRIGGER -->
+        <button id="openFeaturesBtn" class="liquid-capsule lens-refract flex items-center gap-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-brand-violet to-brand-pink text-white font-black text-xs shadow-lg shadow-brand-violet/30 border border-white/30">
+          <i class="fa-solid fa-bolt text-yellow-300"></i>
           <span>100 Features</span>
         </button>
 
-        <button id="openHubBtn" class="action-btn liquid-ripple" type="button">
-          <span>✦</span>
+        <!-- COMMAND HUB DRAWER TRIGGER -->
+        <button id="openHubBtn" class="liquid-capsule lens-refract flex items-center gap-2 px-4 py-2 rounded-2xl bg-gradient-to-r from-brand-cyan to-brand-blue text-black font-black text-xs shadow-lg shadow-brand-cyan/40 border border-white/40">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
           <span>Hub</span>
         </button>
 
-        <button id="settingsBtn" class="icon-btn liquid-ripple" type="button" aria-label="Settings" title="Settings">⚙</button>
+        <!-- SETTINGS MODAL TRIGGER -->
+        <button id="openSettingsBtn" class="liquid-capsule lens-refract w-10 h-10 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/20 flex items-center justify-center text-white transition-all" title="Settings">
+          <i class="fa-solid fa-sliders text-sm"></i>
+        </button>
       </div>
     </header>
 
-    <!-- MAIN CONTENT AREA -->
-    <main class="main-content">
+    <!-- WORKSPACE HERO BANNER & INTERACTIVE CANVAS SLIDERS -->
+    <main class="mt-6 flex flex-col gap-6">
 
-      <!-- HERO BANNER -->
-      <section class="hero glass-panel">
-        <div class="hero-core"></div>
-        <h1>
-          Intelligence<br>
-          <span>reimagined.</span>
+      <section class="vision-glass rounded-3xl p-8 text-center relative overflow-hidden border border-brand-cyan/30">
+        <!-- HERO BACKGROUND ORB & RING -->
+        <div class="relative w-28 h-28 mx-auto mb-6">
+          <div class="w-full h-full rounded-full bg-gradient-to-tr from-brand-cyan via-brand-violet to-brand-pink shadow-[0_0_80px_rgba(108,242,255,0.8)] animate-core"></div>
+          <div class="absolute -inset-4 border border-dashed border-brand-cyan/60 rounded-full animate-ring"></div>
+        </div>
+
+        <h1 class="text-4xl md:text-6xl font-black tracking-tighter leading-none mb-3">
+          Intelligence <span class="bg-gradient-to-r from-brand-cyan via-brand-blue to-brand-pink bg-clip-text text-transparent">reimagined.</span>
         </h1>
-        <p>
-          Next-generation quantum AI environment built with fluid iOS physics animations and 100 futuristic features.
+        <p class="max-w-xl mx-auto text-sm text-brand-cyan/80 font-medium leading-relaxed">
+          VisionOS 26 concept architecture with real-time WebGL lens refraction, physics spring morphing, and zero-latency quantum AI execution.
         </p>
 
-        <div class="hero-badges">
-          <span class="badge"><strong>Quantum OS</strong> Active</span>
-          <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>Liquid Flow</strong> Engine</span>
+        <!-- REAL-TIME INTERACTIVE VISION OS SLIDERS -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl mx-auto mt-6 bg-black/30 p-4 rounded-2xl border border-white/10">
+          <div class="flex flex-col gap-1 text-left">
+            <div class="flex justify-between text-xs font-bold text-brand-cyan">
+              <span><i class="fa-solid fa-droplet mr-1"></i> Refraction Index</span>
+              <span id="refractionVal">1.45</span>
+            </div>
+            <input type="range" id="refractionSlider" min="1.0" max="2.5" step="0.05" value="1.45" class="glass-slider">
+          </div>
+
+          <div class="flex flex-col gap-1 text-left">
+            <div class="flex justify-between text-xs font-bold text-brand-violet">
+              <span><i class="fa-solid fa-wind mr-1"></i> Fluid Elasticity</span>
+              <span id="elasticityVal">0.65</span>
+            </div>
+            <input type="range" id="elasticitySlider" min="0.1" max="1.0" step="0.05" value="0.65" class="glass-slider">
+          </div>
         </div>
       </section>
 
-      <!-- CONVERSATION TRANSCRIPT -->
-      <section id="transcriptPanel" class="transcript-panel glass-panel">
-        <div class="transcript-head">
-          <h2>Active Session</h2>
-          <span id="msgCountBadge">0 messages</span>
+      <!-- CHAT CONVERSATION TRANSCRIPT PANEL -->
+      <section id="transcriptPanel" class="vision-glass rounded-3xl p-6 hidden flex-col gap-4 border border-white/15 transition-all">
+        <div class="flex items-center justify-between border-b border-white/10 pb-3">
+          <div class="text-xs font-black tracking-widest uppercase text-brand-cyan flex items-center gap-2">
+            <i class="fa-solid fa-comments"></i> Quantum Live Session
+          </div>
+          <span id="msgCountBadge" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-white/10 border border-white/20">0 Messages</span>
         </div>
-        <div id="messagesList" class="messages-list"></div>
+
+        <div id="messagesList" class="flex flex-col gap-4 max-h-[420px] overflow-y-auto pr-2">
+          <!-- Messages dynamically injected -->
+        </div>
       </section>
 
-      <!-- SUGGESTIONS -->
-      <div class="suggestions-grid">
-        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Explain artificial intelligence in simple English with one practical example.">
-          <div class="suggestion-icon">✦</div>
-          <strong>Explain anything</strong>
-          <small>Turn complex ideas into clear clarity.</small>
+      <!-- PROMPT SUGGESTION CARDS GRID -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        <button class="suggestion-card vision-glass liquid-capsule lens-refract p-5 rounded-2xl text-left border border-white/10 hover:border-brand-cyan" onclick="sendQuickPrompt('Explain quantum computing and neural refraction in simple terms.')">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-blue text-black flex items-center justify-center font-bold text-sm mb-3">
+            <i class="fa-solid fa-brain"></i>
+          </div>
+          <div class="font-bold text-xs text-white">Explain Anything</div>
+          <div class="text-[11px] text-white/60 mt-1">Deep breakdown of complex concepts.</div>
         </button>
 
-        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Create a realistic weekly productivity plan with priorities, breaks, and measurable goals.">
-          <div class="suggestion-icon">◷</div>
-          <strong>Build a plan</strong>
-          <small>Transform ambitions into systems.</small>
+        <button class="suggestion-card vision-glass liquid-capsule lens-refract p-5 rounded-2xl text-left border border-white/10 hover:border-brand-violet" onclick="sendQuickPrompt('Create an advanced architecture plan for a high-performance web app.')">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-pink text-white flex items-center justify-center font-bold text-sm mb-3">
+            <i class="fa-solid fa-cubes"></i>
+          </div>
+          <div class="font-bold text-xs text-white">Build Architecture</div>
+          <div class="text-[11px] text-white/60 mt-1">System design and technical roadmaps.</div>
         </button>
 
-        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Help me write a polished professional email. Ask for missing context if needed.">
-          <div class="suggestion-icon">✎</div>
-          <strong>Write better</strong>
-          <small>Draft emails and scripts instantly.</small>
+        <button class="suggestion-card vision-glass liquid-capsule lens-refract p-5 rounded-2xl text-left border border-white/10 hover:border-brand-pink" onclick="sendQuickPrompt('Write a clean JavaScript async queue with real-time backoff logic.')">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-brand-pink to-yellow-400 text-black flex items-center justify-center font-bold text-sm mb-3">
+            <i class="fa-solid fa-code"></i>
+          </div>
+          <div class="font-bold text-xs text-white">Write Elite Code</div>
+          <div class="text-[11px] text-white/60 mt-1">Production-ready code snippets.</div>
         </button>
 
-        <button class="suggestion-card glass-card liquid-ripple" type="button" data-prompt="Give me a beginner-friendly coding project and explain how to build it step by step.">
-          <div class="suggestion-icon">⌘</div>
-          <strong>Make something</strong>
-          <small>Explore coding and creation.</small>
+        <button class="suggestion-card vision-glass liquid-capsule lens-refract p-5 rounded-2xl text-left border border-white/10 hover:border-brand-cyan" onclick="sendQuickPrompt('Draft a executive pitch deck summary for an AI startup.')">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-green-400 to-brand-cyan text-black flex items-center justify-center font-bold text-sm mb-3">
+            <i class="fa-solid fa-rocket"></i>
+          </div>
+          <div class="font-bold text-xs text-white">Executive Strategy</div>
+          <div class="text-[11px] text-white/60 mt-1">Refined business messaging.</div>
         </button>
       </div>
 
@@ -856,147 +366,263 @@
 
   </div>
 
-  <!-- FLOATING STICKY COMPOSER -->
-  <div class="sticky-composer">
-    <div class="composer-inner">
-      <form id="chatForm" class="composer-form">
-        <textarea id="promptInput" rows="1" maxlength="12000" autocomplete="off" placeholder="Ask Neural Ultra anything..."></textarea>
-        <button id="voiceBtn" class="icon-btn liquid-ripple" type="button" title="Voice">🎙</button>
-        <button id="sendBtn" class="send-btn liquid-ripple" type="submit" title="Send">↑</button>
+  <!-- FLOATING STICKY LIQUID CHAT COMPOSER AT BOTTOM -->
+  <div class="fixed bottom-0 left-0 right-0 z-40 p-4 bg-gradient-to-t from-black via-black/80 to-transparent backdrop-blur-md">
+    <div class="max-w-5xl mx-auto vision-glass rounded-3xl p-3 border border-brand-cyan/40 shadow-[0_-10px_40px_rgba(108,242,255,0.25)]">
+      <form id="chatForm" class="flex items-end gap-3 bg-black/40 rounded-2xl p-2 border border-white/10">
+        <textarea id="promptInput" rows="1" maxlength="12000" placeholder="Ask Neural Ultra VisionOS anything..." class="flex-1 bg-transparent border-0 outline-none text-sm text-white placeholder:text-white/40 resize-none p-2 min-h-[44px] max-h-[140px]"></textarea>
+
+        <button type="button" id="voiceBtn" class="liquid-capsule lens-refract w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white" title="Voice Input" onclick="startVoiceRecognition()">
+          <i class="fa-solid fa-microphone text-sm"></i>
+        </button>
+
+        <button type="submit" id="sendBtn" class="liquid-capsule lens-refract w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-cyan to-brand-blue text-black font-black flex items-center justify-center text-lg shadow-lg shadow-brand-cyan/40">
+          <i class="fa-solid fa-arrow-up"></i>
+        </button>
       </form>
 
-      <div class="composer-tools">
-        <div class="chips">
-          <button class="chip liquid-ripple" type="button" data-insert="Be concise and practical.">Concise</button>
-          <button class="chip liquid-ripple" type="button" data-insert="Explain step by step.">Step by step</button>
-          <button class="chip liquid-ripple" type="button" data-insert="Provide a clear example.">Example</button>
-          <button id="clearInputBtn" class="chip liquid-ripple" type="button">Clear</button>
+      <!-- COMPOSER TOOL CHIPS -->
+      <div class="flex items-center justify-between gap-2 mt-2 px-2">
+        <div class="flex items-center gap-1.5 flex-wrap">
+          <button type="button" class="liquid-capsule text-[10px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white/80" onclick="insertChip('Be concise and practical.')">Concise</button>
+          <button type="button" class="liquid-capsule text-[10px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white/80" onclick="insertChip('Explain step by step with code.')">Step by step</button>
+          <button type="button" class="liquid-capsule text-[10px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white/80" onclick="insertChip('Provide executable code example.')">Code Example</button>
+          <button type="button" class="liquid-capsule text-[10px] font-semibold px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/15 border border-white/10 text-white/80 text-red-400" onclick="clearInput()">Clear</button>
         </div>
-        <div class="counter"><span id="charCount">0</span>/12000</div>
+        <div class="text-[10px] font-medium text-white/40"><span id="charCount">0</span>/12000</div>
       </div>
     </div>
   </div>
 
-  <!-- COMMAND HUB DRAWER -->
-  <div id="hubDrawer" class="drawer-backdrop">
-    <div class="drawer-panel glass-panel">
-      <div class="drawer-head">
-        <h2>✦ Quantum Command Hub</h2>
-        <button id="closeHubBtn" class="icon-btn liquid-ripple" type="button">×</button>
-      </div>
-
-      <div class="drawer-sections">
-        <div class="drawer-card">
-          <div class="drawer-card-title">Power Tools</div>
-          <div class="tools-grid-layout">
-            <button id="clearChatBtn" class="tool-tile-btn liquid-ripple" type="button">
-              <div class="tool-icon">⌫</div>
-              <div class="tool-info">
-                <strong>Clear chat</strong>
-                <small>Start clean session</small>
-              </div>
-            </button>
-
-            <button id="exportChatBtn" class="tool-tile-btn liquid-ripple" type="button">
-              <div class="tool-icon">⇩</div>
-              <div class="tool-info">
-                <strong>Export</strong>
-                <small>Save transcript file</small>
-              </div>
-            </button>
-
-            <button id="copyLastBtn" class="tool-tile-btn liquid-ripple" type="button">
-              <div class="tool-icon">▣</div>
-              <div class="tool-info">
-                <strong>Copy last</strong>
-                <small>Save to clipboard</small>
-              </div>
-            </button>
-
-            <button id="speakLastBtn" class="tool-tile-btn liquid-ripple" type="button">
-              <div class="tool-icon">◖</div>
-              <div class="tool-info">
-                <strong>Speak</strong>
-                <small>Read aloud response</small>
-              </div>
-            </button>
+  <!-- COMMAND HUB DRAWER MODAL -->
+  <div id="hubDrawer" class="fixed inset-0 z-50 hidden place-items-end justify-center bg-black/80 backdrop-blur-xl transition-opacity duration-300">
+    <div class="vision-glass w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-t-[36px] p-6 border-t border-brand-cyan/50 shadow-2xl flex flex-col gap-6">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-brand-cyan text-black flex items-center justify-center font-bold">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-black tracking-tight text-white">Quantum Command Hub Suite</h2>
+            <p class="text-[10px] text-brand-cyan uppercase tracking-widest font-bold">Full Toolset & Session Metrics</p>
           </div>
         </div>
-
-        <div class="drawer-card">
-          <div class="drawer-card-title">Session Telemetry</div>
-          <div class="metrics-flex">
-            <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
-            <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
-            <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">Liquid Ultra</strong></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 100 FUTURISTIC FEATURES DRAWER -->
-  <div id="featuresDrawer" class="drawer-backdrop">
-    <div class="drawer-panel glass-panel">
-      <div class="drawer-head">
-        <h2>⚡ 100 Futuristic AI OS Features</h2>
-        <button id="closeFeaturesBtn" class="icon-btn liquid-ripple" type="button">×</button>
-      </div>
-      <p style="margin: 0 0 14px; color: var(--text-muted); font-size: 11px;">
-        Exclusive futuristic architecture built for software engineering evaluation and soft opening demonstration:
-      </p>
-      <div id="featuresGrid" class="features-grid"></div>
-    </div>
-  </div>
-
-  <!-- SETTINGS MODAL -->
-  <div id="settingsDrawer" class="drawer-backdrop">
-    <div class="drawer-panel glass-panel">
-      <div class="drawer-head">
-        <h2>⚙ Workspace Settings</h2>
-        <button id="closeSettingsBtn" class="icon-btn liquid-ripple" type="button">×</button>
+        <button id="closeHubBtn" class="liquid-capsule w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
       </div>
 
-      <div class="drawer-sections">
-        <div class="drawer-card">
-          <div class="setting-item">
-            <div>
-              <strong>Visual Theme</strong>
-              <small>Quantum color environment</small>
+      <!-- POWER TOOLS GRID -->
+      <div>
+        <div class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-3">Power Tools</div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <button class="liquid-capsule lens-refract p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-cyan flex items-center gap-3 text-left" onclick="clearChatSession()">
+            <div class="w-10 h-10 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-trash-can"></i>
             </div>
-            <select id="themeSelect">
-              <option value="dark">Obsidian Glow</option>
-              <option value="light">Cloud Neon</option>
-            </select>
-          </div>
-
-          <div class="setting-item">
             <div>
-              <strong>Enter Key Action</strong>
-              <small>Press Enter to send message directly</small>
+              <div class="text-xs font-bold text-white">Clear Session</div>
+              <div class="text-[10px] text-white/50">Reset transcript</div>
             </div>
-            <input type="checkbox" id="enterToggle" checked style="accent-color: var(--cyan);">
+          </button>
+
+          <button class="liquid-capsule lens-refract p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-cyan flex items-center gap-3 text-left" onclick="exportTranscript()">
+            <div class="w-10 h-10 rounded-xl bg-brand-cyan/20 text-brand-cyan flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-download"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Export Data</div>
+              <div class="text-[10px] text-white/50">Download text log</div>
+            </div>
+          </button>
+
+          <button class="liquid-capsule lens-refract p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-cyan flex items-center gap-3 text-left" onclick="copyLastResponse()">
+            <div class="w-10 h-10 rounded-xl bg-brand-violet/20 text-brand-violet flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-copy"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Copy Last</div>
+              <div class="text-[10px] text-white/50">Save to clipboard</div>
+            </div>
+          </button>
+
+          <button class="liquid-capsule lens-refract p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-brand-cyan flex items-center gap-3 text-left" onclick="speakLastResponse()">
+            <div class="w-10 h-10 rounded-xl bg-brand-pink/20 text-brand-pink flex items-center justify-center text-sm font-bold">
+              <i class="fa-solid fa-volume-high"></i>
+            </div>
+            <div>
+              <div class="text-xs font-bold text-white">Speak Voice</div>
+              <div class="text-[10px] text-white/50">Read aloud text</div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <!-- SESSION METRICS -->
+      <div class="bg-black/40 rounded-2xl p-4 border border-white/10">
+        <div class="text-xs font-bold uppercase tracking-widest text-brand-cyan mb-3">Session Telemetry</div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+          <div class="p-3 rounded-xl bg-white/5">
+            <div class="text-[10px] text-white/50 font-bold uppercase">Messages</div>
+            <div id="mCount" class="text-lg font-black text-white mt-1">0</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5">
+            <div class="text-[10px] text-white/50 font-bold uppercase">Total Words</div>
+            <div id="mWords" class="text-lg font-black text-white mt-1">0</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5">
+            <div class="text-[10px] text-white/50 font-bold uppercase">Latency</div>
+            <div id="mLatency" class="text-lg font-black text-brand-cyan mt-1">—</div>
+          </div>
+          <div class="p-3 rounded-xl bg-white/5">
+            <div class="text-[10px] text-white/50 font-bold uppercase">Engine Mode</div>
+            <div id="mEngine" class="text-lg font-black text-brand-violet mt-1">Fast</div>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div id="toastPopup" class="toast-popup"></div>
+  <!-- 100 FUTURISTIC FEATURES DRAWER MODAL -->
+  <div id="featuresDrawer" class="fixed inset-0 z-50 hidden place-items-end justify-center bg-black/80 backdrop-blur-xl transition-opacity duration-300">
+    <div class="vision-glass w-full max-w-5xl max-h-[85vh] overflow-y-auto rounded-t-[36px] p-6 border-t border-brand-pink/50 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-violet to-brand-pink text-white flex items-center justify-center font-bold">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <div>
+            <h2 class="text-base font-black tracking-tight text-white">⚡ 100 Futuristic VisionOS Features Matrix</h2>
+            <p class="text-[10px] text-brand-pink uppercase tracking-widest font-bold">Engineering Evaluation Suite</p>
+          </div>
+        </div>
+        <button id="closeFeaturesBtn" class="liquid-capsule w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
 
+      <div id="featuresGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-[550px] overflow-y-auto pr-2">
+        <!-- 100 features injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- WORKSPACE SETTINGS MODAL -->
+  <div id="settingsDrawer" class="fixed inset-0 z-50 hidden place-items-center justify-center bg-black/80 backdrop-blur-xl p-4">
+    <div class="vision-glass w-full max-w-md rounded-3xl p-6 border border-white/20 shadow-2xl flex flex-col gap-4">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-base font-black text-white flex items-center gap-2">
+          <i class="fa-solid fa-sliders text-brand-cyan"></i> Workspace Settings
+        </h3>
+        <button id="closeSettingsBtn" class="liquid-capsule w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between p-3 rounded-xl bg-white/5">
+          <div>
+            <div class="text-xs font-bold text-white">Audio Synthesis Output</div>
+            <div class="text-[10px] text-white/50">Auto-read AI responses</div>
+          </div>
+          <input type="checkbox" id="autoAudioToggle" class="w-5 h-5 accent-brand-cyan cursor-pointer">
+        </div>
+
+        <div class="flex items-center justify-between p-3 rounded-xl bg-white/5">
+          <div>
+            <div class="text-xs font-bold text-white">Enter Key Instant Send</div>
+            <div class="text-[10px] text-white/50">Shift+Enter for newline</div>
+          </div>
+          <input type="checkbox" id="enterSendToggle" checked class="w-5 h-5 accent-brand-cyan cursor-pointer">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATIONS -->
+  <div id="toastPopup" class="fixed bottom-28 right-6 z-50 max-w-xs vision-glass rounded-2xl p-3 text-xs font-bold text-white border border-brand-cyan shadow-xl opacity-0 transform translate-y-4 pointer-events-none transition-all duration-300"></div>
+
+  <!-- JAVASCRIPT LOGIC & REAL-TIME WEBGL SHADER CANVAS -->
   <script>
     "use strict";
 
     const $ = (id) => document.getElementById(id);
 
+    // REAL-TIME WEBGL / CANVAS GLASS REFRACTION BACKGROUND
+    const canvas = $("glassCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let width, height;
+    let refractionIndex = 1.45;
+    let fluidElasticity = 0.65;
+    let pointerX = 0, pointerY = 0;
+    let targetX = 0, targetY = 0;
+
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    window.addEventListener("pointermove", (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+    });
+
+    // RENDER REAL-TIME REFRACTION BLOBS AND LIGHT DISTORTIONS
+    function renderCanvas() {
+      pointerX += (targetX - pointerX) * (1.1 - fluidElasticity);
+      pointerY += (targetY - pointerY) * (1.1 - fluidElasticity);
+
+      ctx.clearRect(0, 0, width, height);
+
+      // GLOWING GRADIENT ORBS
+      const grad1 = ctx.createRadialGradient(pointerX, pointerY, 20 * refractionIndex, pointerX, pointerY, 350 * refractionIndex);
+      grad1.addColorStop(0, "rgba(108, 242, 255, 0.25)");
+      grad1.addColorStop(0.5, "rgba(168, 124, 255, 0.12)");
+      grad1.addColorStop(1, "transparent");
+
+      ctx.fillStyle = grad1;
+      ctx.beginPath();
+      ctx.arc(pointerX, pointerY, 350 * refractionIndex, 0, Math.PI * 2);
+      ctx.fill();
+
+      const grad2 = ctx.createRadialGradient(width * 0.8, height * 0.2, 50, width * 0.8, height * 0.2, 450);
+      grad2.addColorStop(0, "rgba(255, 117, 200, 0.15)");
+      grad2.addColorStop(1, "transparent");
+
+      ctx.fillStyle = grad2;
+      ctx.beginPath();
+      ctx.arc(width * 0.8, height * 0.2, 450, 0, Math.PI * 2);
+      ctx.fill();
+
+      requestAnimationFrame(renderCanvas);
+    }
+    renderCanvas();
+
+    // INTERACTIVE SLIDERS FOR GLASS DISTORTION
+    $("refractionSlider").addEventListener("input", (e) => {
+      refractionIndex = parseFloat(e.target.value);
+      $("refractionVal").textContent = refractionIndex.toFixed(2);
+    });
+
+    $("elasticitySlider").addEventListener("input", (e) => {
+      fluidElasticity = parseFloat(e.target.value);
+      $("elasticityVal").textContent = fluidElasticity.toFixed(2);
+    });
+
+    // STATE MANAGEMENT
     const state = {
       messages: [],
+      mode: "fast",
       isLoading: false,
       latency: null,
       controller: null
     };
 
+    // 100 FUTURISTIC VISIONOS FEATURES MATRIX
     const featureTitles = [
       "Neural Synapse Engine", "Holographic Thought Visualizer", "Quantum Context Caching", "Bi-Directional Mind Mapping", "Multi-Stream Thinking", 
       "Subconscious Memory Retrieval", "Adaptive Persona Tuning", "Zero-Latency Prediction", "Cognitive Auto-Balancer", "Emotion Spectrum Detection",
@@ -1025,10 +651,10 @@
       grid.innerHTML = "";
       featureTitles.forEach((title, idx) => {
         const item = document.createElement("div");
-        item.className = "feature-chip liquid-ripple";
+        item.className = "vision-glass liquid-capsule lens-refract p-3 rounded-2xl border border-white/10 text-left";
         item.innerHTML = `
-          <div class="feature-num">FEATURE #${idx + 1}</div>
-          <div class="feature-title">${title}</div>
+          <div class="text-[9px] font-black text-brand-cyan uppercase tracking-widest">Feature #${idx + 1}</div>
+          <div class="text-xs font-bold text-white mt-1">${title}</div>
         `;
         grid.appendChild(item);
       });
@@ -1037,40 +663,83 @@
     function showToast(text) {
       const toast = $("toastPopup");
       toast.textContent = text;
-      toast.classList.add("show");
-      clearTimeout(window._t);
-      window._t = setTimeout(() => toast.classList.remove("show"), 2500);
+      toast.classList.remove("opacity-0", "translate-y-4");
+      toast.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(window._toastTimer);
+      window._toastTimer = setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "translate-y-4");
+      }, 2500);
     }
 
+    // MODE SWITCHING TAB MORPH
+    function switchMode(mode) {
+      state.mode = mode;
+      const pill = $("tabPill");
+      if (mode === "fast") {
+        pill.style.left = "4px";
+        $("modeFastBtn").className = "relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-black transition-colors";
+        $("modeUltraBtn").className = "relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-white/70 hover:text-white transition-colors";
+      } else {
+        pill.style.left = "calc(50% - 4px)";
+        $("modeFastBtn").className = "relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-white/70 hover:text-white transition-colors";
+        $("modeUltraBtn").className = "relative z-10 w-1/2 text-center text-xs font-bold py-1.5 text-black transition-colors";
+      }
+      $("mEngine").textContent = mode === "fast" ? "Fast" : "Ultra";
+      showToast(`Engine switched to ${mode.toUpperCase()} mode.`);
+    }
+
+    // COMPOSER HELPERS
     function updateComposerHeight() {
       const input = $("promptInput");
       $("charCount").textContent = String(input.value.length);
       input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 120) + "px";
+      input.style.height = Math.min(input.scrollHeight, 140) + "px";
     }
 
+    function insertChip(text) {
+      const input = $("promptInput");
+      const cur = input.value.trim();
+      input.value = cur ? cur + " " + text : text;
+      updateComposerHeight();
+      input.focus();
+    }
+
+    function clearInput() {
+      $("promptInput").value = "";
+      updateComposerHeight();
+    }
+
+    function sendQuickPrompt(promptText) {
+      $("promptInput").value = promptText;
+      updateComposerHeight();
+      handleSendMessage(promptText);
+    }
+
+    // CHAT TRANSCRIPT RENDER
     function renderMessages() {
       const list = $("messagesList");
       list.innerHTML = "";
 
       state.messages.forEach(msg => {
-        const art = document.createElement("article");
-        art.className = "message " + msg.role;
-
-        const tag = document.createElement("div");
-        tag.className = "message-tag";
-        tag.textContent = msg.role === "user" ? "You" : "Neural Ultra";
-
-        const text = document.createElement("div");
-        text.textContent = msg.text;
-
-        art.append(tag, text);
-        list.appendChild(art);
+        const div = document.createElement("div");
+        div.className = `max-w-[90%] p-4 rounded-2xl text-xs leading-relaxed ${
+          msg.role === "user" 
+            ? "ml-auto bg-gradient-to-tr from-brand-cyan to-brand-blue text-black font-medium shadow-lg shadow-brand-cyan/20 rounded-br-none" 
+            : "mr-auto vision-glass text-white border border-white/10 rounded-bl-none"
+        }`;
+        div.innerHTML = `
+          <div class="text-[9px] font-black uppercase tracking-widest mb-1 opacity-70">${msg.role === 'user' ? 'You' : 'Neural Ultra VisionOS'}</div>
+          <div class="whitespace-pre-wrap">${msg.text}</div>
+        `;
+        list.appendChild(div);
       });
 
       const has = state.messages.length > 0;
-      $("transcriptPanel").classList.toggle("visible", has);
-      $("msgCountBadge").textContent = state.messages.length + " msgs";
+      $("transcriptPanel").classList.toggle("hidden", !has);
+      $("transcriptPanel").classList.toggle("flex", has);
+
+      $("msgCountBadge").textContent = `${state.messages.length} Messages`;
       $("mCount").textContent = String(state.messages.length);
 
       const words = state.messages.reduce((a, b) => a + (b.text || "").split(/\s+/).filter(Boolean).length, 0);
@@ -1084,26 +753,25 @@
       renderMessages();
     }
 
-    async function handleSend(val) {
+    // AI API CHAT REQUEST HANDLER
+    async function handleSendMessage(val) {
       const prompt = String(val || "").trim();
       if (!prompt || state.isLoading) return;
 
       const startTime = Date.now();
       appendMessage(prompt, "user");
-      $("promptInput").value = "";
-      updateComposerHeight();
+      clearInput();
 
       state.isLoading = true;
       state.controller = new AbortController();
-      const btn = $("sendBtn");
-      btn.textContent = "■";
-      btn.classList.add("stop");
+      const sendBtn = $("sendBtn");
+      sendBtn.innerHTML = '<i class="fa-solid fa-square"></i>';
 
       try {
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ message: prompt, mode: "fast" }),
+          body: JSON.stringify({ message: prompt, mode: state.mode }),
           signal: state.controller.signal
         });
 
@@ -1114,111 +782,113 @@
         if (!answer) throw new Error("Empty response.");
 
         state.latency = Date.now() - startTime;
-        $("mLatency").textContent = state.latency + " ms";
+        $("mLatency").textContent = `${state.latency} ms`;
         appendMessage(answer, "assistant");
+
+        if ($("autoAudioToggle").checked && "speechSynthesis" in window) {
+          window.speechSynthesis.cancel();
+          window.speechSynthesis.speak(new SpeechSynthesisUtterance(answer));
+        }
       } catch (err) {
         if (err.name === "AbortError") {
-          showToast("Response stopped.");
+          showToast("Generation cancelled.");
         } else {
-          appendMessage("Error: " + err.message, "assistant");
+          appendMessage(`[Neural VisionOS Error]: ${err.message}`, "assistant");
           showToast(err.message);
         }
       } finally {
         state.isLoading = false;
         state.controller = null;
-        btn.textContent = "↑";
-        btn.classList.remove("stop");
+        sendBtn.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
       }
     }
 
-    // TOGGLES
-    const toggleDrawer = (id, open) => $(id).classList.toggle("open", open);
+    // MODAL TOGGLES
+    const toggleModal = (id, open) => {
+      const modal = $(id);
+      if (open) {
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      } else {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+    };
 
-    $("openHubBtn").addEventListener("click", () => toggleDrawer("hubDrawer", true));
-    $("closeHubBtn").addEventListener("click", () => toggleDrawer("hubDrawer", false));
-    $("hubDrawer").addEventListener("click", (e) => { if (e.target === $("hubDrawer")) toggleDrawer("hubDrawer", false); });
+    $("openHubBtn").addEventListener("click", () => toggleModal("hubDrawer", true));
+    $("closeHubBtn").addEventListener("click", () => toggleModal("hubDrawer", false));
 
-    $("openFeaturesBtn").addEventListener("click", () => toggleDrawer("featuresDrawer", true));
-    $("closeFeaturesBtn").addEventListener("click", () => toggleDrawer("featuresDrawer", false));
-    $("featuresDrawer").addEventListener("click", (e) => { if (e.target === $("featuresDrawer")) toggleDrawer("featuresDrawer", false); });
+    $("openFeaturesBtn").addEventListener("click", () => toggleModal("featuresDrawer", true));
+    $("closeFeaturesBtn").addEventListener("click", () => toggleModal("featuresDrawer", false));
 
-    $("settingsBtn").addEventListener("click", () => toggleDrawer("settingsDrawer", true));
-    $("closeSettingsBtn").addEventListener("click", () => toggleDrawer("settingsDrawer", false));
-    $("settingsDrawer").addEventListener("click", (e) => { if (e.target === $("settingsDrawer")) toggleDrawer("settingsDrawer", false); });
+    $("openSettingsBtn").addEventListener("click", () => toggleModal("settingsDrawer", true));
+    $("closeSettingsBtn").addEventListener("click", () => toggleModal("settingsDrawer", false));
 
-    // POWER TOOLS
-    $("clearChatBtn").addEventListener("click", () => {
+    // POWER TOOLS LOGIC
+    function clearChatSession() {
       state.messages = [];
       renderMessages();
-      showToast("Session cleared.");
-      toggleDrawer("hubDrawer", false);
-    });
+      toggleModal("hubDrawer", false);
+      showToast("Session reset successfully.");
+    }
 
-    $("exportChatBtn").addEventListener("click", () => {
-      if (!state.messages.length) return showToast("Nothing to export.");
+    function exportTranscript() {
+      if (!state.messages.length) return showToast("No transcript available to export.");
       const text = state.messages.map(m => `${m.role.toUpperCase()}: ${m.text}`).join("\n\n");
       const blob = new Blob([text], { type: "text/plain" });
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob);
       a.download = "neural-ultra-transcript.txt";
       a.click();
-      showToast("Transcript exported.");
-    });
+      showToast("Exported transcript file.");
+    }
 
-    $("copyLastBtn").addEventListener("click", () => {
+    function copyLastResponse() {
       const last = [...state.messages].reverse().find(m => m.role === "assistant");
-      if (!last) return showToast("No response to copy.");
+      if (!last) return showToast("No assistant response to copy.");
       navigator.clipboard.writeText(last.text);
       showToast("Copied to clipboard.");
-    });
+    }
 
-    $("speakLastBtn").addEventListener("click", () => {
+    function speakLastResponse() {
       const last = [...state.messages].reverse().find(m => m.role === "assistant");
-      if (!last) return showToast("No response to speak.");
+      if (!last) return showToast("No text to speak.");
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(new SpeechSynthesisUtterance(last.text));
-      showToast("Reading response...");
-    });
+      showToast("Reading aloud response...");
+    }
 
-    // FORM SUBMIT
+    function startVoiceRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return showToast("Speech recognition not supported in browser.");
+      const rec = new SpeechRecognition();
+      rec.onstart = () => showToast("Listening to voice input...");
+      rec.onresult = (e) => {
+        const text = e.results[0][0].transcript;
+        insertChip(text);
+      };
+      rec.start();
+    }
+
+    // FORM LISTENERS
     $("chatForm").addEventListener("submit", (e) => {
       e.preventDefault();
       if (state.isLoading && state.controller) state.controller.abort();
-      else handleSend($("promptInput").value);
+      else handleSendMessage($("promptInput").value);
     });
 
     $("promptInput").addEventListener("input", updateComposerHeight);
     $("promptInput").addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey && $("enterToggle").checked) {
+      if (e.key === "Enter" && !e.shiftKey && $("enterSendToggle").checked) {
         e.preventDefault();
         $("chatForm").requestSubmit();
       }
     });
 
-    $("clearInputBtn").addEventListener("click", () => {
-      $("promptInput").value = "";
-      updateComposerHeight();
-    });
-
-    document.querySelectorAll("[data-prompt]").forEach(b => {
-      b.addEventListener("click", () => {
-        $("promptInput").value = b.dataset.prompt;
-        updateComposerHeight();
-        $("promptInput").focus();
-      });
-    });
-
-    document.querySelectorAll("[data-insert]").forEach(b => {
-      b.addEventListener("click", () => {
-        const cur = $("promptInput").value.trim();
-        $("promptInput").value = cur ? cur + " " + b.dataset.insert : b.dataset.insert;
-        updateComposerHeight();
-        $("promptInput").focus();
-      });
-    });
-
+    // INITIALIZATION
     render100Features();
     updateComposerHeight();
   </script>
 </body>
 </html>
+```
