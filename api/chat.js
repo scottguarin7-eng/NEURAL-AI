@@ -1,4 +1,4 @@
-const MODEL = "";
+const MODEL = "Gemini 3.1 Pro Preview";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
