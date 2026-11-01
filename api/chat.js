@@ -1,4 +1,4 @@
-const MODEL = "grok-4.7";
+const MODEL = "grok-beta";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -94,8 +94,10 @@ export default async function handler(req, res) {
         });
       }
 
+      // Dito natin kukunin ang eksaktong mensahe galing sa xAI API kung bakit nag-error
       const providerError =
         data?.error?.message ||
+        JSON.stringify(data) ||
         `Grok returned HTTP ${response.status}.`;
 
       const retryable = [
