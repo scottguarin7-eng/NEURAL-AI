@@ -741,7 +741,7 @@
           return total;
         }
 
-        return total + clean.split(/s+/).length;
+        return total + clean.split(/\s+/).length;
       }, 0);
 
       get("wordValue").textContent = String(words);
@@ -906,14 +906,9 @@
 
       const text = messages
         .map((item) => {
-          return item.role.toUpperCase() +
-            "
-" +
-            item.text;
+          return item.role.toUpperCase() + "\n" + item.text;
         })
-        .join("
-
-");
+        .join("\n\n");
 
       const file = new Blob([text], {
         type: "text/plain"
