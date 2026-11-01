@@ -1,4 +1,4 @@
-const MODEL = "gemini-3.8-flash";
+const MODEL = "llama-3.3-70b-versatile";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -8,33 +8,25 @@ function wait(ms) {
   });
 }
 
-async function callGemini(apiKey, message, signal) {
-  const endpoint =
-    "https://generativelanguage.googleapis.com/v1beta/models/" +
-    MODEL +
-    ":generateContent?key=" +
-    encodeURIComponent(apiKey);
+async function callGroq(apiKey, message, signal) {
+  const endpoint = "https://api.groq.com/openai/v1/chat/completions";
 
   return fetch(endpoint, {
     method: "POST",
     headers: {
+      "Authorization": "Bearer " + apiKey,
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      contents: [
+      model: MODEL,
+      messages: [
         {
           role: "user",
-          parts: [
-            {
-              text: message
-            }
-          ]
+          content: message
         }
       ],
-      generationConfig: {
-        maxOutputTokens: 512,
-        temperature: 0.7
-      }
+      temperature: 0.7,
+      max_tokens: 512
     }),
     signal
   });
@@ -47,14 +39,14 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const apiKey = process.env.GROQ_API_KEY;
   const message = String(
     req.body?.message || ""
   ).trim();
 
   if (!apiKey) {
     return res.status(500).json({
-      error: "GEMINI_API_KEY is missing in Vercel."
+      error: "GROQ_API_KEY is missing in Vercel environment variables."
     });
   }
 
@@ -76,7 +68,7 @@ export default async function handler(req, res) {
     }, REQUEST_TIMEOUT);
 
     try {
-      const response = await callGemini(
+      const response = await callGroq(
         apiKey,
         message,
         controller.signal
@@ -86,11 +78,11 @@ export default async function handler(req, res) {
 
       if (response.ok) {
         const text =
-          data?.candidates?.[0]?.content?.parts?.[0]?.text;
+          data?.choices?.[0]?.message?.content;
 
         if (!text) {
           return res.status(502).json({
-            error: "Gemini returned an empty response.",
+            error: "Groq returned an empty response.",
             provider: data
           });
         }
@@ -104,7 +96,7 @@ export default async function handler(req, res) {
 
       const providerError =
         data?.error?.message ||
-        `Gemini returned HTTP ${response.status}.`;
+        `Groq returned HTTP ${response.status}.`;
 
       const retryable = [
         408,
@@ -131,7 +123,7 @@ export default async function handler(req, res) {
       ) {
         return res.status(504).json({
           error:
-            "Gemini did not respond within 60 seconds. " +
+            "Groq did not respond within 60 seconds. " +
             "The provider may be busy or unavailable."
         });
       }
@@ -152,6 +144,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(504).json({
-    error: "Gemini request timed out."
+    error: "Groq request timed out."
   });
 }
