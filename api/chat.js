@@ -1,4 +1,4 @@
-const MODEL = "llama-3.3-70b-specdec";
+const MODEL = "grok-beta";
 const MAX_ATTEMPTS = 2;
 const REQUEST_TIMEOUT = 60000;
 
@@ -8,8 +8,8 @@ function wait(ms) {
   });
 }
 
-async function callGroq(apiKey, message, signal) {
-  const endpoint = "https://api.groq.com/openai/v1/chat/completions";
+async function callGrokAI(apiKey, message, signal) {
+  const endpoint = "https://api.x.ai/v1/chat/completions";
 
   return fetch(endpoint, {
     method: "POST",
@@ -39,14 +39,14 @@ export default async function handler(req, res) {
     });
   }
 
-  const apiKey = process.env.GROQ_API_KEY;
+  const apiKey = process.env.GROK_API_KEY;
   const message = String(
     req.body?.message || ""
   ).trim();
 
   if (!apiKey) {
     return res.status(500).json({
-      error: "GROQ_API_KEY is missing in Vercel environment variables."
+      error: "GROK_API_KEY is missing in Vercel environment variables."
     });
   }
 
@@ -68,7 +68,7 @@ export default async function handler(req, res) {
     }, REQUEST_TIMEOUT);
 
     try {
-      const response = await callGroq(
+      const response = await callGrokAI(
         apiKey,
         message,
         controller.signal
@@ -82,7 +82,7 @@ export default async function handler(req, res) {
 
         if (!text) {
           return res.status(502).json({
-            error: "Groq returned an empty response.",
+            error: "Grok returned an empty response.",
             provider: data
           });
         }
@@ -96,7 +96,7 @@ export default async function handler(req, res) {
 
       const providerError =
         data?.error?.message ||
-        `Groq returned HTTP ${response.status}.`;
+        `Grok returned HTTP ${response.status}.`;
 
       const retryable = [
         408,
@@ -123,7 +123,7 @@ export default async function handler(req, res) {
       ) {
         return res.status(504).json({
           error:
-            "Groq did not respond within 60 seconds. " +
+            "Grok did not respond within 60 seconds. " +
             "The provider may be busy or unavailable."
         });
       }
@@ -144,6 +144,6 @@ export default async function handler(req, res) {
   }
 
   return res.status(504).json({
-    error: "Groq request timed out."
+    error: "Grok request timed out."
   });
 }
