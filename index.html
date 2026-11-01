@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="theme-color" content="#000105">
-  <meta name="description" content="Neural Ultra 3D Realistic Liquid Glass OS">
-  <title>Neural Ultra — 3D Realistic Liquid Glass OS</title>
+  <meta name="description" content="Neural Ultra Ultra-Polished Apple King AI OS">
+  <title>Neural Ultra — Ultra-Polished King AI OS</title>
 
   <style>
     :root {
       --bg-base: #000105;
-      --glass-base: rgba(14, 20, 45, 0.55);
-      --glass-card: rgba(10, 16, 38, 0.45);
-      --glass-hover: rgba(22, 32, 70, 0.7);
-      --border-outer: rgba(255, 255, 255, 0.3);
-      --border-glow: rgba(108, 242, 255, 0.95);
+      --glass-base: rgba(12, 18, 40, 0.6);
+      --glass-card: rgba(8, 14, 32, 0.48);
+      --glass-hover: rgba(20, 28, 62, 0.75);
+      --border-outer: rgba(255, 255, 255, 0.32);
+      --border-glow: rgba(108, 242, 255, 1);
       --text-main: #f8faff;
       --text-muted: #9fb0e0;
       --text-faint: #6373a8;
@@ -22,14 +22,14 @@
       --blue: #599dff;
       --violet: #a87cff;
       --pink: #ff75c8;
-      --shadow-hyper: 0 40px 110px rgba(0, 0, 0, 0.98), 
-                      inset 0 1px 2px rgba(255, 255, 255, 0.85), 
-                      inset 0 -2px 6px rgba(0, 0, 0, 0.95);
-      --radius-xl: 38px;
-      --radius-lg: 26px;
-      --radius-md: 18px;
-      --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --smooth: cubic-bezier(0.16, 1, 0.3, 1);
+      --shadow-ultra: 0 45px 120px rgba(0, 0, 0, 0.99), 
+                      inset 0 1px 3px rgba(255, 255, 255, 0.9), 
+                      inset 0 -3px 8px rgba(0, 0, 0, 0.98);
+      --radius-xl: 40px;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+      --spring-apple: cubic-bezier(0.25, 1, 0.5, 1);
+      --bounce-smooth: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -45,14 +45,14 @@
       color: var(--text-main);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Inter, sans-serif;
       background: 
-        radial-gradient(circle at 10% 10%, rgba(108, 242, 255, 0.3), transparent 45%),
-        radial-gradient(circle at 90% 20%, rgba(168, 124, 255, 0.3), transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(255, 117, 200, 0.25), transparent 55%),
-        linear-gradient(135deg, #000105, #040714);
+        radial-gradient(circle at 15% 10%, rgba(108, 242, 255, 0.35), transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(168, 124, 255, 0.35), transparent 50%),
+        radial-gradient(circle at 50% 90%, rgba(255, 117, 200, 0.28), transparent 55%),
+        linear-gradient(135deg, #000105, #030612);
       background-attachment: fixed;
     }
 
-    /* REALISTIC 3D AMBIENT ORBS */
+    /* KING-LEVEL AMBIENT ORBS */
     .ambient-glows {
       position: fixed;
       inset: 0;
@@ -62,24 +62,24 @@
     }
     .ambient-orb {
       position: absolute;
-      width: 550px;
-      height: 550px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(108,242,255,0.35) 0%, rgba(168,124,255,0.2) 50%, transparent 75%);
-      filter: blur(100px);
-      animation: orbFloat 12s ease-in-out infinite alternate;
-    }
-    .ambient-orb:nth-child(2) {
       width: 600px;
       height: 600px;
-      background: radial-gradient(circle, rgba(255,117,200,0.28) 0%, rgba(89,157,255,0.2) 50%, transparent 75%);
-      right: -140px;
-      top: 30%;
-      animation: orbFloat 16s ease-in-out infinite alternate-reverse;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(108,242,255,0.4) 0%, rgba(168,124,255,0.22) 50%, transparent 75%);
+      filter: blur(110px);
+      animation: orbFloat 14s ease-in-out infinite alternate;
+    }
+    .ambient-orb:nth-child(2) {
+      width: 650px;
+      height: 650px;
+      background: radial-gradient(circle, rgba(255,117,200,0.32) 0%, rgba(89,157,255,0.22) 50%, transparent 75%);
+      right: -150px;
+      top: 25%;
+      animation: orbFloat 18s ease-in-out infinite alternate-reverse;
     }
     @keyframes orbFloat {
-      0% { transform: translate(-50px, -50px) scale(1); }
-      100% { transform: translate(80px, 100px) scale(1.15); }
+      0% { transform: translate(-60px, -60px) scale(1) rotate(0deg); }
+      100% { transform: translate(90px, 110px) scale(1.18) rotate(15deg); }
     }
 
     button, input, textarea, select { font: inherit; }
@@ -94,17 +94,17 @@
       padding: 12px 0 140px;
     }
 
-    /* APPLE VISIONOS 3D GLASS PANEL */
+    /* ULTRA-POLISHED APPLE VISIONOS GLASS PANEL */
     .glass-panel {
       position: relative;
       background: var(--glass-base);
-      backdrop-filter: blur(65px) saturate(240%);
-      -webkit-backdrop-filter: blur(65px) saturate(240%);
+      backdrop-filter: blur(70px) saturate(250%);
+      -webkit-backdrop-filter: blur(70px) saturate(250%);
       border: 1px solid var(--border-outer);
-      box-shadow: var(--shadow-hyper);
+      box-shadow: var(--shadow-ultra);
       border-radius: var(--radius-xl);
       overflow: hidden;
-      transition: transform 0.4s var(--spring), box-shadow 0.4s var(--smooth), border-color 0.4s var(--smooth);
+      transition: transform 0.5s var(--spring-apple), box-shadow 0.5s var(--spring-apple), border-color 0.5s var(--spring-apple);
     }
 
     .glass-panel::before {
@@ -114,20 +114,20 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.95), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1), transparent);
       z-index: 3;
     }
 
     .glass-card {
       position: relative;
       background: var(--glass-card);
-      backdrop-filter: blur(45px) saturate(210%);
-      -webkit-backdrop-filter: blur(45px) saturate(210%);
+      backdrop-filter: blur(50px) saturate(220%);
+      -webkit-backdrop-filter: blur(50px) saturate(220%);
       border: 1px solid var(--border-outer);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), inset 0 1px 2px rgba(255, 255, 255, 0.55);
+      box-shadow: 0 22px 50px rgba(0, 0, 0, 0.7), inset 0 1px 3px rgba(255, 255, 255, 0.6);
       border-radius: var(--radius-md);
       overflow: hidden;
-      transition: transform 0.35s var(--spring), background 0.3s var(--smooth), border-color 0.3s var(--smooth);
+      transition: transform 0.4s var(--bounce-smooth), background 0.3s ease, border-color 0.3s ease;
     }
     .glass-card::before {
       content: "";
@@ -136,7 +136,7 @@
       left: 0;
       right: 0;
       height: 1.5px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
     }
 
     /* TOPBAR */
@@ -149,9 +149,9 @@
       justify-content: space-between;
       gap: 12px;
       padding: 12px 18px;
-      border-radius: 28px;
+      border-radius: 30px;
       border: 1px solid var(--border-glow);
-      box-shadow: 0 20px 50px rgba(108, 242, 255, 0.3), inset 0 1px 3px rgba(255,255,255,0.85);
+      box-shadow: 0 22px 55px rgba(108, 242, 255, 0.35), inset 0 1px 4px rgba(255,255,255,0.9);
     }
 
     .brand {
@@ -174,9 +174,9 @@
       inset: -10px;
       background: linear-gradient(135deg, var(--cyan), var(--violet), var(--pink));
       border-radius: 20px;
-      filter: blur(14px);
-      opacity: 0.85;
-      animation: logoGlowPulse 3.5s ease-in-out infinite alternate;
+      filter: blur(16px);
+      opacity: 0.9;
+      animation: logoGlowPulse 3s ease-in-out infinite alternate;
     }
 
     .brand-logo-core {
@@ -185,19 +185,19 @@
       height: 44px;
       border-radius: 16px;
       background: radial-gradient(circle at 30% 30%, #ffffff, var(--cyan) 35%, var(--violet) 75%, var(--pink));
-      box-shadow: 0 0 35px rgba(108, 242, 255, 1), inset 0 2px 6px rgba(255, 255, 255, 1);
+      box-shadow: 0 0 40px rgba(108, 242, 255, 1), inset 0 2px 8px rgba(255, 255, 255, 1);
       display: grid;
       place-items: center;
       font-size: 20px;
       color: #000105;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      transition: transform 0.4s var(--spring);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      transition: transform 0.4s var(--bounce-smooth);
     }
-    .brand-logo-core:active { transform: scale(0.85) rotate(-15deg); }
+    .brand-logo-core:active { transform: scale(0.82) rotate(-15deg); }
 
     @keyframes logoGlowPulse {
-      0% { opacity: 0.6; transform: scale(0.95); filter: blur(10px); }
-      100% { opacity: 1; transform: scale(1.1); filter: blur(18px); }
+      0% { opacity: 0.65; transform: scale(0.93); filter: blur(12px); }
+      100% { opacity: 1; transform: scale(1.12); filter: blur(20px); }
     }
 
     .brand-title { font-size: 16px; font-weight: 900; letter-spacing: -0.04em; }
@@ -216,11 +216,11 @@
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
       font-size: 11px;
       font-weight: 900;
-      box-shadow: 0 6px 25px rgba(108, 242, 255, 0.55), inset 0 1px 3px rgba(255,255,255,1);
-      transition: transform 0.35s var(--spring), box-shadow 0.35s var(--smooth);
+      box-shadow: 0 8px 30px rgba(108, 242, 255, 0.6), inset 0 1px 3px rgba(255,255,255,1);
+      transition: transform 0.4s var(--bounce-smooth), box-shadow 0.4s var(--spring-apple);
     }
-    .action-btn:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 14px 40px rgba(108, 242, 255, 0.9); }
-    .action-btn:active { transform: scale(0.9); filter: brightness(1.2); }
+    .action-btn:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 16px 45px rgba(108, 242, 255, 0.95); }
+    .action-btn:active { transform: scale(0.9); filter: brightness(1.25); }
 
     .icon-btn {
       display: grid;
@@ -231,10 +231,10 @@
       border-radius: 14px;
       color: var(--text-main);
       background: var(--glass-card);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
-      transition: transform 0.35s var(--spring), background 0.3s var(--smooth);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.5);
+      transition: transform 0.4s var(--bounce-smooth), background 0.3s ease;
     }
-    .icon-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: scale(1.08); }
+    .icon-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: scale(1.1); }
     .icon-btn:active { transform: scale(0.85) rotate(15deg); }
 
     /* MAIN CONTENT */
@@ -245,68 +245,68 @@
       margin-top: 16px;
     }
 
-    /* HERO NA MAY 3D REALISTIC GLOWING LIGHT & TYPING ANIMATION */
+    /* KING HERO BANNER NA MAY 3D HYPER-REALISTIC SPHERE & APPLE FLUID TYPING */
     .hero {
-      padding: 42px 20px 30px;
+      padding: 46px 20px 34px;
       text-align: center;
       border: 1px solid var(--border-glow);
     }
 
-    /* 3D REALISTIC GLOWING LIGHT SPHERE */
+    /* KING 3D REALISTIC GLOWING LIGHT SPHERE NA MAY LIQUID WARP */
     .hero-3d-sphere-container {
       position: relative;
-      width: 140px;
-      height: 140px;
-      margin: 0 auto 22px;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto 24px;
       display: grid;
       place-items: center;
     }
 
     .sphere-ambient-glow {
       position: absolute;
-      inset: -20px;
-      background: radial-gradient(circle, rgba(108,242,255,0.7) 0%, rgba(168,124,255,0.5) 50%, transparent 75%);
+      inset: -25px;
+      background: radial-gradient(circle, rgba(108,242,255,0.8) 0%, rgba(168,124,255,0.55) 50%, transparent 75%);
       border-radius: 50%;
-      filter: blur(25px);
-      animation: spherePulse 4s ease-in-out infinite alternate;
+      filter: blur(30px);
+      animation: spherePulse 3.5s ease-in-out infinite alternate;
     }
 
     .sphere-core-3d {
       position: relative;
-      width: 130px;
-      height: 130px;
+      width: 135px;
+      height: 135px;
       border-radius: 50%;
-      background: radial-gradient(circle at 35% 35%, #ffffff 0%, var(--cyan) 25%, var(--violet) 65%, var(--pink) 100%);
-      box-shadow: 0 0 70px rgba(108, 242, 255, 0.95), 
-                  0 0 140px rgba(168, 124, 255, 0.7), 
-                  inset 0 8px 20px rgba(255, 255, 255, 0.95), 
-                  inset 0 -12px 25px rgba(0, 0, 0, 0.85);
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      animation: sphereFloat 6s ease-in-out infinite;
+      background: radial-gradient(circle at 32% 32%, #ffffff 0%, var(--cyan) 22%, var(--violet) 60%, var(--pink) 100%);
+      box-shadow: 0 0 85px rgba(108, 242, 255, 1), 
+                  0 0 160px rgba(168, 124, 255, 0.8), 
+                  inset 0 10px 25px rgba(255, 255, 255, 1), 
+                  inset 0 -15px 30px rgba(0, 0, 0, 0.9);
+      border: 2px solid rgba(255, 255, 255, 0.95);
+      animation: kingFloat 5s ease-in-out infinite;
     }
 
     .sphere-core-3d::before {
       content: "";
       position: absolute;
-      inset: -12px;
-      border: 1px dashed rgba(108, 242, 255, 0.8);
+      inset: -14px;
+      border: 1.5px dashed rgba(108, 242, 255, 0.9);
       border-radius: 50%;
-      animation: spinRing 18s linear infinite;
+      animation: spinRing 14s linear infinite;
     }
 
     @keyframes spherePulse {
-      0% { transform: scale(0.92); opacity: 0.7; filter: blur(20px); }
-      100% { transform: scale(1.08); opacity: 1; filter: blur(30px); }
+      0% { transform: scale(0.9); opacity: 0.65; filter: blur(22px); }
+      100% { transform: scale(1.12); opacity: 1; filter: blur(35px); }
     }
 
-    @keyframes sphereFloat {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-8px) scale(1.03); }
+    @keyframes kingFloat {
+      0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+      50% { transform: translateY(-10px) scale(1.04) rotate(3deg); }
     }
 
     .hero h1 {
       margin: 0;
-      font-size: clamp(2.3rem, 5vw, 4.2rem);
+      font-size: clamp(2.4rem, 5.5vw, 4.4rem);
       line-height: 0.95;
       letter-spacing: -0.08em;
     }
@@ -317,27 +317,29 @@
       -webkit-background-clip: text;
     }
 
-    /* LIVE TYPING ANIMATION CONTAINER */
+    /* ULTRA-POLISHED LIVE TYPING ANIMATION */
     .typing-container {
-      margin: 12px auto 0;
-      font-size: 15px;
-      font-weight: 800;
-      letter-spacing: 0.08em;
+      margin: 14px auto 0;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
       color: var(--cyan);
       text-transform: uppercase;
-      min-height: 24px;
+      min-height: 26px;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 4px;
+      text-shadow: 0 0 20px rgba(108, 242, 255, 0.6);
     }
 
     .typing-cursor {
       display: inline-block;
-      width: 8px;
-      height: 18px;
+      width: 9px;
+      height: 20px;
       background: var(--cyan);
-      animation: cursorBlink 0.8s infinite;
+      box-shadow: 0 0 12px var(--cyan);
+      animation: cursorBlink 0.7s infinite;
     }
 
     @keyframes cursorBlink {
@@ -347,7 +349,7 @@
 
     .hero p {
       max-width: 540px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       color: var(--text-muted);
       font-size: 13px;
       line-height: 1.6;
@@ -367,8 +369,8 @@
       color: var(--text-muted);
       background: rgba(255,255,255,0.03);
       font-size: 10px;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.3);
-      transition: transform 0.3s var(--spring), border-color 0.3s ease;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.4);
+      transition: transform 0.3s var(--spring-apple), border-color 0.3s ease;
     }
     .badge:hover { transform: translateY(-2px); border-color: var(--cyan); }
     .badge strong { color: var(--cyan); }
@@ -378,7 +380,7 @@
       display: none;
       padding: 18px;
     }
-    .transcript-panel.visible { display: block; animation: liquidPop 0.4s var(--spring); }
+    .transcript-panel.visible { display: block; animation: liquidPop 0.4s var(--bounce-smooth); }
 
     .transcript-head {
       display: flex;
@@ -406,13 +408,13 @@
       line-height: 1.6;
       white-space: pre-wrap;
       word-break: break-word;
-      animation: bubbleBounce 0.4s var(--spring);
+      animation: bubbleBounce 0.4s var(--bounce-smooth);
     }
     .message.user {
       margin-left: auto;
       color: #000105;
       background: linear-gradient(135deg, var(--cyan), #b5ffff);
-      box-shadow: 0 8px 24px rgba(108, 242, 255, 0.45);
+      box-shadow: 0 10px 30px rgba(108, 242, 255, 0.5);
       border-bottom-right-radius: 4px;
     }
     .message.assistant {
@@ -436,7 +438,7 @@
       padding: 16px;
       cursor: pointer;
     }
-    .suggestion-card:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.6); }
+    .suggestion-card:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-5px) scale(1.03); box-shadow: 0 18px 45px rgba(0,0,0,0.7); }
     .suggestion-card:active { transform: scale(0.95); }
 
     .suggestion-icon {
@@ -450,9 +452,9 @@
       color: #000105;
       font-size: 13px;
       box-shadow: inset 0 1px 2px rgba(255,255,255,1);
-      transition: transform 0.35s var(--spring);
+      transition: transform 0.4s var(--bounce-smooth);
     }
-    .suggestion-card:hover .suggestion-icon { transform: rotate(15deg) scale(1.1); }
+    .suggestion-card:hover .suggestion-icon { transform: rotate(15deg) scale(1.15); }
     .suggestion-card strong { display: block; font-size: 12px; }
     .suggestion-card small { display: block; margin-top: 3px; color: var(--text-muted); font-size: 10px; }
 
@@ -464,24 +466,24 @@
       right: 0;
       z-index: 90;
       padding: 10px 14px 16px;
-      background: linear-gradient(to top, rgba(0,1,5,0.95) 80%, transparent);
-      backdrop-filter: blur(30px);
-      -webkit-backdrop-filter: blur(30px);
+      background: linear-gradient(to top, rgba(0,1,5,0.96) 80%, transparent);
+      backdrop-filter: blur(35px);
+      -webkit-backdrop-filter: blur(35px);
     }
 
     .composer-inner {
       width: min(1080px, 100%);
       margin: 0 auto;
       padding: 12px;
-      border-radius: 30px;
+      border-radius: 32px;
       background: var(--glass-base);
       border: 1px solid var(--border-glow);
-      box-shadow: 0 -25px 70px rgba(0, 0, 0, 0.95), 0 0 45px rgba(108, 242, 255, 0.4), inset 0 1px 3px rgba(255,255,255,0.7);
-      backdrop-filter: blur(60px) saturate(230%);
-      -webkit-backdrop-filter: blur(60px) saturate(230%);
-      transition: transform 0.4s var(--spring), border-color 0.3s ease;
+      box-shadow: 0 -30px 80px rgba(0, 0, 0, 0.98), 0 0 50px rgba(108, 242, 255, 0.45), inset 0 1px 4px rgba(255,255,255,0.85);
+      backdrop-filter: blur(70px) saturate(250%);
+      -webkit-backdrop-filter: blur(70px) saturate(250%);
+      transition: transform 0.4s var(--spring-apple), border-color 0.3s ease;
     }
-    .composer-inner:focus-within { border-color: var(--cyan); transform: translateY(-2px); }
+    .composer-inner:focus-within { border-color: var(--cyan); transform: translateY(-3px); }
 
     .composer-form {
       display: flex;
@@ -489,8 +491,8 @@
       gap: 8px;
       padding: 4px 6px;
       border-radius: 18px;
-      background: rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
     textarea {
@@ -518,12 +520,12 @@
       border-radius: 14px;
       color: #000105;
       background: linear-gradient(135deg, var(--cyan), #b8ffff);
-      box-shadow: 0 6px 25px rgba(108, 242, 255, 0.65), inset 0 1px 3px rgba(255,255,255,1);
+      box-shadow: 0 8px 30px rgba(108, 242, 255, 0.7), inset 0 1px 3px rgba(255,255,255,1);
       font-size: 18px;
       font-weight: 900;
-      transition: transform 0.35s var(--spring), filter 0.2s ease;
+      transition: transform 0.4s var(--bounce-smooth), filter 0.2s ease;
     }
-    .send-btn:hover { transform: scale(1.08); }
+    .send-btn:hover { transform: scale(1.1); }
     .send-btn:active { transform: scale(0.9); }
     .send-btn.stop { color: #fff; background: linear-gradient(135deg, var(--red), #ffa1b4); }
 
@@ -543,8 +545,8 @@
       background: rgba(255,255,255,0.02);
       font-size: 10px;
       font-weight: 600;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.18);
-      transition: transform 0.3s var(--spring), border-color 0.2s ease, background 0.2s ease;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.25);
+      transition: transform 0.3s var(--spring-apple), border-color 0.2s ease, background 0.2s ease;
     }
     .chip:hover { color: var(--text-main); border-color: var(--cyan); transform: translateY(-2px); background: var(--glass-card); }
     .chip:active { transform: scale(0.92); }
@@ -557,10 +559,10 @@
       z-index: 150;
       display: none;
       place-items: flex-end center;
-      background: rgba(0, 1, 5, 0.95);
-      backdrop-filter: blur(30px);
+      background: rgba(0, 1, 5, 0.96);
+      backdrop-filter: blur(35px);
       opacity: 0;
-      transition: opacity 0.35s var(--smooth);
+      transition: opacity 0.4s var(--spring-apple);
     }
     .drawer-backdrop.open { display: grid; opacity: 1; }
 
@@ -569,14 +571,14 @@
       max-height: 88vh;
       overflow-y: auto;
       padding: 24px;
-      border-radius: 38px 38px 0 0;
+      border-radius: 40px 40px 0 0;
       background: var(--glass-base);
       border: 1px solid var(--border-glow);
-      box-shadow: 0 -35px 110px rgba(0,0,0,0.98);
-      backdrop-filter: blur(60px) saturate(230%);
-      -webkit-backdrop-filter: blur(60px) saturate(230%);
+      box-shadow: 0 -40px 120px rgba(0,0,0,0.99);
+      backdrop-filter: blur(70px) saturate(250%);
+      -webkit-backdrop-filter: blur(70px) saturate(250%);
       transform: translateY(100%);
-      transition: transform 0.45s var(--spring);
+      transition: transform 0.5s var(--bounce-smooth);
     }
     .drawer-backdrop.open .drawer-panel { transform: translateY(0); }
 
@@ -597,7 +599,7 @@
       border-radius: var(--radius-md);
       background: var(--glass-card);
       border: 1px solid var(--border-outer);
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.25);
+      box-shadow: inset 0 1px 3px rgba(255,255,255,0.3);
     }
     .drawer-card-title { font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cyan); margin-bottom: 12px; }
 
@@ -618,8 +620,8 @@
       background: rgba(255, 255, 255, 0.04);
       color: var(--text-main);
       text-align: left;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.18);
-      transition: transform 0.35s var(--spring), background 0.3s ease, border-color 0.3s ease;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.22);
+      transition: transform 0.4s var(--bounce-smooth), background 0.3s ease;
     }
     .tool-tile-btn:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-3px) scale(1.02); }
     .tool-tile-btn:active { transform: scale(0.94); }
@@ -630,14 +632,14 @@
       width: 34px;
       height: 34px;
       border-radius: 10px;
-      background: rgba(108, 242, 255, 0.22);
+      background: rgba(108, 242, 255, 0.25);
       color: var(--cyan);
       font-size: 16px;
       flex-shrink: 0;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.9);
-      transition: transform 0.35s var(--spring);
+      box-shadow: inset 0 1px 2px rgba(255,255,255,1);
+      transition: transform 0.4s var(--bounce-smooth);
     }
-    .tool-tile-btn:hover .tool-icon { transform: scale(1.15) rotate(-10deg); }
+    .tool-tile-btn:hover .tool-icon { transform: scale(1.2) rotate(-10deg); }
 
     .tool-info strong { display: block; font-size: 12px; font-weight: 700; }
     .tool-info small { display: block; color: var(--text-faint); font-size: 10px; margin-top: 1px; }
@@ -662,8 +664,8 @@
       border-radius: 14px;
       background: var(--glass-card);
       text-align: left;
-      box-shadow: inset 0 1px 2px rgba(255,255,255,0.18);
-      transition: transform 0.35s var(--spring), border-color 0.3s ease;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,0.22);
+      transition: transform 0.4s var(--bounce-smooth), border-color 0.3s ease;
     }
     .feature-chip:hover { border-color: var(--cyan); background: var(--glass-hover); transform: translateY(-3px) scale(1.02); }
     .feature-chip:active { transform: scale(0.94); }
@@ -700,10 +702,10 @@
       opacity: 0;
       transform: translateY(20px) scale(0.9);
       pointer-events: none;
-      backdrop-filter: blur(40px);
-      -webkit-backdrop-filter: blur(40px);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.9), inset 0 1px 3px rgba(255,255,255,0.7);
-      transition: transform 0.4s var(--spring), opacity 0.3s ease;
+      backdrop-filter: blur(45px);
+      -webkit-backdrop-filter: blur(45px);
+      box-shadow: 0 22px 50px rgba(0,0,0,0.95), inset 0 1px 3px rgba(255,255,255,0.8);
+      transition: transform 0.4s var(--bounce-smooth), opacity 0.3s ease;
     }
     .toast-popup.show { opacity: 1; transform: translateY(0) scale(1); }
 
@@ -731,13 +733,13 @@
     <!-- TOPBAR -->
     <header class="topbar glass-panel">
       <div class="brand">
-        <div class="brand-logo-container" title="Neural Ultra 3D Core">
+        <div class="brand-logo-container" title="Neural Ultra King Core">
           <div class="brand-logo-glow"></div>
           <div class="brand-logo-core">✦</div>
         </div>
         <div>
           <div class="brand-title">Neural Ultra</div>
-          <div class="brand-sub">3D Quantum OS</div>
+          <div class="brand-sub">King Quantum OS</div>
         </div>
       </div>
 
@@ -759,7 +761,7 @@
     <!-- MAIN CONTENT AREA -->
     <main class="main-content">
 
-      <!-- HERO BANNER WITH 3D REALISTIC SPHERE & LIVE TYPING ANIMATION -->
+      <!-- KING HERO BANNER -->
       <section class="hero glass-panel">
         <div class="hero-3d-sphere-container">
           <div class="sphere-ambient-glow"></div>
@@ -771,19 +773,19 @@
           <span>reimagined.</span>
         </h1>
 
-        <!-- LIVE TYPING ANIMATION -->
+        <!-- ULTRA-POLISHED LIVE TYPING ANIMATION -->
         <div class="typing-container">
           <span id="typedText"></span><span class="typing-cursor"></span>
         </div>
 
         <p>
-          Next-generation quantum AI environment engineered with 3D realistic glowing lights, live typing AI signatures, and 100 futuristic features.
+          Next-generation quantum AI environment engineered with king-level Apple VisionOS animations, 3D hyper-realistic lighting, and 100 futuristic features.
         </p>
 
         <div class="hero-badges">
-          <span class="badge"><strong>Quantum OS</strong> Active</span>
-          <span class="badge"><strong>100 Features</strong> Built-in</span>
-          <span class="badge"><strong>3D Realistic</strong> Lighting</span>
+          <span class="badge"><strong>Quantum OS</strong> King Edition</span>
+          <span class="badge"><strong>100 Features</strong> Active</span>
+          <span class="badge"><strong>Apple-Grade</strong> Ultra Polish</span>
         </div>
       </section>
 
@@ -900,7 +902,7 @@
             <div class="metric-row"><span>Total Messages</span><strong id="mCount">0</strong></div>
             <div class="metric-row"><span>Total Words</span><strong id="mWords">0</strong></div>
             <div class="metric-row"><span>Response Latency</span><strong id="mLatency">—</strong></div>
-            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">3D Realistic Core</strong></div>
+            <div class="metric-row"><span>Engine Pipeline</span><strong style="color: var(--cyan);">King Ultra Core</strong></div>
           </div>
         </div>
       </div>
@@ -961,13 +963,13 @@
 
     const $ = (id) => document.getElementById(id);
 
-    // LIVE TYPING ANIMATION SCRIPT FOR AI NAME
+    // ULTRA-POLISHED LIVE TYPING ANIMATION
     const wordsToType = [
       "NEURAL ULTRA PRIME",
-      "QUANTUM OS v100",
-      "5000 IQ AI ENGINE",
+      "KING QUANTUM OS",
+      "5000 IQ AI CORE",
       "VISIONOS LIQUID GLASS",
-      "ENTERPRISE AI CORE"
+      "ENTERPRISE SUPREME AI"
     ];
     let wordIdx = 0;
     let charIdx = 0;
@@ -984,20 +986,20 @@
         charIdx++;
       }
 
-      let speed = isDeleting ? 40 : 80;
+      let speed = isDeleting ? 30 : 70;
 
       if (!isDeleting && charIdx === currentWord.length) {
-        speed = 2000; // Pause at end of word
+        speed = 2200; // Pause at end
         isDeleting = true;
       } else if (isDeleting && charIdx === 0) {
         isDeleting = false;
         wordIdx = (wordIdx + 1) % wordsToType.length;
-        speed = 400;
+        speed = 350;
       }
 
       setTimeout(typeWriter, speed);
     }
-    setTimeout(typeWriter, 600);
+    setTimeout(typeWriter, 500);
 
     const state = {
       messages: [],
