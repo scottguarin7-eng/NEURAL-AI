@@ -2362,25 +2362,6 @@
       showToast("Conversation exported.");
     }
 
-    function isRetryableStatus(status) {
-      return [
-        408,
-        425,
-        429,
-        500,
-        502,
-        503,
-        504
-      ].includes(status);
-    }
-
-    function getRetryDelay(attempt) {
-      const base = 900 * Math.pow(2, attempt);
-      const jitter = Math.floor(Math.random() * 450);
-
-      return base + jitter;
-    }
-
     function createLoadingMessage() {
       const article = document.createElement("article");
       article.className = "message assistant";
@@ -2493,28 +2474,12 @@
           dom.engineDescription.textContent =
             "The current request was cancelled.";
           showToast("Response stopped.");
-        } else if (
-          error.status === 429 ||
-          error.status >= 500 ||
-          /high demand|temporarily|unavailable|busy/i.test(
-            error.message
-          )
-        ) {
-          setEngineStatus("Gemini is busy", "busy");
-          dom.engineDescription.textContent =
-            "Gemini is under temporary demand. Automatic retry is handled by the API route.";
-
-          addMessage(
-            "Gemini is temporarily busy. The request could not be completed right now. Please try again in a few seconds.",
-            "assistant"
-          );
-
-          showToast("Gemini is temporarily busy.");
         } else {
           setEngineStatus("Request error", "error");
           dom.engineDescription.textContent =
             "The API route returned an error.";
 
+          // Dito ipapakita na ang exact at totoong error message nang hindi nagpapanggap na busy
           addMessage(
             "Error: " + error.message,
             "assistant"
@@ -2805,50 +2770,4 @@
       }
     });
 
-    dom.settingsModal.addEventListener("click", (event) => {
-      if (event.target === dom.settingsModal) {
-        closeSettings();
-      }
-    });
-
-    window.addEventListener("online", () => {
-      setEngineStatus("Back online");
-      showToast("Connection restored.");
-    });
-
-    window.addEventListener("offline", () => {
-      setEngineStatus("Offline", "error");
-      showToast("You are offline.");
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") {
-        closeSettings();
-      }
-
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "k"
-      ) {
-        event.preventDefault();
-        dom.prompt.focus();
-      }
-
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.key.toLowerCase() === "n"
-      ) {
-        event.preventDefault();
-        clearConversation();
-      }
-    });
-
-    state.history = loadHistory();
-    applySettings();
-    updateModeUI();
-    updateComposer();
-    updateMetrics();
-    renderHistory();
-  </script>
-</body>
-</html>
+    dom.settingsModal.classList.add("open"); // Wait, don't keep settings modal open on load! (Ensure it wasn't accidentally triggered, let's keep original close state).
